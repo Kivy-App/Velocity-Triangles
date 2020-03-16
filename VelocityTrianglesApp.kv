@@ -20,7 +20,6 @@ WindowManager:
 <VelocityTriangles>:
     name: "Main"
     p:p
-    
 
     GridLayout:
         rows:2
@@ -64,7 +63,7 @@ WindowManager:
                     text: ""
                     id: mike
                     group: "a"
-                    on_press: 
+                    on_press: root.some()
                 ToggleButton:
                     text: ""
                     id: faulty
@@ -235,13 +234,10 @@ WindowManager:
                         size_hint_x:0.33
                         text: "Velocity Analysis"
                         color: [1,1,1,1]
-
                         on_release:
                             app.root.current = "new"
                             root.manager.transition.direction = "left"
-                            root.angles()
-
-
+                            root.some()
 
                     Label:
                         size_hint_x:0.325
@@ -290,17 +286,20 @@ WindowManager:
 
 <NewWindow>:
     name: "new"
+
     GridLayout:
         rows: 2
         BoxLayout:
             size_hint_y:0.9
             canvas:
                 Color:
-                    #rgba: 0.6,0.8,0.6,0.6
                     rgba: 0.6862,0.9333,0.9333,0.737
                 Rectangle:
                     pos: self.pos
                     size: self.size
+            Button:
+                size_hint: 0.1,0.1
+                on_release: root.some1()
 
         GridLayout:
             cols:2
@@ -321,7 +320,7 @@ WindowManager:
                     on_release:
                         app.root.current = "Main"
                         root.manager.transition.direction = "right"
-                        
+
 
             BoxLayout:
                 size_hint_x:0.7
