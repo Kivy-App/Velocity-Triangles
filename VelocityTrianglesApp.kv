@@ -19,7 +19,18 @@ WindowManager:
 
 <VelocityTriangles>:
     name: "Main"
+
     p:p
+    f:f
+    rn:rn
+    a1:a1
+    a2:a2
+    a3:a3
+    b1:b1
+    b2:b2
+    b3:b3
+    
+
 
     GridLayout:
         rows:2
@@ -120,7 +131,7 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
-                    id: Rn
+                    id: rn
                 Label:
                     text: "  ---------"
                     text_size: self.size
@@ -237,7 +248,7 @@ WindowManager:
                         on_release:
                             app.root.current = "new"
                             root.manager.transition.direction = "left"
-                            text: root.SetText()
+                            text: root.systemsolver()
 
                     Label:
                         size_hint_x:0.325
@@ -299,7 +310,28 @@ WindowManager:
                     pos: self.pos
                     size: self.size
             Label:
-                text: root.labelText
+                text: root.pText
+            Label:
+                text: root.fText
+            Label:
+                text: root.rnText
+            Label:
+                text: root.a1Text
+            Label:
+                text: root.a2Text
+            Label:
+                text: root.a3Text
+            Label:
+                text: root.b1Text
+            Label:
+                text: root.b2Text
+            Label:
+                text: root.b3Text
+
+
+
+            #Label:
+                #text:root.rText
             Button:
                 size_hint: 0.1,0.1
                 #on_release: root.some1()
