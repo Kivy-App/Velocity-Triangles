@@ -12,6 +12,7 @@ WindowManager:
 <TextInput>
     size_hint: 1,0.6
     spacing: 5
+   
 
 <ToggleButton>
     size_hint: 0.5,1
@@ -74,7 +75,7 @@ WindowManager:
                     text: ""
                     id: mike
                     group: "a"
-                    on_press: root.some()
+                    on_press:
                 ToggleButton:
                     text: ""
                     id: faulty
@@ -86,7 +87,7 @@ WindowManager:
 
 
             GridLayout:
-                size_hint_y: 0.4
+                size_hint_y: 0.45
                 cols: 3
                 canvas:
                     Color:
@@ -105,7 +106,7 @@ WindowManager:
                     id: p
                     multiline: False
                 Label:
-                    text: "  ---------"
+                    text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -119,7 +120,7 @@ WindowManager:
                     id: f
                     multiline: False
                 Label:
-                    text: "  ---------"
+                    text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -133,7 +134,7 @@ WindowManager:
                     multiline: False
                     id: rn
                 Label:
-                    text: "  ---------"
+                    text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -147,7 +148,7 @@ WindowManager:
                     multiline: False
                     id: a1
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -161,7 +162,7 @@ WindowManager:
                     multiline: False
                     id: a2
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -175,7 +176,7 @@ WindowManager:
                     multiline: False
                     id: a3
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -189,7 +190,7 @@ WindowManager:
                     multiline: False
                     id: b1
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -203,7 +204,7 @@ WindowManager:
                     multiline: False
                     id: b2
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
@@ -217,20 +218,18 @@ WindowManager:
                     multiline: False
                     id: b3
                 Label:
-                    text: "  ---------"
+                    text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
-
-
             #Deytero Grid
             GridLayout:
-                size_hint_y: 0.5
-                rows:3
+                size_hint_y: 0.45
+                rows:4
                 #Proto Box
                 BoxLayout:
-                    size_hint_y: 0.1
+                    size_hint_y: 0.2
                     padding:5
                     canvas:
                         Color:                        
@@ -242,7 +241,7 @@ WindowManager:
                         size_hint_x:0.325
                         text: ""
                     Button:
-                        size_hint_x:0.33
+                        size_hint_x:0.333
                         text: "Velocity Analysis"
                         color: [1,1,1,1]
                         on_release:
@@ -255,8 +254,8 @@ WindowManager:
                         text: ""
 
                 BoxLayout:
-                    size_hint_y: 0.2
-                    padding: 14
+                    size_hint_y: 0.36
+                    padding: 11
                     canvas:
                         Color:
                             rgba: 0.333,0.596,0.635,0.9
@@ -281,18 +280,65 @@ WindowManager:
                         font_size: "18sp"
                         text:"Non Parallel Annulus"
 
-                BoxLayout:
-                    size_hint_y: 0.6
+                GridLayout:
+                    size_hint_y: 0.485
+                    cols: 3
                     canvas:
                         Color:
-                            #rgba: 0.6,0.8,0.6,0.6
                             rgba: 0.6862,0.9333,0.9333,0.737
+
                         Rectangle:
                             pos: self.pos
                             size: self.size
                     Label:
-                        font_size: "18sp"
+                        text:"Tip Diameter : "
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        multiline: False
+                        id: b1
+                    Label:
+                        text: " [ m ]"
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                    Label:
+                        text:" Hub to Tip Ratio : "
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        multiline: False
+                        id: b2
+                    Label:
+                        text: " [ - ]"
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                    Label:
+                        text:" Rotational Speed : "
+                        text_size: self.size
+                        halign: 'right'
+                        valign: 'middle'
+                    TextInput:
+                        multiline: False
+                        id: b3
+                    Label:
+                        text: " [ rpm ]"
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
 
+                BoxLayout:
+                    size_hint_y: 0.5
+                    padding:5
+                    canvas:
+                        Color:
+                            rgba: 0.6862,0.9333,0.9333,0.737
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
 
 <NewWindow>:
@@ -301,7 +347,7 @@ WindowManager:
     GridLayout:
         rows: 2
         BoxLayout:
-            
+            orientation: "vertical"
             size_hint_y:0.9
             canvas:
                 Color:
@@ -328,14 +374,6 @@ WindowManager:
             Label:
                 text: root.b3Text
 
-
-
-            #Label:
-                #text:root.rText
-            Button:
-                size_hint: 0.1,0.1
-                #on_release: root.some1()
-
         GridLayout:
             cols:2
             size_hint_y:0.1
@@ -355,7 +393,6 @@ WindowManager:
                     on_release:
                         root.manager.current = "Main"
                         root.manager.transition.direction = "right"
-
 
             BoxLayout:
                 size_hint_x:0.7
