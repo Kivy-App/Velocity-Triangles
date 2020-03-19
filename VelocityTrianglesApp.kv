@@ -75,7 +75,7 @@ WindowManager:
                     group: "a"
                     on_press:
                 Label:
-                    text:'Non Repeating Stage'
+                    text:'   Non Repeating Stage'
                     font_size: root.fontsize(self.text)
 
 ############Keno anamesa sto switch kai ta inputs
@@ -253,7 +253,7 @@ WindowManager:
                     size_hint_y: 0.2
                     padding:5
                     canvas:
-                        Color:                        
+                        Color:
                             rgba: 0.6862,0.9333,0.9333,0.737
                         Rectangle:
                             pos: self.pos
@@ -264,6 +264,7 @@ WindowManager:
                     Button:
                         size_hint_x:0.333
                         text: "Velocity Analysis"
+                        font_size:root.fontsize2(self.text)
                         color: [1,1,1,1]
                         on_release:
                             app.root.current = "new"
@@ -299,7 +300,7 @@ WindowManager:
                         on_press:
                     Label:
                         font_size: root.fontsize(self.text)
-                        text:"Non Parallel Annulus"
+                        text:"    Non Parallel Annulus"
 
                 GridLayout:
                     size_hint_y: 0.485

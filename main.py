@@ -86,6 +86,7 @@ class VelocityTriangles(Screen):
         else:
             b3e = str('')
 
+
         self.manager.get_screen('new').pText = pe
         self.manager.get_screen('new').fText = fe
         self.manager.get_screen('new').rnText = rne
@@ -96,42 +97,43 @@ class VelocityTriangles(Screen):
         self.manager.get_screen('new').b2Text = b2e
         self.manager.get_screen('new').b3Text = b3e
 
+
+
     def fontsize(self, text):
-        dp = 7
-        for i in range(0,Window.size[0],50):
-            dp = dp+1
-        return "{}dp".format(dp)
+        if Window.size[0]>400:
+            dp = 7
+            for i in range(0,Window.size[0],50):
+                dp = dp+1
+            return "{}dp".format(dp)
+        else:
+            dp = 5
+            for i in range(0, Window.size[0], 50):
+                dp = dp + 1
+            return "{}dp".format(dp)
 
     def fontsize2(self, text):
-        dp = 5
-        for i in range(0,Window.size[0],50):
-            dp = dp+1
-        return "{}dp".format(dp)
+        if Window.size[0]>400:
+            dp = 5
+            for i in range(0,Window.size[0],50):
+                dp = dp+1
+            return "{}dp".format(dp)
+        else:
+            dp = 3
+            for i in range(0, Window.size[0], 50):
+                dp = dp + 1
+            return "{}dp".format(dp)
 
     def fontsize3(self, text):
-        dp = 7
-        for i in range(0,Window.size[0],50):
-            dp = dp+1
-        return "{}dp".format(dp)
-
-    # def setTextToFit(self, widget, text):
-    #     widget.text = text
-    #     # for long names, reduce font size until it fits in its widget
-    #     m = self.defaultTextHeightMultiplier
-    #     widget.font_size = widget.height * m
-    #     widget.texture_update()
-    #     while m > 0.3 and widget.texture_size[0] > widget.width:
-    #         m = m - 0.05
-    #         widget.font_size = widget.height * m
-    #         widget.texture_update()
-
-# class MyLabel(Image):
-#     text = StringProperty('')
-#     def resize(self,*_):
-#         self.font_size = '1000dp'  # something that'll give texture bigger than phone's screen size
-#         kappa.texture_update()
-#         # Set it to image, it'll be scaled to image size automatically:
-#         self.texture = l.texture
+        if Window.size[0]>400:
+            dp = 9
+            for i in range(0,Window.size[0],50):
+                dp = dp+1
+            return "{}dp".format(dp)
+        else:
+            dp = 7
+            for i in range(0, Window.size[0], 50):
+                dp = dp + 1
+            return "{}dp".format(dp)
 
 
 class NewWindow(Screen):
@@ -149,7 +151,7 @@ class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (400, 700)
+Window.size = (600, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
