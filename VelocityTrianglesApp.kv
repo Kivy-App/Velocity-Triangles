@@ -26,6 +26,7 @@ WindowManager:
     b2:b2
     b3:b3
     
+    
 
 
     GridLayout:
@@ -262,6 +263,7 @@ WindowManager:
                         size_hint_x:0.325
                         text: ""
                     Button:
+                        id:z
                         size_hint_x:0.333
                         text: "Velocity Analysis"
                         font_size:root.fontsize2(self.text)
@@ -270,6 +272,7 @@ WindowManager:
                             app.root.current = "new"
                             root.manager.transition.direction = "left"
                             text: root.systemsolver()
+
 
                     Label:
                         size_hint_x:0.325

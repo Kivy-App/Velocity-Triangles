@@ -15,12 +15,13 @@ from kivy.properties import StringProperty
 import math as m
 import numpy as np
 from scipy.optimize import fsolve
-from kivy.uix.image import Image
+
+
 
 class VelocityTriangles(Screen):
 
-    p = ObjectProperty(None)
-    f = ObjectProperty(None)
+    p  = ObjectProperty(None)
+    f  = ObjectProperty(None)
     rn = ObjectProperty(None)
     a1 = ObjectProperty(None)
     a2 = ObjectProperty(None)
@@ -29,7 +30,11 @@ class VelocityTriangles(Screen):
     b2 = ObjectProperty(None)
     b3 = ObjectProperty(None)
 
+
+    
     def systemsolver(self):
+
+        
 
         pe  = str(self.p.text)
         fe  = str(self.f.text)
@@ -41,50 +46,11 @@ class VelocityTriangles(Screen):
         b2e = str(self.b2.text)
         b3e = str(self.b3.text)
 
-        if pe!='':
-            pe = str(self.p.text)
-        else:
-            pe=str('')
+        a1e = str(-np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe))))
+        a2e = str(np.degrees(np.arctan(((float(pe) / 2)+1-float(rne)) / float(fe))))
+        b1e = str(np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe))))
+        b2e = str(-np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe))))
 
-        if fe!='':
-            fe = str(self.f.text)
-        else:
-            fe = str('')
-
-        if rne!='':
-            rne = str(self.rn.text)
-        else:
-            rne = str('')
-
-        if a1e!='':
-            a1e = str(self.a1.text)
-        else:
-            a1e = str('')
-
-        if a2e!='':
-            a2e = str(self.a2.text)
-        else:
-            a2e = str('')
-
-        if a3e!='':
-            a3e = str(self.a3.text)
-        else:
-            a3e = str('')
-
-        if b1e!='':
-            b1e = str(self.b1.text)
-        else:
-            b1e = str('')
-
-        if b2e!='':
-            b2e = str(self.b2.text)
-        else:
-            b2e = str('')
-
-        if b3e!='':
-            b3e = str(self.b3.text)
-        else:
-            b3e = str('')
 
 
         self.manager.get_screen('new').pText = pe
@@ -96,6 +62,8 @@ class VelocityTriangles(Screen):
         self.manager.get_screen('new').b1Text = b1e
         self.manager.get_screen('new').b2Text = b2e
         self.manager.get_screen('new').b3Text = b3e
+
+        
 
 
 
@@ -151,7 +119,7 @@ class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (600, 700)
+Window.size = (330, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
@@ -162,7 +130,6 @@ class VelocityTrianglesApp(App):
 if __name__ == '__main__':
 	va = VelocityTrianglesApp()
 	va.run()
-
 
 
 
