@@ -46,10 +46,10 @@ class VelocityTriangles(Screen):
         b2e = str(self.b2.text)
         b3e = str(self.b3.text)
 
-        a1e = str(-np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe))))
-        a2e = str(np.degrees(np.arctan(((float(pe) / 2)+1-float(rne)) / float(fe))))
-        b1e = str(np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe))))
-        b2e = str(-np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe))))
+        a1e = str(round(-np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe))), 3))
+        a2e = str(round(np.degrees(np.arctan(((float(pe) / 2)+1-float(rne)) / float(fe))),3))
+        b1e = str(round(np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe))),3))
+        b2e = str(round(-np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe))),3))
 
 
 
@@ -64,8 +64,6 @@ class VelocityTriangles(Screen):
         self.manager.get_screen('new').b3Text = b3e
 
         
-
-
 
     def fontsize(self, text):
         if Window.size[0]>400:
@@ -105,21 +103,33 @@ class VelocityTriangles(Screen):
 
 
 class NewWindow(Screen):
-	pText  = StringProperty('My Label')
-	fText  = StringProperty('My Label')
-	rnText = StringProperty('My Label')
-	a1Text = StringProperty('My Label')
-	a2Text = StringProperty('My Label')
-	a3Text = StringProperty('My Label')
-	b1Text = StringProperty('My Label')
-	b2Text = StringProperty('My Label')
-	b3Text = StringProperty('My Label')
+    pText  = StringProperty('My Label')
+    fText  = StringProperty('My Label')
+    rnText = StringProperty('My Label')
+    a1Text = StringProperty('My Label')
+    a2Text = StringProperty('My Label')
+    a3Text = StringProperty('My Label')
+    b1Text = StringProperty('My Label')
+    b2Text = StringProperty('My Label')
+    b3Text = StringProperty('My Label')
+
+    def fontsize2(self, text):
+        if Window.size[0]>400:
+            dp = 5
+            for i in range(0,Window.size[0],50):
+                dp = dp+1
+            return "{}dp".format(dp)
+        else:
+            dp = 3
+            for i in range(0, Window.size[0], 50):
+                dp = dp + 1
+            return "{}dp".format(dp)
 
 class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (330, 700)
+Window.size = (600, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
