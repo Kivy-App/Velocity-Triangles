@@ -125,11 +125,23 @@ class NewWindow(Screen):
                 dp = dp + 1
             return "{}dp".format(dp)
 
+    def fontsize3(self, text):
+        if Window.size[0]>400:
+            dp = 9
+            for i in range(0,Window.size[0],50):
+                dp = dp+1
+            return "{}dp".format(dp)
+        else:
+            dp = 7
+            for i in range(0, Window.size[0], 50):
+                dp = dp + 1
+            return "{}dp".format(dp)
+
 class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (600, 700)
+Window.size = (400, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 

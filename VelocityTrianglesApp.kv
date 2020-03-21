@@ -78,6 +78,13 @@ WindowManager:
                 Label:
                     text:'   Non Repeating Stage'
                     font_size: root.fontsize(self.text)
+#                Label:
+#                    text: 'Choose your stage state'
+#                Switch:
+#                    id: switch
+#                    source: 'account-login-3x.png'
+#                Label:
+#                    text: 'Repeating Stage' if switch.active else 'Non Repeating Stage'
 
 ############Keno anamesa sto switch kai ta inputs
             BoxLayout:
@@ -378,7 +385,7 @@ WindowManager:
         rows: 2
         GridLayout:
             cols:2
-            size_hint_y:0.9
+            size_hint_y:0.7
 
             GridLayout:
                 rows:3
@@ -402,7 +409,7 @@ WindowManager:
                     Label:
 
                         text:'Velocity analysis Results'
-                        font_size:'18dp'
+                        font_size: root.fontsize3(self.text)
                         bold:True
                         underline: True
                         text_size: self.size
@@ -466,7 +473,7 @@ WindowManager:
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet absolute angle \u03B13: "
+                            text:"Inlet absolute angle \u03B13 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -562,6 +569,12 @@ WindowManager:
                         Rectangle:
                             pos: self.pos
                             size: self.size
+                        Color:
+                            rgba:0,0,0,1
+                        Line:
+                            width:3
+                            points: (self.size[0]+50,self.size[1]+0,self.size[0]+50,self.size[1]+50)
+
             BoxLayout:
                 size_hint:0.5,0.5
                 canvas:
@@ -571,12 +584,12 @@ WindowManager:
                         pos: self.pos
                         size: self.size
 
+
         GridLayout:
             cols:2
-            size_hint_y:0.1
+            size_hint_y:0.3
             canvas:
                 Color:
-                    #rgba: 0.6,0.8,0.6,0.6
                     rgba: 0.6862,0.9333,0.9333,0.737
                 Rectangle:
                     pos: self.pos
@@ -587,6 +600,7 @@ WindowManager:
                 spacing: 20
                 size_hint_x: 0.3
                 Button:
+                    size_hint_y:0.25
                     text:"Back"
                     on_release:
                         root.manager.current = "Main"
