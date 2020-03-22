@@ -12,9 +12,8 @@ from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
-import math as m
-import numpy as np
-from scipy.optimize import fsolve
+
+
 
 
 
@@ -103,15 +102,19 @@ class VelocityTriangles(Screen):
 
 
 class NewWindow(Screen):
-    pText  = StringProperty('My Label')
-    fText  = StringProperty('My Label')
-    rnText = StringProperty('My Label')
-    a1Text = StringProperty('My Label')
-    a2Text = StringProperty('My Label')
-    a3Text = StringProperty('My Label')
-    b1Text = StringProperty('My Label')
-    b2Text = StringProperty('My Label')
-    b3Text = StringProperty('My Label')
+    pText  = StringProperty("0")
+    fText  = StringProperty('0')
+    rnText = StringProperty('0')
+    a1Text = StringProperty('0')
+    a2Text = StringProperty('0')
+    a3Text = StringProperty('0')
+    b1Text = StringProperty('0')
+    b2Text = StringProperty('0')
+    b3Text = StringProperty('0')
+
+  
+    
+
 
     def fontsize2(self, text):
         if Window.size[0]>400:

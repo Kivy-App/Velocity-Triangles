@@ -25,6 +25,7 @@ WindowManager:
     b1:b1
     b2:b2
     b3:b3
+
     
     
 
@@ -380,7 +381,6 @@ WindowManager:
 
 <NewWindow>:
     name: "new"
-
     GridLayout:
         rows: 2
         GridLayout:
@@ -411,7 +411,6 @@ WindowManager:
                         text:'Velocity analysis Results'
                         font_size: root.fontsize3(self.text)
                         bold:True
-                        underline: True
                         text_size: self.size
                         halign: 'center'
                         valign: 'middle'
@@ -569,11 +568,7 @@ WindowManager:
                         Rectangle:
                             pos: self.pos
                             size: self.size
-                        Color:
-                            rgba:0,0,0,1
-                        Line:
-                            width:3
-                            points: (self.size[0]+50,self.size[1]+0,self.size[0]+50,self.size[1]+50)
+                        
 
             BoxLayout:
                 size_hint:0.5,0.5
@@ -599,6 +594,27 @@ WindowManager:
                 padding: 15
                 spacing: 20
                 size_hint_x: 0.3
+                canvas:
+                    Color:
+                        rgba:0,0,0,1
+                    Line:
+                        width:1.5
+                        points: (125,80,275,80) ###BASELINE
+                    Line:
+                        width:1.5
+                        points: (125,80,125+150*float(root.rnText)-150*float(root.pText)/2,125+150*float(root.fText))
+                    Line:
+                        width:1.5
+                        points: (125+150*float(root.rnText)-150*float(root.pText)/2,125+150*float(root.fText),275,80)
+                    Line:
+                        width:1.5
+                        points: (275,80,125+150*float(root.rnText)+150*float(root.pText)/2,125+150*float(root.fText))
+                    Line:
+                        width:1.5
+                        points: (125,80,125+150*float(root.rnText)+150*float(root.pText)/2,125+150*float(root.fText))
+
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
                 Button:
                     size_hint_y:0.25
                     text:"Back"
@@ -608,3 +624,7 @@ WindowManager:
 
             BoxLayout:
                 size_hint_x:0.7
+                
+
+                    
+
