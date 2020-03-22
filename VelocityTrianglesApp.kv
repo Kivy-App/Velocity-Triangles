@@ -2,6 +2,26 @@ WindowManager:
     VelocityTriangles:
     NewWindow:
 
+<P>:
+    title: ' Analysis error'
+    id:pop
+    Label:
+        color: [1,0,0,0.5]
+        text_size: self.size
+        halign: 'center'
+        valign: 'middle'
+        text: "At least three variables are required for the analysis"
+        font_size: '18dp'
+        size_hint: 0.8, 0.6
+        pos_hint: {"x":0.1, "y":0.4}
+
+    Button:
+        text: "Ok got it !!!"
+        id:popupbtn
+        size_hint: 0.8, 0.2
+        pos_hint: {"x":0.1, "y":0.1}
+        on_press: app.root.popup.dismiss()
+
 <Label>
     color: [0,0,0,1]
     id: kappa
@@ -271,16 +291,15 @@ WindowManager:
                         size_hint_x:0.325
                         text: ""
                     Button:
-                        id:z
+                        id:oti
                         size_hint_x:0.333
                         text: "Velocity Analysis"
                         font_size:root.fontsize2(self.text)
                         color: [1,1,1,1]
                         on_release:
+                            root.systemsolver()
                             app.root.current = "new"
                             root.manager.transition.direction = "left"
-                            text: root.systemsolver()
-
 
                     Label:
                         size_hint_x:0.325
@@ -599,7 +618,7 @@ WindowManager:
                         rgba:0,0,0,1
                     Line:
                         width:1.5
-                        points: (125,80,275,80) ###BASELINE
+                        points: (125,80,275,80) ###BASELINE U
                     Line:
                         width:1.5
                         points: (125,80,125+150*float(root.rnText)-150*float(root.pText)/2,125+150*float(root.fText))
