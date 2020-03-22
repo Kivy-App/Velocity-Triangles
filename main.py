@@ -14,6 +14,9 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 import numpy as np
 from kivy.uix.popup import Popup
+import json
+from os.path import basename, dirname, join, splitext
+from kivy.event import EventDispatcher
 
 class P(FloatLayout):
     pass

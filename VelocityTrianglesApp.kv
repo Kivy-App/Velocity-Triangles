@@ -90,6 +90,7 @@ WindowManager:
                     text: " "
                     id: dion
                     group: "a"
+                    self.source: 'atlas://data/images/defaulttheme/checkbox_off'
                     on_press:
                 ToggleButton:
                     text: " "
@@ -276,10 +277,10 @@ WindowManager:
             #Deytero Grid
             GridLayout:
                 size_hint_y: 0.45
-                rows:4
+                rows:5
                 #Proto Box
                 BoxLayout:
-                    size_hint_y: 0.2
+                    size_hint_y: 0.25
                     padding:5
                     canvas:
                         Color:
@@ -306,7 +307,7 @@ WindowManager:
                         text: ""
 
                 BoxLayout:
-                    size_hint_y: 0.36
+                    size_hint_y: 0.39
                     padding: 11
                     canvas:
                         Color:
@@ -331,6 +332,16 @@ WindowManager:
                     Label:
                         font_size: root.fontsize(self.text)
                         text:"    Non Parallel Annulus"
+
+                BoxLayout:
+                    size_hint_y: 0.03
+                    padding:5
+                    canvas:
+                        Color:
+                            rgba: 0.6862,0.9333,0.9333,0.737
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
                 GridLayout:
                     size_hint_y: 0.485
