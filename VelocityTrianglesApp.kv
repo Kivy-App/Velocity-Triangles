@@ -3,24 +3,23 @@ WindowManager:
     NewWindow:
 
 <P>:
-    title: ' Analysis error'
-    id:pop
-    Label:
-        color: [1,0,0,0.5]
-        text_size: self.size
-        halign: 'center'
-        valign: 'middle'
-        text: "At least three variables are required for the analysis"
-        font_size: '18dp'
-        size_hint: 0.8, 0.6
-        pos_hint: {"x":0.1, "y":0.4}
-
-    Button:
-        text: "Ok got it !!!"
-        id:popupbtn
-        size_hint: 0.8, 0.2
-        pos_hint: {"x":0.1, "y":0.1}
-        on_press: app.root.popup.dismiss()
+#    id:pop
+#    Label:
+#        color: [1,0,0,0.5]
+#        text_size: self.size
+#        halign: 'center'
+#        valign: 'middle'
+#        text: "At least three variables are required for the analysis"
+#        font_size: '18dp'
+#        size_hint: 0.8, 0.6
+#        pos_hint: {"x":0.1, "y":0.4}
+#
+#    Button:
+#        text: "Ok got it !!!"
+#        id:popupbtn
+#        size_hint: 0.8, 0.2
+#        pos_hint: {"x":0.1, "y":0.1}
+#        on_press: app.root.popup.dismiss()
 
 <Label>
     color: [0,0,0,1]
@@ -90,7 +89,6 @@ WindowManager:
                     text: " "
                     id: dion
                     group: "a"
-                    self.source: 'atlas://data/images/defaulttheme/checkbox_off'
                     on_press:
                 ToggleButton:
                     text: " "
@@ -299,8 +297,11 @@ WindowManager:
                         color: [1,1,1,1]
                         on_release:
                             root.systemsolver()
-                            app.root.current = "new"
-                            root.manager.transition.direction = "left"
+                            if root.p.text.replace(".","",1).isdigit()== True or root.f.text.replace(".","",1).isdigit() == True or root.rn.text.replace(".","",1).isdigit() == True:\
+                            app.root.current = "new";\
+                            root.manager.transition.direction = "left";\
+
+
 
                     Label:
                         size_hint_x:0.325
@@ -632,17 +633,16 @@ WindowManager:
                         points: (125,80,275,80) ###BASELINE U
                     Line:
                         width:1.5
-                        points: (125,80,125+150*float(root.rnText)-150*float(root.pText)/2,125+150*float(root.fText))
+                        points: (125,80,275-150*float(root.rnText)-150*float(root.pText)/2,80+150*float(root.fText))
                     Line:
                         width:1.5
-                        points: (125+150*float(root.rnText)-150*float(root.pText)/2,125+150*float(root.fText),275,80)
+                        points: (275-150*float(root.rnText)-150*float(root.pText)/2,80+150*float(root.fText),275,80)
                     Line:
                         width:1.5
-                        points: (275,80,125+150*float(root.rnText)+150*float(root.pText)/2,125+150*float(root.fText))
+                        points: (275,80,275-150*float(root.rnText)+150*float(root.pText)/2,80+150*float(root.fText))
                     Line:
                         width:1.5
-                        points: (125,80,125+150*float(root.rnText)+150*float(root.pText)/2,125+150*float(root.fText))
-
+                        points: (125,80,275-150*float(root.rnText)+150*float(root.pText)/2,80+150*float(root.fText))
                     Color:
                         rgba: 0.6862,0.9333,0.9333,0.737
                 Button:

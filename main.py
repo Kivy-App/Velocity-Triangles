@@ -1,12 +1,5 @@
 from kivy.app import App
-from kivy.uix.widget import Widget
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.button import Button
-from kivy.uix.label import Label
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.textinput import TextInput
 from kivy.config import Config
-from kivy.graphics import Color,Rectangle
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -14,19 +7,23 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty
 import numpy as np
 from kivy.uix.popup import Popup
-import json
-from os.path import basename, dirname, join, splitext
-from kivy.event import EventDispatcher
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
 
-class P(FloatLayout):
+class P(BoxLayout):
     pass
 
-def show_popup():
-    show = P()  # Create a new instance of the P class
-    popupWindow = Popup(title="Popup Window", content=show, auto_dismiss=True, size_hint=(None, None), size=(300, 300))
-    # Create the popup window
-    popupWindow.open()  # show the popup
-    return popupWindow
+def firstPopup():
+    show = P()
+    # create content for the Popup
+    bl = BoxLayout(orientation='vertical',padding = 30)
+    label = Label(text = ' At least three variables \n are required for the analysis',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+    bl.add_widget(label)
+    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=(400, 400))
+    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.15,'y':1.2}, on_release = popupWindow.dismiss))
+    popupWindow.open()
 
 class VelocityTriangles(Screen):
 
@@ -67,7 +64,7 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').b2Text = b2e
             self.manager.get_screen('new').b3Text = b3e
         except:
-            self.popup = show_popup()
+            self.popup = firstPopup()
 
     def fontsize(self, text):
         if Window.size[0]>400:
