@@ -11,7 +11,8 @@ WindowManager:
 <TextInput>
     #size_hint: 1,0.6
     spacing: 5
-
+    write_tab: False
+    input_filter:'float'
 <ToggleButton>
     size_hint: 0.5,1
 
@@ -120,6 +121,7 @@ WindowManager:
                 TextInput:
                     id: p
                     multiline: False
+                    write_tab: False
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ] "
