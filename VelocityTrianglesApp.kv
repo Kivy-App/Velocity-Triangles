@@ -280,7 +280,7 @@ WindowManager:
                         color: [1,1,1,1]
                         on_release:
                             root.systemsolver()
-                            if root.p.text.replace(".","",1).isdigit()== True or root.f.text.replace(".","",1).isdigit() == True or root.rn.text.replace(".","",1).isdigit() == True:\
+                            if root.p.text.replace(".","",1).isdigit()== True and root.f.text.replace(".","",1).isdigit() == True and root.rn.text.replace(".","",1).isdigit() == True:\
                             app.root.current = "new";\
                             root.manager.transition.direction = "left";\
 
