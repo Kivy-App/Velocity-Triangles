@@ -19,6 +19,9 @@ WindowManager:
 
 <Slider>
     size_hint_x: 0.5
+    value_track: True
+    value_track_color: [0.2,0.2,0.2,0.8]
+
 
 <VelocityTriangles>:
     name: "Main"
@@ -79,8 +82,9 @@ WindowManager:
                     min: 0
                     max: 1
                     step: 1
-                    cursor_height: '30sp'
-                    cursor_width: '30sp'
+                    cursor_height: '28sp'
+                    cursor_width: '28sp'
+
 #                ToggleButton:
 #                    text: " "
 #                    id: dion
@@ -149,9 +153,12 @@ WindowManager:
 
                 Slider:
                     id: slider1
-                    min: 0.2
+                    min: 0
                     max: 2.5
                     step: 0.01
+                    value: 0.5
+
+
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -160,6 +167,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider2.value,3))
                     id: f
                     multiline: False
                 Label:
@@ -169,12 +177,13 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider2
-                    min: 0.2
-                    max: 2.5
+                    min: 0
+                    max: 2
                     step: 0.01
+                    value:.4
+
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -183,6 +192,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider3.value,3))
                     multiline: False
                     id: rn
                 Label:
@@ -192,12 +202,12 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider3
-                    min: 0.2
-                    max: 2.5
+                    min: 0
+                    max: 1.5
                     step: 0.01
+                    value: 0.3
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -206,6 +216,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider4.value,3))
                     multiline: False
                     id: a1
                 Label:
@@ -215,13 +226,11 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider4
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
-
+                    min: -45
+                    max: 75
+                    step: 0.1
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -230,6 +239,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider5.value,3))
                     multiline: False
                     id: a2
                 Label:
@@ -239,12 +249,11 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider5
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
+                    min: -45
+                    max: 75
+                    step: 0.1
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -253,6 +262,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider6.value,3))
                     multiline: False
                     id: a3
                 Label:
@@ -265,9 +275,9 @@ WindowManager:
 
                 Slider:
                     id: slider6
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
+                    min: -45
+                    max: 75
+                    step: 0.1
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -276,6 +286,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider7.value,3))
                     multiline: False
                     id: b1
                 Label:
@@ -288,10 +299,9 @@ WindowManager:
 
                 Slider:
                     id: slider7
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
-
+                    min: -45
+                    max: 75
+                    step: 0.1
                 Label:
                     font_size:root.fontsize2(self.text)
                     text:"Outlet relative angle \u03B22 : "
@@ -299,6 +309,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider8.value,3))
                     multiline: False
                     id: b2
                 Label:
@@ -311,9 +322,9 @@ WindowManager:
 
                 Slider:
                     id: slider8
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
+                    min: -45
+                    max: 75
+                    step: 0.1
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -322,6 +333,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    text: str(round(slider9.value,3))
                     multiline: False
                     id: b3
                 Label:
@@ -334,9 +346,9 @@ WindowManager:
 
                 Slider:
                     id: slider9
-                    min: 0.2
-                    max: 2.5
-                    step: 0.01
+                    min: -45
+                    max: 75
+                    step: 0.1
 
             #Deytero Grid
             GridLayout:
