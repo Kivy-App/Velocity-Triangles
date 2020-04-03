@@ -21,7 +21,7 @@ def firstPopup():
     label = Label(text = ' At least three variables \n are required for the analysis',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
     bl.add_widget(label)
-    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=(400, 400))
+    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('400dp' ,'400dp'))
     bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.15,'y':1.2}, on_release = popupWindow.dismiss))
     popupWindow.open()
 
@@ -102,7 +102,6 @@ class VelocityTriangles(Screen):
                 dp = dp + 1
             return "{}dp".format(dp)
 
-
 class NewWindow(Screen):
     pText  = StringProperty("0")
     fText  = StringProperty('0')
@@ -142,7 +141,7 @@ class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (600, 700)
+Window.size = (400, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
@@ -151,9 +150,5 @@ class VelocityTrianglesApp(App):
         return kv
 
 if __name__ == '__main__':
-	va = VelocityTrianglesApp()
-	va.run()
-
-
-
-
+    va = VelocityTrianglesApp()
+    va.run()
