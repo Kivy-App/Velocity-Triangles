@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
+from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -24,7 +25,7 @@ def firstPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('400dp' ,'400dp'))
-    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.15,'y':1.2}, on_release = popupWindow.dismiss))
+    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.05,'y':1.2}, on_release = popupWindow.dismiss))
     popupWindow.open()
 
 class VelocityTriangles(Screen):
@@ -38,6 +39,8 @@ class VelocityTriangles(Screen):
     b1 = ObjectProperty(None)
     b2 = ObjectProperty(None)
     b3 = ObjectProperty(None)
+
+    k = NumericProperty(0)
 
     def systemsolver(self):
         try:
@@ -101,9 +104,7 @@ class VelocityTriangles(Screen):
                 pe = float(pe)
             else:
                 X[i]== 'pe'
-
                 i=i+1
-
 
             if str(X[i])!='fe':
                 del X[i]
@@ -147,15 +148,16 @@ class VelocityTriangles(Screen):
                 b2e = float(b2e)
             else:
                 X[i]!='b2e'
+                i = i+1
 
 
-
+            # print(i)
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
                 a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
                 b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
 
-            print(sys)
+            #print(sys)
             r=0
             if str(self.p.text)=='':
                 pe = str(round(sys[r],3))
@@ -199,6 +201,7 @@ class VelocityTriangles(Screen):
             else :
                 b2e = str(self.b2.text)
 
+            self.k = i
 
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe
@@ -209,6 +212,7 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').b1Text = b1e
             self.manager.get_screen('new').b2Text = b2e
             self.manager.get_screen('new').b3Text = b3e
+
         except:
              self.popup = firstPopup()
 

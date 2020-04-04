@@ -7,19 +7,23 @@ WindowManager:
 <Label>
     color: [0,0,0,1]
     id: kappa
-    size_hint_x: 0.8
+    size_hint_x: 1
 
 <TextInput>
-    size_hint_x: 0.8
+    size_hint_x: 1
     spacing: 5
     write_tab: False
     input_filter:'float'
+    #do_cursor_movement(cursor_down)
+    cursor_color: 0.2,0.5,0,0.8
+    cursor_width: '2dp'
+    #disabled_foreground_color: [0,0,0,0]
 
 <ToggleButton>
     size_hint: 0.5,1
 
 <Slider>
-    size_hint_x: 0.5
+    size_hint_x: 0.7
     value_track: True
     value_track_color: [0.2,0.2,0.2,0.8]
 
@@ -36,10 +40,6 @@ WindowManager:
     b1:b1
     b2:b2
     b3:b3
-
-    
-    
-
 
     GridLayout:
         rows:2
@@ -79,7 +79,7 @@ WindowManager:
                     font_size: root.fontsize(self.text)
 
                 Slider:
-                    size_hint_x:0.4
+                    size_hint_x:0.6
                     min: 0
                     max: 1
                     step: 1
@@ -164,6 +164,7 @@ WindowManager:
                     text: '' if slider2.value==0  else str(round(slider2.value,3))
                     id: f
                     multiline: False
+
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ] "
@@ -303,8 +304,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    disabled: slider0.value==0
-                    #disabled_foreground_color: [0.5,0,0,10]
+
                     text: '' if slider8.value==0  else str(round(slider8.value,3))
                     multiline: False
                     id: b2
@@ -329,6 +329,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    disabled: slider0.value==0
                     text: '' if slider9.value==0  else str(round(slider9.value,3))
                     multiline: False
                     id: b3
@@ -371,10 +372,9 @@ WindowManager:
                         color: [1,1,1,1]
                         on_release:
                             root.systemsolver()
-                            app.root.current = "new"
-                            root.manager.transition.direction = "left"
-
-
+                            if root.k == 4 :\
+                            app.root.current = "new";\
+                            root.manager.transition.direction = "left";\
 
                     Label:
                         size_hint_x:0.325
