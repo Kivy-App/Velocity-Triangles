@@ -14,6 +14,7 @@ WindowManager:
     spacing: 5
     write_tab: False
     input_filter:'float'
+
 <ToggleButton>
     size_hint: 0.5,1
 
@@ -78,10 +79,11 @@ WindowManager:
                     font_size: root.fontsize(self.text)
 
                 Slider:
-                    size_hint_x:0.3
+                    size_hint_x:0.4
                     min: 0
                     max: 1
                     step: 1
+                    id: slider0
                     cursor_height: '28sp'
                     cursor_width: '28sp'
 
@@ -98,14 +100,6 @@ WindowManager:
                 Label:
                     text:'   Non Repeating Stage'
                     font_size: root.fontsize(self.text)
-
-#                Label:
-#                    text: 'Choose your stage state'
-#                Switch:
-#                    id: switch
-#                    source: 'account-login-3x.png'
-#                Label:
-#                    text: 'Repeating Stage' if switch.active else 'Non Repeating Stage'
 
 ############Keno anamesa sto switch kai ta inputs
             BoxLayout:
@@ -138,7 +132,7 @@ WindowManager:
                     size_hint_x:0.33
 
                 TextInput:
-                    text: str(round(slider1.value,3))
+                    text: '' if slider1.value==0  else str(round(slider1.value,3))
                     id: p
                     multiline: False
                     write_tab: False
@@ -156,7 +150,7 @@ WindowManager:
                     min: 0
                     max: 2.5
                     step: 0.01
-                    value: 0.5
+                    value: 0
 
 
 
@@ -167,7 +161,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider2.value,3))
+                    text: '' if slider2.value==0  else str(round(slider2.value,3))
                     id: f
                     multiline: False
                 Label:
@@ -182,7 +176,7 @@ WindowManager:
                     min: 0
                     max: 2
                     step: 0.01
-                    value:.4
+                    value:0
 
 
                 Label:
@@ -192,7 +186,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider3.value,3))
+                    text: '' if slider3.value==0  else str(round(slider3.value,3))
                     multiline: False
                     id: rn
                 Label:
@@ -207,7 +201,7 @@ WindowManager:
                     min: 0
                     max: 1.5
                     step: 0.01
-                    value: 0.3
+                    value: 0
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -216,7 +210,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider4.value,3))
+                    text: '' if slider4.value==0  else str(round(slider4.value,3))
                     multiline: False
                     id: a1
                 Label:
@@ -239,7 +233,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider5.value,3))
+                    text: '' if slider5.value==0  else str(round(slider5.value,3))
                     multiline: False
                     id: a2
                 Label:
@@ -262,7 +256,8 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider6.value,3))
+                    disabled: slider0.value==0
+                    text: '' if slider6.value==0  else str(round(slider6.value,3))
                     multiline: False
                     id: a3
                 Label:
@@ -272,7 +267,6 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider6
                     min: -45
@@ -286,7 +280,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider7.value,3))
+                    text: '' if slider7.value==0  else str(round(slider7.value,3))
                     multiline: False
                     id: b1
                 Label:
@@ -309,7 +303,9 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider8.value,3))
+                    disabled: slider0.value==0
+                    #disabled_foreground_color: [0.5,0,0,10]
+                    text: '' if slider8.value==0  else str(round(slider8.value,3))
                     multiline: False
                     id: b2
                 Label:
@@ -333,7 +329,7 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
-                    text: str(round(slider9.value,3))
+                    text: '' if slider9.value==0  else str(round(slider9.value,3))
                     multiline: False
                     id: b3
                 Label:
@@ -375,9 +371,8 @@ WindowManager:
                         color: [1,1,1,1]
                         on_release:
                             root.systemsolver()
-                            if root.p.text.replace(".","",1).isdigit()== True and root.f.text.replace(".","",1).isdigit() == True and root.rn.text.replace(".","",1).isdigit() == True:\
-                            app.root.current = "new";\
-                            root.manager.transition.direction = "left";\
+                            app.root.current = "new"
+                            root.manager.transition.direction = "left"
 
 
 
