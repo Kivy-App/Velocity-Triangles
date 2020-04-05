@@ -24,8 +24,8 @@ def firstPopup():
     label = Label(text = ' At least three variables \n are required for the analysis',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
     bl.add_widget(label)
-    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('400dp' ,'400dp'))
-    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.05,'y':1.2}, on_release = popupWindow.dismiss))
+    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
     popupWindow.open()
 
 class VelocityTriangles(Screen):
@@ -150,7 +150,7 @@ class VelocityTriangles(Screen):
                 X[i]!='b2e'
                 i = i+1
 
-
+            self.k = i
             # print(i)
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
                 a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
@@ -201,7 +201,7 @@ class VelocityTriangles(Screen):
             else :
                 b2e = str(self.b2.text)
 
-            self.k = i
+
 
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe

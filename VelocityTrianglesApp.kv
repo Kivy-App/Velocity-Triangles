@@ -87,16 +87,6 @@ WindowManager:
                     cursor_height: '28sp'
                     cursor_width: '28sp'
 
-#                ToggleButton:
-#                    text: " "
-#                    id: dion
-#                    group: ""
-#                    on_press:
-#                ToggleButton:
-#                    text: " "
-#                    id: faulty
-#                    group: "a"
-#                    on_press:
                 Label:
                     text:'   Non Repeating Stage'
                     font_size: root.fontsize(self.text)
@@ -273,6 +263,7 @@ WindowManager:
                     min: -45
                     max: 75
                     step: 0.1
+                    disabled: slider0.value == 0
 
                 Label:
                     font_size:root.fontsize2(self.text)
@@ -346,6 +337,7 @@ WindowManager:
                     min: -45
                     max: 75
                     step: 0.1
+                    disabled: slider0.value == 0
 
             #Deytero Grid
             GridLayout:
@@ -395,16 +387,14 @@ WindowManager:
                         text:"Parallel Annulus"
                         size_hint_x: 1
 
-                    ToggleButton:
-                        text: " "
-                        id: dion
-                        group: "b"
-                        on_press:
-                    ToggleButton:
-                        text: " "
-                        id: faulty
-                        group: "b"
-                        on_press:
+                    Slider:
+                        size_hint_x:0.6
+                        min: 0
+                        max: 1
+                        step: 1
+                        id: slider10
+                        cursor_height: '28sp'
+                        cursor_width: '28sp'
                     Label:
                         font_size: root.fontsize(self.text)
                         text:"    Non Parallel Annulus"
