@@ -17,11 +17,27 @@ import sympy as sy
 class P(BoxLayout):
     pass
 
+
+
 def firstPopup():
     show = P()
     # create content for the Popup
     bl = BoxLayout(orientation='vertical',padding = 30)
     label = Label(text = ' At least three variables \n are required for the analysis',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+    bl.add_widget(label)
+    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+    popupWindow.open()
+
+class P2(BoxLayout):
+    pass
+
+def secondPopup():
+    show = P2()
+    # create content for the Popup
+    bl = BoxLayout(orientation='vertical',padding = 30)
+    label = Label(text = ' This combination of variables \n is not valid ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
     bl.add_widget(label)
     popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
@@ -152,10 +168,12 @@ class VelocityTriangles(Screen):
 
             self.k = i
             # print(i)
+
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
                 a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
                 b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
+
 
             #print(sys)
             r=0
@@ -213,9 +231,16 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').b2Text = b2e
             self.manager.get_screen('new').b3Text = b3e
 
-        except:
-             self.popup = firstPopup()
 
+
+
+        except:
+            if i > 4:
+                self.popup = firstPopup()
+                self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
+            else:
+                self.popup = secondPopup()
+                self.k = 0
     def fontsize(self, text):
         if Window.size[0]>400:
             dp = 7
