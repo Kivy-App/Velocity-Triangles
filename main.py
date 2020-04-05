@@ -55,6 +55,7 @@ class VelocityTriangles(Screen):
     b1 = ObjectProperty(None)
     b2 = ObjectProperty(None)
     b3 = ObjectProperty(None)
+    
 
     k = NumericProperty(0)
 
@@ -167,6 +168,7 @@ class VelocityTriangles(Screen):
                 i = i+1
 
             self.k = i
+            
             # print(i)
 
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
@@ -174,8 +176,7 @@ class VelocityTriangles(Screen):
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
                 b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
 
-
-            #print(sys)
+            
             r=0
             if str(self.p.text)=='':
                 pe = str(round(sys[r],3))
@@ -218,6 +219,10 @@ class VelocityTriangles(Screen):
                 r=r+1
             else :
                 b2e = str(self.b2.text)
+
+
+
+            
 
 
 
