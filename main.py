@@ -12,7 +12,7 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 import sympy as sy
-
+from kivy.uix.scrollview import ScrollView
 
 class P(BoxLayout):
     pass

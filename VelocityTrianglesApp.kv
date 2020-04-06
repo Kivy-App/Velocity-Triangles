@@ -43,34 +43,35 @@ WindowManager:
     b2:b2
     b3:b3
     
+    ScrollView:
+        size: root.height, root.width
+        size_hint: 1,1
 
-    GridLayout:
-        rows:2
-        size: root.width,root.height
 
-        ######  App Title
-        BoxLayout:
-            size_hint_y:0.08
-            canvas:
-                Color:
-                    rgba: 0.066,0.392,0.505,0.768
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            Label:
-                text: "One Stage Velocity Analysis "
-                bold: True
-                font_size:dp(30)
+
 
 
         ###### Overall Grid after title
         GridLayout:
-            rows: 4
-            size_hint_y:0.92
+            rows: 11
+            size_hint_y:1.2
 ############ proto part tou grid. Switch button Area
             BoxLayout:
+                size_hint_y:0.08
+                canvas:
+                    Color:
+                        rgba: 0.066,0.392,0.505,0.768
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: "Velocity Triangles Analysis "
+                    bold: True
+                    font_size:dp(30)
+
+            BoxLayout:
                 padding: 10
-                size_hint_y: 0.1
+                size_hint_y: 0.08
                 canvas:
                     Color:
                         rgba: 0.333,0.596,0.635,0.9
@@ -106,7 +107,7 @@ WindowManager:
 
 ########### Grid me ta textInputs
             GridLayout:
-                size_hint_y: 0.45
+                size_hint_y: 0.4
                 cols: 4
                 canvas:
                     Color:
@@ -123,13 +124,11 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                     size_hint_x:0.33
-
                 TextInput:
                     text: '' if slider1.value==0  else str(round(slider1.value,3))
                     id: p
                     multiline: False
                     write_tab: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ] "
@@ -137,7 +136,6 @@ WindowManager:
                     halign: 'left'
                     valign: 'middle'
                     size_hint_x:0.3
-
                 Slider:
                     id: slider1
                     min: 0
@@ -157,7 +155,6 @@ WindowManager:
                     text: '' if slider2.value==0  else str(round(slider2.value,3))
                     id: f
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ] "
@@ -342,142 +339,251 @@ WindowManager:
                     step: 0.1
                     disabled: slider0.value == 0
 
-            #Deytero Grid
+            BoxLayout:
+                size_hint_y: 0.01
+                padding:5
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+############ Deyteros Titlos
+            BoxLayout:
+                size_hint_y: 0.08
+                padding:5
+                canvas:
+                    Color:
+                        rgba: 0.066,0.392,0.505,0.768
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    text: " Dimensional Analysis "
+                    bold: True
+                    font_size:dp(30)
+
+            BoxLayout:
+                size_hint_y: 0.08
+                padding: 11
+                canvas:
+                    Color:
+                        rgba: 0.333,0.596,0.635,0.9
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                Label:
+                    font_size: root.fontsize(self.text)
+                    text:"Parallel Annulus"
+                    size_hint_x: 1
+
+                Slider:
+                    size_hint_x:0.6
+                    min: 0
+                    max: 1
+                    step: 1
+                    id: slider10
+                    cursor_height: '28sp'
+                    cursor_width: '28sp'
+                Label:
+                    font_size: root.fontsize(self.text)
+                    text:"    Non Parallel Annulus"
+                    size_hint_x: 1
+
+            BoxLayout:
+                size_hint_y: 0.01
+                padding:5
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
             GridLayout:
-                size_hint_y: 0.45
-                rows:5
-                #Proto Box
-                BoxLayout:
-                    size_hint_y: 0.25
-                    padding:5
-                    canvas:
-                        Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                    Label:
-                        size_hint_x:0.325
-                        text: ""
-                    Button:
-                        id:oti
-                        size_hint_x:0.333
-                        text: "Velocity Analysis"
-                        font_size:root.fontsize2(self.text)
-                        color: [1,1,1,1]
-                        on_release:
-                            root.systemsolver()
-                            if root.k == 4 :\
-                            app.root.current = "new";\
-                            root.manager.transition.direction = "left";\
+                size_hint_y: 0.3
+                cols: 3
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
 
-                    Label:
-                        size_hint_x:0.325
-                        text: ""
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:"Tip Diameter at Stage 1: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                BoxLayout:
-                    size_hint_y: 0.39
-                    padding: 11
-                    canvas:
-                        Color:
-                            rgba: 0.333,0.596,0.635,0.9
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ m ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:"Tip Diameter at Stage 2: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                    Label:
-                        font_size: root.fontsize(self.text)
-                        text:"Parallel Annulus"
-                        size_hint_x: 1
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ m ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:"Tip Diameter at Stage 3: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                    Slider:
-                        size_hint_x:0.6
-                        min: 0
-                        max: 1
-                        step: 1
-                        id: slider10
-                        cursor_height: '28sp'
-                        cursor_width: '28sp'
-                    Label:
-                        font_size: root.fontsize(self.text)
-                        text:"    Non Parallel Annulus"
-                        size_hint_x: 1
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ m ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
 
-                BoxLayout:
-                    size_hint_y: 0.03
-                    padding:5
-                    canvas:
-                        Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:" Hub2Tip ratio at Stage 1: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                GridLayout:
-                    size_hint_y: 0.485
-                    cols: 3
-                    canvas:
-                        Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ - ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:" Hub2Tip ratio at Stage 2: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text:"Tip Diameter : "
-                        text_size: self.size
-                        halign: 'right'
-                        valign: 'middle'
-                    TextInput:
-                        multiline: False
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ - ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:" Hub2Tip ratio at Stage 1: "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text: " [ m ]"
-                        text_size: self.size
-                        halign: 'left'
-                        valign: 'middle'
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text:" Hub to Tip Ratio : "
-                        text_size: self.size
-                        halign: 'right'
-                        valign: 'middle'
-                    TextInput:
-                        multiline: False
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ - ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
 
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text: " [ - ]"
-                        text_size: self.size
-                        halign: 'left'
-                        valign: 'middle'
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text:" Rotational Speed : "
-                        text_size: self.size
-                        halign: 'right'
-                        valign: 'middle'
-                    TextInput:
-                        multiline: False
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text:" Rotational Speed : "
+                    text_size: self.size
+                    halign: 'right'
+                    valign: 'middle'
+                TextInput:
+                    multiline: False
 
-                    Label:
-                        font_size:root.fontsize2(self.text)
-                        text: " [ rpm ]"
-                        text_size: self.size
-                        halign: 'left'
-                        valign: 'middle'
+                Label:
+                    font_size:root.fontsize2(self.text)
+                    text: " [ rpm ]"
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
 
-                BoxLayout:
-                    size_hint_y: 0.5
-                    padding:5
-                    canvas:
-                        Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+
+            BoxLayout:
+                size_hint_y: 0.08
+                padding:5
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    size_hint_x:0.325
+                    text: ""
+                Button:
+                    id:oti
+                    size_hint_x:0.333
+                    text: "Velocity Analysis"
+                    font_size:root.fontsize2(self.text)
+                    color: [1,1,1,1]
+                    on_release:
+                        root.systemsolver()
+                        if root.k == 4 :\
+                        app.root.current = "new";\
+                        root.manager.transition.direction = "left";\
+                Label:
+                    size_hint_x:0.325
+                    text: ""
+
+            BoxLayout:
+                size_hint_y: 0.01
+                padding:5
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+
+#<NewWindow>:
+#name: "new"
+#    GridLayout:
+#        rows: 3
+#
+#        GridLayout:
+#            cols:2
+#            size_hint_y: 0.5
+#
+#        BoxLayout:
+#            size_hint_y: 0.25
+#
+#        GridLayout:
+#            cols:2
+#            size_hint_y: 0.25
+#            Button:
+#                size_hint_y:0.25
+#                text:"Back"
+#                on_release:
+#                    root.manager.current = "Main"
+#                    root.manager.transition.direction = "right"
+#
+#            BoxLayout:
+#                size_hint_x:0.7
+
 
 <NewWindow>:
     name: "new"
@@ -668,7 +774,7 @@ WindowManager:
                         Rectangle:
                             pos: self.pos
                             size: self.size
-                        
+
 
             BoxLayout:
                 size_hint:0.5,0.5
