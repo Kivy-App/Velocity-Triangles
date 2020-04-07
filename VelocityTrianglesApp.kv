@@ -80,6 +80,7 @@ WindowManager:
                         size: self.size
                 Label:
                     text:'Repeating Stage'
+                    #bold: if slider0.value==0
                     font_size: root.fontsize(self.text)
 
                 Slider:
@@ -420,13 +421,13 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
+
                 Label:
                     font_size:root.fontsize2(self.text)
                     text:"Tip Diameter at Stage 2: "
@@ -434,14 +435,15 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    disabled: slider10.value==0
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
+
                 Label:
                     font_size:root.fontsize2(self.text)
                     text:"Tip Diameter at Stage 3: "
@@ -449,8 +451,8 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    disabled: slider10.value==0
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
@@ -466,13 +468,13 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
+
                 Label:
                     font_size:root.fontsize2(self.text)
                     text:" Hub2Tip ratio at Stage 2: "
@@ -480,14 +482,15 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    disabled: slider10.value==0
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
+
                 Label:
                     font_size:root.fontsize2(self.text)
                     text:" Hub2Tip ratio at Stage 1: "
@@ -495,8 +498,8 @@ WindowManager:
                     halign: 'right'
                     valign: 'middle'
                 TextInput:
+                    disabled: slider10.value==0
                     multiline: False
-
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
@@ -761,7 +764,7 @@ WindowManager:
                             width: 3.
                             rectangle: (self.x, self.y, self.width, self.height)
                     Label:
-                        text:'Velocity analysis Results'
+                        text:'Velocity variables'
                         font_size: root.fontsize3(self.text)
                         bold:True
                         text_size: self.size
@@ -790,63 +793,63 @@ WindowManager:
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Loading Coefficient \u03C8 : "
+                            text:" Hub rotation speed Uh: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Flow Coefficient \u03C6 : "
+                            text:" Middle rotation speed Um:  "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Reaction Coefficient Rn : "
+                            text:" Tip rotation speed Ut: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet absolute angle \u03B11 : "
+                            text:" Axial Velocity  Vx: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Outlet absolute angle \u03B12 : "
+                            text:" Inlet absolute velocity V1: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet absolute angle \u03B13 : "
+                            text:" Outlet absolute velocity V2: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet relative angle \u03B21 : "
+                            text:" Inlet relative velocity W1: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Outlet relative angle \u03B22 : "
+                            text:" Outlet relative velocity W1: "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet relative angle \u03B13 : "
+                            text:" "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -887,7 +890,7 @@ WindowManager:
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            #text: root.a3Text
+                            #text: root.a1Text if slider0.value == 0 else '------'
                             text:'------'
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
