@@ -80,7 +80,7 @@ WindowManager:
                         size: self.size
                 Label:
                     text:'Repeating Stage'
-                    #bold: if slider0.value==0
+                    bold: True if slider0.value==0 else False
                     font_size: root.fontsize(self.text)
 
                 Slider:
@@ -94,6 +94,7 @@ WindowManager:
 
                 Label:
                     text:'   Non Repeating Stage'
+                    bold: True if slider0.value==1 else False
                     font_size: root.fontsize(self.text)
 
 ############Keno anamesa sto switch kai ta inputs
@@ -377,6 +378,7 @@ WindowManager:
 
                 Label:
                     font_size: root.fontsize(self.text)
+                    bold: True if slider10.value==0 else False
                     text:"Parallel Annulus"
                     size_hint_x: 1
 
@@ -390,6 +392,7 @@ WindowManager:
                     cursor_width: '28sp'
                 Label:
                     font_size: root.fontsize(self.text)
+                    bold: True if slider10.value==1 else False
                     text:"    Non Parallel Annulus"
                     size_hint_x: 1
 
