@@ -42,13 +42,18 @@ WindowManager:
     b1:b1
     b2:b2
     b3:b3
-    
+
+    d1:d1
+    d2:d2
+    d3:d3
+    rh2t1:rh2t1
+    rh2t2:rh2t2
+    rh2t3:rh2t3
+    n:n
+
     ScrollView:
         size: root.height, root.width
         size_hint: 1,1
-
-
-
 
 
         ###### Overall Grid after title
@@ -81,7 +86,8 @@ WindowManager:
                 Label:
                     text:'Repeating Stage'
                     bold: True if slider0.value==0 else False
-                    font_size: root.fontsize(self.text)
+                    #font_size: root.fontsize(self.text)
+                    font_size: '15dp'
 
                 Slider:
                     size_hint_x:0.6
@@ -95,7 +101,8 @@ WindowManager:
                 Label:
                     text:'   Non Repeating Stage'
                     bold: True if slider0.value==1 else False
-                    font_size: root.fontsize(self.text)
+                    #font_size: root.fontsize(self.text)
+                    font_size: '15dp'
 
 ############Keno anamesa sto switch kai ta inputs
             BoxLayout:
@@ -377,7 +384,8 @@ WindowManager:
                         size: self.size
 
                 Label:
-                    font_size: root.fontsize(self.text)
+                    #font_size: root.fontsize(self.text)
+                    font_size: '15dp'
                     bold: True if slider10.value==0 else False
                     text:"Parallel Annulus"
                     size_hint_x: 1
@@ -391,7 +399,8 @@ WindowManager:
                     cursor_height: '28sp'
                     cursor_width: '28sp'
                 Label:
-                    font_size: root.fontsize(self.text)
+                    #font_size: root.fontsize(self.text)
+                    font_size: '15dp'
                     bold: True if slider10.value==1 else False
                     text:"    Non Parallel Annulus"
                     size_hint_x: 1
@@ -424,6 +433,7 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
+                    id: d1
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
@@ -440,6 +450,7 @@ WindowManager:
                 TextInput:
                     disabled: slider10.value==0
                     multiline: False
+                    id: d2
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
@@ -456,6 +467,7 @@ WindowManager:
                 TextInput:
                     disabled: slider10.value==0
                     multiline: False
+                    id: d3
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ m ]"
@@ -471,6 +483,7 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
+                    id: rh2t1
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
@@ -487,6 +500,7 @@ WindowManager:
                 TextInput:
                     disabled: slider10.value==0
                     multiline: False
+                    id: rh2t2
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
@@ -503,6 +517,7 @@ WindowManager:
                 TextInput:
                     disabled: slider10.value==0
                     multiline: False
+                    id: rh2t3
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ - ]"
@@ -518,7 +533,7 @@ WindowManager:
                     valign: 'middle'
                 TextInput:
                     multiline: False
-
+                    id: n
                 Label:
                     font_size:root.fontsize2(self.text)
                     text: " [ rpm ]"
@@ -547,6 +562,7 @@ WindowManager:
                     color: [1,1,1,1]
                     on_release:
                         root.systemsolver()
+                        root.dml()
                         if root.k == 4 :\
                         app.root.current = "new";\
                         root.manager.transition.direction = "left";\
@@ -863,57 +879,57 @@ WindowManager:
                         size_hint_x:0.3
 
                         Label:
-                            text: root.pText
+                            text: root.UhText
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.fText
+                            text: root.UmText
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.rnText
+                            text: root.UtText
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.a1Text
+                            text: root.VxText
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.a2Text
+                            text: root.V1Text
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             #text: root.a1Text if slider0.value == 0 else '------'
-                            text:'------'
+                            text: root.V2Text
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.b1Text
+                            text: root.W1Text
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.b2Text
+                            text: root.W2Text
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
-                            text:'------'
+                            text:''
                             font_size:root.fontsize2(self.text)
                             text_size: self.size
                             halign: 'left'
@@ -992,253 +1008,3 @@ WindowManager:
                 size_hint_x:0.7
 
 
-#<NewWindow>:
-#    name: "new"
-#    GridLayout:
-#        rows: 2
-#        GridLayout:
-#            cols:2
-#            size_hint_y:0.7
-#
-#            GridLayout:
-#                rows:3
-#                size_hint_x:0.5
-#
-#                BoxLayout:
-#                    size_hint_y:0.08
-#                    spacing:10
-#
-#                    canvas:
-#                        Color:
-#                            rgba: 0.066,0.392,0.505,0.768
-#                        Rectangle:
-#                            pos: self.pos
-#                            size: self.size
-#                        Color:
-#                            rgba:0,0,0,1
-#                        Line:
-#                            width: 3.
-#                            rectangle: (self.x, self.y, self.width, self.height)
-#                    Label:
-#                        text:'Velocity analysis Results'
-#                        font_size: root.fontsize3(self.text)
-#                        bold:True
-#                        text_size: self.size
-#                        halign: 'center'
-#                        valign: 'middle'
-#
-#                GridLayout:
-#                    cols:2
-#                    size_hint_y:0.65
-#                    canvas:
-#                        Color:
-#                            rgba: 0.6862,0.9333,0.9333,0.737
-#                        Rectangle:
-#                            pos: self.pos
-#                            size: self.size
-#                        Color:
-#                            rgba:0,0,0,1
-#                        Line:
-#                            width: 3.
-#                            rectangle: (self.x, self.y, self.width, self.height)
-#
-#
-#                    GridLayout:
-#                        rows:9
-#                        size_hint_x:0.7
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Loading Coefficient \u03C8 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Flow Coefficient \u03C6 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Reaction Coefficient Rn : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Inlet absolute angle \u03B11 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Outlet absolute angle \u03B12 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Inlet absolute angle \u03B13 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Inlet relative angle \u03B21 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Outlet relative angle \u03B22 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#                        Label:
-#                            font_size:root.fontsize2(self.text)
-#                            text:"Inlet relative angle \u03B13 : "
-#                            text_size: self.size
-#                            halign: 'right'
-#                            valign: 'middle'
-#
-#
-#                    GridLayout:
-#                        rows:9
-#                        size_hint_x:0.3
-#
-#                        Label:
-#                            text: root.pText
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.fText
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.rnText
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.a1Text
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.a2Text
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            #text: root.a3Text
-#                            text:'------'
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.b1Text
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            text: root.b2Text
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#                        Label:
-#                            #text: root.b3Text
-#                            text:'------'
-#                            font_size:root.fontsize2(self.text)
-#                            text_size: self.size
-#                            halign: 'left'
-#                            valign: 'middle'
-#
-#                BoxLayout:
-#                    size_hint_y:0.3
-#                    canvas:
-#                        Color:
-#                            rgba: 0.6862,0.9333,0.9333,0.737
-#                        Rectangle:
-#                            pos: self.pos
-#                            size: self.size
-#
-#
-#            BoxLayout:
-#                size_hint:0.5,0.5
-#                canvas:
-#                    Color:
-#                        rgba: 0.6862,0.9333,0.9333,0.737
-#                    Rectangle:
-#                        pos: self.pos
-#                        size: self.size
-#
-#
-#        GridLayout:
-#            cols:2
-#            size_hint_y:0.3
-#            canvas:
-#                Color:
-#                    rgba: 0.6862,0.9333,0.9333,0.737
-#                Rectangle:
-#                    pos: self.pos
-#                    size: self.size
-#
-#            BoxLayout:
-#                padding: 15
-#                spacing: 20
-#                size_hint_x: 0.3
-#                canvas:
-#                    Color:
-#                        rgba:0,0,0,1
-#                    Line:
-#                    	#:set x0 dp(125)
-#                    	#:set y0 dp(80)
-#                    	#:set x1 dp(275)
-#                    	#:set y1 dp(80)
-#                    	#:set U  x1-x0
-#
-#
-#                        width:1.5
-#                        points: (x0,y0,x1,y1) ### U ###
-#                    Line:
-#                        width:1.5
-#                        points: (x0,y0,x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText))
-#                    Line:
-#                        width:1.5
-#                        points: (x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText),x1,y1)
-#                    Line:
-#                        width:1.5
-#                        points: (x1,y1,x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText))
-#                    Line:
-#                        width:1.5
-#                        points: (x0,y0,x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText))
-#                    Color:
-#                        rgba: 0.6862,0.9333,0.9333,0.737
-#                Button:
-#                    size_hint_y:0.25
-#                    text:"Back"
-#                    on_release:
-#                        root.manager.current = "Main"
-#                        root.manager.transition.direction = "right"
-#
-#            BoxLayout:
-#                size_hint_x:0.7

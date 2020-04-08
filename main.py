@@ -6,6 +6,7 @@ from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
+import math as m
 import numpy as np
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
@@ -55,12 +56,30 @@ class VelocityTriangles(Screen):
     b1 = ObjectProperty(None)
     b2 = ObjectProperty(None)
     b3 = ObjectProperty(None)
-    
+
+    d1 = ObjectProperty(None)
+    d2 = ObjectProperty(None)
+    d3 = ObjectProperty(None)
+    rh2t1 = ObjectProperty(None)
+    rh2t2 = ObjectProperty(None)
+    rh2t3 = ObjectProperty(None)
+    n = ObjectProperty(None)
 
     k = NumericProperty(0)
 
+
+
+
     def systemsolver(self):
         try:
+            global a1e
+            global a2e
+            global b1e
+            global b2e
+            global pe
+            global fe
+            global rne
+
             pe  = str(self.p.text)
             fe  = str(self.f.text)
             rne = str(self.rn.text)
@@ -221,11 +240,6 @@ class VelocityTriangles(Screen):
                 b2e = str(self.b2.text)
 
 
-
-            
-
-
-
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe
             self.manager.get_screen('new').rnText = rne
@@ -236,9 +250,6 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').b2Text = b2e
             self.manager.get_screen('new').b3Text = b3e
 
-
-
-
         except:
             if i > 4:
                 self.popup = firstPopup()
@@ -246,6 +257,7 @@ class VelocityTriangles(Screen):
             else:
                 self.popup = secondPopup()
                 self.k = 0
+
     def fontsize(self, text):
         if Window.size[0]>400:
             dp = 7
@@ -282,6 +294,50 @@ class VelocityTriangles(Screen):
                 dp = dp + 1
             return "{}dp".format(dp)
 
+
+
+    def dml(self):
+        D1e = str(self.d1.text)
+        D2e = str(self.d2.text)
+        D3e = str(self.d3.text)
+        Rh1e = str(self.rh2t1.text)
+        Rh2e = str(self.rh2t2.text)
+        Rh3e = str(self.rh2t3.text)
+        Ne = str(self.n.text)
+
+
+        self.rt = float(D1e)/2
+        self.rh = float(Rh1e)*float(D1e)/2
+        rti = self.rt
+        rhi = self.rh
+        self.rm = (rti+rhi)/2
+
+        self.Um = 0.01666666 * float(Ne) * self.rm
+        Umi = self.Um
+
+        self.Uh = 0.01666666 * float(Ne) * self.rh
+        Uhi = self.Uh
+
+        self.Ut = 0.01666666 * float(Ne) * self.rt
+        Uti = self.Ut
+
+        self.Vx = float(fe)*Umi
+        Vxi = self.Vx
+
+        self.V1 = Vxi/m.cos(float(a1e))
+        self.V2 = Vxi/m.cos(float(a2e))
+        self.W1 = Vxi / m.cos(float(b1e))
+        self.W2 = Vxi / m.cos(float(b2e))
+
+        self.manager.get_screen('new').UmText = str(round(self.Um,3))
+        self.manager.get_screen('new').UhText = str(round(self.Uh,3))
+        self.manager.get_screen('new').UtText = str(round(self.Ut,3))
+        self.manager.get_screen('new').VxText = str(round(self.Vx,3))
+        self.manager.get_screen('new').V1Text = str(round(self.V1, 3))
+        self.manager.get_screen('new').V2Text = str(round(self.V2, 3))
+        self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
+        self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
+
 class NewWindow(Screen):
     pText  = StringProperty("0")
     fText  = StringProperty('0')
@@ -292,6 +348,15 @@ class NewWindow(Screen):
     b1Text = StringProperty('0')
     b2Text = StringProperty('0')
     b3Text = StringProperty('0')
+
+    UmText = StringProperty('0')
+    UtText = StringProperty('0')
+    UhText = StringProperty('0')
+    VxText = StringProperty('0')
+    V1Text = StringProperty('0')
+    V2Text = StringProperty('0')
+    W1Text = StringProperty('0')
+    W2Text = StringProperty('0')
 
     def fontsize2(self, text):
         if Window.size[0]>400:
