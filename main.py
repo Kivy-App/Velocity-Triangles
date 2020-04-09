@@ -45,6 +45,20 @@ def secondPopup():
     bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
     popupWindow.open()
 
+class P3(BoxLayout):
+    pass
+
+def thirdPopup():
+    show = P3()
+    # create content for the Popup
+    bl = BoxLayout(orientation='vertical',padding = 30)
+    label = Label(text = ' Dimensional measurements missing.\n Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+    bl.add_widget(label)
+    popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+    bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+    popupWindow.open()
+
 class VelocityTriangles(Screen):
 
     p  = ObjectProperty(None)
@@ -365,7 +379,7 @@ class VelocityTriangles(Screen):
                 self.manager.get_screen('new').W2Text = ''
                 self.manager.get_screen('new').DVthText = ''
             else:
-                self.popup = firstPopup()
+                self.popup = thirdPopup()
                 self.k = 0
 
 
