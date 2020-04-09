@@ -79,6 +79,7 @@ class VelocityTriangles(Screen):
             global pe
             global fe
             global rne
+            global i
 
             pe  = str(self.p.text)
             fe  = str(self.f.text)
@@ -187,7 +188,7 @@ class VelocityTriangles(Screen):
                 i = i+1
 
             self.k = i
-            
+
             # print(i)
 
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
@@ -195,7 +196,7 @@ class VelocityTriangles(Screen):
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
                 b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
 
-            
+
             r=0
             if str(self.p.text)=='':
                 pe = str(round(sys[r],3))
@@ -239,6 +240,17 @@ class VelocityTriangles(Screen):
             else :
                 b2e = str(self.b2.text)
 
+            print(str(round(float(a2e),3)))
+
+            pe = str(round(float(pe),3))
+            fe = str(round(float(fe),3))
+            rne = str(round(float(rne),3))
+            a1e = str(round(float(a1e),3))
+            a2e = str(round(float(a2e),3))
+            #a3e = str(round(float(a3e),3))
+            b1e = str(round(float(b1e),3))
+            b2e = str(round(float(b2e),3))
+            #b3e = str(round(float(b3e),3))
 
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe
@@ -256,7 +268,7 @@ class VelocityTriangles(Screen):
                 self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
             else:
                 self.popup = secondPopup()
-                self.k = 0
+                i = 0
 
     def fontsize(self, text):
         if Window.size[0]>400:
@@ -297,46 +309,66 @@ class VelocityTriangles(Screen):
 
 
     def dml(self):
-        D1e = str(self.d1.text)
-        D2e = str(self.d2.text)
-        D3e = str(self.d3.text)
-        Rh1e = str(self.rh2t1.text)
-        Rh2e = str(self.rh2t2.text)
-        Rh3e = str(self.rh2t3.text)
-        Ne = str(self.n.text)
+        try:
+            D1e = str(self.d1.text)
+            D2e = str(self.d2.text)
+            D3e = str(self.d3.text)
+            Rh1e = str(self.rh2t1.text)
+            Rh2e = str(self.rh2t2.text)
+            Rh3e = str(self.rh2t3.text)
+            Ne = str(self.n.text)
 
 
-        self.rt = float(D1e)/2
-        self.rh = float(Rh1e)*float(D1e)/2
-        rti = self.rt
-        rhi = self.rh
-        self.rm = (rti+rhi)/2
+            self.rt = float(D1e)/2
+            self.rh = float(Rh1e)*float(D1e)/2
+            rti = self.rt
+            rhi = self.rh
+            self.rm = (rti+rhi)/2
 
-        self.Um = 0.01666666 * float(Ne) * self.rm
-        Umi = self.Um
+            self.Um = 0.01666666 * float(Ne) * self.rm
+            Umi = self.Um
 
-        self.Uh = 0.01666666 * float(Ne) * self.rh
-        Uhi = self.Uh
+            self.Uh = 0.01666666 * float(Ne) * self.rh
+            Uhi = self.Uh
 
-        self.Ut = 0.01666666 * float(Ne) * self.rt
-        Uti = self.Ut
+            self.Ut = 0.01666666 * float(Ne) * self.rt
+            Uti = self.Ut
 
-        self.Vx = float(fe)*Umi
-        Vxi = self.Vx
+            self.Vx = float(fe)*Umi
+            Vxi = self.Vx
 
-        self.V1 = Vxi/m.cos(float(a1e))
-        self.V2 = Vxi/m.cos(float(a2e))
-        self.W1 = Vxi / m.cos(float(b1e))
-        self.W2 = Vxi / m.cos(float(b2e))
+            self.dvth = float(pe)*Umi
 
-        self.manager.get_screen('new').UmText = str(round(self.Um,3))
-        self.manager.get_screen('new').UhText = str(round(self.Uh,3))
-        self.manager.get_screen('new').UtText = str(round(self.Ut,3))
-        self.manager.get_screen('new').VxText = str(round(self.Vx,3))
-        self.manager.get_screen('new').V1Text = str(round(self.V1, 3))
-        self.manager.get_screen('new').V2Text = str(round(self.V2, 3))
-        self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
-        self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
+            self.V1 = Vxi/m.cos(float(a1e))
+            self.V2 = Vxi/m.cos(float(a2e))
+            self.W1 = Vxi / m.cos(float(b1e))
+            self.W2 = Vxi / m.cos(float(b2e))
+
+            self.manager.get_screen('new').UmText = str(round(self.Um, 3))
+            self.manager.get_screen('new').UhText = str(round(self.Uh, 3))
+            self.manager.get_screen('new').UtText = str(round(self.Ut, 3))
+            self.manager.get_screen('new').VxText = str(round(self.Vx, 3))
+            self.manager.get_screen('new').V1Text = str(round(self.V1, 3))
+            self.manager.get_screen('new').V2Text = str(round(self.V2, 3))
+            self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
+            self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
+            self.manager.get_screen('new').DVthText = str(round(self.dvth, 3))
+        except:
+            if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
+                self.manager.get_screen('new').UmText = ''
+                self.manager.get_screen('new').UhText = ''
+                self.manager.get_screen('new').UtText = ''
+                self.manager.get_screen('new').VxText = ''
+                self.manager.get_screen('new').V1Text = ''
+                self.manager.get_screen('new').V2Text = ''
+                self.manager.get_screen('new').W1Text = ''
+                self.manager.get_screen('new').W2Text = ''
+                self.manager.get_screen('new').DVthText = ''
+            else:
+                self.popup = firstPopup()
+                self.k = 0
+
+
 
 class NewWindow(Screen):
     pText  = StringProperty("0")
@@ -357,6 +389,7 @@ class NewWindow(Screen):
     V2Text = StringProperty('0')
     W1Text = StringProperty('0')
     W2Text = StringProperty('0')
+    DVthText = StringProperty('0')
 
     def fontsize2(self, text):
         if Window.size[0]>400:
