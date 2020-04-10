@@ -203,8 +203,6 @@ class VelocityTriangles(Screen):
 
             self.k = i
 
-            # print(i)
-
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
                 a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
@@ -254,7 +252,6 @@ class VelocityTriangles(Screen):
             else :
                 b2e = str(self.b2.text)
 
-            print(str(round(float(a2e),3)))
 
             pe = str(round(float(pe),3))
             fe = str(round(float(fe),3))

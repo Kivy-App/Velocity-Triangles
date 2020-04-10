@@ -938,7 +938,7 @@ WindowManager:
 
 
 ########Box sthn mesh . Kato apo ta apotelesmata (Ekei pou tha einai ta trigvna)
-        BoxLayout:
+        FloatLayout:
             size_hint_y: 0.4
             canvas:
                 Color:
@@ -946,12 +946,19 @@ WindowManager:
                 Rectangle:
                     pos: self.pos
                     size: self.size
-
+################Plaisio gyro apo ta trigona
                 Color:
                     rgba:0.5862,0.9333,0.9333,0.737
                 Rectangle:
                     pos:self.x+20, self.y
                     size:self.width-40, self.height-20
+
+                Color:
+                    rgba:0,0,0,1
+                Line:
+                    width: 1.
+                    rectangle: (self.x+20, self.y, self.width-40, self.height-20)
+################# Triangle Lines
 
                 Color:
                     rgba:0,0,0,1
@@ -976,13 +983,31 @@ WindowManager:
                     width:1.5
                     points: (x0,y0,x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText))
 
-                Color:
-                    rgba:0,0,0,1
+
+                ##### Dash Lines and Labels
+
                 Line:
-                    width: 1.
-                    rectangle: (self.x+20, self.y, self.width-40, self.height-20)
+                    width: 1
+                    points: (x0,y0-20,x1,y1-20)
+                Line:
+                    width: 1
+                    points: (x0,y0,x0,y0-30)
+                    dash_length: 5
+                    dash_offset: 5
+                Line:
+                    width: 1
+                    points: (x1,y0,x1,y0-30)
+                    dash_length: 5
+                    dash_offset: 5
 
+            Label:
+                pos: -120,-20
+                text: 'Probably turbine' if float(root.pText)>0.99 else '        Probably compressor'
+                color: 1,0,0,1
 
+            Label:
+                text: 'U'
+                pos: 0,-15
 
         GridLayout:
             cols:2
