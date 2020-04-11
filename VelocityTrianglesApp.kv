@@ -970,44 +970,83 @@ WindowManager:
                     #:set U  x1-x0
                     width:1.5
                     points: (x0,y0,x1,y1) ### U ###
+
+################ V1
                 Line:
                     width:1.5
                     points: (x0,y0,x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText))
+################ W1
                 Line:
                     width:1.5
-                    points: (x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText),x1,y1)
+                    points: (x1,y1,x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText))
+################ W2
                 Line:
                     width:1.5
                     points: (x1,y1,x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText))
+################ V2
                 Line:
                     width:1.5
                     points: (x0,y0,x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText))
 
 
                 ##### Dash Lines and Labels
-
                 Line:
                     width: 1
-                    points: (x0,y0-20,x1,y1-20)
+                    points: (x0,y0-dp(20),x1,y1-dp(20))
                 Line:
                     width: 1
-                    points: (x0,y0,x0,y0-30)
+                    points: (x0,y0,x0,y0-dp(30))
                     dash_length: 5
                     dash_offset: 5
                 Line:
                     width: 1
-                    points: (x1,y0,x1,y0-30)
+                    points: (x1,y0,x1,y0-dp(30))
+                    dash_length: 5
+                    dash_offset: 5
+################ Vx Line
+                Line:
+                    width: 1
+                    points: (x1 + dp(20),y0,x1 + dp(20),y0+U*float(root.fText)) if (x1-U*float(root.rnText)+U*float(root.pText)/2) < x1 else (x1-U*float(root.rnText)+U*float(root.pText)/2 + dp(20),y0,x1-U*float(root.rnText)+U*float(root.pText)/2 + dp(20) ,y0+U*float(root.fText))
+################ Vx dash Lines
+                Line:
+                    width: 1
+                    points: (x1,y0,x1 + dp(30),y0) if (x1-U*float(root.rnText)+U*float(root.pText)/2) < x1 else (x1,y0,x1-U*float(root.rnText)+U*float(root.pText)/2 + dp(30) ,y0)
+                    dash_length: 5
+                    dash_offset: 5
+                Line:
+                    width: 1
+                    points: (x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText),x1 + dp(30),y0+U*float(root.fText))    if (x1-U*float(root.rnText)+U*float(root.pText)/2) < x1    else (x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText),x1-U*float(root.rnText)+U*float(root.pText)/2 +dp(30),y0+U*float(root.fText))
+                    dash_length: 5
+                    dash_offset: 5
+################ ΔVθ Line
+                Line:
+                    width: 1
+                    points: (x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText) + dp(20),x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText) + dp(20))
+################ ΔVθ dash Lines
+                Line:
+                    width: 1
+                    points: (x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText),x1-U*float(root.rnText)-U*float(root.pText)/2,y0+U*float(root.fText) + dp(30))
+                    dash_length: 5
+                    dash_offset: 5
+                Line:
+                    width: 1
+                    points: (x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText),x1-U*float(root.rnText)+U*float(root.pText)/2,y0+U*float(root.fText) + dp(30))
                     dash_length: 5
                     dash_offset: 5
 
             Label:
-                pos: -120,-20
+                pos: dp(-120),dp(-20)
                 text: 'Probably turbine' if float(root.pText)>0.99 else '        Probably compressor'
                 color: 1,0,0,1
 
             Label:
                 text: 'U'
-                pos: 0,-15
+                pos: dp(0),dp(-15)
+
+            Label:
+                text: 'Vx'
+                #pos: dp(-200) + x1 +35,dp(-25+(y0+U*float(root.fText))/2.5)
+                pos: (dp(self.parent.x + U/2 + 35),dp(self.parent.y +(-y0 + U*float(root.fText))/2)) if (x1-U*float(root.rnText)+U*float(root.pText)/2) < x1 else (self.parent.x + x1-U*float(root.rnText)+U*float(root.pText)/2 - x0 -U/2 + 35,dp(self.parent.y +(-y0 + U*float(root.fText))/2))
 
         GridLayout:
             cols:2
