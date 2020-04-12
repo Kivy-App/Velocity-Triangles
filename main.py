@@ -86,192 +86,218 @@ class VelocityTriangles(Screen):
 
     def systemsolver(self):
         try:
-            global a1e
-            global a2e
-            global b1e
-            global b2e
-            global pe
-            global fe
-            global rne
-            global i
+	        global a1e
+	        global a2e
+	        global b1e
+	        global b2e
+	        global pe
+	        global fe
+	        global rne
+	        global i
 
-            pe  = str(self.p.text)
-            fe  = str(self.f.text)
-            rne = str(self.rn.text)
-            a1e = str(self.a1.text)
-            a2e = str(self.a2.text)
-            a3e = str(self.a3.text)
-            b1e = str(self.b1.text)
-            b2e = str(self.b2.text)
-            b3e = str(self.b3.text)
-
-
-            if pe == '':
-                pe = sy.symbols('pe')
-            else:
-                pe  = str(self.p.text)
-
-            if fe == '':
-                fe = sy.symbols('fe')
-            else:
-                fe  = str(self.f.text)
+	        pe  = str(self.p.text)
+	        fe  = str(self.f.text)
+	        rne = str(self.rn.text)
+	        a1e = str(self.a1.text)
+	        a2e = str(self.a2.text)
+	        a3e = str(self.a3.text)
+	        b1e = str(self.b1.text)
+	        b2e = str(self.b2.text)
+	        b3e = str(self.b3.text)
 
 
-            if rne == '':
-                rne = sy.symbols('rne')
-            else:
-                rne  = str(self.rn.text)
+	        if pe == '':
+	            pe = sy.symbols('pe')
+	        else:
+	            pe  = str(self.p.text)
 
-            if a1e == '':
-                a1e = sy.symbols('a1e')
-            else:
-                a1e  = str(self.a1.text)
-
-            if a2e == '':
-                a2e = sy.symbols('a2e')
-            else:
-                a2e  = str(self.a2.text)
-
-            if b1e == '':
-                b1e = sy.symbols('b1e')
-            else:
-                b1e  = str(self.b1.text)
-
-            if b2e == '':
-                b2e = sy.symbols('b2e')
-            else:
-                b2e  = str(self.b2.text)
-
-            X = pe,fe,rne,a1e,a2e,b1e,b2e
+	        if fe == '':
+	            fe = sy.symbols('fe')
+	        else:
+	            fe  = str(self.f.text)
 
 
-            X=list(X)
+	        if rne == '':
+	            rne = sy.symbols('rne')
+	        else:
+	            rne  = str(self.rn.text)
+
+	        if a1e == '':
+	            a1e = sy.symbols('a1e')
+	        else:
+	            a1e  = str(self.a1.text)
+
+	        if a2e == '':
+	            a2e = sy.symbols('a2e')
+	        else:
+	            a2e  = str(self.a2.text)
+
+	        if b1e == '':
+	            b1e = sy.symbols('b1e')
+	        else:
+	            b1e  = str(self.b1.text)
+
+	        if b2e == '':
+	            b2e = sy.symbols('b2e')
+	        else:
+	            b2e  = str(self.b2.text)
+
+	        X = pe,fe,rne,a1e,a2e,b1e,b2e
 
 
-            i=0
-
-            if str(X[i])!= 'pe':
-                del X[i]
-                pe = float(pe)
-            else:
-                X[i]== 'pe'
-                i=i+1
-
-            if str(X[i])!='fe':
-                del X[i]
-                fe = float(fe)
-            else:
-                X[i]=='fe'
-                i=i+1
-
-            if str(X[i])!='rne':
-                del X[i]
-                rne = float(rne)
-            else:
-                X[i]=='rne'
-                i=i+1
-
-            if str(X[i])!= 'a1e':
-                del X[i]
-                a1e = float(a1e)
-            else:
-                X[i]=='a1e'
-                i=i+1
+	        X=list(X)
 
 
-            if str(X[i])!='a2e':
-                del X[i]
-                a2e = float(a2e)
-            else:
-                X[i]=='a2e'
-                i=i+1
+	        i=0
 
-            if str(X[i])!='b1e':
-                del X[i]
-                b1e = float(b1e)
-            else:
-                X[i]=='b1e'
-                i=i+1
+	        if str(X[i])!= 'pe':
+	            del X[i]
+	            pe = float(pe)
+	        else:
+	            X[i]== 'pe'
+	            i=i+1
 
+	        if str(X[i])!='fe':
+	            del X[i]
+	            fe = float(fe)
+	        else:
+	            X[i]=='fe'
+	            i=i+1
 
-            if str(X[i])!='b2e':
-                del X[i]
-                b2e = float(b2e)
-            else:
-                X[i]!='b2e'
-                i = i+1
+	        if str(X[i])!='rne':
+	            del X[i]
+	            rne = float(rne)
+	        else:
+	            X[i]=='rne'
+	            i=i+1
 
-            self.k = i
-
-            sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
-                a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
-                b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
-                b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
-
-
-            r=0
-            if str(self.p.text)=='':
-                pe = str(round(sys[r],3))
-                r=r+1
-            else :
-                pe = str(self.p.text)
-
-            if str(self.f.text)=='':
-                fe = str(round(sys[r],3))
-                r=r+1
-            else :
-                fe = str(self.f.text)
-
-            if str(self.rn.text)=='':
-                rne = str(round(sys[r],3))
-                r=r+1
-            else :
-                rne = str(self.rn.text)
-
-            if str(self.a1.text)=='':
-                a1e = str(round(sys[r],3))
-                r=r+1
-            else :
-                a1e = str(self.a1.text)
-
-            if str(self.a2.text)=='':
-                a2e = str(round(sys[r],3))
-                r=r+1
-            else :
-                a2e = str(self.a2.text)
-
-            if str(self.b1.text)=='':
-                b1e = str(round(sys[r],3))
-                r=r+1
-            else :
-                b1e = str(self.b1.text)
-
-            if str(self.b2.text)=='':
-                b2e = str(round(sys[r],3))
-                r=r+1
-            else :
-                b2e = str(self.b2.text)
+	        if str(X[i])!= 'a1e':
+	            del X[i]
+	            a1e = float(a1e)
+	        else:
+	            X[i]=='a1e'
+	            i=i+1
 
 
-            pe = str(round(float(pe),3))
-            fe = str(round(float(fe),3))
-            rne = str(round(float(rne),3))
-            a1e = str(round(float(a1e),3))
-            a2e = str(round(float(a2e),3))
-            #a3e = str(round(float(a3e),3))
-            b1e = str(round(float(b1e),3))
-            b2e = str(round(float(b2e),3))
-            #b3e = str(round(float(b3e),3))
+	        if str(X[i])!='a2e':
+	            del X[i]
+	            a2e = float(a2e)
+	        else:
+	            X[i]=='a2e'
+	            i=i+1
 
-            self.manager.get_screen('new').pText = pe
-            self.manager.get_screen('new').fText = fe
-            self.manager.get_screen('new').rnText = rne
-            self.manager.get_screen('new').a1Text = a1e
-            self.manager.get_screen('new').a2Text = a2e
-            self.manager.get_screen('new').a3Text = a3e
-            self.manager.get_screen('new').b1Text = b1e
-            self.manager.get_screen('new').b2Text = b2e
-            self.manager.get_screen('new').b3Text = b3e
+	        if str(X[i])!='b1e':
+	            del X[i]
+	            b1e = float(b1e)
+	        else:
+	            X[i]=='b1e'
+	            i=i+1
+
+
+	        if str(X[i])!='b2e':
+	            del X[i]
+	            b2e = float(b2e)
+	        else:
+	            X[i]!='b2e'
+	            i = i+1
+
+	        self.k = i
+
+	        sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
+	            a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
+	            b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
+	            b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
+
+
+	        r=0
+	        if str(self.p.text)=='':
+	            pe = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            pe = str(self.p.text)
+
+	        if str(self.f.text)=='':
+	            fe = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            fe = str(self.f.text)
+
+	        if str(self.rn.text)=='':
+	            rne = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            rne = str(self.rn.text)
+
+	        if str(self.a1.text)=='':
+	            a1e = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            a1e = str(self.a1.text)
+
+	        if str(self.a2.text)=='':
+	            a2e = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            a2e = str(self.a2.text)
+
+	        if str(self.b1.text)=='':
+	            b1e = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            b1e = str(self.b1.text)
+
+	        if str(self.b2.text)=='':
+	            b2e = str(round(sys[r],3))
+	            r=r+1
+	        else :
+	            b2e = str(self.b2.text)
+
+
+	        pe = str(round(float(pe),3))
+	        fe = str(round(float(fe),3))
+	        rne = str(round(float(rne),3))
+	        a1e = str(round(float(a1e),3))
+	        a2e = str(round(float(a2e),3))
+	        #a3e = str(round(float(a3e),3))
+	        b1e = str(round(float(b1e),3))
+	        b2e = str(round(float(b2e),3))
+	        #b3e = str(round(float(b3e),3))
+
+	############################# Drawing Triangles ######################################
+	        x0,y0 = 130,150
+	        x1,y1 = 270,150
+	        U = x1-x0
+	        xL = x1 - U*float(rne)-U*float(pe)/2
+	        yL = y0 + U*float(fe)
+	        xR = x1 - U*float(rne) +U*float(pe)/2
+	        yR = y0 + U*float(fe)
+
+	############### Passing the Results on the Second Screen  ############################
+
+	        self.manager.get_screen('new').pText = pe
+	        self.manager.get_screen('new').fText = fe
+	        self.manager.get_screen('new').rnText = rne
+	        self.manager.get_screen('new').a1Text = a1e
+	        self.manager.get_screen('new').a2Text = a2e
+	        self.manager.get_screen('new').a3Text = a3e
+	        self.manager.get_screen('new').b1Text = b1e
+	        self.manager.get_screen('new').b2Text = b2e
+	        self.manager.get_screen('new').b3Text = b3e
+
+	############### Passing the Triangles Points on the Second Screen  ##################
+
+	        self.manager.get_screen('new').x0Text = str(x0)
+	        self.manager.get_screen('new').y0Text = str(y0)
+	        self.manager.get_screen('new').x1Text = str(x1)
+	        self.manager.get_screen('new').y1Text = str(y1)
+	        self.manager.get_screen('new').UText =  str(U)
+	        self.manager.get_screen('new').xLText =  str(xL)
+	        self.manager.get_screen('new').yLText =  str(yL)
+	        self.manager.get_screen('new').xRText =  str(xR)
+	        self.manager.get_screen('new').yRText =  str(yR)
+
+
+
 
         except:
             if i > 4:
@@ -392,6 +418,16 @@ class NewWindow(Screen):
     b2Text = StringProperty('0')
     b3Text = StringProperty('0')
 
+    x0Text = StringProperty("0")
+    y0Text = StringProperty('0')
+    x1Text = StringProperty('0')
+    y1Text = StringProperty('0')
+    UText  = StringProperty('0')
+    xLText = StringProperty("0")
+    yLText = StringProperty('0')
+    xRText = StringProperty('0')
+    yRText = StringProperty('0')
+
     UmText = StringProperty('0')
     UtText = StringProperty('0')
     UhText = StringProperty('0')
@@ -431,7 +467,6 @@ class WindowManager(ScreenManager):
 
 Config.set('graphics', 'resizable', True)
 Window.size = (400, 700)
-
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
