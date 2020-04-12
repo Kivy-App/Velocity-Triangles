@@ -118,6 +118,7 @@ WindowManager:
 
 ########### Grid me ta textInputs
             GridLayout:
+                spacing: 3
                 size_hint_y: 0.4
                 cols: 4
                 canvas:
@@ -418,6 +419,7 @@ WindowManager:
                         size: self.size
 
             GridLayout:
+                spacing: 3
                 size_hint_y: 0.3
                 cols: 3
                 canvas:
@@ -698,7 +700,7 @@ WindowManager:
 
                         Label:
                             font_size:root.fontsize2(self.text)
-                            text:"Inlet relative angle \u03B13 : "
+                            text:"Inlet relative angle \u03B23 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -963,7 +965,7 @@ WindowManager:
 ###################    Color of the Lines    ##################
                 Color:
                     rgba:0,0,0,1
-###################    U Dashline    ##########################
+###################    U line    ##########################
                 Line:
                     width:1.5
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.x1Text),dp(root.y1Text)) 
@@ -988,13 +990,13 @@ WindowManager:
                     width:1.5
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.xLText),dp(root.yLText))
 
-########### Lines, Dashlines and Labels ###################
-###################    U Line    ##########################
+########### Lines, Dash lines and Labels ###################
+###################    U dashLine    ##########################
                 Line:
                     width: 1
                     points: (dp(root.x0Text),dp(root.y0Text)-dp(20),dp(root.x1Text),dp(root.y1Text)-dp(20))
 
-###################    U Dashlines    ##########################
+###################    U Dash lines    ##########################
                 Line:
                     width: 1
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.x0Text),dp(root.y0Text)-dp(30))
@@ -1028,7 +1030,7 @@ WindowManager:
                     width: 1
                     points: (dp(root.xLText),dp(root.yLText) + dp(20),dp(root.xRText),dp(root.yRText) + dp(20))
 
-###################    ΔVθ  Dashlines    ##########################
+###################    ΔVθ  Dash lines    ##########################
                 Line:
                     width: 1
                     points: (dp(root.xLText),dp(root.yLText),dp(root.xLText),dp(root.yLText)+dp(30))
@@ -1041,13 +1043,39 @@ WindowManager:
                     dash_offset: 5
 ###################   Arrows   ##########################
                 Triangle:
-                    points:dp(root.x0Text),dp(root.y0Text),dp(root.x0Text)+dp(20),dp(root.y0Text)+dp(5),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(5)
+                    points:dp(root.x0Text),dp(root.y0Text),dp(root.x0Text)+dp(25),dp(root.y0Text)+dp(5),dp(root.x0Text)+dp(25),dp(root.y0Text)-dp(5)
+
+                Triangle:
+                    points:dp(root.x0Text),dp(root.y0Text),dp(root.xL1uText),dp(root.yL1uText),dp(root.xL1dText),dp(root.yL1dText)
+
+                Triangle:
+                    points:dp(root.x0Text),dp(root.y0Text),dp(root.xL2uText),dp(root.yL2uText),dp(root.xL2dText),dp(root.yL2dText)
+
+                Triangle:
+                    points:dp(root.x1Text),dp(root.y1Text),dp(root.xR1uText),dp(root.yR1uText),dp(root.xR1dText),dp(root.yR1dText)
+
+                Triangle:
+                    points:dp(root.x1Text),dp(root.y1Text),dp(root.xR2uText),dp(root.yR2uText),dp(root.xR2dText),dp(root.yR2dText)
+
+
+##################  U Line Arrows  ####################
+                Triangle:
+                    points:dp(root.x0Text),dp(root.y0Text)-dp(20),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(20)+dp(5),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(20)-dp(5)
+                Triangle:
+                    points:dp(root.x1Text),dp(root.y1Text)-dp(20),dp(root.x1Text)-dp(20),dp(root.y1Text)-dp(20)+dp(5),dp(root.x1Text)-dp(20),dp(root.y1Text)-dp(20)-dp(5)
+
+##################  ΔVθ Line Arrows  ####################
+
+
+
+
+
 
 
 
 ###################   Labels   ##########################
             Label:
-                pos: dp(-120),dp(-20)
+                pos: (dp(-120),dp(-20)) if float(root.pText)>0.99 else (dp(-100),dp(-20))
                 text: 'Probably turbine' if float(root.pText)>0.99 else 'Probably compressor'
                 color: 1,0,0,1
 
@@ -1057,11 +1085,16 @@ WindowManager:
 
             Label:
                 text: 'Vx'
-                #pos: dp(-200) + x1 +35,dp(-25+(y0+U*float(root.fText))/2.5)
-                #pos: (dp(self.parent.x + U/2 + 35),dp(self.parent.y +(-y0 + U*float(root.fText))/2)) if (x1-U*float(root.rnText)+U*float(root.pText)/2) < x1 else (self.parent.x + x1-U*float(root.rnText)+U*float(root.pText)/2 - x0 -U/2 + 35,dp(self.parent.y +(-y0 + U*float(root.fText))/2))
-                pos:dp(self.parent.x)+dp(root.UText)/2 +dp(35),dp(self.parent.y) -dp(root.y1Text)/2 + (dp(root.yRText)-dp(root.y1Text))/2
+                pos:
+                    (dp(self.parent.x) + dp(root.UText)/2 + 35,dp(self.parent.y) +(-dp(root.y0Text) + dp(root.UText)*float(root.fText))/2)\
+                    if (dp(root.x1Text) - dp(root.UText)*float(root.rnText) + dp(root.UText)*float(root.pText)/2) < dp(root.x1Text)\
+                    else\
+                    (self.parent.x + dp(root.x1Text) - dp(root.UText)*float(root.rnText)+ dp(root.UText)*float(root.pText)/2 - dp(root.x0Text) - dp(root.UText)/2 + 35,\
+                    dp(self.parent.y) +(-dp(root.y0Text) + dp(root.UText)*float(root.fText))/2)
 
-
+            Label:
+                text: '\u0394V\u03B8'
+                pos: -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText)+dp(root.UText)*dp(root.pText)/2,dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35)
 
         GridLayout:
             cols:2
