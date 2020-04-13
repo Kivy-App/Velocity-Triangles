@@ -12,6 +12,7 @@ WindowManager:
     color: [0,0,0,1]
     id: kappa
     size_hint_x: 1
+    
 
 <TextInput>
     size_hint_x: 1
@@ -74,7 +75,7 @@ WindowManager:
                 Label:
                     text: "Velocity Triangles Analysis "
                     bold: True
-                    font_size:dp(25)
+                    font_size:root.DPI*25
 
             BoxLayout:
                 padding: 10
@@ -89,7 +90,7 @@ WindowManager:
                     text:'Repeating Stage'
                     bold: True if slider0.value==0 else False
                     #font_size: root.fontsize(self.text)
-                    font_size: dp(15)
+                    font_size: root.DPI*15
 
                 Slider:
                     size_hint_x:0.6
@@ -105,7 +106,7 @@ WindowManager:
                     text:'   Non Repeating Stage'
                     bold: True if slider0.value==1 else False
                     #font_size: root.fontsize(self.text)
-                    font_size: dp(15)
+                    font_size: root.DPI*15
 
 ############ Keno anamesa sto switch kai ta inputs ###########################
             BoxLayout:
@@ -130,7 +131,7 @@ WindowManager:
                         size: self.size
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Loading Coefficient \u03C8 : "
                     text_size: self.size
                     halign: 'right'
@@ -142,7 +143,7 @@ WindowManager:
                     multiline: False
                     write_tab: False
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
@@ -156,7 +157,7 @@ WindowManager:
                     value: 0
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Flow Coefficient \u03C6 : "
                     text_size: self.size
                     halign: 'right'
@@ -166,7 +167,7 @@ WindowManager:
                     id: f
                     multiline: False
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
@@ -181,7 +182,7 @@ WindowManager:
 
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Reaction Coefficient Rn : "
                     text_size: self.size
                     halign: 'right'
@@ -191,7 +192,7 @@ WindowManager:
                     multiline: False
                     id: rn
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ] "
                     text_size: self.size
                     halign: 'left'
@@ -205,7 +206,7 @@ WindowManager:
                     value: 0
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Inlet absolute angle \u03B11 : "
                     text_size: self.size
                     halign: 'right'
@@ -215,7 +216,7 @@ WindowManager:
                     multiline: False
                     id: a1
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -228,7 +229,7 @@ WindowManager:
                     step: 0.1
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Exit absolute angle \u03B12 : "
                     text_size: self.size
                     halign: 'right'
@@ -238,7 +239,7 @@ WindowManager:
                     multiline: False
                     id: a2
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -251,7 +252,7 @@ WindowManager:
                     step: 0.1
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Inlet absolute angle \u03B13 : "
                     text_size: self.size
                     halign: 'right'
@@ -262,7 +263,7 @@ WindowManager:
                     multiline: False
                     id: a3
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -276,7 +277,7 @@ WindowManager:
                     disabled: slider0.value == 0
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Inlet relative angle \u03B21 : "
                     text_size: self.size
                     halign: 'right'
@@ -286,7 +287,7 @@ WindowManager:
                     multiline: False
                     id: b1
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -299,7 +300,7 @@ WindowManager:
                     max: 75
                     step: 0.1
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Exit relative angle \u03B22 : "
                     text_size: self.size
                     halign: 'right'
@@ -310,7 +311,7 @@ WindowManager:
                     multiline: False
                     id: b2
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -324,7 +325,7 @@ WindowManager:
                     step: 0.1
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Inlet relative angle \u03B23 : "
                     text_size: self.size
                     halign: 'right'
@@ -335,7 +336,7 @@ WindowManager:
                     multiline: False
                     id: b3
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ \u00B0 ]"
                     text_size: self.size
                     halign: 'left'
@@ -372,7 +373,7 @@ WindowManager:
                 Label:
                     text: " Dimensional Analysis "
                     bold: True
-                    font_size:dp(25)
+                    font_size:root.DPI*25
 
             BoxLayout:
                 size_hint_y: 0.08
@@ -386,7 +387,7 @@ WindowManager:
 
                 Label:
                     #font_size: root.fontsize(self.text)
-                    font_size: dp(15)
+                    font_size: root.DPI*15
                     bold: True if slider10.value==0 else False
                     text:"Parallel Annulus"
                     size_hint_x: 1
@@ -401,7 +402,7 @@ WindowManager:
                     cursor_width: dp(28)
                 Label:
                     #font_size: root.fontsize(self.text)
-                    font_size: dp(15)
+                    font_size: root.DPI*15
                     bold: True if slider10.value==1 else False
                     text:"    Non Parallel Annulus"
                     size_hint_x: 1
@@ -428,7 +429,7 @@ WindowManager:
                         pos: self.pos
                         size: self.size
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Tip Diameter at Stage 1: "
                     text_size: self.size
                     halign: 'right'
@@ -437,14 +438,14 @@ WindowManager:
                     multiline: False
                     id: d1
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ m ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Tip Diameter at Stage 2: "
                     text_size: self.size
                     halign: 'right'
@@ -454,14 +455,14 @@ WindowManager:
                     multiline: False
                     id: d2
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ m ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:"Tip Diameter at Stage 3: "
                     text_size: self.size
                     halign: 'right'
@@ -471,14 +472,14 @@ WindowManager:
                     multiline: False
                     id: d3
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ m ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:" Hub2Tip ratio at Stage 1: "
                     text_size: self.size
                     halign: 'right'
@@ -487,14 +488,14 @@ WindowManager:
                     multiline: False
                     id: rh2t1
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:" Hub2Tip ratio at Stage 2: "
                     text_size: self.size
                     halign: 'right'
@@ -504,14 +505,14 @@ WindowManager:
                     multiline: False
                     id: rh2t2
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:" Hub2Tip ratio at Stage 1: "
                     text_size: self.size
                     halign: 'right'
@@ -521,14 +522,14 @@ WindowManager:
                     multiline: False
                     id: rh2t3
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ - ]"
                     text_size: self.size
                     halign: 'left'
                     valign: 'middle'
 
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text:" Rotational Speed : "
                     text_size: self.size
                     halign: 'right'
@@ -537,7 +538,7 @@ WindowManager:
                     multiline: False
                     id: n
                 Label:
-                    font_size:dp(11)
+                    font_size:root.DPI*11
                     text: " [ rpm ]"
                     text_size: self.size
                     halign: 'left'
@@ -615,7 +616,7 @@ WindowManager:
                             rectangle: (self.x, self.y, self.width, self.height)
                     Label:
                         text:'Velocity analysis Results'
-                        font_size: dp(15)
+                        font_size: root.DPI*15
                         bold:True
                         text_size: self.size
                         halign: 'center'
@@ -647,63 +648,63 @@ WindowManager:
                         size_hint_x:0.7
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Loading Coefficient \u03C8 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Flow Coefficient \u03C6 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Reaction Coefficient Rn : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Inlet absolute angle \u03B11 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Exit absolute angle \u03B12 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Inlet absolute angle \u03B13 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Inlet relative angle \u03B21 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Exit relative angle \u03B22 : "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:"Inlet relative angle \u03B23 : "
                             text_size: self.size
                             halign: 'right'
@@ -716,56 +717,56 @@ WindowManager:
 
                         Label:
                             text: root.pText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.fText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.rnText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.a1Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.a2Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text:'------'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.b1Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.b2Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
                             text:'------'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -776,56 +777,56 @@ WindowManager:
 
                         Label:
                             text: '[ - ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ - ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ - ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
                             text:'[ \u00B0 ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
@@ -861,7 +862,7 @@ WindowManager:
 
                     Label:
                         text:'Velocity variables'
-                        font_size: dp(15)
+                        font_size: root.DPI*15
                         bold:True
                         text_size: self.size
                         halign: 'center'
@@ -892,63 +893,63 @@ WindowManager:
                         size_hint_x:0.55
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Hub rotational \n speed Uh   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:' Middle rotational \n speed Um   '
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Tip rotational \n speed Ut   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Axial Velocity Vx "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Inlet absolute \n velocity V1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Exit absolute \n velocity V2   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Inlet relative \n velocity W1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Exit relative \n velocity W1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text:" Difference of rotary \n velocity DV\u03B8   "
                             text_size: self.size
                             halign: 'right'
@@ -961,56 +962,56 @@ WindowManager:
 
                         Label:
                             text: root.UhText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.UmText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.UtText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.VxText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.V1Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             #text: root.a1Text if slider0.value == 0 else '------'
                             text: root.V2Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.W1Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.W2Text
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.DVthText
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
@@ -1020,56 +1021,56 @@ WindowManager:
 
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text:'[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             text: '[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
                             text:'[ m/s ]'
-                            font_size:dp(11)
+                            font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'

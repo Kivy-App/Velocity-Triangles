@@ -7,14 +7,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
-import numpy as np
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 import sympy as sy
-from kivy.uix.scrollview import ScrollView
-
+from kivy.metrics import Metrics
 
 
 
@@ -82,7 +80,7 @@ class VelocityTriangles(Screen):
 
     k = NumericProperty(0)
 
-
+    DPI = Metrics.dpi/96
 
 
     def systemsolver(self):
@@ -415,6 +413,8 @@ class VelocityTriangles(Screen):
 
 
 class NewWindow(Screen):
+
+    DPI = Metrics.dpi/96
 
     pText  = StringProperty('0')
     fText  = StringProperty('0')
