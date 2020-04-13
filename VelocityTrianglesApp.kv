@@ -1011,17 +1011,26 @@ WindowManager:
 ###################    Vx Line    ##########################
                 Line:
                     width: 1
-                    points: (dp(root.x1Text) + dp(20),dp(root.y0Text),dp(root.x1Text) + dp(20),dp(root.yRText)) if dp(root.xRText) < dp(root.x1Text) else (dp(root.xRText)+ dp(20),dp(root.y0Text),dp(root.xRText)+ dp(20),dp(root.yRText))
+                    points:
+                        (dp(root.x1Text) + dp(20),dp(root.y0Text),dp(root.x1Text) + dp(20),dp(root.yRText))\
+                        if dp(root.xRText) < dp(root.x1Text) else\
+                        (dp(root.xRText)+ dp(20),dp(root.y0Text),dp(root.xRText)+ dp(20),dp(root.yRText))
 
-###################    Vx Dashlines    ##########################
+###################    Vx Dash lines    ##########################
                 Line:
                     width: 1
-                    points: (dp(root.x1Text),dp(root.y1Text),dp(root.x1Text) + dp(30),dp(root.y0Text)) if dp(root.xRText) < dp(root.x1Text) else (dp(root.x1Text),dp(root.y0Text),dp(root.xRText) + dp(30) ,dp(root.y1Text))
+                    points:
+                        (dp(root.x1Text),dp(root.y1Text),dp(root.x1Text) + dp(30),dp(root.y0Text))\
+                        if dp(root.xRText) < dp(root.x1Text) else\
+                        (dp(root.x1Text),dp(root.y0Text),dp(root.xRText) + dp(30) ,dp(root.y1Text))
                     dash_length: 5
                     dash_offset: 5
                 Line:
                     width: 1
-                    points: (dp(root.xRText),dp(root.yRText),dp(root.x1Text) + dp(30),dp(root.yRText))  if dp(root.xRText) < dp(root.x1Text)  else (dp(root.xRText),dp(root.yRText),dp(root.xRText)+dp(30),dp(root.yRText))
+                    points:
+                        (dp(root.xRText),dp(root.yRText),dp(root.x1Text) + dp(30),dp(root.yRText))\
+                        if dp(root.xRText) < dp(root.x1Text)  else\
+                        (dp(root.xRText),dp(root.yRText),dp(root.xRText)+dp(30),dp(root.yRText))
                     dash_length: 5
                     dash_offset: 5
 
@@ -1041,7 +1050,9 @@ WindowManager:
                     points: (dp(root.xRText),dp(root.yRText),dp(root.xRText),dp(root.yRText)+dp(30))
                     dash_length: 5
                     dash_offset: 5
-###################   Arrows   ##########################
+
+             ################################  Arrows   ##########################################
+################### Base Velocity Arrows   ##########################
                 Triangle:
                     points:dp(root.x0Text),dp(root.y0Text),dp(root.x0Text)+dp(25),dp(root.y0Text)+dp(5),dp(root.x0Text)+dp(25),dp(root.y0Text)-dp(5)
 
@@ -1057,17 +1068,42 @@ WindowManager:
                 Triangle:
                     points:dp(root.x1Text),dp(root.y1Text),dp(root.xR2uText),dp(root.yR2uText),dp(root.xR2dText),dp(root.yR2dText)
 
-
 ##################  U Line Arrows  ####################
                 Triangle:
-                    points:dp(root.x0Text),dp(root.y0Text)-dp(20),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(20)+dp(5),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(20)-dp(5)
+                    points:
+                        dp(root.x0Text),dp(root.y0Text)-dp(20),dp(root.x0Text)+dp(20),\
+                        dp(root.y0Text)-dp(20)+dp(3),dp(root.x0Text)+dp(20),dp(root.y0Text)-dp(20)-dp(3)
                 Triangle:
-                    points:dp(root.x1Text),dp(root.y1Text)-dp(20),dp(root.x1Text)-dp(20),dp(root.y1Text)-dp(20)+dp(5),dp(root.x1Text)-dp(20),dp(root.y1Text)-dp(20)-dp(5)
+                    points:
+                        dp(root.x1Text),dp(root.y1Text)-dp(20),dp(root.x1Text)-dp(20),\
+                        dp(root.y1Text)-dp(20)+dp(3),dp(root.x1Text)-dp(20),dp(root.y1Text)-dp(20)-dp(3)
 
 ##################  ΔVθ Line Arrows  ####################
+                Triangle:
+                    points:
+                        dp(root.xLText),dp(root.yLText) + dp(20),dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) + dp(3),\
+                        dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) - dp(3)
+                Triangle:
+                    points:
+                        dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
+                        dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3)
 
+##########  Vx Line Arrows  ####################
+                Triangle:
+                    points:
+                        (dp(root.x1Text) + dp(20),dp(root.y1Text),dp(root.x1Text) + dp(20) + dp(3),\
+                        dp(root.y1Text)+dp(20),dp(root.x1Text) + dp(20) - dp(3),dp(root.y1Text)+dp(20))\
+                        if dp(root.xRText) < dp(root.x1Text) else\
+                        (dp(root.xRText)+ dp(20),dp(root.y1Text),dp(root.xRText)+ dp(20) + dp(3),\
+                        dp(root.y1Text) + dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.y1Text) + dp(20))
 
-
+                Triangle:
+                    points:
+                        (dp(root.x1Text) + dp(20),dp(root.yRText),dp(root.x1Text) + dp(20) + dp(3),\
+                        dp(root.yRText) - dp(20),dp(root.x1Text) + dp(20) - dp(3),dp(root.yRText) - dp(20))\
+                        if dp(root.xRText) < dp(root.x1Text) else\
+                        (dp(root.xRText)+ dp(20),dp(root.yRText),dp(root.xRText)+ dp(20) + dp(3),\
+                        dp(root.yRText) - dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.yRText) - dp(20))
 
 
 
