@@ -15,10 +15,11 @@ from kivy.uix.button import Button
 import sympy as sy
 from kivy.uix.scrollview import ScrollView
 
+
+
+
 class P(BoxLayout):
     pass
-
-
 
 def firstPopup():
     show = P()
@@ -203,6 +204,8 @@ class VelocityTriangles(Screen):
 
             self.k = i
 
+#####################    Solving the System      #########################################            
+
             sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
                 a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
                 b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
@@ -353,44 +356,6 @@ class VelocityTriangles(Screen):
                 self.popup = secondPopup()
                 i = 0
 
-    def fontsize(self, text):
-        if Window.size[0]>400:
-            dp = 7
-            for i in range(0,Window.size[0],50):
-                dp = dp+1
-            return "{}dp".format(dp)
-        else:
-            dp = 5
-            for i in range(0, Window.size[0], 50):
-                dp = dp + 1
-            return "{}dp".format(dp)
-
-    def fontsize2(self, text):
-        if Window.size[0]>400:
-            dp = 5
-            for i in range(0,Window.size[0],50):
-                dp = dp+1
-            return "{}dp".format(dp)
-        else:
-            dp = 3
-            for i in range(0, Window.size[0], 50):
-                dp = dp + 1
-            return "{}dp".format(dp)
-
-    def fontsize3(self, text):
-        if Window.size[0]>400:
-            dp = 9
-            for i in range(0,Window.size[0],50):
-                dp = dp+1
-            return "{}dp".format(dp)
-        else:
-            dp = 7
-            for i in range(0, Window.size[0], 50):
-                dp = dp + 1
-            return "{}dp".format(dp)
-
-
-
     def dml(self):
         try:
             D1e = str(self.d1.text)
@@ -434,7 +399,7 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').DVthText = str(round(self.dvth, 3))
         except:
             if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
-                ############### Passing empty slots on second screen on the Second Screen  ##################
+                ############### Passing empty slots  on the Second Screen  ##################
                 self.manager.get_screen('new').UmText = ''
                 self.manager.get_screen('new').UhText = ''
                 self.manager.get_screen('new').UtText = ''
@@ -449,8 +414,8 @@ class VelocityTriangles(Screen):
                 self.k = 0
 
 
-
 class NewWindow(Screen):
+
     pText  = StringProperty('0')
     fText  = StringProperty('0')
     rnText = StringProperty('0')
@@ -501,30 +466,6 @@ class NewWindow(Screen):
     xR2dText = StringProperty('0')
     yR2dText = StringProperty('0')
 
-    def fontsize2(self, text):
-        if Window.size[0]>400:
-            dp = 5
-            for i in range(0,Window.size[0],50):
-                dp = dp+1
-            return "{}dp".format(dp)
-        else:
-            dp = 3
-            for i in range(0, Window.size[0], 50):
-                dp = dp + 1
-            return "{}dp".format(dp)
-
-    def fontsize3(self, text):
-        if Window.size[0]>400:
-            dp = 9
-            for i in range(0,Window.size[0],50):
-                dp = dp+1
-            return "{}dp".format(dp)
-        else:
-            dp = 7
-            for i in range(0, Window.size[0], 50):
-                dp = dp + 1
-            return "{}dp".format(dp)
-
 class WindowManager(ScreenManager):
     pass
 
@@ -538,5 +479,5 @@ class VelocityTrianglesApp(App):
         return kv
 
 if __name__ == '__main__':
-    va = VelocityTrianglesApp()
-    va.run()
+    vt = VelocityTrianglesApp()
+    vt.run()
