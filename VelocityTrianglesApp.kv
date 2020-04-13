@@ -97,6 +97,7 @@ WindowManager:
                     max: 1
                     step: 1
                     id: slider0
+
                     cursor_height: dp(28)
                     cursor_width: dp(28)
 
@@ -633,7 +634,13 @@ WindowManager:
                             rgba:0,0,0,1
                         Line:
                             width: 3.
-                            rectangle: (self.x, self.y, self.width, self.height)
+                            points: (self.x, self.y, self.x +self.width, self.y)
+                        Line:
+                            width: 3.
+                            points: (self.x, self.y, self.x, self.y+self.height)
+                        Line:
+                            width: 3.
+                            points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
 
                     GridLayout:
                         rows:9
@@ -738,7 +745,6 @@ WindowManager:
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            #text: root.a3Text
                             text:'------'
                             font_size:dp(11)
                             text_size: self.size
@@ -782,7 +788,16 @@ WindowManager:
                             rgba:0,0,0,1
                         Line:
                             width: 3.
-                            rectangle: (self.x, self.y, self.width, self.height)
+                            points: (self.x, self.y,self.x+ self.width, self.y)
+                        Line:
+                            width: 3.
+                            points: (self.x+ self.width, self.y,self.x+ self.width, self.height + self.y)
+                        Line:
+                            width: 3.
+                            points: (self.x, self.y + self.height,self.x+ self.width, self.height + self.y)
+
+                        
+
                     Label:
                         text:'Velocity variables'
                         font_size: dp(15)
@@ -805,7 +820,11 @@ WindowManager:
                             rgba:0,0,0,1
                         Line:
                             width: 3.
-                            rectangle: (self.x, self.y, self.width, self.height)
+                            points: (self.x, self.y, self.x +self.width, self.y)
+                        Line:
+                            width: 3.
+                            points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
+                       
 
                     GridLayout:
                         rows:9
