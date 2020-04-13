@@ -612,8 +612,8 @@ WindowManager:
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3.
-                            rectangle: (self.x, self.y, self.width, self.height)
+                            width: dp(3.)
+                            rectangle: (dp(self.x), dp(self.y), dp(self.width), dp(self.height))
                     Label:
                         text:'Velocity analysis Results'
                         font_size: root.DPI*15
@@ -634,18 +634,18 @@ WindowManager:
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3.
-                            points: (self.x, self.y, self.x +self.width, self.y)
+                            width: dp(3.)
+                            points: (dp(self.x), dp(self.y), dp(self.x +self.width), dp(self.y))
                         Line:
-                            width: 3.
-                            points: (self.x, self.y, self.x, self.y+self.height)
+                            width: dp(3.)
+                            points: (dp(self.x), dp(self.y), dp(self.x), dp(self.y+self.height))
                         Line:
-                            width: 3.
-                            points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
+                            width: dp(3.)
+                            points: (dp(self.x+self.width), dp(self.y), dp(self.x + self.width), dp(self.y+self.height))
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.7
+                        size_hint_x:0.67
 
                         Label:
                             font_size:root.DPI*11
@@ -713,7 +713,7 @@ WindowManager:
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.25
+                        size_hint_x:0.22
 
                         Label:
                             text: root.pText
@@ -773,7 +773,7 @@ WindowManager:
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.1
+                        size_hint_x:0.11
 
                         Label:
                             text: '[ - ]'
@@ -849,14 +849,14 @@ WindowManager:
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3. if root.check == 0 else 0.01
-                            points: (self.x, self.y,self.x+ self.width, self.y)
+                            width: dp(3.) if root.check == 0 else dp(0.01)
+                            points: (dp(self.x), dp(self.y),dp(self.x+ self.width), dp(self.y))
                         Line:
-                            width: 3. if root.check == 0 else 0.01
-                            points: (self.x+ self.width, self.y,self.x+ self.width, self.height + self.y)
+                            width: dp(3.) if root.check == 0 else dp(0.01)
+                            points: (dp(self.x+ self.width), dp(self.y),dp(self.x+ self.width), dp(self.height + self.y))
                         Line:
-                            width: 3. if root.check == 0 else 0.01
-                            points: (self.x, self.y + self.height,self.x+ self.width, self.height + self.y)
+                            width: dp(3.) if root.check == 0 else dp(0.01)
+                            points: (dp(self.x), dp(self.y + self.height),dp(self.x+ self.width), dp(self.height + self.y))
 
                         
 
@@ -881,11 +881,11 @@ WindowManager:
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3. if root.check == 0 else 0.01
-                            points: (self.x, self.y, self.x +self.width, self.y)
+                            width: dp(3.) if root.check == 0 else dp(0.01)
+                            points: (dp(self.x), dp(self.y), dp(self.x +self.width), dp(self.y))
                         Line:
-                            width: 3. if root.check == 0 else 0.01
-                            points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
+                            width: dp(3.) if root.check == 0 else dp(0.01)
+                            points: (dp(self.x+self.width), dp(self.y), dp(self.x+self.width), dp(self.y+self.height))
                        
 
                     GridLayout:
