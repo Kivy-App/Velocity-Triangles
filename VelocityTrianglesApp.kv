@@ -622,7 +622,7 @@ WindowManager:
                         valign: 'middle'
 ################   Grid apotelespata aristera    ###########################
                 GridLayout:
-                    cols:2
+                    cols:3
                     size_hint_x: 0.85
                     canvas:
                         Color:
@@ -712,63 +712,124 @@ WindowManager:
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.3
+                        size_hint_x:0.25
 
                         Label:
                             text: root.pText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.fText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
                             text: root.rnText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.a1Text +' [ \u00B0 ]  '
+                            text: root.a1Text
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.a2Text +' [ \u00B0 ]  '
+                            text: root.a2Text
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
                             text:'------'
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.b1Text +' [ \u00B0 ]  '
+                            text: root.b1Text
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.b2Text +' [ \u00B0 ]  '
+                            text: root.b2Text
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
                             text:'------'
                             font_size:dp(11)
                             text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+
+                    GridLayout:
+                        rows:9
+                        size_hint_x:0.1
+
+                        Label:
+                            text: '[ - ]'
+                            font_size:dp(11)
+                            text_size: self.size
                             halign: 'left'
                             valign: 'middle'
+                        Label:
+                            text: '[ - ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ - ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            #text: root.b3Text
+                            text:'[ \u00B0 ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+
 
 ############ Deksi grid to opoio diaxorizei ton titlo apo ta deksio apotelesmata ####################
             GridLayout:
@@ -808,7 +869,7 @@ WindowManager:
 
 ################   Grid apotelespatvn deksia   ########################
                 GridLayout:
-                    cols:2
+                    cols:3
                     size_hint_x: 0.85
                     canvas:
                         Color:
@@ -828,67 +889,67 @@ WindowManager:
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.7
+                        size_hint_x:0.55
 
                         Label:
                             font_size:dp(11)
-                            text:"Hub rotational speed Uh: "
+                            text:" Hub rotational \n speed Uh   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:'Middle rotational \n speed Um:   '
+                            text:' Middle rotational \n speed Um   '
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Tip rotational speed Ut: "
+                            text:" Tip rotational \n speed Ut   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Axial Velocity Vx: "
+                            text:" Axial Velocity Vx "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Inlet absolute velocity V1: "
+                            text:" Inlet absolute \n velocity V1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Exit absolute velocity V2: "
+                            text:" Exit absolute \n velocity V2   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Inlet relative velocity W1: "
+                            text:" Inlet relative \n velocity W1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Exit relative velocity W1: "
+                            text:" Exit relative \n velocity W1   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:dp(11)
-                            text:"Difference of rotary \n velocity DV\u03B8:   "
+                            text:" Difference of rotary \n velocity DV\u03B8   "
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -896,59 +957,118 @@ WindowManager:
 
                     GridLayout:
                         rows:9
-                        size_hint_x:0.3
+                        size_hint_x:0.25
 
                         Label:
-                            text: root.UhText +' [m/s]  '
+                            text: root.UhText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.UmText +' [m/s]  '
+                            text: root.UmText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.UtText +' [m/s]  '
+                            text: root.UtText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.VxText +' [m/s]  '
+                            text: root.VxText
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
-                            text: root.V1Text +' [m/s]  '
+                            text: root.V1Text
                             font_size:dp(11)
                             text_size: self.size
-                            halign: 'left'
+                            halign: 'center'
                             valign: 'middle'
                         Label:
                             #text: root.a1Text if slider0.value == 0 else '------'
-                            text: root.V2Text +' [m/s]  '
+                            text: root.V2Text
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        Label:
+                            text: root.W1Text
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        Label:
+                            text: root.W2Text
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                        Label:
+                            text: root.DVthText
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'center'
+                            valign: 'middle'
+                    GridLayout:
+                        rows:9
+                        size_hint_x:0.2
+
+                        Label:
+                            text: '[ m/s ]'
                             font_size:dp(11)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.W1Text +' [m/s]  '
+                            text: '[ m/s ]'
                             font_size:dp(11)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.W2Text +' [m/s]  '
+                            text: '[ m/s ]'
                             font_size:dp(11)
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: root.DVthText +' [m/s]  '
+                            text: '[ m/s ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ m/s ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ m/s ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text:'[ m/s ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            text: '[ m/s ]'
+                            font_size:dp(11)
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'middle'
+                        Label:
+                            #text: root.b3Text
+                            text:'[ m/s ]'
                             font_size:dp(11)
                             text_size: self.size
                             halign: 'left'
