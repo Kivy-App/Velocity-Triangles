@@ -1122,15 +1122,19 @@ WindowManager:
             Label:
                 text: 'Vx'
                 pos:
-                    (dp(self.parent.x) + dp(root.UText)/2 + 35,dp(self.parent.y) +(-dp(root.y0Text) + dp(root.UText)*float(root.fText))/2)\
+                    (dp(self.parent.x) + dp(root.UText)/2 + 35,\
+                    dp(self.parent.y) +(-dp(root.y0Text) + dp(root.UText)*float(root.fText))/2)\
                     if (dp(root.x1Text) - dp(root.UText)*float(root.rnText) + dp(root.UText)*float(root.pText)/2) < dp(root.x1Text)\
                     else\
-                    (self.parent.x + dp(root.x1Text) - dp(root.UText)*float(root.rnText)+ dp(root.UText)*float(root.pText)/2 - dp(root.x0Text) - dp(root.UText)/2 + 35,\
+                    (self.parent.x + dp(root.x1Text) - dp(root.UText)*float(root.rnText)+\
+                    dp(root.UText)*float(root.pText)/2 - dp(root.x0Text) - dp(root.UText)/2 + 35,\
                     dp(self.parent.y) +(-dp(root.y0Text) + dp(root.UText)*float(root.fText))/2)
 
             Label:
                 text: '\u0394V\u03B8'
-                pos: -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText)+dp(root.UText)*dp(root.pText)/2,dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35)
+                pos:
+                    -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText)+dp(root.UText)*dp(root.pText)/2,\
+                    dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35)
 
         GridLayout:
             cols:2
