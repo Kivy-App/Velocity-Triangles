@@ -842,26 +842,26 @@ WindowManager:
                     spacing:10
                     canvas:
                         Color:
-                            rgba: 0.066,0.392,0.505,0.768
+                            rgba: (0.066,0.392,0.505,0.768) if root.check == 0 else (0.6862,0.9333,0.9333,0.737)
                         Rectangle:
                             pos: self.pos
                             size: self.size
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3.
+                            width: 3. if root.check == 0 else 0.01
                             points: (self.x, self.y,self.x+ self.width, self.y)
                         Line:
-                            width: 3.
+                            width: 3. if root.check == 0 else 0.01
                             points: (self.x+ self.width, self.y,self.x+ self.width, self.height + self.y)
                         Line:
-                            width: 3.
+                            width: 3. if root.check == 0 else 0.01
                             points: (self.x, self.y + self.height,self.x+ self.width, self.height + self.y)
 
                         
 
                     Label:
-                        text:'Velocity variables'
+                        text:'Velocity variables' if root.check == 0 else ''
                         font_size: root.DPI*15
                         bold:True
                         text_size: self.size
@@ -881,10 +881,10 @@ WindowManager:
                         Color:
                             rgba:0,0,0,1
                         Line:
-                            width: 3.
+                            width: 3. if root.check == 0 else 0.01
                             points: (self.x, self.y, self.x +self.width, self.y)
                         Line:
-                            width: 3.
+                            width: 3. if root.check == 0 else 0.01
                             points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
                        
 
@@ -894,63 +894,63 @@ WindowManager:
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Hub rotational \n speed Uh   "
+                            text:" Hub rotational \n speed Uh   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:' Middle rotational \n speed Um   '
+                            text:' Middle rotational \n speed Um   ' if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Tip rotational \n speed Ut   "
+                            text:" Tip rotational \n speed Ut   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Axial Velocity Vx "
+                            text:" Axial Velocity Vx " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Inlet absolute \n velocity V1   "
+                            text:" Inlet absolute \n velocity V1   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Exit absolute \n velocity V2   "
+                            text:" Exit absolute \n velocity V2   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Inlet relative \n velocity W1   "
+                            text:" Inlet relative \n velocity W1   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Exit relative \n velocity W1   "
+                            text:" Exit relative \n velocity W1   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Difference of rotary \n velocity DV\u03B8   "
+                            text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -1020,56 +1020,56 @@ WindowManager:
                         size_hint_x:0.2
 
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text:'[ m/s ]'
+                            text:'[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
-                            text: '[ m/s ]'
+                            text: '[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
                         Label:
                             #text: root.b3Text
-                            text:'[ m/s ]'
+                            text:'[ m/s ]' if root.check == 0 else ''
                             font_size:root.DPI*11
                             text_size: self.size
                             halign: 'left'

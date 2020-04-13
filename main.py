@@ -395,6 +395,8 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
             self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
             self.manager.get_screen('new').DVthText = str(round(self.dvth, 3))
+
+            self.manager.get_screen('new').check = 0
         except:
             if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
                 ############### Passing empty slots  on the Second Screen  ##################
@@ -407,6 +409,8 @@ class VelocityTriangles(Screen):
                 self.manager.get_screen('new').W1Text = ''
                 self.manager.get_screen('new').W2Text = ''
                 self.manager.get_screen('new').DVthText = ''
+
+                self.manager.get_screen('new').check = 1
             else:
                 self.popup = thirdPopup()
                 self.k = 0
@@ -465,6 +469,8 @@ class NewWindow(Screen):
     yR2uText = StringProperty('0')
     xR2dText = StringProperty('0')
     yR2dText = StringProperty('0')
+
+    check = NumericProperty(0)
 
 class WindowManager(ScreenManager):
     pass
