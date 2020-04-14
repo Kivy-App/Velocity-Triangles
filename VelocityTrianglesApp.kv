@@ -57,7 +57,7 @@ WindowManager:
     ScrollView:
         size: root.height, root.width
         size_hint: 1,1
-
+        scroll_wheel_distance: '40dp'
 
 ####################  Overall Grid after title ############################
         GridLayout:
@@ -86,11 +86,15 @@ WindowManager:
                     Rectangle:
                         pos: self.pos
                         size: self.size
+
                 Label:
                     text:'Repeating Stage'
                     bold: True if slider0.value==0 else False
                     #font_size: root.fontsize(self.text)
                     font_size: root.DPI*15
+                    size: self.width,self.height
+                    halign: 'left'
+                    valign: 'middle'
 
                 Slider:
                     size_hint_x:0.6
@@ -224,7 +228,7 @@ WindowManager:
                     size_hint_x:0.3
                 Slider:
                     id: slider4
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
 
@@ -247,7 +251,7 @@ WindowManager:
                     size_hint_x:0.3
                 Slider:
                     id: slider5
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
 
@@ -271,7 +275,7 @@ WindowManager:
                     size_hint_x:0.3
                 Slider:
                     id: slider6
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
                     disabled: slider0.value == 0
@@ -296,7 +300,7 @@ WindowManager:
 
                 Slider:
                     id: slider7
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
                 Label:
@@ -320,7 +324,7 @@ WindowManager:
 
                 Slider:
                     id: slider8
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
 
@@ -345,7 +349,7 @@ WindowManager:
 
                 Slider:
                     id: slider9
-                    min: -45
+                    min: -75
                     max: 75
                     step: 0.1
                     disabled: slider0.value == 0
@@ -419,7 +423,7 @@ WindowManager:
 
             GridLayout:
                 spacing: 3
-                size_hint_y: 0.3
+                size_hint_y: 0.31
                 cols: 3
                 canvas:
                     Color:
@@ -546,7 +550,7 @@ WindowManager:
 
 
             BoxLayout:
-                size_hint_y: 0.08
+                size_hint_y: 0.07
                 padding:5
                 canvas:
                     Color:
