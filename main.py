@@ -264,6 +264,7 @@ class VelocityTriangles(Screen):
             b2e = str(round(float(b2e),3))
             #b3e = str(round(float(b3e),3))
 
+
             ############################# Drawing Triangles ######################################
             x0,y0 = 130,150
             x1,y1 = 270,150
@@ -273,7 +274,37 @@ class VelocityTriangles(Screen):
             xR = x1 - U*float(rne) +U*float(pe)/2
             yR = y0 + U*float(fe)
 
-            ############### Computing down angles  ############################
+            while xL < 40:
+                x0 = x0 + 1
+                x1 = x1 - 1
+
+                U = x1 - x0
+                xL = x1 - U * float(rne) - U * float(pe) / 2
+                yL = y0 + U * float(fe)
+                xR = x1 - U * float(rne) + U * float(pe) / 2
+                yR = y0 + U * float(fe)
+
+            while xR > 320:
+                x0 = x0 + 1
+                x1 = x1 - 1
+
+                U = x1 - x0
+                xL = x1 - U * float(rne) - U * float(pe) / 2
+                yL = y0 + U * float(fe)
+                xR = x1 - U * float(rne) + U * float(pe) / 2
+                yR = y0 + U * float(fe)
+
+            while yL > 280:
+                x0 = x0 + 1
+                x1 = x1 - 1
+
+                U = x1 - x0
+                xL = x1 - U * float(rne) - U * float(pe) / 2
+                yL = y0 + U * float(fe)
+                xR = x1 - U * float(rne) + U * float(pe) / 2
+                yR = y0 + U * float(fe)
+
+            ############### Computing base angles  ############################
 
             a1d = 180 + float(a1e) - 90
             a2d = 180 - float(a2e) - 90
@@ -353,6 +384,7 @@ class VelocityTriangles(Screen):
             else:
                 self.popup = secondPopup()
                 i = 0
+                self.k = 0
 
     def dml(self):
         try:
@@ -412,8 +444,11 @@ class VelocityTriangles(Screen):
 
                 self.manager.get_screen('new').check = 1
             else:
-                self.popup = thirdPopup()
-                self.k = 0
+                if self.k == 0:
+                    pass
+                else:
+                    self.popup = thirdPopup()
+                    self.k = 0
 
 
 class NewWindow(Screen):
