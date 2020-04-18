@@ -266,15 +266,15 @@ class VelocityTriangles(Screen):
 
 
             ############################# Drawing Triangles ######################################
-            x0,y0 = 130,150
-            x1,y1 = 270,150
+            x0,y0 = Window.size[0]*130/400,Window.size[1]*150/700
+            x1,y1 = Window.size[0]*270/400,Window.size[1]*150/700
             U = x1-x0
             xL = x1 - U*float(rne)-U*float(pe)/2
             yL = y0 + U*float(fe)
             xR = x1 - U*float(rne) +U*float(pe)/2
             yR = y0 + U*float(fe)
 
-            while xL < 40:
+            while xL < self.x + 60:
                 x0 = x0 + 1
                 x1 = x1 - 1
 
@@ -284,7 +284,7 @@ class VelocityTriangles(Screen):
                 xR = x1 - U * float(rne) + U * float(pe) / 2
                 yR = y0 + U * float(fe)
 
-            while xR > 320:
+            while xR > self.width - 80:
                 x0 = x0 + 1
                 x1 = x1 - 1
 
@@ -333,7 +333,27 @@ class VelocityTriangles(Screen):
             xR2d = x1 + 25 * m.cos(m.radians(b2d - 11.3))
             yR2d = y1 + 25 * m.sin(m.radians(b2d - 11.3))
 
-            ############### Passing the Results on the Second Screen  ############################
+            ######################### Choosing if it is Turbine or Compressor ###################
+            if float(pe) > 0.999:
+                if abs(x1-xL)>abs(x1-xR):
+                    tc = 0  # turbine
+                    tc_name = 'Turbine'
+                    ptn_x = self.x - self.width/2 + 50
+                else:
+                    tc = 1  # compressor
+                    tc_name = 'Compressor'
+                    ptn_x = self.x - self.width / 2 + 70
+            else:
+                if abs(x1-xL)>abs(x1-xR):
+                    tc = 1  # compressor
+                    tc_name = 'Compressor'
+                    ptn_x = self.x - self.width / 2 + 70
+                else:
+                    tc = 0  # turbine
+                    tc_name = 'Turbine'
+                    ptn_x = ptn_x = self.x - self.width/2 + 50
+
+                    ############### Passing the Results on the Second Screen  ############################
 
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe
@@ -376,6 +396,9 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').yR2uText = str(yR2u)
             self.manager.get_screen('new').xR2dText = str(xR2d)
             self.manager.get_screen('new').yR2dText = str(yR2d)
+
+            self.manager.get_screen('new').tc_nameText = tc_name
+            self.manager.get_screen('new').ptn_xText = str(ptn_x)
 
         except:
             if i > 4:
@@ -506,6 +529,9 @@ class NewWindow(Screen):
     yR2dText = StringProperty('0')
 
     check = NumericProperty(0)
+
+    tc_nameText = StringProperty('0')
+    ptn_xText = StringProperty('0')
 
 class WindowManager(ScreenManager):
     pass

@@ -927,7 +927,7 @@ WindowManager:
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Inlet absolute \n velocity V1   " if root.check == 0 else ''
+                            text:(" Inlet relative \n velocity V1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -941,14 +941,14 @@ WindowManager:
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Inlet relative \n velocity W1   " if root.check == 0 else ''
+                            text:(" Inlet relative \n velocity W1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
 
                         Label:
                             font_size:root.DPI*11
-                            text:" Exit relative \n velocity W1   " if root.check == 0 else ''
+                            text:" Exit relative \n velocity W2   "  if root.check == 0 else ''
                             text_size: self.size
                             halign: 'right'
                             valign: 'middle'
@@ -1101,7 +1101,7 @@ WindowManager:
                 Color:
                     rgba:0,0,0,1
                 Line:
-                    width: 1.
+                    width: dp(1.)
                     rectangle: (self.x+20, self.y, self.width-40, self.height-20)
 
 ###################    Color of the Lines    ##################
@@ -1109,38 +1109,38 @@ WindowManager:
                     rgba:0,0,0,1
 ###################    U line    ##########################
                 Line:
-                    width:1.5
+                    width: dp(1.5)
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.x1Text),dp(root.y1Text)) 
 
 ###################    V1 Line    ##########################
                 Line:
-                    width:1.5
+                    width: dp(1.5)
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.xRText),dp(root.yRText))
 
 ###################    W1 Line    ##########################
                 Line:
-                    width:1.5
+                    width: dp(1.5)
                     points: (dp(root.x1Text),dp(root.y1Text),dp(root.xRText),dp(root.yRText))
 
 ###################    W2 Line    ##########################
                 Line:
-                    width:1.5
+                    width: dp(1.5)
                     points: (dp(root.x1Text),dp(root.y1Text),dp(root.xLText),dp(root.yLText))
 
 ###################    V2 Line    ##########################
                 Line:
-                    width:1.5
+                    width: dp(1.5)
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.xLText),dp(root.yLText))
 
 ########### Lines, Dash lines and Labels ###################
 ###################    U dashLine    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points: (dp(root.x0Text),dp(root.y0Text)-dp(20),dp(root.x1Text),dp(root.y1Text)-dp(20))
 
 ###################    U Dash lines    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points: (dp(root.x0Text),dp(root.y0Text),dp(root.x0Text),dp(root.y0Text)-dp(30))
                     dash_length: 5
                     dash_offset: 5
@@ -1152,7 +1152,7 @@ WindowManager:
 
 ###################    Vx Line    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points:
                         (dp(root.x1Text) + dp(20),dp(root.y0Text),dp(root.x1Text) + dp(20),dp(root.yRText))\
                         if dp(root.xRText) < dp(root.x1Text) else\
@@ -1160,7 +1160,7 @@ WindowManager:
 
 ###################    Vx Dash lines    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points:
                         (dp(root.x1Text),dp(root.y1Text),dp(root.x1Text) + dp(30),dp(root.y0Text))\
                         if dp(root.xRText) < dp(root.x1Text) else\
@@ -1168,7 +1168,7 @@ WindowManager:
                     dash_length: 5
                     dash_offset: 5
                 Line:
-                    width: 1
+                    width: dp(1)
                     points:
                         (dp(root.xRText),dp(root.yRText),dp(root.x1Text) + dp(30),dp(root.yRText))\
                         if dp(root.xRText) < dp(root.x1Text)  else\
@@ -1178,20 +1178,33 @@ WindowManager:
 
 ###################   ΔVθ   Line    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points: (dp(root.xLText),dp(root.yLText) + dp(20),dp(root.xRText),dp(root.yRText) + dp(20))
 
 ###################    ΔVθ  Dash lines    ##########################
                 Line:
-                    width: 1
+                    width: dp(1)
                     points: (dp(root.xLText),dp(root.yLText),dp(root.xLText),dp(root.yLText)+dp(30))
                     dash_length: 5
                     dash_offset: 5
                 Line:
-                    width: 1
+                    width: dp(1)
                     points: (dp(root.xRText),dp(root.yRText),dp(root.xRText),dp(root.yRText)+dp(30))
                     dash_length: 5
                     dash_offset: 5
+
+################### Circles of stages numbers ###############################
+                Line:
+                    width: 1.
+                    circle:
+                        (dp(root.xLText) - dp(15),dp(root.yLText) + dp(17),dp(10))
+
+                Line:
+                    width: 1.
+                    circle:
+                        (dp(root.xRText) + dp(15),dp(root.yLText) + dp(17),dp(10))
+
+
 
              ################################  Arrows   ##########################################
 ################### Base Velocity Arrows   ##########################
@@ -1223,14 +1236,16 @@ WindowManager:
 ##################  ΔVθ Line Arrows  ####################
                 Triangle:
                     points:
-                        dp(root.xLText),dp(root.yLText) + dp(20),dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) + dp(3),\
-                        dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) - dp(3)
-                Triangle:
-                    points:
-                        dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
-                        dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3)
+                        (dp(root.xLText),dp(root.yLText) + dp(20),dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) + dp(3),\
+                        dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) - dp(3)) if root.tc_nameText == 'Compressor' else\
+                        (dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
+                        dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3))
+#                Triangle:
+#                    points:
+#                        dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
+#                        dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3)
 
-##########  Vx Line Arrows  ####################
+#####################  Vx Line Arrows  ####################
                 Triangle:
                     points:
                         (dp(root.x1Text) + dp(20),dp(root.y1Text),dp(root.x1Text) + dp(20) + dp(3),\
@@ -1239,22 +1254,19 @@ WindowManager:
                         (dp(root.xRText)+ dp(20),dp(root.y1Text),dp(root.xRText)+ dp(20) + dp(3),\
                         dp(root.y1Text) + dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.y1Text) + dp(20))
 
-                Triangle:
-                    points:
-                        (dp(root.x1Text) + dp(20),dp(root.yRText),dp(root.x1Text) + dp(20) + dp(3),\
-                        dp(root.yRText) - dp(20),dp(root.x1Text) + dp(20) - dp(3),dp(root.yRText) - dp(20))\
-                        if dp(root.xRText) < dp(root.x1Text) else\
-                        (dp(root.xRText)+ dp(20),dp(root.yRText),dp(root.xRText)+ dp(20) + dp(3),\
-                        dp(root.yRText) - dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.yRText) - dp(20))
-
-
-
+#                Triangle:
+#                    points:
+#                        (dp(root.x1Text) + dp(20),dp(root.yRText),dp(root.x1Text) + dp(20) + dp(3),\
+#                        dp(root.yRText) - dp(20),dp(root.x1Text) + dp(20) - dp(3),dp(root.yRText) - dp(20))\
+#                        if dp(root.xRText) < dp(root.x1Text) else\
+#                        (dp(root.xRText)+ dp(20),dp(root.yRText),dp(root.xRText)+ dp(20) + dp(3),\
+#                        dp(root.yRText) - dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.yRText) - dp(20))
 
 
 ###################   Labels   ##########################
             Label:
-                pos: (dp(-120),dp(-20)) if float(root.pText)>0.99 else (dp(-100),dp(-20))
-                text: 'Probably turbine' if float(root.pText)>0.99 else 'Probably compressor'
+                pos: (dp(root.ptn_xText),dp(-20))
+                text: root.tc_nameText
                 color: 1,0,0,1
 
             Label:
@@ -1277,6 +1289,18 @@ WindowManager:
                 pos:
                     -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText)+dp(root.UText)*dp(root.pText)/2,\
                     dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35)
+
+            Label:
+                text:'1'
+                pos:
+                    -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText) - dp(15),\
+                    dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(15)
+
+            Label:
+                text:'2'
+                pos:
+                    -dp(root.UText)/2-dp(root.x0Text)+dp(root.xRText) + dp(15),\
+                    dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(15)
 
         GridLayout:
             cols:2
