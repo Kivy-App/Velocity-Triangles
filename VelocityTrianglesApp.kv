@@ -6,7 +6,7 @@ WindowManager:
 
 <P2>:
 
-<P3>
+<P3>:
 
 <Label>
     color: [0,0,0,1]
@@ -588,7 +588,6 @@ WindowManager:
                         pos: self.pos
                         size: self.size
 
-
 <NewWindow>:
     name: "new"
 
@@ -605,10 +604,12 @@ WindowManager:
             GridLayout:
                 cols:2
                 size_hint_y: 0.55
+
     ###############   Grid gia diaxorismo titlou apo ta apotelesmata #######################
                 GridLayout:
                     rows:2
                     size_hint_x:0.5
+
     ##################################   Titlos    ####################################
                     BoxLayout:
                         size_hint_y:0.15
@@ -631,6 +632,7 @@ WindowManager:
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
+
     ################   Grid apotelespata aristera    ###########################
                     GridLayout:
                         cols:3
@@ -643,9 +645,6 @@ WindowManager:
                                 size: self.size
                             Color:
                                 rgba:0,0,0,1
-#                            Line:
-#                                width: dp(3.)
-#                                points: (dp(self.x), dp(self.y), dp(self.x +self.width), dp(self.y))
                             Line:
                                 width: dp(3.)
                                 points: (dp(self.x), dp(self.y), dp(self.x), dp(self.y+self.height))
@@ -841,7 +840,6 @@ WindowManager:
                                 halign: 'left'
                                 valign: 'middle'
 
-
     ############ Deksi grid to opoio diaxorizei ton titlo apo ta deksio apotelesmata ####################
                 GridLayout:
                     rows:2
@@ -868,8 +866,6 @@ WindowManager:
                                 width: dp(3.) if root.check == 0 else dp(0.01)
                                 points: (dp(self.x), dp(self.y + self.height),dp(self.x+ self.width), dp(self.height + self.y))
 
-
-
                         Label:
                             text:'Dimensional Velocities' if root.check == 0 else ''
                             font_size: root.DPI*15
@@ -890,9 +886,6 @@ WindowManager:
                                 size: self.size
                             Color:
                                 rgba:0,0,0,1
-#                            Line:
-#                                width: dp(3.) if root.check == 0 else dp(0.01)
-#                                points: (dp(self.x), dp(self.y), dp(self.x +self.width), dp(self.y))
                             Line:
                                 width: dp(3.) if root.check == 0 else dp(0.01)
                                 points: (dp(self.x+self.width), dp(self.y), dp(self.x+self.width), dp(self.y+self.height))
@@ -1273,10 +1266,6 @@ WindowManager:
                             dp(root.xLText)+ dp(20),dp(root.yLText) + dp(20) - dp(3)) if root.tc_nameText == 'Compressor' else\
                             (dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
                             dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3))
-    #                Triangle:
-    #                    points:
-    #                        dp(root.xRText),dp(root.yRText) + dp(20),dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) + dp(3),\
-    #                        dp(root.xRText)- dp(20),dp(root.yRText) + dp(20) - dp(3)
 
     #####################  Vx Line Arrows  ####################
                     Triangle:
@@ -1287,18 +1276,9 @@ WindowManager:
                             (dp(root.xRText)+ dp(20),dp(root.y1Text),dp(root.xRText)+ dp(20) + dp(3),\
                             dp(root.y1Text) + dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.y1Text) + dp(20))
 
-    #                Triangle:
-    #                    points:
-    #                        (dp(root.x1Text) + dp(20),dp(root.yRText),dp(root.x1Text) + dp(20) + dp(3),\
-    #                        dp(root.yRText) - dp(20),dp(root.x1Text) + dp(20) - dp(3),dp(root.yRText) - dp(20))\
-    #                        if dp(root.xRText) < dp(root.x1Text) else\
-    #                        (dp(root.xRText)+ dp(20),dp(root.yRText),dp(root.xRText)+ dp(20) + dp(3),\
-    #                        dp(root.yRText) - dp(20),dp(root.xRText)+ dp(20) - dp(3),dp(root.yRText) - dp(20))
-
-
     ###################   Labels   ##########################
                 Label:
-                    pos: (dp(root.ptn_xText),dp(-20))
+                    pos: (dp(root.ptn_xText),dp(self.parent.y - self.height/2 + 0.05*self.height))
                     text: root.tc_nameText
                     color: 1,0,0,1
 
@@ -1327,13 +1307,13 @@ WindowManager:
                     text:'1'
                     pos:
                         -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText) - dp(15),\
-                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(15)
+                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(17)
 
                 Label:
                     text:'2'
                     pos:
                         -dp(root.UText)/2-dp(root.x0Text)+dp(root.xRText) + dp(15),\
-                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(15)
+                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(17)
 
             GridLayout:
                 cols:2

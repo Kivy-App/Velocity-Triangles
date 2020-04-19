@@ -11,11 +11,9 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-#import sympy as sy
 from kivy.metrics import Metrics
 import numpy as np
 from scipy.optimize import fsolve
-
 
 
 class P(BoxLayout):
@@ -249,7 +247,7 @@ class VelocityTriangles(Screen):
                 xR = x1 - U * float(rne) + U * float(pe) / 2
                 yR = y0 + U * float(fe)
 
-            while yL > 280:
+            while yL > self.height*0.35:
                 x0 = x0 + 1
                 x1 = x1 - 1
 
