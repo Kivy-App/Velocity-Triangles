@@ -597,8 +597,65 @@ WindowManager:
         scroll_wheel_distance: '40dp'
 
         GridLayout:
-            rows: 4
-            size_hint: 1,1.08
+            rows: 6
+            size_hint: 1,1.56
+
+############ First Title ####################
+            BoxLayout:
+                size_hint_y: 0.08
+                canvas:
+                    Color:
+                        rgba: 0.066,0.392,0.505,0.768
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                Label:
+                    text: 'Velocity Analysis'
+                    font_size: dp(25)
+                    bold: True
+
+############ Image Box ##############
+            BoxLayout:
+                size_hint_y: 0.4
+                canvas:
+                    Color:
+                        rgba: 0.6862,0.9333,0.9333,0.737
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    Rectangle:
+                        source: "images/compressor.png" if root.tc_nameText == 'Compressor' else "images/turbine.png"
+                        size: self.width,self.height
+                        pos: self.x,self.y
+
+            BoxLayout:
+                size_hint_y: 0.08
+                canvas:
+                    Color:
+                        rgba: 0.066,0.392,0.505,0.768
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    Color:
+                        rgba:0,0,0,1
+                    Line:
+                        width: dp(1.5)
+                        points: (dp(self.x), dp(self.y + self.height), dp(self.x + self.width), dp(self.y + self.height))
+                    Line:
+                        width: dp(3)
+                        points: (dp(self.x), dp(self.y ), dp(self.x), dp(self.y + self.height))
+                    Line:
+                        width: dp(3)
+                        points: (dp(self.x + self.width), dp(self.y),dp(self.x+ self.width), dp(self.y + self.height))
+
+                    Line:
+                        width: dp(3)
+                        points: (dp(self.x), dp(self.y), dp(self.x + self.width), dp(self.y))
+                Label:
+                    text: 'Middle Velocity Triangles'
+                    font_size: dp(20)
+                    bold: True
 
     ######################GRid me ta grapta apotelesmata #############################
             GridLayout:
@@ -622,9 +679,15 @@ WindowManager:
                                 size: self.size
                             Color:
                                 rgba:0,0,0,1
+#                            Line:
+#                                width: dp(1.5)
+#                                points: (dp(self.x),dp(self.y + self.height),dp(self.x+self.width),dp(self.y + self.height))
                             Line:
                                 width: dp(3.)
-                                rectangle: (dp(self.x), dp(self.y), dp(self.width), dp(self.height))
+                                points: (dp(self.x), dp(self.y), dp(self.x), dp(self.y+self.height))
+                            Line:
+                                width: dp(3.)
+                                points: (dp(self.x+self.width), dp(self.y), dp(self.x + self.width), dp(self.y+self.height))
                         Label:
                             text:'Coefficients and Angles'
                             font_size: root.DPI*15
@@ -651,6 +714,12 @@ WindowManager:
                             Line:
                                 width: dp(3.)
                                 points: (dp(self.x+self.width), dp(self.y), dp(self.x + self.width), dp(self.y+self.height))
+                            Line:
+                                width: dp(3)
+                                points: (dp(self.x), dp(self.y), dp(self.x + self.width), dp(self.y))
+                            Line:
+                                width: dp(1.5)
+                                points: (dp(self.x), dp(self.y+self.height), dp(self.x + self.width), dp(self.y+self.height))
 
                         GridLayout:
                             rows:9
@@ -855,16 +924,15 @@ WindowManager:
                                 pos: self.pos
                                 size: self.size
                             Color:
-                                rgba:0,0,0,1
+                                rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+
                             Line:
-                                width: dp(3.) if root.check == 0 else dp(0.01)
-                                points: (dp(self.x), dp(self.y),dp(self.x+ self.width), dp(self.y))
-                            Line:
-                                width: dp(3.) if root.check == 0 else dp(0.01)
+                                width: dp(3.)
                                 points: (dp(self.x+ self.width), dp(self.y),dp(self.x+ self.width), dp(self.height + self.y))
-                            Line:
-                                width: dp(3.) if root.check == 0 else dp(0.01)
-                                points: (dp(self.x), dp(self.y + self.height),dp(self.x+ self.width), dp(self.height + self.y))
+#                            Line:
+#                                width: dp(1.5)
+#                                points: (dp(self.x), dp(self.y + self.height),dp(self.x+ self.width), dp(self.height + self.y))
+
 
                         Label:
                             text:'Dimensional Velocities' if root.check == 0 else ''
@@ -885,11 +953,16 @@ WindowManager:
                                 pos: self.pos
                                 size: self.size
                             Color:
-                                rgba:0,0,0,1
+                                rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
                             Line:
-                                width: dp(3.) if root.check == 0 else dp(0.01)
+                                width: dp(3.)
                                 points: (dp(self.x+self.width), dp(self.y), dp(self.x+self.width), dp(self.y+self.height))
-
+                            Line:
+                                width: dp(1.5)
+                                points: (dp(self.x), dp(self.y+self.height),dp(self.x+ self.width), dp(self.y+self.height))
+                            Line:
+                                width: dp(3)
+                                points: (dp(self.x), dp(self.y),dp(self.x+ self.width), dp(self.y))
 
                         GridLayout:
                             rows:9
@@ -1078,33 +1151,7 @@ WindowManager:
                                 halign: 'left'
                                 valign: 'middle'
 
-            BoxLayout:
-                size_hint_y: 0.08
-                canvas:
-                    Color:
-                        rgba: 0.066,0.392,0.505,0.768
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
-                    Color:
-                        rgba:0,0,0,1
-                    Line:
-                        width: dp(1.5)
-                        points: (dp(self.x), dp(self.y + self.height), dp(self.x + self.width), dp(self.y + self.height))
-                    Line:
-                        width: dp(3)
-                        points: (dp(self.x), dp(self.y ), dp(self.x), dp(self.y + self.height))
-                    Line:
-                        width: dp(3)
-                        points: (dp(self.x + self.width), dp(self.y),dp(self.x+ self.width), dp(self.y + self.height))
 
-                    Line:
-                        width: dp(3)
-                        points: (dp(self.x), dp(self.y), dp(self.x + self.width), dp(self.y))
-                Label:
-                    text: 'Middle Velocity Triangles'
-                    font_size: dp(20)
-                    bold: True
 
 
     ########Box sthn mesh . Kato apo ta apotelesmata (Ekei pou tha einai ta trigwna) ###########
@@ -1307,13 +1354,13 @@ WindowManager:
                     text:'1'
                     pos:
                         -dp(root.UText)/2-dp(root.x0Text)+dp(root.xLText) - dp(15),\
-                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(17)
+                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(22)
 
                 Label:
                     text:'2'
                     pos:
                         -dp(root.UText)/2-dp(root.x0Text)+dp(root.xRText) + dp(15),\
-                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(17)
+                        dp(self.parent.y) -dp(root.y0Text)/2+dp(root.UText)*float(root.fText)+ dp(35) - dp(22)
 
             GridLayout:
                 cols:2
