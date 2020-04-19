@@ -11,8 +11,10 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-import sympy as sy
+#import sympy as sy
 from kivy.metrics import Metrics
+import numpy as np
+from scipy.optimize import fsolve
 
 
 
@@ -104,154 +106,107 @@ class VelocityTriangles(Screen):
             b2e = str(self.b2.text)
             b3e = str(self.b3.text)
 
+            X = []
+
+            self.k = 0
 
             if pe == '':
-                pe = sy.symbols('pe')
-            else:
-                pe  = str(self.p.text)
-
+                X.append(1)
             if fe == '':
-                fe = sy.symbols('fe')
-            else:
-                fe  = str(self.f.text)
-
-
+                X.append(2)
             if rne == '':
-                rne = sy.symbols('rne')
-            else:
-                rne  = str(self.rn.text)
-
+                X.append(3)
             if a1e == '':
-                a1e = sy.symbols('a1e')
-            else:
-                a1e  = str(self.a1.text)
-
+                X.append(4)
             if a2e == '':
-                a2e = sy.symbols('a2e')
-            else:
-                a2e  = str(self.a2.text)
-
+                X.append(5)
             if b1e == '':
-                b1e = sy.symbols('b1e')
-            else:
-                b1e  = str(self.b1.text)
-
+                X.append(6)
             if b2e == '':
-                b2e = sy.symbols('b2e')
-            else:
-                b2e  = str(self.b2.text)
+                X.append(7)
 
-            X = pe,fe,rne,a1e,a2e,b1e,b2e
+            self.k = len(X)
 
+            def sys(z):
 
-            X=list(X)
+                i = 0
 
+                if 1 in X:
+                    pev = z[i]
+                    i = i + 1
+                else:
+                    pev = float(pe)
 
-            i=0
+                if 2 in X:
+                    fev = z[i]
+                    i = i + 1
+                else:
+                    fev = float(fe)
 
-            if str(X[i])!= 'pe':
-                del X[i]
-                pe = float(pe)
-            else:
-                X[i]== 'pe'
-                i=i+1
+                if 3 in X:
+                    rnev = z[i]
+                    i = i + 1
+                else:
+                    rnev = float(rne)
 
-            if str(X[i])!='fe':
-                del X[i]
-                fe = float(fe)
-            else:
-                X[i]=='fe'
-                i=i+1
+                if 4 in X:
+                    a1ev = z[i]
+                    i = i + 1
+                else:
+                    a1ev = float(a1e)
 
-            if str(X[i])!='rne':
-                del X[i]
-                rne = float(rne)
-            else:
-                X[i]=='rne'
-                i=i+1
+                if 5 in X:
+                    a2ev = z[i]
+                    i = i + 1
+                else:
+                    a2ev = float(a2e)
 
-            if str(X[i])!= 'a1e':
-                del X[i]
-                a1e = float(a1e)
-            else:
-                X[i]=='a1e'
-                i=i+1
+                if 6 in X:
+                    b1ev = z[i]
+                    i = i + 1
+                else:
+                    b1ev = float(b1e)
 
+                if 7 in X:
+                    b2ev = z[i]
+                    i = i + 1
+                else:
+                    b2ev = float(b2e)
 
-            if str(X[i])!='a2e':
-                del X[i]
-                a2e = float(a2e)
-            else:
-                X[i]=='a2e'
-                i=i+1
+                F = np.zeros((4))
 
-            if str(X[i])!='b1e':
-                del X[i]
-                b1e = float(b1e)
-            else:
-                X[i]=='b1e'
-                i=i+1
+                F[0] = -a1ev - np.degrees(np.arctan(-((pev / 2) - 1 + rnev) / fev))
+                F[1] = -a2ev + np.degrees(np.arctan(((pev / 2) + 1 - rnev) / (fev)))
+                F[2] = -b1ev + np.degrees(np.arctan(((pev / 2) + rnev) / fev))
+                F[3] = -b2ev - np.degrees(np.arctan(-((pev / 2) - rnev) / fev))
 
+                return F
 
-            if str(X[i])!='b2e':
-                del X[i]
-                b2e = float(b2e)
-            else:
-                X[i]!='b2e'
-                i = i+1
+            r = fsolve(sys, [1, 1, 1, 1])
 
-            self.k = i
+            j = 0
 
-#####################    Solving the System      #########################################            
-
-            sys = sy.nsolve((a1e + 57.2955*(sy.atan(-((pe / 2) - 1 + rne) / fe)),
-                a2e- 57.2955*(sy.atan(((pe / 2)+1-rne) / fe)),
-                b1e - 57.2955*(sy.atan(((pe / 2) + rne) / fe)),
-                b2e + 57.2955*(sy.atan(-((pe / 2) - rne) / fe))),X,(1,1,1,1))
-
-
-            r=0
-            if str(self.p.text)=='':
-                pe = str(round(sys[r],3))
-                r=r+1
-            else :
-                pe = str(self.p.text)
-
-            if str(self.f.text)=='':
-                fe = str(round(sys[r],3))
-                r=r+1
-            else :
-                fe = str(self.f.text)
-
-            if str(self.rn.text)=='':
-                rne = str(round(sys[r],3))
-                r=r+1
-            else :
-                rne = str(self.rn.text)
-
-            if str(self.a1.text)=='':
-                a1e = str(round(sys[r],3))
-                r=r+1
-            else :
-                a1e = str(self.a1.text)
-
-            if str(self.a2.text)=='':
-                a2e = str(round(sys[r],3))
-                r=r+1
-            else :
-                a2e = str(self.a2.text)
-
-            if str(self.b1.text)=='':
-                b1e = str(round(sys[r],3))
-                r=r+1
-            else :
-                b1e = str(self.b1.text)
-
-            if str(self.b2.text)=='':
-                b2e = str(round(sys[r],3))
-                r=r+1
-            else :
-                b2e = str(self.b2.text)
+            if self.p.text == '':
+                pe = str(round(r[j], 3))
+                j = j + 1
+            if self.f.text == '':
+                fe = str(round(r[j], 3))
+                j = j + 1
+            if self.rn.text == '':
+                rne = str(round(r[j], 3))
+                j = j + 1
+            if self.a1.text == '':
+                a1e = str(round(r[j], 3))
+                j = j + 1
+            if self.a2.text == '':
+                a2e = str(round(r[j], 3))
+                j = j + 1
+            if self.b1.text == '':
+                b1e = str(round(r[j], 3))
+                j = j + 1
+            if self.b2.text == '':
+                b2e = str(round(r[j], 3))
+                j = j + 1
 
 
             pe = str(round(float(pe),3))
@@ -354,7 +309,6 @@ class VelocityTriangles(Screen):
                     ptn_x = ptn_x = self.x - self.width/2 + 50
 
                     ############### Passing the Results on the Second Screen  ############################
-
             self.manager.get_screen('new').pText = pe
             self.manager.get_screen('new').fText = fe
             self.manager.get_screen('new').rnText = rne
@@ -371,11 +325,11 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').y0Text = str(y0)
             self.manager.get_screen('new').x1Text = str(x1)
             self.manager.get_screen('new').y1Text = str(y1)
-            self.manager.get_screen('new').UText =  str(U)
-            self.manager.get_screen('new').xLText =  str(xL)
-            self.manager.get_screen('new').yLText =  str(yL)
-            self.manager.get_screen('new').xRText =  str(xR)
-            self.manager.get_screen('new').yRText =  str(yR)
+            self.manager.get_screen('new').UText = str(U)
+            self.manager.get_screen('new').xLText = str(xL)
+            self.manager.get_screen('new').yLText = str(yL)
+            self.manager.get_screen('new').xRText = str(xR)
+            self.manager.get_screen('new').yRText = str(yR)
 
             self.manager.get_screen('new').xL1uText = str(xL1u)
             self.manager.get_screen('new').yL1uText = str(yL1u)
@@ -400,14 +354,15 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').tc_nameText = tc_name
             self.manager.get_screen('new').ptn_xText = str(ptn_x)
 
+            if float(b1e) - float(a1e) < 2 or  float(a2e) - float(b2e) < 2:
+                self.popup = secondPopup()
+                self.k = 0
+
         except:
             if i > 4:
                 self.popup = firstPopup()
                 self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
-            else:
-                self.popup = secondPopup()
-                i = 0
-                self.k = 0
+
 
     def dml(self):
         try:
@@ -435,10 +390,10 @@ class VelocityTriangles(Screen):
 
             self.dvth = float(pe)*Umi
 
-            self.V1 = Vxi/m.cos(float(a1e))
-            self.V2 = Vxi/m.cos(float(a2e))
-            self.W1 = Vxi / m.cos(float(b1e))
-            self.W2 = Vxi / m.cos(float(b2e))
+            self.V1 = Vxi/m.cos(m.radians(float(a1e)))
+            self.V2 = Vxi/m.cos(m.radians(float(a2e)))
+            self.W1 = Vxi / m.cos(m.radians(float(b1e)))
+            self.W2 = Vxi / m.cos(m.radians(float(b2e)))
 
             ############### Passing the Results on the Second Screen  ##################
             self.manager.get_screen('new').UmText = str(round(self.Um, 3))
