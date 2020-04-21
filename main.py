@@ -13,7 +13,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-from scipy.optimize import fsolve
+
 
 
 class P(BoxLayout):
@@ -84,282 +84,185 @@ class VelocityTriangles(Screen):
 
 
     def systemsolver(self):
-        try:
-            global a1e
-            global a2e
-            global b1e
-            global b2e
-            global pe
-            global fe
-            global rne
-            global i
+        # try:
+        global a1e
+        global a2e
+        global b1e
+        global b2e
+        global pe
+        global fe
+        global rne
+        global i
 
-            pe  = str(self.p.text)
-            fe  = str(self.f.text)
-            rne = str(self.rn.text)
-            a1e = str(self.a1.text)
-            a2e = str(self.a2.text)
-            a3e = str(self.a3.text)
-            b1e = str(self.b1.text)
-            b2e = str(self.b2.text)
-            b3e = str(self.b3.text)
+        pe  = str(self.p.text)
+        fe  = str(self.f.text)
+        rne = str(self.rn.text)
+        a1e = str(self.a1.text)
+        a2e = str(self.a2.text)
+        a3e = str(self.a3.text)
+        b1e = str(self.b1.text)
+        b2e = str(self.b2.text)
+        b3e = str(self.b3.text)
 
-            X = []
+        a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+        a2e =   np.degrees(np.arctan(((float(pe)/ 2)+1-float(rne)) / float(fe)))
+        b1e =   np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+        b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
 
+
+        pe = str(round(float(pe),3))
+        fe = str(round(float(fe),3))
+        rne = str(round(float(rne),3))
+        a1e = str(round(float(a1e),3))
+        a2e = str(round(float(a2e),3))
+        #a3e = str(round(float(a3e),3))
+        b1e = str(round(float(b1e),3))
+        b2e = str(round(float(b2e),3))
+        #b3e = str(round(float(b3e),3))
+
+
+        ############################# Drawing Triangles ######################################
+        x0,y0 = Window.size[0]*130/400,Window.size[1]*150/700
+        x1,y1 = Window.size[0]*270/400,Window.size[1]*150/700
+        U = x1-x0
+        xL = x1 - U*float(rne)-U*float(pe)/2
+        yL = y0 + U*float(fe)
+        xR = x1 - U*float(rne) +U*float(pe)/2
+        yR = y0 + U*float(fe)
+
+        while xL < self.x + Window.size[0]*60/400:
+            x0 = x0 + 1
+            x1 = x1 - 1
+
+            U = x1 - x0
+            xL = x1 - U * float(rne) - U * float(pe) / 2
+            yL = y0 + U * float(fe)
+            xR = x1 - U * float(rne) + U * float(pe) / 2
+            yR = y0 + U * float(fe)
+
+        while xR > self.width - Window.size[0]*80/400:
+            x0 = x0 + 1
+            x1 = x1 - 1
+
+            U = x1 - x0
+            xL = x1 - U * float(rne) - U * float(pe) / 2
+            yL = y0 + U * float(fe)
+            xR = x1 - U * float(rne) + U * float(pe) / 2
+            yR = y0 + U * float(fe)
+
+        while yL > self.height*0.4:
+            x0 = x0 + 1
+            x1 = x1 - 1
+
+            U = x1 - x0
+            xL = x1 - U * float(rne) - U * float(pe) / 2
+            yL = y0 + U * float(fe)
+            xR = x1 - U * float(rne) + U * float(pe) / 2
+            yR = y0 + U * float(fe)
+
+        ############### Computing base angles  ############################
+
+        a1d = 180 + float(a1e) - 90
+        a2d = 180 - float(a2e) - 90
+        b1d = 180 - float(b1e) - 90
+        b2d = 180 - float(b2e) - 90
+
+        ############### Computing rotating arrow points  ############################
+
+        xL1u = x0 + (Window.size[0]/400)*25*m.cos(m.radians(a1d + 11.3))
+        yL1u = y0 + (Window.size[1]/700)*25*m.sin(m.radians(a1d + 11.3))
+        xL1d = x0 + (Window.size[0]/400)*25*m.cos(m.radians(a1d - 11.3))
+        yL1d = y0 + (Window.size[1]/700)*25*m.sin(m.radians(a1d - 11.3))
+
+        xL2u = x0 + (Window.size[0]/400)*25 * m.cos(m.radians(a2d + 11.3))
+        yL2u = y0 + (Window.size[1]/700)*25 * m.sin(m.radians(a2d + 11.3))
+        xL2d = x0 + (Window.size[0]/400)*25 * m.cos(m.radians(a2d - 11.3))
+        yL2d = y0 + (Window.size[1]/700)*25 * m.sin(m.radians(a2d - 11.3))
+
+        xR1u = x1 - (Window.size[0]/400)*25 * m.cos(m.radians(b1d + 11.3))
+        yR1u = y1 + (Window.size[1]/700)*25 * m.sin(m.radians(b1d + 11.3))
+        xR1d = x1 - (Window.size[0]/400)*25 * m.cos(m.radians(b1d - 11.3))
+        yR1d = y1 + (Window.size[1]/700)*25 * m.sin(m.radians(b1d - 11.3))
+
+        xR2u = x1 + (Window.size[0]/400)*25 * m.cos(m.radians(b2d + 11.3))
+        yR2u = y1 + (Window.size[1]/700)*25 * m.sin(m.radians(b2d + 11.3))
+        xR2d = x1 + (Window.size[0]/400)*25 * m.cos(m.radians(b2d - 11.3))
+        yR2d = y1 + (Window.size[1]/700)*25 * m.sin(m.radians(b2d - 11.3))
+
+        ######################### Choosing if it is Turbine or Compressor ###################
+        if float(pe) > 0.999:
+            if abs(x1-xL)>abs(x1-xR):
+                tc = 0  # turbine
+                tc_name = 'Turbine'
+                ptn_x = self.x - self.width/2 + Window.size[0]*50/400
+            else:
+                tc = 1  # compressor
+                tc_name = 'Compressor'
+                ptn_x = self.x - self.width / 2 + Window.size[0]*70/400
+        else:
+            if abs(x1-xL)>abs(x1-xR):
+                tc = 1  # compressor
+                tc_name = 'Compressor'
+                ptn_x = self.x - self.width / 2 + Window.size[0]*70/400
+            else:
+                tc = 0  # turbine
+                tc_name = 'Turbine'
+                ptn_x = ptn_x = self.x - self.width/2 + Window.size[0]*50/400
+
+                ############### Passing the Results on the Second Screen  ############################
+        self.manager.get_screen('new').pText = pe
+        self.manager.get_screen('new').fText = fe
+        self.manager.get_screen('new').rnText = rne
+        self.manager.get_screen('new').a1Text = a1e
+        self.manager.get_screen('new').a2Text = a2e
+        self.manager.get_screen('new').a3Text = a3e
+        self.manager.get_screen('new').b1Text = b1e
+        self.manager.get_screen('new').b2Text = b2e
+        self.manager.get_screen('new').b3Text = b3e
+
+        ############### Passing the Triangles Points on the Second Screen  ##################
+
+        self.manager.get_screen('new').x0Text = str(x0)
+        self.manager.get_screen('new').y0Text = str(y0)
+        self.manager.get_screen('new').x1Text = str(x1)
+        self.manager.get_screen('new').y1Text = str(y1)
+        self.manager.get_screen('new').UText = str(U)
+        self.manager.get_screen('new').xLText = str(xL)
+        self.manager.get_screen('new').yLText = str(yL)
+        self.manager.get_screen('new').xRText = str(xR)
+        self.manager.get_screen('new').yRText = str(yR)
+
+        self.manager.get_screen('new').xL1uText = str(xL1u)
+        self.manager.get_screen('new').yL1uText = str(yL1u)
+        self.manager.get_screen('new').xL1dText = str(xL1d)
+        self.manager.get_screen('new').yL1dText = str(yL1d)
+
+        self.manager.get_screen('new').xL2uText = str(xL2u)
+        self.manager.get_screen('new').yL2uText = str(yL2u)
+        self.manager.get_screen('new').xL2dText = str(xL2d)
+        self.manager.get_screen('new').yL2dText = str(yL2d)
+
+        self.manager.get_screen('new').xR1uText = str(xR1u)
+        self.manager.get_screen('new').yR1uText = str(yR1u)
+        self.manager.get_screen('new').xR1dText = str(xR1d)
+        self.manager.get_screen('new').yR1dText = str(yR1d)
+
+        self.manager.get_screen('new').xR2uText = str(xR2u)
+        self.manager.get_screen('new').yR2uText = str(yR2u)
+        self.manager.get_screen('new').xR2dText = str(xR2d)
+        self.manager.get_screen('new').yR2dText = str(yR2d)
+
+        self.manager.get_screen('new').tc_nameText = tc_name
+        self.manager.get_screen('new').ptn_xText = str(ptn_x)
+
+        if float(b1e) - float(a1e) < 2 or  float(a2e) - float(b2e) < 2:
+            self.popup = secondPopup()
             self.k = 0
 
-            if pe == '':
-                X.append(1)
-            if fe == '':
-                X.append(2)
-            if rne == '':
-                X.append(3)
-            if a1e == '':
-                X.append(4)
-            if a2e == '':
-                X.append(5)
-            if b1e == '':
-                X.append(6)
-            if b2e == '':
-                X.append(7)
-
-            self.k = len(X)
-
-            def sys(z):
-
-                i = 0
-
-                if 1 in X:
-                    pev = z[i]
-                    i = i + 1
-                else:
-                    pev = float(pe)
-
-                if 2 in X:
-                    fev = z[i]
-                    i = i + 1
-                else:
-                    fev = float(fe)
-
-                if 3 in X:
-                    rnev = z[i]
-                    i = i + 1
-                else:
-                    rnev = float(rne)
-
-                if 4 in X:
-                    a1ev = z[i]
-                    i = i + 1
-                else:
-                    a1ev = float(a1e)
-
-                if 5 in X:
-                    a2ev = z[i]
-                    i = i + 1
-                else:
-                    a2ev = float(a2e)
-
-                if 6 in X:
-                    b1ev = z[i]
-                    i = i + 1
-                else:
-                    b1ev = float(b1e)
-
-                if 7 in X:
-                    b2ev = z[i]
-                    i = i + 1
-                else:
-                    b2ev = float(b2e)
-
-                F = np.zeros((4))
-
-                F[0] = -a1ev - np.degrees(np.arctan(-((pev / 2) - 1 + rnev) / fev))
-                F[1] = -a2ev + np.degrees(np.arctan(((pev / 2) + 1 - rnev) / (fev)))
-                F[2] = -b1ev + np.degrees(np.arctan(((pev / 2) + rnev) / fev))
-                F[3] = -b2ev - np.degrees(np.arctan(-((pev / 2) - rnev) / fev))
-
-                return F
-
-            r = fsolve(sys, [1, 1, 1, 1])
-
-            j = 0
-
-            if self.p.text == '':
-                pe = str(round(r[j], 3))
-                j = j + 1
-            if self.f.text == '':
-                fe = str(round(r[j], 3))
-                j = j + 1
-            if self.rn.text == '':
-                rne = str(round(r[j], 3))
-                j = j + 1
-            if self.a1.text == '':
-                a1e = str(round(r[j], 3))
-                j = j + 1
-            if self.a2.text == '':
-                a2e = str(round(r[j], 3))
-                j = j + 1
-            if self.b1.text == '':
-                b1e = str(round(r[j], 3))
-                j = j + 1
-            if self.b2.text == '':
-                b2e = str(round(r[j], 3))
-                j = j + 1
-
-
-            pe = str(round(float(pe),3))
-            fe = str(round(float(fe),3))
-            rne = str(round(float(rne),3))
-            a1e = str(round(float(a1e),3))
-            a2e = str(round(float(a2e),3))
-            #a3e = str(round(float(a3e),3))
-            b1e = str(round(float(b1e),3))
-            b2e = str(round(float(b2e),3))
-            #b3e = str(round(float(b3e),3))
-
-
-            ############################# Drawing Triangles ######################################
-            x0,y0 = Window.size[0]*130/400,Window.size[1]*150/700
-            x1,y1 = Window.size[0]*270/400,Window.size[1]*150/700
-            U = x1-x0
-            xL = x1 - U*float(rne)-U*float(pe)/2
-            yL = y0 + U*float(fe)
-            xR = x1 - U*float(rne) +U*float(pe)/2
-            yR = y0 + U*float(fe)
-
-            while xL < self.x + 60:
-                x0 = x0 + 1
-                x1 = x1 - 1
-
-                U = x1 - x0
-                xL = x1 - U * float(rne) - U * float(pe) / 2
-                yL = y0 + U * float(fe)
-                xR = x1 - U * float(rne) + U * float(pe) / 2
-                yR = y0 + U * float(fe)
-
-            while xR > self.width - 80:
-                x0 = x0 + 1
-                x1 = x1 - 1
-
-                U = x1 - x0
-                xL = x1 - U * float(rne) - U * float(pe) / 2
-                yL = y0 + U * float(fe)
-                xR = x1 - U * float(rne) + U * float(pe) / 2
-                yR = y0 + U * float(fe)
-
-            while yL > self.height*0.35:
-                x0 = x0 + 1
-                x1 = x1 - 1
-
-                U = x1 - x0
-                xL = x1 - U * float(rne) - U * float(pe) / 2
-                yL = y0 + U * float(fe)
-                xR = x1 - U * float(rne) + U * float(pe) / 2
-                yR = y0 + U * float(fe)
-
-            ############### Computing base angles  ############################
-
-            a1d = 180 + float(a1e) - 90
-            a2d = 180 - float(a2e) - 90
-            b1d = 180 - float(b1e) - 90
-            b2d = 180 - float(b2e) - 90
-
-            ############### Computing rotating arrow points  ############################
-
-            xL1u = x0 + 25*m.cos(m.radians(a1d + 11.3))
-            yL1u = y0 + 25*m.sin(m.radians(a1d + 11.3))
-            xL1d = x0 + 25*m.cos(m.radians(a1d - 11.3))
-            yL1d = y0 + 25*m.sin(m.radians(a1d - 11.3))
-
-            xL2u = x0 + 25 * m.cos(m.radians(a2d + 11.3))
-            yL2u = y0 + 25 * m.sin(m.radians(a2d + 11.3))
-            xL2d = x0 + 25 * m.cos(m.radians(a2d - 11.3))
-            yL2d = y0 + 25 * m.sin(m.radians(a2d - 11.3))
-
-            xR1u = x1 - 25 * m.cos(m.radians(b1d + 11.3))
-            yR1u = y1 + 25 * m.sin(m.radians(b1d + 11.3))
-            xR1d = x1 - 25 * m.cos(m.radians(b1d - 11.3))
-            yR1d = y1 + 25 * m.sin(m.radians(b1d - 11.3))
-
-            xR2u = x1 + 25 * m.cos(m.radians(b2d + 11.3))
-            yR2u = y1 + 25 * m.sin(m.radians(b2d + 11.3))
-            xR2d = x1 + 25 * m.cos(m.radians(b2d - 11.3))
-            yR2d = y1 + 25 * m.sin(m.radians(b2d - 11.3))
-
-            ######################### Choosing if it is Turbine or Compressor ###################
-            if float(pe) > 0.999:
-                if abs(x1-xL)>abs(x1-xR):
-                    tc = 0  # turbine
-                    tc_name = 'Turbine'
-                    ptn_x = self.x - self.width/2 + 50
-                else:
-                    tc = 1  # compressor
-                    tc_name = 'Compressor'
-                    ptn_x = self.x - self.width / 2 + 70
-            else:
-                if abs(x1-xL)>abs(x1-xR):
-                    tc = 1  # compressor
-                    tc_name = 'Compressor'
-                    ptn_x = self.x - self.width / 2 + 70
-                else:
-                    tc = 0  # turbine
-                    tc_name = 'Turbine'
-                    ptn_x = ptn_x = self.x - self.width/2 + 50
-
-                    ############### Passing the Results on the Second Screen  ############################
-            self.manager.get_screen('new').pText = pe
-            self.manager.get_screen('new').fText = fe
-            self.manager.get_screen('new').rnText = rne
-            self.manager.get_screen('new').a1Text = a1e
-            self.manager.get_screen('new').a2Text = a2e
-            self.manager.get_screen('new').a3Text = a3e
-            self.manager.get_screen('new').b1Text = b1e
-            self.manager.get_screen('new').b2Text = b2e
-            self.manager.get_screen('new').b3Text = b3e
-
-            ############### Passing the Triangles Points on the Second Screen  ##################
-
-            self.manager.get_screen('new').x0Text = str(x0)
-            self.manager.get_screen('new').y0Text = str(y0)
-            self.manager.get_screen('new').x1Text = str(x1)
-            self.manager.get_screen('new').y1Text = str(y1)
-            self.manager.get_screen('new').UText = str(U)
-            self.manager.get_screen('new').xLText = str(xL)
-            self.manager.get_screen('new').yLText = str(yL)
-            self.manager.get_screen('new').xRText = str(xR)
-            self.manager.get_screen('new').yRText = str(yR)
-
-            self.manager.get_screen('new').xL1uText = str(xL1u)
-            self.manager.get_screen('new').yL1uText = str(yL1u)
-            self.manager.get_screen('new').xL1dText = str(xL1d)
-            self.manager.get_screen('new').yL1dText = str(yL1d)
-
-            self.manager.get_screen('new').xL2uText = str(xL2u)
-            self.manager.get_screen('new').yL2uText = str(yL2u)
-            self.manager.get_screen('new').xL2dText = str(xL2d)
-            self.manager.get_screen('new').yL2dText = str(yL2d)
-
-            self.manager.get_screen('new').xR1uText = str(xR1u)
-            self.manager.get_screen('new').yR1uText = str(yR1u)
-            self.manager.get_screen('new').xR1dText = str(xR1d)
-            self.manager.get_screen('new').yR1dText = str(yR1d)
-
-            self.manager.get_screen('new').xR2uText = str(xR2u)
-            self.manager.get_screen('new').yR2uText = str(yR2u)
-            self.manager.get_screen('new').xR2dText = str(xR2d)
-            self.manager.get_screen('new').yR2dText = str(yR2d)
-
-            self.manager.get_screen('new').tc_nameText = tc_name
-            self.manager.get_screen('new').ptn_xText = str(ptn_x)
-
-            if float(b1e) - float(a1e) < 2 or  float(a2e) - float(b2e) < 2:
-                self.popup = secondPopup()
-                self.k = 0
-
-        except:
-            if i > 4:
-                self.popup = firstPopup()
-                self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
+        # except:
+            
+        #     # self.popup = firstPopup()
+        #     # self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 
 
     def dml(self):
@@ -490,7 +393,7 @@ class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-Window.size = (400, 700)
+#Window.size = (400, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
