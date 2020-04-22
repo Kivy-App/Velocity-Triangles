@@ -104,6 +104,110 @@ class VelocityTriangles(Screen):
         b2e = str(self.b2.text)
         b3e = str(self.b3.text)
 
+        X = []
+
+        self.k = 0
+
+        if pe != '':
+            X.append(1)
+        if fe != '':
+            X.append(2)
+        if rne != '':
+            X.append(3)
+        if a1e != '':
+            X.append(4)
+        if a2e != '':
+            X.append(5)
+        if b1e != '':
+            X.append(6)
+        if b2e != '':
+            X.append(7)
+
+
+ ###############    φ ψ Rn   ###################
+        if 1 in X and 2 in X and 3 in X:
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+###################  ψ φ γωνιες ##########################
+        if 1 in X and 2 in X and 4 in X:
+            rne = float(fe)*np.tan(m.radians(float(a1e)))-float(pe)/2 + 1
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 2 in X and 5 in X:
+            rne = -float(fe)*np.tan(m.radians(float(a2e))) + float(pe)/2 + 1
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 2 in X and 6 in X:
+            rne = float(fe)*np.tan(m.radians(float(b1e))) - float(pe)/2
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 2 in X and 7 in X:
+            rne = -float(fe)*np.tan(m.radians(float(b2e))) + float(pe)/2
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+
+        ################### φ Rn γωνιες ##########################
+        if 2 in X and 3 in X and 4 in X:
+            pe = 2*(float(fe)*np.tan(m.radians(float(a1e)))+1 - float(rne))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 2 in X and 3 in X and 5 in X:
+            pe = 2*(float(fe)*np.tan(m.radians(float(a2e))) - 1 + float(rne))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 2 in X and 3 in X and 6 in X:
+            pe = 2*(float(fe)*np.tan(m.radians(float(b1e))) - float(rne))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 2 in X and 3 in X and 7 in X:
+            pe = 2*(float(fe)*np.tan(m.radians(float(b2e))) + float(rne))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+
+        ################### ψ Rn γωνιες ##########################
+        if 1 in X and 3 in X and 4 in X:
+            fe = (float(pe)/2 - 1 + rne)/np.tan(m.radians(float(a1e)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 3 in X and 5 in X:
+            fe = (float(pe)/2 + 1 - rne) / np.tan(m.radians(float(a2e)))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 3 in X and 6 in X:
+            fe = (float(pe)/2 + rne) / np.tan(m.radians(float(b1e)))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b2e = - np.degrees(np.arctan(-((float(pe) / 2) - float(rne)) / float(fe)))
+
+        if 1 in X and 3 in X and 7 in X:
+            fe = (float(pe)/2 - rne) / np.tan(m.radians(float(b2e)))
+            a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
+            a2e = np.degrees(np.arctan(((float(pe) / 2) + 1 - float(rne)) / float(fe)))
+            b1e = np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
+
+        self.k = len(X)
+
         a1e = - np.degrees(np.arctan(-((float(pe) / 2) - 1 + float(rne)) / float(fe)))
         a2e =   np.degrees(np.arctan(((float(pe)/ 2)+1-float(rne)) / float(fe)))
         b1e =   np.degrees(np.arctan(((float(pe) / 2) + float(rne)) / float(fe)))
@@ -140,7 +244,27 @@ class VelocityTriangles(Screen):
             xR = x1 - U * float(rne) + U * float(pe) / 2
             yR = y0 + U * float(fe)
 
+        while xR < self.x + Window.size[0]*60/400:
+            x0 = x0 + 1
+            x1 = x1 - 1
+
+            U = x1 - x0
+            xL = x1 - U * float(rne) - U * float(pe) / 2
+            yL = y0 + U * float(fe)
+            xR = x1 - U * float(rne) + U * float(pe) / 2
+            yR = y0 + U * float(fe)
+
         while xR > self.width - Window.size[0]*80/400:
+            x0 = x0 + 1
+            x1 = x1 - 1
+
+            U = x1 - x0
+            xL = x1 - U * float(rne) - U * float(pe) / 2
+            yL = y0 + U * float(fe)
+            xR = x1 - U * float(rne) + U * float(pe) / 2
+            yR = y0 + U * float(fe)
+
+        while xL > self.width - Window.size[0]*80/400:
             x0 = x0 + 1
             x1 = x1 - 1
 
@@ -393,7 +517,7 @@ class WindowManager(ScreenManager):
     pass
 
 Config.set('graphics', 'resizable', True)
-#Window.size = (400, 700)
+Window.size = (400, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 
