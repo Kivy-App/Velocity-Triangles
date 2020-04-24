@@ -59,6 +59,8 @@ def thirdPopup():
     popupWindow.open()
 
 class VelocityTriangles(Screen):
+    Config.set('graphics', 'resizable', True)
+    Window.size = (400, 700)
 
     p  = ObjectProperty(None)
     f  = ObjectProperty(None)
@@ -77,10 +79,14 @@ class VelocityTriangles(Screen):
     rh2t2 = ObjectProperty(None)
     rh2t3 = ObjectProperty(None)
     n = ObjectProperty(None)
+    l = NumericProperty(0)
 
     k = NumericProperty(0)
 
     DPI = Metrics.dpi/96
+
+
+
 
 
     def systemsolver(self):
@@ -381,6 +387,7 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').tc_nameText = tc_name
             self.manager.get_screen('new').ptn_xText = str(ptn_x)
 
+
 ################ Debugging Section #################
             if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
                 self.popup = secondPopup()
@@ -389,7 +396,7 @@ class VelocityTriangles(Screen):
             if self.k < 4:
                 self.popup = secondPopup()
                 self.k = 0
-                
+
         except:
             if self.k != 4:
                 self.popup = firstPopup()
@@ -398,7 +405,11 @@ class VelocityTriangles(Screen):
                 self.popup = secondPopup()
                 self.k = 0
 
-
+    print(Window.size[0])
+    if Window.size[0] > 800 and Window.size[0] < 1000:
+        l = 10 / 11
+    else:
+        l = 1
 
 
     def dml(self):
@@ -428,9 +439,19 @@ class VelocityTriangles(Screen):
             self.dvth = float(pe)*Umi
 
             self.V1 = Vxi/m.cos(m.radians(float(a1e)))
+            V1i = self.V1
             self.V2 = Vxi/m.cos(m.radians(float(a2e)))
+            V2i = self.V2
             self.W1 = Vxi / m.cos(m.radians(float(b1e)))
+            W1i = self.W1
             self.W2 = Vxi / m.cos(m.radians(float(b2e)))
+            W2i = self.W2
+
+            self.Vth1 = -V1i * m.sin(m.radians(float(a1e)))
+            self.Vth2 = V2i * m.sin(m.radians(float(a2e)))
+            self.Wth1 = -W1i * m.sin(m.radians(float(b1e)))
+            self.Wth2 = W2i * m.sin(m.radians(float(b2e)))
+
 
             ############### Passing the Results on the Second Screen  ##################
             self.manager.get_screen('new').UmText = str(round(self.Um, 3))
@@ -442,6 +463,10 @@ class VelocityTriangles(Screen):
             self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
             self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
             self.manager.get_screen('new').DVthText = str(round(self.dvth, 3))
+            self.manager.get_screen('new').Vth1Text = str(round(self.Vth1, 3))
+            self.manager.get_screen('new').Vth2Text = str(round(self.Vth2, 3))
+            self.manager.get_screen('new').Wth1Text = str(round(self.Wth1, 3))
+            self.manager.get_screen('new').Wth2Text = str(round(self.Wth2, 3))
 
             self.manager.get_screen('new').check = 0
         except:
@@ -456,6 +481,11 @@ class VelocityTriangles(Screen):
                 self.manager.get_screen('new').W1Text = ''
                 self.manager.get_screen('new').W2Text = ''
                 self.manager.get_screen('new').DVthText = ''
+                self.manager.get_screen('new').DVthText = ''
+                self.manager.get_screen('new').Vth1Text = ''
+                self.manager.get_screen('new').Vth2Text = ''
+                self.manager.get_screen('new').Wth1Text = ''
+                self.manager.get_screen('new').Wth2Text = ''
 
                 self.manager.get_screen('new').check = 1
             else:
@@ -499,6 +529,10 @@ class NewWindow(Screen):
     W1Text = StringProperty('0')
     W2Text = StringProperty('0')
     DVthText = StringProperty('0')
+    Vth1Text = StringProperty('0')
+    Vth2Text = StringProperty('0')
+    Wth1Text = StringProperty('0')
+    Wth2Text = StringProperty('0')
 
     xL1uText = StringProperty('0')
     yL1uText = StringProperty('0')
@@ -520,6 +554,8 @@ class NewWindow(Screen):
     xR2dText = StringProperty('0')
     yR2dText = StringProperty('0')
 
+
+
     check = NumericProperty(0)
 
     tc_nameText = StringProperty('0')
@@ -528,8 +564,6 @@ class NewWindow(Screen):
 class WindowManager(ScreenManager):
     pass
 
-Config.set('graphics', 'resizable', True)
-Window.size = (400, 700)
 
 kv = Builder.load_file("VelocityTrianglesApp.kv")
 

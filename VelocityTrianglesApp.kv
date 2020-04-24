@@ -184,9 +184,8 @@ WindowManager:
                     step: 0.01
                     value:0
 
-
                 Label:
-                    font_size:dp(11)
+                    font_size:root.l*dp(11)
                     text:"Reaction Coefficient Rn : "
                     text_size: self.size
                     halign: 'right'
@@ -597,7 +596,7 @@ WindowManager:
 
         GridLayout:
             rows: 6
-            size_hint: 1,1.56
+            size_hint: 1,1.66
 
 ############ First Title ####################
             BoxLayout:
@@ -659,7 +658,7 @@ WindowManager:
     ######################GRid me ta grapta apotelesmata #############################
             GridLayout:
                 cols:2
-                size_hint_y: 0.55
+                size_hint_y: 0.65
 
     ###############   Grid gia diaxorismo titlou apo ta apotelesmata #######################
                 GridLayout:
@@ -668,7 +667,7 @@ WindowManager:
 
     ##################################   Titlos    ####################################
                     BoxLayout:
-                        size_hint_y:0.15
+                        size_hint_y:0.12
                         spacing:10
                         canvas:
                             Color:
@@ -698,7 +697,6 @@ WindowManager:
     ################   Grid apotelespata aristera    ###########################
                     GridLayout:
                         cols:3
-                        size_hint_x: 0.85
                         canvas:
                             Color:
                                 rgba: 0.6862,0.9333,0.9333,0.737
@@ -811,7 +809,7 @@ WindowManager:
                                 halign: 'center'
                                 valign: 'middle'
                             Label:
-                                text: root.a1Text
+                                text: root.a1Text if root.tc_nameText == 'Compressor' else '------'
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
@@ -823,13 +821,13 @@ WindowManager:
                                 halign: 'center'
                                 valign: 'middle'
                             Label:
-                                text:'------'
+                                text:'------' if root.tc_nameText == 'Compressor' else root.a1Text
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
                                 valign: 'middle'
                             Label:
-                                text: root.b1Text
+                                text: root.b1Text if root.tc_nameText == 'Compressor' else '------'
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
@@ -842,7 +840,7 @@ WindowManager:
                                 valign: 'middle'
                             Label:
                                 #text: root.b3Text
-                                text:'------'
+                                text:'------' if root.tc_nameText == 'Compressor' else root.b1Text
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
@@ -914,7 +912,7 @@ WindowManager:
                     size_hint_x:0.5
     ##################  Titlos ###############################
                     BoxLayout:
-                        size_hint_y:0.15
+                        size_hint_y:0.12
                         spacing:10
                         canvas:
                             Color:
@@ -944,7 +942,6 @@ WindowManager:
     ################   Grid apotelespatvn deksia   ########################
                     GridLayout:
                         cols:3
-                        size_hint_x: 0.85
                         canvas:
                             Color:
                                 rgba: 0.6862,0.9333,0.9333,0.737
@@ -964,15 +961,8 @@ WindowManager:
                                 points: (self.x, self.y,self.x+ self.width, self.y)
 
                         GridLayout:
-                            rows:9
+                            rows:11
                             size_hint_x:0.55
-
-                            Label:
-                                font_size:dp(11)
-                                text:" Hub rotational \n speed Uh   " if root.check == 0 else ''
-                                text_size: self.size
-                                halign: 'right'
-                                valign: 'middle'
 
                             Label:
                                 font_size:dp(11)
@@ -981,12 +971,6 @@ WindowManager:
                                 halign: 'right'
                                 valign: 'middle'
 
-                            Label:
-                                font_size:dp(11)
-                                text:" Tip rotational \n speed Ut   " if root.check == 0 else ''
-                                text_size: self.size
-                                halign: 'right'
-                                valign: 'middle'
 
                             Label:
                                 font_size:dp(11)
@@ -1022,6 +1006,30 @@ WindowManager:
                                 text_size: self.size
                                 halign: 'right'
                                 valign: 'middle'
+                            Label:
+                                font_size:dp(11)
+                                text:" Absolute rotary \n velocity V\u03B81   " if root.check == 0 else ''
+                                text_size: self.size
+                                halign: 'right'
+                                valign: 'middle'
+                            Label:
+                                font_size:dp(11)
+                                text:" Absolute rotary \n velocity V\u03B82  " if root.check == 0 else ''
+                                text_size: self.size
+                                halign: 'right'
+                                valign: 'middle'
+                            Label:
+                                font_size:dp(11)
+                                text:" Absolute rotary \n velocity W\u03B81   " if root.check == 0 else ''
+                                text_size: self.size
+                                halign: 'right'
+                                valign: 'middle'
+                            Label:
+                                font_size:dp(11)
+                                text:" Absolute rotary \n velocity W\u03B82  " if root.check == 0 else ''
+                                text_size: self.size
+                                halign: 'right'
+                                valign: 'middle'
 
                             Label:
                                 font_size:dp(11)
@@ -1032,27 +1040,16 @@ WindowManager:
 
 
                         GridLayout:
-                            rows:9
+                            rows:11
                             size_hint_x:0.25
 
-                            Label:
-                                text: root.UhText
-                                font_size:dp(11)
-                                text_size: self.size
-                                halign: 'center'
-                                valign: 'middle'
                             Label:
                                 text: root.UmText
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
                                 valign: 'middle'
-                            Label:
-                                text: root.UtText
-                                font_size:dp(11)
-                                text_size: self.size
-                                halign: 'center'
-                                valign: 'middle'
+
                             Label:
                                 text: root.VxText
                                 font_size:dp(11)
@@ -1085,13 +1082,37 @@ WindowManager:
                                 halign: 'center'
                                 valign: 'middle'
                             Label:
+                                text: root.Vth1Text
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+                            Label:
+                                text: root.Vth2Text
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+                            Label:
+                                text: root.Wth1Text
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+                            Label:
+                                text: root.Wth2Text
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+                            Label:
                                 text: root.DVthText
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'center'
                                 valign: 'middle'
                         GridLayout:
-                            rows:9
+                            rows:11
                             size_hint_x:0.2
 
                             Label:
@@ -1120,6 +1141,18 @@ WindowManager:
                                 valign: 'middle'
                             Label:
                                 text: '[ m/s ]' if root.check == 0 else ''
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                            Label:
+                                text: '[ m/s ]' if root.check == 0 else ''
+                                font_size:dp(11)
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                            Label:
+                                text:'[ m/s ]' if root.check == 0 else ''
                                 font_size:dp(11)
                                 text_size: self.size
                                 halign: 'left'
@@ -1347,19 +1380,19 @@ WindowManager:
                     text: '\u0394V\u03B8'
                     pos:
                         -float(root.UText)/2-float(root.x0Text)+float(root.xLText)+float(root.UText)*float(root.pText)/2,\
-                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(35)
+                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(25)
 
                 Label:
-                    text:'1'
+                    text:'1' if root.tc_nameText == 'Compressor' else '3'
                     pos:
                         -float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
-                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(35) - dp(22)
+                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(25) - dp(14)
 
                 Label:
                     text:'2'
                     pos:
                         -float(root.UText)/2-float(root.x0Text)+float(root.xRText) + dp(15),\
-                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(35) - dp(22)
+                        self.parent.y -float(root.y0Text)/2+float(root.UText)*float(root.fText)+ dp(25) - dp(14)
 
             GridLayout:
                 cols:2
