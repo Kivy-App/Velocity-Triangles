@@ -14,7 +14,21 @@ from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
 from scipy.optimize import fsolve
+from kivy.uix.bubble import Bubble
 
+class B(Bubble):
+    pass
+
+def showbubble(self):
+    bubb = B()
+    # bl = BoxLayout(orientation='vertical',size_hint = (0.5,0.5),pos_hint={'x': 0.1,'y':0.1})
+    label = Label(text=' Dimensional measurements missing', halign='center', valign='middle',
+                  color=[1, 0.1, 0.5, 1], font_size='12dp')
+    bubb = Bubble(orientation='vertical', size_hint=(0.5, 0.5), arrow_pos='bottom_left',
+                  pos_hint={'x': 0.1, 'y': 0.1})
+    bubb.add_widget(label)
+    self.add_widget(bubb)
+# self.add_widget(bl)
 
 class P(BoxLayout):
     pass
@@ -494,6 +508,7 @@ class VelocityTriangles(Screen):
                 else:
                     self.popup = thirdPopup()
                     self.k = 0
+
 
 
 class NewWindow(Screen):
