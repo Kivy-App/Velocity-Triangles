@@ -43,7 +43,7 @@ def secondPopup():
 						 ' is not valid. It seems that with\n'
 						 ' this combination of variables \n'
 						 ' Loading coefficient \u03C8 or \n'
-						 ' Flow Coefficient \u03C6 tends to infinity\n'
+						 ' Flow Coefficient \u03C6 tends to infinity.\n'
 						 ' Please try again with new varieables.',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
@@ -451,7 +451,7 @@ class VelocityTriangles(Screen):
 
 		except:
 			# if self.k > 4:
-		########## It goes in to except if only variables are less tha 3. So if is unnecesery #########
+		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
 			self.popup = firstPopup()
 			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 			# else:
