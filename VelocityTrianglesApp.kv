@@ -8,6 +8,8 @@ WindowManager:
 
 <P3>:
 
+<P4>:
+
 <Label>
     color: [0,0,0,1]
     id: kappa
@@ -31,6 +33,29 @@ WindowManager:
     size_hint_x: 0.7
     value_track: True
     value_track_color: [0.2,0.2,0.2,0.8]
+
+<SmoothButton@Button>
+#    background_color: (0,0,0,0)
+    background_normal: 'images/info_down.png'
+    background_down: 'images/info_down.png'
+
+    back_color: (0.066,0.392,0.505,0.768)
+    front_color: 0,0.5,0.6,1
+    border_radius: [20]
+    canvas.before:
+        Color:
+            rgba: self.back_color if self.state == 'normal' else self.front_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: self.border_radius
+        Color:
+            rgba: 0,0,0,1
+        Line:
+            width: dp(1.1)
+            circle:
+                (self.x + self.width/2,self.y + self.height/2,17)
+
 
 
 <VelocityTriangles>:
@@ -86,13 +111,14 @@ WindowManager:
                 BoxLayout:
                     size_hint_x:0.1
                     padding:dp(3)
-                    Button:
+                    SmoothButton:
                         size_hint: 0.9,0.6
                         pos_hint: {'x':0.05,'y':0.2}
-                        #background_color: 0,0,0,1
-                        background_normal: 'images/info-4x.png'
-                        #background_down: 'down.png'
-                        on_press:root.showbubble() if root.b%2!=1 else root.destroybubble()    
+#                        background_color: 0,0,0,1
+#                        background_normal: 'images/info_down.png'
+#                        background_down: 'images/info-4x.png'
+#                        border : 5,5,5,5
+                        on_press:root.showbubble() if root.b%2!=1 else root.destroybubble()
 
             BoxLayout:
                 padding: 10
@@ -533,7 +559,7 @@ WindowManager:
 
                 Label:
                     font_size:dp(11)
-                    text:" Hub2Tip ratio at Stage 1: "
+                    text:" Hub2Tip ratio at Stage 3: "
                     text_size: self.size
                     halign: 'right'
                     valign: 'middle'
@@ -1025,7 +1051,7 @@ WindowManager:
                                 valign: 'middle'
                             Label:
                                 font_size:dp(11)
-                                text:" Absolute rotary \n velocity V\u03B81   " if root.check == 0 else ''
+                                text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_nameText == 'Compressor' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
                                 text_size: self.size
                                 halign: 'right'
                                 valign: 'middle'
@@ -1037,7 +1063,7 @@ WindowManager:
                                 valign: 'middle'
                             Label:
                                 font_size:dp(11)
-                                text:" Absolute rotary \n velocity W\u03B81   " if root.check == 0 else ''
+                                text:(" Relative rotary \n velocity W\u03B81   " if root.tc_nameText == 'Compressor' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
                                 text_size: self.size
                                 halign: 'right'
                                 valign: 'middle'

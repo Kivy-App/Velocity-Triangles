@@ -25,7 +25,7 @@ def firstPopup():
 	show = P()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' At least three variables \n are required for the analysis',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
@@ -39,7 +39,12 @@ def secondPopup():
 	show = P2()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' This combination of variables \n is not valid ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' This combination of variables \n'
+						 ' is not valid. It seems that with\n'
+						 ' this combination of variables \n'
+						 ' Loading coefficient \u03C8 or \n'
+						 ' Flow Coefficient \u03C6 tends to infinity\n'
+						 ' Please try again with new varieables.',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
@@ -60,10 +65,26 @@ def thirdPopup():
 	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
+class P4(BoxLayout):
+	pass
+
+def fourthPopup():
+	show = P3()
+	# create content for the Popup
+	bl = BoxLayout(orientation='vertical',padding = 30)
+	label = Label(text = ' You should not put more than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+	bl.add_widget(label)
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+	popupWindow.open()
+
 class VelocityTriangles(Screen):
+	########## Window properties #########
 	Config.set('graphics', 'resizable', True)
 	Window.size = (400, 700)
 
+	######### Variable properties ########
 	p  = ObjectProperty(None)
 	f  = ObjectProperty(None)
 	rn = ObjectProperty(None)
@@ -83,20 +104,43 @@ class VelocityTriangles(Screen):
 
 	n = ObjectProperty(None)
 	l = NumericProperty(0)
-	k =  NumericProperty(0)
+	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
+	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
 	b = NumericProperty(0) ##### Bubble Variable #####
 
+
+############ Debuging for smaller screens #################
+	if Window.size[0] > 800 and Window.size[0] < 1000:
+		l = 10 / 11
+	else:
+		l = 1
+
 	DPI = Metrics.dpi/96
-	
+
+############ Function of creating info bubble ############
 	def showbubble(self):
 		self.b += 1
 		global bubb
-		bubb = Bubble(orientation='vertical', size_hint=(0.65, 0.4), arrow_pos='top_right',
-						  pos_hint={'x': 0.33, 'y': 0.52})
-		bubb.add_widget(Label(text=' Dimensional measurements missing', halign='center', valign='middle',
-			 			      color=[1, 0.1, 0.5, 1], font_size='12dp'))
+		bubb = Bubble(orientation='vertical', size_hint=(0.98, 0.27), arrow_pos='top_right',
+						  pos_hint={'x': 0.01, 'y': 0.65}, background_color = (1, 0, 0, 1))
+		l = Label(text=' This application was created to extract an easy and fast velocity \n'
+					   ' analysis for one stage of a turbomachine. It can analize the \n'
+					   ' velocities of both compressor and turbine and it is divided into 2 \n'
+					   ' compartments. The first compartment extracts the non dimensional\n'
+					   ' velocity charts through input of coefficients and angles. To achieve\n'
+					   ' the non dimensional analysis you should complete 3 off the first \n'
+					   ' segments inputs. The second compartment extracts the dimensional\n'
+					   ' analysis. At the second compartment you should fill all the enabled\n'
+					   ' input slots. Note that the first compartments can work without\n'
+					   ' filling the second but it doesnt work the other way around.\n'
+					   ' [color=ff3333][b] To dismiss info panel press the info button once more. [/b][/color]'
+				  , markup = True
+				  ,halign='left', valign='top'
+				  ,color=[1,1,1,1], font_size='12dp')
+		bubb.add_widget(l)
 		self.add_widget(bubb)
 
+############ Function of destroying info bubble ############
 	def destroybubble(self):
 		self.remove_widget(bubb)
 		self.b += 1
@@ -142,14 +186,7 @@ class VelocityTriangles(Screen):
 				X.append(7)
 
 			self.k = len(X)
-
-			# if self.k > 4:
-			#     self.popup = firstPopup()
-			#     self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
-			#
-			# if self.k < 4:
-			#     self.popup = thirdPopup()
-			#     self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
+			t = len(X)
 
 			def sys(z):
 
@@ -254,6 +291,7 @@ class VelocityTriangles(Screen):
 			xR = x1 - U*float(rne) +U*float(pe)/2
 			yR = y0 + U*float(fe)
 
+	######### While functions for triangles fitting #########
 			while xL < self.x + 60:
 				x0 = x0 + 1
 				x1 = x1 - 1
@@ -353,7 +391,7 @@ class VelocityTriangles(Screen):
 					tc_name = 'Turbine'
 					ptn_x = ptn_x = self.x - self.width / 2 + Window.size[0] * 50 / 400
 
-					############### Passing the Results on the Second Screen  ############################
+			############### Passing the Results on the Second Screen  ############################
 			self.manager.get_screen('new').pText = pe
 			self.manager.get_screen('new').fText = fe
 			self.manager.get_screen('new').rnText = rne
@@ -376,6 +414,7 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').xRText = str(xR)
 			self.manager.get_screen('new').yRText = str(yR)
 
+			############### Passing the Arrow Points on the Second Screen  ##################
 			self.manager.get_screen('new').xL1uText = str(xL1u)
 			self.manager.get_screen('new').yL1uText = str(yL1u)
 			self.manager.get_screen('new').xL1dText = str(xL1d)
@@ -396,31 +435,28 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').xR2dText = str(xR2d)
 			self.manager.get_screen('new').yR2dText = str(yR2d)
 
+			############### Passing the compressor or turbine text and possition on the Second Screen  ##################
 			self.manager.get_screen('new').tc_nameText = tc_name
 			self.manager.get_screen('new').ptn_xText = str(ptn_x)
 
 
 ################ Debugging Section #################
-			if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
-				self.popup = secondPopup()
-				self.k = 0
-
-			if self.k < 4:
-				self.popup = secondPopup()
+			if self.k == 4:
+				if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
+					self.popup = secondPopup()
+					self.k = 0
+			if t < 4:
+				self.popup = fourthPopup()
 				self.k = 0
 
 		except:
-			if self.k != 4:
-				self.popup = firstPopup()
-				self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
-			else:
-				self.popup = secondPopup()
-				self.k = 0
-
-	if Window.size[0] > 800 and Window.size[0] < 1000:
-		l = 10 / 11
-	else:
-		l = 1
+			# if self.k > 4:
+		########## It goes in to except if only variables are less tha 3. So if is unnecesery #########
+			self.popup = firstPopup()
+			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
+			# else:
+			# 	self.popup = secondPopup()
+			# 	self.k = 0
 
 
 	def dml(self):
