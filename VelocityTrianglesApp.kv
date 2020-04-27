@@ -92,12 +92,7 @@ WindowManager:
                         #background_color: 0,0,0,1
                         background_normal: 'images/info-4x.png'
                         #background_down: 'down.png'
-
-                        radius: [10,10,10,10]
-#                    size_hint_y: 0.1
-
-
-
+                        on_press:root.showbubble() if root.b%2!=1 else root.destroybubble()    
 
             BoxLayout:
                 padding: 10
