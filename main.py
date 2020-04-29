@@ -83,6 +83,8 @@ class VelocityTriangles(Screen):
 	########## Window properties #########
 	Config.set('graphics', 'resizable', True)
 	Window.size = (400, 700)
+	# Window.Keyboard_anim_args = {'d':.2 , "t": in_out_expo}
+	Window.softinput_mode = "below_target"
 
 	######### Variable properties ########
 	p  = ObjectProperty(None)
@@ -588,7 +590,7 @@ class VelocityTriangles(Screen):
 		b2et = - np.degrees(np.arctan(-((pet / 2) - rnet) / fet2))
 
 
-		print(a)
+		print("a:" ,a)
 		print(b)
 		print(rneh)
 		print(rnet)
