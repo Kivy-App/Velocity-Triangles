@@ -120,7 +120,7 @@ WindowManager:
 #                        background_normal: 'images/info_down.png'
 #                        background_down: 'images/info-4x.png'
 #                        border : 5,5,5,5
-                        on_press:root.showbubble() if root.b%2!=1 else root.destroybubble()
+                        on_press:root.showbubble() if root.bbl%2!=1 else root.destroybubble()
 
             BoxLayout:
                 padding: 10
@@ -614,6 +614,7 @@ WindowManager:
                     on_release:
                         root.systemsolver()
                         root.dml()
+                        root.h2t_triangles()
                         if root.k == 4 :\
                         app.root.current = "new"
                         root.manager.transition.direction = "left"

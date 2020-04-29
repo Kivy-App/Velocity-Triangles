@@ -106,7 +106,7 @@ class VelocityTriangles(Screen):
 	l = NumericProperty(0)
 	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
-	b = NumericProperty(0) ##### Bubble Variable #####
+	bbl = NumericProperty(0) ##### Bubble Variable #####
 
 
 ############ Debuging for smaller screens #################
@@ -119,7 +119,7 @@ class VelocityTriangles(Screen):
 
 ############ Function of creating info bubble ############
 	def showbubble(self):
-		self.b += 1
+		self.bbl += 1
 		global bubb
 		bubb = Bubble(orientation='vertical', size_hint=(0.98, 0.27), arrow_pos='top_right',
 						  pos_hint={'x': 0.01, 'y': 0.65}, background_color = (1, 0, 0, 1))
@@ -143,7 +143,7 @@ class VelocityTriangles(Screen):
 ############ Function of destroying info bubble ############
 	def destroybubble(self):
 		self.remove_widget(bubb)
-		self.b += 1
+		self.bbl += 1
 
 	def systemsolver(self):
 		try:
@@ -281,8 +281,8 @@ class VelocityTriangles(Screen):
 			#b3e = str(round(float(b3e),3))
 
 			############################# Drawing Triangles ######################################
-			x0,y0 = Window.size[0]*130/400,Window.size[1]*150/700
-			x1,y1 = Window.size[0]*270/400,Window.size[1]*150/700
+			x0,y0 = Window.size[0]*130/400,Window.size[1]*80/700
+			x1,y1 = Window.size[0]*270/400,Window.size[1]*80/700
 			# x0, y0 = self.width/2 - 100, Window.size[1] * 150 / 700
 			# x1, y1 = self.width/2 + 100, Window.size[1] * 150 / 700
 			U = x1-x0
@@ -469,51 +469,59 @@ class VelocityTriangles(Screen):
 			Rh3e = str(self.rh2t3.text)
 			Ne = str(self.n.text)
 
+			global rh
+			global rt
+			global rm
+			global Um
+			global Uh
+			global Ut
+			global Vx
+			global Vth1
+			global Vth2
 
 			rt = float(D1e)/2
 			rh = float(Rh1e)*float(D1e)/2
 			rm = (rt+rh)/2
 
-			self.Um = 0.01666666 * float(Ne) * rm
-			Umi = self.Um
+			Um = 0.01666666 * float(Ne) * rm
 
-			self.Uh = 0.01666666 * float(Ne) * rh
-			self.Ut = 0.01666666 * float(Ne) * rt
+			Uh = 0.01666666 * float(Ne) * rh
 
-			self.Vx = float(fe)*Umi
-			Vxi = self.Vx
+			Ut = 0.01666666 * float(Ne) * rt
 
-			self.dvth = float(pe)*Umi
+			Vx = float(fe)*Um
 
-			self.V1 = Vxi/m.cos(m.radians(float(a1e)))
-			V1i = self.V1
-			self.V2 = Vxi/m.cos(m.radians(float(a2e)))
-			V2i = self.V2
-			self.W1 = Vxi / m.cos(m.radians(float(b1e)))
-			W1i = self.W1
-			self.W2 = Vxi / m.cos(m.radians(float(b2e)))
-			W2i = self.W2
+			dvth = float(pe)*Um
 
-			self.Vth1 = -V1i * m.sin(m.radians(float(a1e)))
-			self.Vth2 = V2i * m.sin(m.radians(float(a2e)))
-			self.Wth1 = -W1i * m.sin(m.radians(float(b1e)))
-			self.Wth2 = W2i * m.sin(m.radians(float(b2e)))
+			V1 = Vx/m.cos(m.radians(float(a1e)))
+
+			V2 = Vx/m.cos(m.radians(float(a2e)))
+
+			W1 = Vx / m.cos(m.radians(float(b1e)))
+
+			W2 = Vx / m.cos(m.radians(float(b2e)))
+
+
+			Vth1 = -V1 * m.sin(m.radians(float(a1e)))
+			Vth2 = V2 * m.sin(m.radians(float(a2e)))
+			Wth1 = -W1 * m.sin(m.radians(float(b1e)))
+			Wth2 = W2 * m.sin(m.radians(float(b2e)))
 
 
 			############### Passing the Results on the Second Screen  ##################
-			self.manager.get_screen('new').UmText = str(round(self.Um, 3))
-			self.manager.get_screen('new').UhText = str(round(self.Uh, 3))
-			self.manager.get_screen('new').UtText = str(round(self.Ut, 3))
-			self.manager.get_screen('new').VxText = str(round(self.Vx, 3))
-			self.manager.get_screen('new').V1Text = str(round(self.V1, 3))
-			self.manager.get_screen('new').V2Text = str(round(self.V2, 3))
-			self.manager.get_screen('new').W1Text = str(round(self.W1, 3))
-			self.manager.get_screen('new').W2Text = str(round(self.W2, 3))
-			self.manager.get_screen('new').DVthText = str(round(self.dvth, 3))
-			self.manager.get_screen('new').Vth1Text = str(round(self.Vth1, 3))
-			self.manager.get_screen('new').Vth2Text = str(round(self.Vth2, 3))
-			self.manager.get_screen('new').Wth1Text = str(round(self.Wth1, 3))
-			self.manager.get_screen('new').Wth2Text = str(round(self.Wth2, 3))
+			self.manager.get_screen('new').UmText = str(round(Um, 3))
+			self.manager.get_screen('new').UhText = str(round(Uh, 3))
+			self.manager.get_screen('new').UtText = str(round(Ut, 3))
+			self.manager.get_screen('new').VxText = str(round(Vx, 3))
+			self.manager.get_screen('new').V1Text = str(round(V1, 3))
+			self.manager.get_screen('new').V2Text = str(round(V2, 3))
+			self.manager.get_screen('new').W1Text = str(round(W1, 3))
+			self.manager.get_screen('new').W2Text = str(round(W2, 3))
+			self.manager.get_screen('new').DVthText = str(round(dvth, 3))
+			self.manager.get_screen('new').Vth1Text = str(round(Vth1, 3))
+			self.manager.get_screen('new').Vth2Text = str(round(Vth2, 3))
+			self.manager.get_screen('new').Wth1Text = str(round(Wth1, 3))
+			self.manager.get_screen('new').Wth2Text = str(round(Wth2, 3))
 
 			self.manager.get_screen('new').check = 0
 		except:
@@ -542,7 +550,57 @@ class VelocityTriangles(Screen):
 					self.popup = thirdPopup()
 					self.k = 0
 
+	def h2t_triangles(self):
+		a = Um * (1 - float(rne))
+		b = Vth2 - a
+		n = 0
 
+		#########    HUB    ##########
+		Vth1h = a * (rh / rm) ** n - b * (rm / rh)
+		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
+		Vx1h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) - b * ((rm / rh) - 1))))
+		Vx2h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) + b * ((rm / rh) - 1))))
+		dVthh = Vth2h - Vth1h
+		rneh = 1 + (a / Um) * (2 * (rh / rm) ** (n - 1) - n - 1) / (n - 1)
+		feh1 = Vx1h / Uh
+		feh2 = Vx2h / Uh
+		peh = dVthh/Uh
+
+		a1eh = - np.degrees(np.arctan(-((peh / 2) - 1 + rneh) / feh1))
+		a2eh = np.degrees(np.arctan(((peh / 2) + 1 - rneh) / feh2))
+		b1eh = np.degrees(np.arctan(((peh / 2) + rneh) / feh2))
+		b2eh = - np.degrees(np.arctan(-((peh / 2) - rneh) / feh2))
+
+		#########    TIP    ##########
+		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
+		Vth2t = a * (rt / rm) ** n + b * (rm / rt)
+		Vx1t = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rt / rm) - b * ((rm / rt) - 1))))
+		Vx2t = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rt / rm) + b * ((rm / rt) - 1))))
+		dVtht = Vth2t - Vth1t
+		rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
+		fet1 = Vx1t / Ut
+		fet2 = Vx2t / Ut
+		pet = dVtht / Ut
+
+		a1et = - np.degrees(np.arctan(-((pet / 2) - 1 + rnet) / fet1))
+		a2et = np.degrees(np.arctan(((pet / 2) + 1 - rnet) / fet2))
+		b1et = np.degrees(np.arctan(((pet / 2) + rnet) / fet1))
+		b2et = - np.degrees(np.arctan(-((pet / 2) - rnet) / fet2))
+
+
+		print(a)
+		print(b)
+		print(rneh)
+		print(rnet)
+		print(Vx1h)
+		print(Vx1t)
+		print(Vth1h)
+		print(Vth2h)
+		print(feh1)
+		print(feh2)
+		print(peh)
+
+		print(a1eh)
 
 class NewWindow(Screen):
 
