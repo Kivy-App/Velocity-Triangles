@@ -377,21 +377,37 @@ class VelocityTriangles(Screen):
 			if float(pe) > 0.999:
 				if abs(x1-xL)>abs(x1-xR):
 					tc = 0  # turbine
-					tc_name = 'Turbine'
-					ptn_x = self.x - self.width / 2 + Window.size[0] * 50 / 400
+					tc_namem = 'Turbine Middle'
+					tc_nameh = 'Turbine Hub'
+					tc_namet = 'Turbine Tip'
+					ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
+					ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
+					ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 				else:
 					tc = 1  # compressor
-					tc_name = 'Compressor'
-					ptn_x = self.x - self.width / 2 + Window.size[0] * 70 / 400
+					tc_namem = 'Compressor Middle'
+					tc_nameh = 'Compressor Hub'
+					tc_namet = 'Compressor Tip'
+					ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
+					ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
+					ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 			else:
 				if abs(x1 - xL) > abs(x1 - xR):
 					tc = 1  # compressor
-					tc_name = 'Compressor'
-					ptn_x = self.x - self.width / 2 + Window.size[0] * 70 / 400
+					tc_namem = 'Compressor Middle'
+					tc_nameh = 'Compressor Hub'
+					tc_namet = 'Compressor Tip'
+					ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
+					ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
+					ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 				else:
 					tc = 0  # turbine
-					tc_name = 'Turbine'
-					ptn_x = ptn_x = self.x - self.width / 2 + Window.size[0] * 50 / 400
+					tc_namem = 'Turbine Middle'
+					tc_nameh = 'Turbine Hub'
+					tc_namet = 'Turbine Tip'
+					ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
+					ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
+					ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 
 			############### Passing the Results on the Second Screen  ############################
 			self.manager.get_screen('new').pText = pe
@@ -438,8 +454,12 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').yR2dText = str(yR2d)
 
 			############### Passing the compressor or turbine text and possition on the Second Screen  ##################
-			self.manager.get_screen('new').tc_nameText = tc_name
-			self.manager.get_screen('new').ptn_xText = str(ptn_x)
+			self.manager.get_screen('new').tc_namemText = tc_namem
+			self.manager.get_screen('new').tc_namehText = tc_nameh
+			self.manager.get_screen('new').tc_nametText = tc_namet
+			self.manager.get_screen('new').ptnm_xText = str(ptnm_x)
+			self.manager.get_screen('new').ptnh_xText = str(ptnh_x)
+			self.manager.get_screen('new').ptnt_xText = str(ptnt_x)
 
 
 ################ Debugging Section #################
@@ -666,8 +686,12 @@ class NewWindow(Screen):
 
 	check = NumericProperty(0)
 
-	tc_nameText = StringProperty('0')
-	ptn_xText = StringProperty('0')
+	tc_namemText = StringProperty('0')
+	tc_namehText = StringProperty('0')
+	tc_nametText = StringProperty('0')
+	ptnm_xText = StringProperty('0')
+	ptnh_xText = StringProperty('0')
+	ptnt_xText = StringProperty('0')
 
 class WindowManager(ScreenManager):
 	pass

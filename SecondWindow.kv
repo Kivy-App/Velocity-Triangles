@@ -35,7 +35,7 @@
 						pos: self.pos
 						size: self.size
 					Rectangle:
-						source: "images/compressor.png" if root.tc_nameText == 'Compressor' else "images/turbine.png"
+						source: "images/compressor.png" if root.tc_namemText == 'Compressor Middle' else "images/turbine.png"
 						size: self.width,self.height
 						pos: self.x,self.y
 
@@ -221,7 +221,7 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.a1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -233,13 +233,13 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text:'------' if root.tc_nameText == 'Compressor' else root.a1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.b1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -252,7 +252,7 @@
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'------' if root.tc_nameText == 'Compressor' else root.b1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -393,7 +393,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -407,7 +407,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -420,7 +420,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_nameText == 'Compressor' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -432,7 +432,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_nameText == 'Compressor' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -755,7 +755,7 @@
 					Triangle:
 						points:
 							(float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_nameText == 'Compressor' else\
+							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
 							float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
 
@@ -770,8 +770,8 @@
 
 	###################   Labels   ##########################
 				Label:
-					pos: (float(root.ptn_xText),self.parent.y - self.parent.height/2 + dp(30))
-					text: root.tc_nameText
+					pos: (float(root.ptnm_xText),self.parent.y - self.parent.height/2 + dp(30))
+					text: root.tc_namemText
 					color: 1,0,0,1
 
 				Label:
@@ -796,7 +796,7 @@
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
 
 				Label:
-					text:'1' if root.tc_nameText == 'Compressor' else '3'
+					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
 					pos:
 						-float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
@@ -997,7 +997,7 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.a1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1009,13 +1009,13 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text:'------' if root.tc_nameText == 'Compressor' else root.a1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.b1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1028,7 +1028,7 @@
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'------' if root.tc_nameText == 'Compressor' else root.b1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1169,7 +1169,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1183,7 +1183,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1196,7 +1196,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_nameText == 'Compressor' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1208,7 +1208,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_nameText == 'Compressor' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1526,7 +1526,7 @@
 					Triangle:
 						points:
 							(float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_nameText == 'Compressor' else\
+							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
 							float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
 
@@ -1541,8 +1541,8 @@
 
 	###################   Labels   ##########################
 				Label:
-					pos: (float(root.ptn_xText),self.parent.y - self.parent.height/2 + dp(30))
-					text: root.tc_nameText
+					pos: (float(root.ptnh_xText),self.parent.y - self.parent.height/2 + dp(30))
+					text: root.tc_namehText
 					color: 1,0,0,1
 
 				Label:
@@ -1567,7 +1567,7 @@
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
 
 				Label:
-					text:'1' if root.tc_nameText == 'Compressor' else '3'
+					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
 					pos:
 						-float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
@@ -1765,7 +1765,7 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.a1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1777,13 +1777,13 @@
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text:'------' if root.tc_nameText == 'Compressor' else root.a1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
 								valign: 'middle'
 							Label:
-								text: root.b1Text if root.tc_nameText == 'Compressor' else '------'
+								text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1796,7 +1796,7 @@
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'------' if root.tc_nameText == 'Compressor' else root.b1Text
+								text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'center'
@@ -1937,7 +1937,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1951,7 +1951,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_nameText == 'Compressor' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1964,7 +1964,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_nameText == 'Compressor' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1976,7 +1976,7 @@
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_nameText == 'Compressor' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -2294,7 +2294,7 @@
 					Triangle:
 						points:
 							(float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_nameText == 'Compressor' else\
+							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
 							float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
 
@@ -2309,8 +2309,8 @@
 
 	###################   Labels   ##########################
 				Label:
-					pos: (float(root.ptn_xText),self.parent.y - self.parent.height/2 + dp(30))
-					text: root.tc_nameText
+					pos: (float(root.ptnt_xText),self.parent.y - self.parent.height/2 + dp(30))
+					text: root.tc_nametText
 					color: 1,0,0,1
 
 				Label:
@@ -2335,7 +2335,7 @@
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
 
 				Label:
-					text:'1' if root.tc_nameText == 'Compressor' else '3'
+					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
 					pos:
 						-float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
