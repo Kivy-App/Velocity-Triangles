@@ -104,6 +104,8 @@ class VelocityTriangles(Screen):
 	rh2t2 = ObjectProperty(None)
 	rh2t3 = ObjectProperty(None)
 
+	check = NumericProperty(0)
+
 	n = ObjectProperty(None)
 	l = NumericProperty(0)
 	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
@@ -546,6 +548,7 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').Wth2Text = str(round(Wth2, 3))
 
 			self.manager.get_screen('new').check = 0
+			self.check = 0
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				############### Passing empty slots  on the Second Screen  ##################
@@ -565,12 +568,15 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('new').Wth2Text = ''
 
 				self.manager.get_screen('new').check = 1
+
+				self.check = 1
 			else:
 				if self.k == 0:
-					pass
+					self.check = 1
 				else:
 					self.popup = thirdPopup()
 					self.k = 0
+					self.check = 1
 
 	def h2t_triangles(self):
 		a = Um * (1 - float(rne))

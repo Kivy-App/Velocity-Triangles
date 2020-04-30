@@ -614,7 +614,10 @@ WindowManager:
                     on_release:
                         root.systemsolver()
                         root.dml()
-                        root.h2t_triangles()
+
+                        if root.check == 0 :\
+                        root.h2t_triangles();
+
                         if root.k == 4 :\
                         app.root.current = "new"
                         root.manager.transition.direction = "left"
