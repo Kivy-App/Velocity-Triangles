@@ -328,12 +328,12 @@
 						spacing:10
 						canvas:
 							Color:
-								rgba: (0.066,0.392,0.505,0.768) if root.check == 0 else (0.6862,0.9333,0.9333,0.737)
+								rgba: (0.066,0.392,0.505,0.768)
 							Rectangle:
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 
 							Line:
 								width: dp(3.)
@@ -344,7 +344,7 @@
 
 
 						Label:
-							text:'Dimensional Velocities' if root.check == 0 else ''
+							text:'Dimensional Velocities' 
 							font_size: dp(15)
 							bold:True
 							text_size: self.size
@@ -361,7 +361,7 @@
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 							Line:
 								width: dp(3.)
 								points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
@@ -378,7 +378,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:' Middle rotational \n speed Um   ' if root.check == 0 else ''
+								text:' Middle rotational \n speed Um   ' 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -386,66 +386,66 @@
 
 							Label:
 								font_size:dp(11)
-								text:" Axial Velocity Vx " if root.check == 0 else ''
+								text:" Axial Velocity Vx " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit absolute \n velocity V2   " if root.check == 0 else ''
+								text:" Exit absolute \n velocity V2   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit relative \n velocity W2   "  if root.check == 0 else ''
+								text:" Exit relative \n velocity W2   "  
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity V\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity V\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity W\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity W\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 0 else ''
+								text:" Difference of rotary \n velocity DV\u03B8   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -528,68 +528,68 @@
 							size_hint_x:0.2
 
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
@@ -1104,12 +1104,12 @@
 						spacing:10
 						canvas:
 							Color:
-								rgba: (0.066,0.392,0.505,0.768) if root.check == 0 else (0.6862,0.9333,0.9333,0.737)
+								rgba: (0.066,0.392,0.505,0.768)
 							Rectangle:
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 
 							Line:
 								width: dp(3.)
@@ -1120,7 +1120,7 @@
 
 
 						Label:
-							text:'Dimensional Velocities' if root.check == 0 else ''
+							text:'Dimensional Velocities' 
 							font_size: dp(15)
 							bold:True
 							text_size: self.size
@@ -1137,7 +1137,7 @@
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 							Line:
 								width: dp(3.)
 								points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
@@ -1154,7 +1154,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:' Middle rotational \n speed Um   ' if root.check == 0 else ''
+								text:' Middle rotational \n speed Um   ' 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1162,66 +1162,66 @@
 
 							Label:
 								font_size:dp(11)
-								text:" Axial Velocity Vx " if root.check == 0 else ''
+								text:" Axial Velocity Vx " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit absolute \n velocity V2   " if root.check == 0 else ''
+								text:" Exit absolute \n velocity V2   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit relative \n velocity W2   "  if root.check == 0 else ''
+								text:" Exit relative \n velocity W2   "  
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity V\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity V\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity W\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity W\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 0 else ''
+								text:" Difference of rotary \n velocity DV\u03B8   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1304,68 +1304,68 @@
 							size_hint_x:0.2
 
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
@@ -1872,12 +1872,12 @@
 						spacing:10
 						canvas:
 							Color:
-								rgba: (0.066,0.392,0.505,0.768) if root.check == 0 else (0.6862,0.9333,0.9333,0.737)
+								rgba: (0.066,0.392,0.505,0.768)
 							Rectangle:
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 
 							Line:
 								width: dp(3.)
@@ -1888,7 +1888,7 @@
 
 
 						Label:
-							text:'Dimensional Velocities' if root.check == 0 else ''
+							text:'Dimensional Velocities' 
 							font_size: dp(15)
 							bold:True
 							text_size: self.size
@@ -1905,7 +1905,7 @@
 								pos: self.pos
 								size: self.size
 							Color:
-								rgba: (0,0,0,1) if root.check == 0 else (0,0,0,0)
+								rgba: (0,0,0,1) 
 							Line:
 								width: dp(3.)
 								points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
@@ -1922,7 +1922,7 @@
 
 							Label:
 								font_size:dp(11)
-								text:' Middle rotational \n speed Um   ' if root.check == 0 else ''
+								text:' Middle rotational \n speed Um   ' 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -1930,66 +1930,66 @@
 
 							Label:
 								font_size:dp(11)
-								text:" Axial Velocity Vx " if root.check == 0 else ''
+								text:" Axial Velocity Vx " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit absolute \n velocity V2   " if root.check == 0 else ''
+								text:" Exit absolute \n velocity V2   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 0 else ''
+								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Exit relative \n velocity W2   "  if root.check == 0 else ''
+								text:" Exit relative \n velocity W2   "  
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 0 else ''
+								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity V\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity V\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 0 else ''
+								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 							Label:
 								font_size:dp(11)
-								text:" Absolute rotary \n velocity W\u03B82  " if root.check == 0 else ''
+								text:" Absolute rotary \n velocity W\u03B82  " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
 
 							Label:
 								font_size:dp(11)
-								text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 0 else ''
+								text:" Difference of rotary \n velocity DV\u03B8   " 
 								text_size: self.size
 								halign: 'right'
 								valign: 'middle'
@@ -2072,68 +2072,68 @@
 							size_hint_x:0.2
 
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
-								text: '[ m/s ]' if root.check == 0 else ''
+								text: '[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'
 								valign: 'middle'
 							Label:
 								#text: root.b3Text
-								text:'[ m/s ]' if root.check == 0 else ''
+								text:'[ m/s ]' 
 								font_size:dp(11)
 								text_size: self.size
 								halign: 'left'

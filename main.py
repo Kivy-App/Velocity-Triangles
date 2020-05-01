@@ -534,11 +534,8 @@ class VelocityTriangles(Screen):
 
 				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
 				self.manager.get_screen('simple').tc_namemText = tc_namem
-				self.manager.get_screen('simple').tc_namehText = tc_nameh
-				self.manager.get_screen('simple').tc_nametText = tc_namet
 				self.manager.get_screen('simple').ptnm_xText = str(ptnm_x)
-				self.manager.get_screen('simple').ptnh_xText = str(ptnh_x)
-				self.manager.get_screen('simple').ptnt_xText = str(ptnt_x)
+
 
 
 ################ Debugging Section #################
@@ -551,14 +548,9 @@ class VelocityTriangles(Screen):
 				self.k = 0
 
 		except:
-			# if self.k > 4:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
 			self.popup = firstPopup()
 			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
-			# else:
-			# 	self.popup = secondPopup()
-			# 	self.k = 0
-
 
 ################          Dimendional Analisys           ################################
 	def dml(self):
@@ -617,29 +609,27 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').Wth1Text = str(round(Wth1, 3))
 			self.manager.get_screen('new').Wth2Text = str(round(Wth2, 3))
 
-			self.manager.get_screen('new').check = 0
 			self.check = 0
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				############### Passing empty slots  on the Second Screen  ##################
-				self.manager.get_screen('new').UmText = ''
-				self.manager.get_screen('new').UhText = ''
-				self.manager.get_screen('new').UtText = ''
-				self.manager.get_screen('new').VxText = ''
-				self.manager.get_screen('new').V1Text = ''
-				self.manager.get_screen('new').V2Text = ''
-				self.manager.get_screen('new').W1Text = ''
-				self.manager.get_screen('new').W2Text = ''
-				self.manager.get_screen('new').DVthText = ''
-				self.manager.get_screen('new').DVthText = ''
-				self.manager.get_screen('new').Vth1Text = ''
-				self.manager.get_screen('new').Vth2Text = ''
-				self.manager.get_screen('new').Wth1Text = ''
-				self.manager.get_screen('new').Wth2Text = ''
-
-				self.manager.get_screen('new').check = 1
+				self.manager.get_screen('simple').UmText = ''
+				self.manager.get_screen('simple').UhText = ''
+				self.manager.get_screen('simple').UtText = ''
+				self.manager.get_screen('simple').VxText = ''
+				self.manager.get_screen('simple').V1Text = ''
+				self.manager.get_screen('simple').V2Text = ''
+				self.manager.get_screen('simple').W1Text = ''
+				self.manager.get_screen('simple').W2Text = ''
+				self.manager.get_screen('simple').DVthText = ''
+				self.manager.get_screen('simple').DVthText = ''
+				self.manager.get_screen('simple').Vth1Text = ''
+				self.manager.get_screen('simple').Vth2Text = ''
+				self.manager.get_screen('simple').Wth1Text = ''
+				self.manager.get_screen('simple').Wth2Text = ''
 
 				self.check = 1
+
 			else:
 				if self.k == 0:
 					self.check = 1
@@ -758,8 +748,6 @@ class NewWindow(Screen):
 	yR2uText = StringProperty('0')
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
-
-
 
 	check = NumericProperty(0)
 
