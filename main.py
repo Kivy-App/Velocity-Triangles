@@ -170,6 +170,22 @@ class VelocityTriangles(Screen):
 			b2e = str(self.b2.text)
 			b3e = str(self.b3.text)
 
+			global D1e
+			global D2e
+			global D3e
+			global Rh1e
+			global Rh2e
+			global Rh3e
+			global Ne
+
+			D1e = str(self.d1.text)
+			D2e = str(self.d2.text)
+			D3e = str(self.d3.text)
+			Rh1e = str(self.rh2t1.text)
+			Rh2e = str(self.rh2t2.text)
+			Rh3e = str(self.rh2t3.text)
+			Ne = str(self.n.text)
+
 			X = []
 
 			self.k = 0
@@ -411,57 +427,118 @@ class VelocityTriangles(Screen):
 					ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
 					ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 
-			############### Passing the Results on the Second Screen  ############################
-			self.manager.get_screen('new').pText = pe
-			self.manager.get_screen('new').fText = fe
-			self.manager.get_screen('new').rnText = rne
-			self.manager.get_screen('new').a1Text = a1e
-			self.manager.get_screen('new').a2Text = a2e
-			self.manager.get_screen('new').a3Text = a3e
-			self.manager.get_screen('new').b1Text = b1e
-			self.manager.get_screen('new').b2Text = b2e
-			self.manager.get_screen('new').b3Text = b3e
+#####################  Checking if the second compartment is completed ####################
+			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
+				self.check = 1
+			else:
+				self.check = 0
+############################################################################################
 
-			############### Passing the Triangles Points on the Second Screen  ##################
+################ Case of  Both Compartments filled #########################################
+			if self.check == 0:	
+				############### Passing the Results on the Second Screen  ############################
+				self.manager.get_screen('new').pText = pe
+				self.manager.get_screen('new').fText = fe
+				self.manager.get_screen('new').rnText = rne
+				self.manager.get_screen('new').a1Text = a1e
+				self.manager.get_screen('new').a2Text = a2e
+				self.manager.get_screen('new').a3Text = a3e
+				self.manager.get_screen('new').b1Text = b1e
+				self.manager.get_screen('new').b2Text = b2e
+				self.manager.get_screen('new').b3Text = b3e
+	
+				############### Passing the Triangles Points on the Second Screen  ##################
+				self.manager.get_screen('new').x0Text = str(x0)
+				self.manager.get_screen('new').y0Text = str(y0)
+				self.manager.get_screen('new').x1Text = str(x1)
+				self.manager.get_screen('new').y1Text = str(y1)
+				self.manager.get_screen('new').UText = str(U)
+				self.manager.get_screen('new').xLText = str(xL)
+				self.manager.get_screen('new').yLText = str(yL)
+				self.manager.get_screen('new').xRText = str(xR)
+				self.manager.get_screen('new').yRText = str(yR)
+	
+				############### Passing the Arrow Points on the Second Screen  ##################
+				self.manager.get_screen('new').xL1uText = str(xL1u)
+				self.manager.get_screen('new').yL1uText = str(yL1u)
+				self.manager.get_screen('new').xL1dText = str(xL1d)
+				self.manager.get_screen('new').yL1dText = str(yL1d)
+	
+				self.manager.get_screen('new').xL2uText = str(xL2u)
+				self.manager.get_screen('new').yL2uText = str(yL2u)
+				self.manager.get_screen('new').xL2dText = str(xL2d)
+				self.manager.get_screen('new').yL2dText = str(yL2d)
+	
+				self.manager.get_screen('new').xR1uText = str(xR1u)
+				self.manager.get_screen('new').yR1uText = str(yR1u)
+				self.manager.get_screen('new').xR1dText = str(xR1d)
+				self.manager.get_screen('new').yR1dText = str(yR1d)
+	
+				self.manager.get_screen('new').xR2uText = str(xR2u)
+				self.manager.get_screen('new').yR2uText = str(yR2u)
+				self.manager.get_screen('new').xR2dText = str(xR2d)
+				self.manager.get_screen('new').yR2dText = str(yR2d)
+	
+				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
+				self.manager.get_screen('new').tc_namemText = tc_namem
+				self.manager.get_screen('new').tc_namehText = tc_nameh
+				self.manager.get_screen('new').tc_nametText = tc_namet
+				self.manager.get_screen('new').ptnm_xText = str(ptnm_x)
+				self.manager.get_screen('new').ptnh_xText = str(ptnh_x)
+				self.manager.get_screen('new').ptnt_xText = str(ptnt_x)
 
-			self.manager.get_screen('new').x0Text = str(x0)
-			self.manager.get_screen('new').y0Text = str(y0)
-			self.manager.get_screen('new').x1Text = str(x1)
-			self.manager.get_screen('new').y1Text = str(y1)
-			self.manager.get_screen('new').UText = str(U)
-			self.manager.get_screen('new').xLText = str(xL)
-			self.manager.get_screen('new').yLText = str(yL)
-			self.manager.get_screen('new').xRText = str(xR)
-			self.manager.get_screen('new').yRText = str(yR)
+################ Case of  the First Compartment filled #########################################
+			else:
+				############### Passing the Results on the Second Screen  ############################
+				self.manager.get_screen('simple').pText = pe
+				self.manager.get_screen('simple').fText = fe
+				self.manager.get_screen('simple').rnText = rne
+				self.manager.get_screen('simple').a1Text = a1e
+				self.manager.get_screen('simple').a2Text = a2e
+				self.manager.get_screen('simple').a3Text = a3e
+				self.manager.get_screen('simple').b1Text = b1e
+				self.manager.get_screen('simple').b2Text = b2e
+				self.manager.get_screen('simple').b3Text = b3e
 
-			############### Passing the Arrow Points on the Second Screen  ##################
-			self.manager.get_screen('new').xL1uText = str(xL1u)
-			self.manager.get_screen('new').yL1uText = str(yL1u)
-			self.manager.get_screen('new').xL1dText = str(xL1d)
-			self.manager.get_screen('new').yL1dText = str(yL1d)
+				############### Passing the Triangles Points on the Second Screen  ##################
+				self.manager.get_screen('simple').x0Text = str(x0)
+				self.manager.get_screen('simple').y0Text = str(y0)
+				self.manager.get_screen('simple').x1Text = str(x1)
+				self.manager.get_screen('simple').y1Text = str(y1)
+				self.manager.get_screen('simple').UText = str(U)
+				self.manager.get_screen('simple').xLText = str(xL)
+				self.manager.get_screen('simple').yLText = str(yL)
+				self.manager.get_screen('simple').xRText = str(xR)
+				self.manager.get_screen('simple').yRText = str(yR)
 
-			self.manager.get_screen('new').xL2uText = str(xL2u)
-			self.manager.get_screen('new').yL2uText = str(yL2u)
-			self.manager.get_screen('new').xL2dText = str(xL2d)
-			self.manager.get_screen('new').yL2dText = str(yL2d)
+				############### Passing the Arrow Points on the Second Screen  ##################
+				self.manager.get_screen('simple').xL1uText = str(xL1u)
+				self.manager.get_screen('simple').yL1uText = str(yL1u)
+				self.manager.get_screen('simple').xL1dText = str(xL1d)
+				self.manager.get_screen('simple').yL1dText = str(yL1d)
 
-			self.manager.get_screen('new').xR1uText = str(xR1u)
-			self.manager.get_screen('new').yR1uText = str(yR1u)
-			self.manager.get_screen('new').xR1dText = str(xR1d)
-			self.manager.get_screen('new').yR1dText = str(yR1d)
+				self.manager.get_screen('simple').xL2uText = str(xL2u)
+				self.manager.get_screen('simple').yL2uText = str(yL2u)
+				self.manager.get_screen('simple').xL2dText = str(xL2d)
+				self.manager.get_screen('simple').yL2dText = str(yL2d)
 
-			self.manager.get_screen('new').xR2uText = str(xR2u)
-			self.manager.get_screen('new').yR2uText = str(yR2u)
-			self.manager.get_screen('new').xR2dText = str(xR2d)
-			self.manager.get_screen('new').yR2dText = str(yR2d)
+				self.manager.get_screen('simple').xR1uText = str(xR1u)
+				self.manager.get_screen('simple').yR1uText = str(yR1u)
+				self.manager.get_screen('simple').xR1dText = str(xR1d)
+				self.manager.get_screen('simple').yR1dText = str(yR1d)
 
-			############### Passing the compressor or turbine text and possition on the Second Screen  ##################
-			self.manager.get_screen('new').tc_namemText = tc_namem
-			self.manager.get_screen('new').tc_namehText = tc_nameh
-			self.manager.get_screen('new').tc_nametText = tc_namet
-			self.manager.get_screen('new').ptnm_xText = str(ptnm_x)
-			self.manager.get_screen('new').ptnh_xText = str(ptnh_x)
-			self.manager.get_screen('new').ptnt_xText = str(ptnt_x)
+				self.manager.get_screen('simple').xR2uText = str(xR2u)
+				self.manager.get_screen('simple').yR2uText = str(yR2u)
+				self.manager.get_screen('simple').xR2dText = str(xR2d)
+				self.manager.get_screen('simple').yR2dText = str(yR2d)
+
+				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
+				self.manager.get_screen('simple').tc_namemText = tc_namem
+				self.manager.get_screen('simple').tc_namehText = tc_nameh
+				self.manager.get_screen('simple').tc_nametText = tc_namet
+				self.manager.get_screen('simple').ptnm_xText = str(ptnm_x)
+				self.manager.get_screen('simple').ptnh_xText = str(ptnh_x)
+				self.manager.get_screen('simple').ptnt_xText = str(ptnt_x)
 
 
 ################ Debugging Section #################
@@ -483,16 +560,9 @@ class VelocityTriangles(Screen):
 			# 	self.k = 0
 
 
+################          Dimendional Analisys           ################################
 	def dml(self):
 		try:
-			D1e = str(self.d1.text)
-			D2e = str(self.d2.text)
-			D3e = str(self.d3.text)
-			Rh1e = str(self.rh2t1.text)
-			Rh2e = str(self.rh2t2.text)
-			Rh3e = str(self.rh2t3.text)
-			Ne = str(self.n.text)
-
 			global rh
 			global rt
 			global rm
@@ -578,6 +648,7 @@ class VelocityTriangles(Screen):
 					self.k = 0
 					self.check = 1
 
+#######################     Radial Balance  Computation   #######################
 	def h2t_triangles(self):
 		a = Um * (1 - float(rne))
 		b = Vth2 - a
@@ -698,6 +769,68 @@ class NewWindow(Screen):
 	ptnm_xText = StringProperty('0')
 	ptnh_xText = StringProperty('0')
 	ptnt_xText = StringProperty('0')
+
+class SimWindow(Screen):
+	DPI = Metrics.dpi / 96
+
+	pText = StringProperty('0')
+	fText = StringProperty('0')
+	rnText = StringProperty('0')
+	a1Text = StringProperty('0')
+	a2Text = StringProperty('0')
+	a3Text = StringProperty('0')
+	b1Text = StringProperty('0')
+	b2Text = StringProperty('0')
+	b3Text = StringProperty('0')
+
+	x0Text = StringProperty('0')
+	y0Text = StringProperty('0')
+	x1Text = StringProperty('0')
+	y1Text = StringProperty('0')
+	UText = StringProperty('0')
+	xLText = StringProperty('0')
+	yLText = StringProperty('0')
+	xRText = StringProperty('0')
+	yRText = StringProperty('0')
+
+	UmText = StringProperty('0')
+	UtText = StringProperty('0')
+	UhText = StringProperty('0')
+	VxText = StringProperty('0')
+	V1Text = StringProperty('0')
+	V2Text = StringProperty('0')
+	W1Text = StringProperty('0')
+	W2Text = StringProperty('0')
+	DVthText = StringProperty('0')
+	Vth1Text = StringProperty('0')
+	Vth2Text = StringProperty('0')
+	Wth1Text = StringProperty('0')
+	Wth2Text = StringProperty('0')
+
+	xL1uText = StringProperty('0')
+	yL1uText = StringProperty('0')
+	xL1dText = StringProperty('0')
+	yL1dText = StringProperty('0')
+
+	xL2uText = StringProperty('0')
+	yL2uText = StringProperty('0')
+	xL2dText = StringProperty('0')
+	yL2dText = StringProperty('0')
+
+	xR1uText = StringProperty('0')
+	yR1uText = StringProperty('0')
+	xR1dText = StringProperty('0')
+	yR1dText = StringProperty('0')
+
+	xR2uText = StringProperty('0')
+	yR2uText = StringProperty('0')
+	xR2dText = StringProperty('0')
+	yR2dText = StringProperty('0')
+
+	check = NumericProperty(0)
+
+	tc_namemText = StringProperty('0')
+	ptnm_xText = StringProperty('0')
 
 class WindowManager(ScreenManager):
 	pass

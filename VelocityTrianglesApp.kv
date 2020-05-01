@@ -1,8 +1,10 @@
 #: include SecondWindow.kv
+#: include SimpleWindow.kv
 
 WindowManager:
     VelocityTriangles:
     NewWindow:
+    SimWindow
 
 <P>:
 
@@ -618,8 +620,12 @@ WindowManager:
                         if root.check == 0 :\
                         root.h2t_triangles();
 
-                        if root.k == 4 :\
-                        app.root.current = "new"
+                        if root.check == 0 and root.k == 4:\
+                        app.root.current = "new";
+
+                        if root.check == 1 and root.k == 4:\
+                        app.root.current = "simple"
+
                         root.manager.transition.direction = "left"
                 Label:
                     size_hint_x:0.325
