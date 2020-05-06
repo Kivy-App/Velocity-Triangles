@@ -318,7 +318,7 @@ class VelocityTriangles(Screen):
 			yR = y0 + U*float(fe)
 
 	######### While functions for triangles fitting #########
-			while xL < self.x + 60:
+			while xL < self.x + Window.size[0]*60/400:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -328,7 +328,7 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			while xR < self.x + 60:
+			while xR < self.x +  Window.size[0]*60/400:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -338,7 +338,7 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			while xR > self.width - 80:
+			while xR > self.width -  Window.size[0]*80/400:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -348,7 +348,7 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			while xL > self.width - 80:
+			while xL > self.width -  Window.size[0]*80/400:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -358,7 +358,7 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			while yL > 220:
+			while yL >  Window.size[1]*220/700:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -661,7 +661,7 @@ class VelocityTriangles(Screen):
 
 		a1eh = - np.degrees(np.arctan(-((peh / 2) - 1 + rneh) / feh1))
 		a2eh = np.degrees(np.arctan(((peh / 2) + 1 - rneh) / feh2))
-		b1eh = np.degrees(np.arctan(((peh / 2) + rneh) / feh2))
+		b1eh = np.degrees(np.arctan(((peh / 2) + rneh) / feh1))
 		b2eh = - np.degrees(np.arctan(-((peh / 2) - rneh) / feh2))
 
 		V1h = Vx1h / m.cos(m.radians(float(a1eh)))
@@ -689,6 +689,8 @@ class VelocityTriangles(Screen):
 		b1dh = 180 - float(b1eh) - 90
 		b2dh = 180 - float(b2eh) - 90
 
+		print(b1dh)
+
 		############### Computing rotating arrow points  ############################
 
 		xL1uh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dh + 11.3))
@@ -710,6 +712,7 @@ class VelocityTriangles(Screen):
 		yR2uh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dh + 11.3))
 		xR2dh = x1h + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dh - 11.3))
 		yR2dh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dh - 11.3))
+
 
 		#########    TIP    ##########
 		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
@@ -753,8 +756,6 @@ class VelocityTriangles(Screen):
 		a2dt = 180 - float(a2et) - 90
 		b1dt = 180 - float(b1et) - 90
 		b2dt = 180 - float(b2et) - 90
-
-		print(a1dt)
 
 		############### Computing rotating arrow points  ############################
 
@@ -884,19 +885,19 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('new').xR2dtText = str(xR2dt)
 		self.manager.get_screen('new').yR2dtText = str(yR2dt)
 
-		print("a:" ,a)
-		print(b)
-		print(rneh)
-		print(rnet)
-		print(Vx1h)
-		print(Vx1t)
-		print(Vth1h)
-		print(Vth2h)
-		print(feh1)
-		print(feh2)
-		print(peh)
-
-		print(a1eh)
+		# print("a:" ,a)
+		# print(b)
+		# print(rneh)
+		# print(rnet)
+		# print(Vx1h)
+		# print(Vx1t)
+		# print(Vth1h)
+		# print(Vth2h)
+		# print(feh1)
+		# print(feh2)
+		# print(peh)
+		#
+		# print(a1eh)
 
 class NewWindow(Screen):
 
