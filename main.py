@@ -684,12 +684,34 @@ class VelocityTriangles(Screen):
 		xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 		yRh = y0 + Uhp * float(feh2)
 
+		while xRh > self.width - Window.size[0] * 80 / 400:
+			x0h = x0h + 1
+			x1h = x1h - 1
+			Uhp = x1h - x0h
+
+			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
+			yLh = y0 + Uhp * float(feh1)
+			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
+			yRh = y0 + Uhp * float(feh2)
+
+		while xLh < self.x + Window.size[0] * 80 / 400:
+			x0h = x0h + 1
+			x1h = x1h - 1
+			Uhp = x1h - x0h
+
+			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
+			yLh = y0 + Uhp * float(feh1)
+			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
+			yRh = y0 + Uhp * float(feh2)
+
+
+
+
 		a1dh = 180 + float(a1eh) - 90
 		a2dh = 180 - float(a2eh) - 90
 		b1dh = 180 - float(b1eh) - 90
 		b2dh = 180 - float(b2eh) - 90
 
-		print(b1dh)
 
 		############### Computing rotating arrow points  ############################
 
@@ -751,6 +773,26 @@ class VelocityTriangles(Screen):
 		yLt = y0 + Utp * float(fet1)
 		xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 		yRt = y0 + Utp * float(fet2)
+
+		while xRt > self.width - Window.size[0] * 80 / 400:
+			x0t = x0t + 1
+			x1t = x1t - 1
+			Utp = x1t - x0t
+
+			xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
+			yLt = y0 + Utp * float(fet1)
+			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
+			yRt = y0 + Utp * float(fet2)
+
+		while xLt < self.x + Window.size[0] * 80 / 400:
+			x0t = x0t + 1
+			x1t = x1t - 1
+			Utp = x1t - x0t
+
+			xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
+			yLt = y0 + Utp * float(fet1)
+			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
+			yRt = y0 + Utp * float(fet2)
 
 		a1dt = 180 + float(a1et) - 90
 		a2dt = 180 - float(a2et) - 90

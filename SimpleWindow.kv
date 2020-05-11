@@ -726,9 +726,16 @@
 
 				 ################################  Arrows   ##########################################
 	################### Base Velocity Arrows   ##########################
+
+	                ################## U Arrow ########################
+	                Color:
+                        rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
 					Triangle:
 						points:float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
 
+                    ################## The other 4 Base Arrows ########################
+                    Color:
+                        rgba: (0,0,0,1)
 					Triangle:
 						points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL1uText),self.y + float(root.yL1uText),float(root.xL1dText),self.y + float(root.yL1dText)
 
@@ -742,6 +749,8 @@
 						points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR2uText),self.y + float(root.yR2uText),float(root.xR2dText),self.y + float(root.yR2dText)
 
 	##################  U Line Arrows  ####################
+	                Color:
+                        rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 40 else (0,0,0,1)
 					Triangle:
 						points:
 							float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x0Text)+dp(20),\
@@ -752,14 +761,19 @@
 							self.y + float(root.y1Text)-dp(20)+dp(3),float(root.x1Text)-dp(20),self.y + float(root.y1Text)-dp(20)-dp(3)
 
 	##################  ΔVθ Line Arrows  ####################
+                    Color:
+                        rgba: (1,1,1,0) if float(root.xRText) - float(root.xLText) < 25 else (0,0,0,1)
 					Triangle:
 						points:
 							(float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3)) if root.tc_namemText == 'Compressor Middle' else\
+							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3))\
+							if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
 							float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
 
 	#####################  Vx Line Arrows  ####################
+	                Color:
+	                    rgba: (1,1,1,0) if (float(root.yRText) - float(root.y1Text)) < 25 else (0,0,0,1)
 					Triangle:
 						points:
 							(float(root.x1Text) + dp(20),self.y + float(root.y1Text),float(root.x1Text) + dp(20) + dp(3),\
@@ -783,10 +797,8 @@
 					pos:
 						(self.parent.x + float(root.UText)/2 + dp(35),\
 						self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)\
-						if (float(root.x1Text) - float(root.UText)*float(root.rnText) + float(root.UText)*float(root.pText)/2) < float(root.x1Text)\
-						else\
-						(self.parent.x + float(root.x1Text) - float(root.UText)*float(root.rnText)+\
-						float(root.UText)*float(root.pText)/2 - float(root.x0Text) - float(root.UText)/2 + dp(35),\
+						if float(root.x1Text) > float(root.xRText) else\
+						(self.parent.x - self.parent.width/2 + float(root.xRText) + dp(40),\
 						self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)
 
 				Label:
