@@ -704,6 +704,16 @@ class VelocityTriangles(Screen):
 			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 			yRh = y0 + Uhp * float(feh2)
 
+		while yLh > Window.size[1] * 220 / 700 or yRh > Window.size[1] * 220 / 700:
+			x0h = x0h + 1
+			x1h = x1h - 1
+			Uhp = x1h - x0h
+
+			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
+			yLh = y0 + Uhp * float(feh1)
+			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
+			yRh = y0 + Uhp * float(feh2)
+
 
 
 
@@ -785,6 +795,16 @@ class VelocityTriangles(Screen):
 			yRt = y0 + Utp * float(fet2)
 
 		while xLt < self.x + Window.size[0] * 80 / 400:
+			x0t = x0t + 1
+			x1t = x1t - 1
+			Utp = x1t - x0t
+
+			xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
+			yLt = y0 + Utp * float(fet1)
+			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
+			yRt = y0 + Utp * float(fet2)
+
+		while yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700:
 			x0t = x0t + 1
 			x1t = x1t - 1
 			Utp = x1t - x0t
@@ -965,7 +985,7 @@ class NewWindow(Screen):
 	xRText = StringProperty('0')
 	yRText = StringProperty('0')
 
-	UmText = StringProperty('0')
+	UmText = StringProperty('1')
 	VxText = StringProperty('0')
 	V1Text = StringProperty('0')
 	V2Text = StringProperty('0')

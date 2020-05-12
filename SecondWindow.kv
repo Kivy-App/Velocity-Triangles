@@ -1557,12 +1557,16 @@
 					Line:
 						width: dp(1.)
 						circle:
-							(float(root.xLhText) - dp(15),self.y + float(root.yLhText) + dp(17),dp(10))
+							(float(root.xLhText) - dp(15),self.y + float(root.yLhText) + dp(17),dp(10))\
+							if float(root.yLhText) > float(root.yRhText) else\
+							(float(root.xLhText) - dp(15),self.y + float(root.yRhText) + dp(17),dp(10))
 
 					Line:
 						width: dp(1.)
 						circle:
-							(float(root.xRhText) + dp(15),self.y + float(root.yLhText) + dp(17),dp(10))
+							(float(root.xRhText) + dp(15),self.y + float(root.yLhText) + dp(17),dp(10))\
+							if float(root.yLhText) > float(root.yRhText) else\
+							(float(root.xRhText) + dp(15),self.y + float(root.yRhText) + dp(17),dp(10))
 
 
 
@@ -1606,11 +1610,17 @@
                         rgba: (1,1,1,0) if float(root.xRhText) - float(root.xLhText) < 25 else (0,0,0,1)
 					Triangle:
 						points:
-							(float(root.xLhText),self.y + float(root.yLhText) + dp(20),float(root.xLhText)+ dp(20),self.y + float(root.yLhText) + dp(20) + dp(3),\
+							((float(root.xLhText),self.y + float(root.yLhText) + dp(20),float(root.xLhText)+ dp(20),self.y + float(root.yLhText) + dp(20) + dp(3),\
 							float(root.xLhText)+ dp(20),self.y + float(root.yLhText) + dp(20) - dp(3))\
 							if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRhText),self.y + float(root.yLhText) + dp(20),float(root.xRhText)- dp(20),self.y + float(root.yLhText) + dp(20) + dp(3),\
-							float(root.xRhText)- dp(20),self.y + float(root.yLhText) + dp(20) - dp(3))
+							float(root.xRhText)- dp(20),self.y + float(root.yLhText) + dp(20) - dp(3)))\
+							if float(root.yLhText) > float(root.yRhText) else \
+							((float(root.xLhText),self.y + float(root.yRhText) + dp(20),float(root.xLhText)+ dp(20),self.y + float(root.yRhText) + dp(20) + dp(3),\
+							float(root.xLhText)+ dp(20),self.y + float(root.yRhText) + dp(20) - dp(3))\
+							if root.tc_namemText == 'Compressor Middle' else\
+							(float(root.xRhText),self.y + float(root.yRhText) + dp(20),float(root.xRhText)- dp(20),self.y + float(root.yRhText) + dp(20) + dp(3),\
+							float(root.xRhText)- dp(20),self.y + float(root.yRhText) + dp(20) - dp(3)))
 
 	#####################  Vx2 Line Arrows  ####################
 	                Color:
@@ -1667,21 +1677,35 @@
 				Label:
 					text: '\u0394V\u03B8'
 					pos:
-						-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText)+float(root.UhpText)*float(root.phText)/2,\
-						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(35)
+						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText)+float(root.UhpText)*float(root.phText)/2,\
+						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(35))\
+                        if float(root.yLhText) > float(root.yRhText) else\
+                        (-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText)+float(root.UhpText)*float(root.phText)/2,\
+						self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(35))
 
 				Label:
 					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
 					pos:
-						-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText) - dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(17)
+						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText) - dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(17))\
+						if float(root.yLhText) > float(root.yRhText) else\
+						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText) - dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(17))
+
 
 				Label:
 					text:'2'
 					pos:
-						-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(17)
+						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(17))\
+						if float(root.yLhText) > float(root.yRhText) else\
+						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(17))
 
+                Label:
+                    pos: self.parent.x,self.parent.y + self.height/2 - dp(10)
+                    color:1,0,0,1
+                    text: 'Note that tip triangles are scaled down in order to fit' if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
 
 
 ################################################### Tip Velocity Triangles ############################################################################
@@ -2424,12 +2448,16 @@
 					Line:
 						width: dp(1.)
 						circle:
-							(float(root.xLtText) - dp(15),self.y + float(root.yRtText) + dp(17),dp(10))
+							(float(root.xLtText) - dp(15),self.y + float(root.yRtText) + dp(17),dp(10))\
+							if float(root.yRtText) > float(root.yLtText) else\
+							(float(root.xLtText) - dp(15),self.y + float(root.yLtText) + dp(17),dp(10))
 
 					Line:
 						width: dp(1.)
 						circle:
-							(float(root.xRtText) + dp(15),self.y + float(root.yRtText) + dp(17),dp(10))
+							(float(root.xRtText) + dp(15),self.y + float(root.yRtText) + dp(17),dp(10))\
+							if float(root.yRtText) > float(root.yLtText) else\
+							(float(root.xRtText) + dp(15),self.y + float(root.yLtText) + dp(17),dp(10))
 
 
 
@@ -2459,7 +2487,7 @@
 
 	##################  U Line Arrows  ####################
 	                Color:
-                        rgba: (1,1,1,0) if float(root.x1tText) - float(root.x0tText) < 40 else (0,0,0,1)
+                        rgba: (1,1,1,0) if float(root.x1tText) - float(root.x0tText) < dp(40) else (0,0,0,1)
 					Triangle:
 						points:
 							float(root.x0tText),self.y + float(root.y0Text)-dp(20),float(root.x0tText)+dp(20),\
@@ -2474,11 +2502,17 @@
                         rgba: (1,1,1,0) if float(root.xRtText) - float(root.xLtText) < 25 else (0,0,0,1)
 					Triangle:
 						points:
-							(float(root.xLtText),self.y + float(root.yRtText) + dp(20),float(root.xLtText)+ dp(20),self.y + float(root.yRtText) + dp(20) + dp(3),\
+							((float(root.xLtText),self.y + float(root.yRtText) + dp(20),float(root.xLtText)+ dp(20),self.y + float(root.yRtText) + dp(20) + dp(3),\
 							float(root.xLtText)+ dp(20),self.y + float(root.yRtText) + dp(20) - dp(3))\
 							if root.tc_namemText == 'Compressor Middle' else\
 							(float(root.xRtText),self.y + float(root.yRtText) + dp(20),float(root.xRtText)- dp(20),self.y + float(root.yRtText) + dp(20) + dp(3),\
-							float(root.xRtText)- dp(20),self.y + float(root.yRtText) + dp(20) - dp(3))
+							float(root.xRtText)- dp(20),self.y + float(root.yRtText) + dp(20) - dp(3)))\
+							if float(root.yRtText) > float(root.yLtText) else\
+							((float(root.xLtText),self.y + float(root.yLtText) + dp(20),float(root.xLtText)+ dp(20),self.y + float(root.yLtText) + dp(20) + dp(3),\
+							float(root.xLtText)+ dp(20),self.y + float(root.yLtText) + dp(20) - dp(3))\
+							if root.tc_namemText == 'Compressor Middle' else\
+							(float(root.xRtText),self.y + float(root.yLtText) + dp(20),float(root.xRtText)- dp(20),self.y + float(root.yLtText) + dp(20) + dp(3),\
+							float(root.xRtText)- dp(20),self.y + float(root.yLtText) + dp(20) - dp(3)))
 
 	#####################  Vx2 Line Arrows  ####################
 	                Color:
@@ -2520,7 +2554,7 @@
 						self.parent.y - self.parent.height/2 + float(root.y0Text)/2 + float(root.yRtText)/2)\
 						if float(root.xRtText)<float(root.x1tText)\
 						else\
-						(self.parent.x - self.parent.width/2 + float(root.xRText) + dp(40),\
+						(self.parent.x - self.parent.width/2 + float(root.xRtText) + dp(40),\
 						self.parent.y - self.parent.height/2 + float(root.y0Text)/2 + float(root.yRtText)/2)
 
                 Label:
@@ -2536,20 +2570,34 @@
 				Label:
 					text: '\u0394V\u03B8'
 					pos:
-						-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText)+float(root.UtpText)*float(root.ptText)/2,\
-						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(35)
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText)+float(root.UtpText)*float(root.ptText)/2,\
+						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(35))\
+						if float(root.yRtText) > float(root.yLtText) else\
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText)+float(root.UtpText)*float(root.ptText)/2,\
+						self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(35))
 
 				Label:
 					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
 					pos:
-						-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText) - dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(17)
-
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText) - dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(17))\
+						if float(root.yRtText) > float(root.yLtText) else\
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText) - dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(17))
 				Label:
 					text:'2'
 					pos:
-						-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(17)
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(17))\
+						if float(root.yRtText) > float(root.yLtText) else\
+						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
+						self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(17))
+
+                Label:
+                    pos: self.parent.x,self.parent.y + self.height/2 - dp(10)
+                    color:1,0,0,1
+                    text: 'Note that tip triangles are scaled down in order to fit' if (float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText)) else ''
+
 
             BoxLayout:
 				size_hint_y: 0.08
@@ -2732,6 +2780,7 @@
                             float(root.x0tText),self.y + float(root.y0Text),float(root.x0tText)+dp(25),\
                             self.y + float(root.y0Text)+dp(5),float(root.x0tText)+dp(25),self.y + float(root.y0Text)-dp(5)
 
+
                     ##### MID ###
                     Color:
                         rgba: (0,0,0,1) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
@@ -2762,17 +2811,17 @@
 
                 Label:
                     font_size: dp(12)
-                    pos: dp(300)-self.parent.width/2, self.parent.y + self.parent.width/2 - dp(93)
+                    pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(45)
                     text: 'Hub'
 
                 Label:
                     font_size: dp(12)
-                    pos: dp(300)-self.parent.width/2, self.parent.y + self.parent.width/2 - dp(108)
+                    pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(60)
                     text: 'Mid'
 
                 Label:
                     font_size: dp(12)
-                    pos: dp(300)-self.parent.width/2, self.parent.y + self.parent.width/2 - dp(123)
+                    pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(75)
                     text: 'Tip'
 
 
