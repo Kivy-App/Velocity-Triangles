@@ -612,14 +612,14 @@
 					Color:
 						rgba:0.5862,0.9333,0.9333,0.737
 					Rectangle:
-						pos:self.x+20, self.y + 20
-						size:self.width-40, self.height-40
+						pos:self.x + dp(20), self.y + dp(20)
+						size:self.width - dp(40), self.height - dp(40)
 
 					Color:
 						rgba:0,0,0,1
 					Line:
 						width: dp(1.)
-						rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+						rectangle: (self.x + dp(20), self.y + dp(20), self.width - dp(40), self.height - dp(40))
 
 	###################    Color of the Lines    ##################
 					Color:
@@ -788,7 +788,7 @@
 
 				Label:
 					text: 'U'
-					pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(45)
+					pos: self.parent.x, self.parent.y - self.parent.height/2 + float(root.y0Text) - dp(35)
 
 				Label:
 					text: 'Vx'
@@ -1415,14 +1415,14 @@
 					Color:
 						rgba:0.5862,0.9333,0.9333,0.737
 					Rectangle:
-						pos:self.x+20, self.y + 20
-						size:self.width-40, self.height-40
+						pos:self.x + dp(20), self.y + dp(20)
+						size:self.width - dp(40), self.height - dp(40)
 
 					Color:
 						rgba:0,0,0,1
 					Line:
 						width: dp(1.)
-						rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+						rectangle: (self.x + dp(20), self.y + dp(20), self.width - dp(40), self.height - dp(40))
 
 	###################    Color of the Lines    ##################
 					Color:
@@ -1652,7 +1652,7 @@
 
 				Label:
 					text: 'U'
-					pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(45)
+					pos: self.parent.x, self.parent.y - self.parent.height/2 + float(root.y0Text) - dp(35)
 
 				Label:
 					text: 'Vx2'
@@ -1705,7 +1705,7 @@
                 Label:
                     pos: self.parent.x,self.parent.y + self.height/2 - dp(10)
                     color:1,0,0,1
-                    text: 'Note that tip triangles are scaled down in order to fit' if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
+                    text: 'Note that hub triangles are scaled down in order to fit' if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
 
 
 ################################################### Tip Velocity Triangles ############################################################################
@@ -2308,14 +2308,14 @@
 					Color:
 						rgba:0.5862,0.9333,0.9333,0.737
 					Rectangle:
-						pos:self.x+20, self.y + 20
-						size:self.width-40, self.height-40
+						pos:self.x + dp(20), self.y + dp(20)
+						size:self.width - dp(40), self.height - dp(40)
 
 					Color:
 						rgba:0,0,0,1
 					Line:
 						width: dp(1.)
-						rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+						rectangle: (self.x + dp(20), self.y + dp(20), self.width - dp(40), self.height - dp(40))
 
 	###################    Color of the Lines    ##################
 					Color:
@@ -2545,7 +2545,7 @@
 
 				Label:
 					text: 'U'
-					pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(45)
+					pos: self.parent.x, self.parent.y - self.parent.height/2 + float(root.y0Text) -dp(35)
 
 				Label:
 					text: 'Vx2'
