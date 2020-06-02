@@ -1,3 +1,5 @@
+#:import MDRectangleFlatIconButton kivymd.uix.button.MDRectangleFlatIconButton
+
 <NewWindow>:
 	name: "new"
 
@@ -2841,7 +2843,9 @@
 					size_hint_x:0.3
 					padding:dp(10)
 					spacing:dp(10)
-					Button:
+					MDRectangleFlatIconButton:
+						icon:'keyboard-backspace'
+						md_bg_color:[0,0,0,1]
 						size_hint:0.25,1
 						text:"Back"
 						on_release:

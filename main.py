@@ -15,6 +15,10 @@ from kivy.metrics import Metrics
 import numpy as np
 from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
+from kivymd.app import MDApp
+from system_solver import system_solver1
+from periptoseis import system_if
+from kivymd.uix.dialog import MDDialog
 
 
 
@@ -29,7 +33,7 @@ def firstPopup():
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P2(BoxLayout):
@@ -48,7 +52,7 @@ def secondPopup():
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P3(BoxLayout):
@@ -57,12 +61,12 @@ class P3(BoxLayout):
 def thirdPopup():
 	show = P3()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
+	bl = BoxLayout(orientation='vertical',padding=30)
 	label = Label(text = ' Dimensional measurements missing.\n Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P4(BoxLayout):
@@ -76,15 +80,17 @@ def fourthPopup():
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'x': 0.01,'y':1.2}, on_release = popupWindow.dismiss))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class VelocityTriangles(Screen):
 	########## Window properties #########
-	Config.set('graphics', 'resizable', True)
+	# Config.set('graphics', 'resizable', True)
 	Window.size = (400, 700)
 	# Window.Keyboard_anim_args = {'d':.2 , "t": in_out_expo}
 	Window.softinput_mode = "below_target"
+
+		
 
 	######### Variable properties ########
 	p  = ObjectProperty(None)
@@ -186,119 +192,9 @@ class VelocityTriangles(Screen):
 			Rh3e = str(self.rh2t3.text)
 			Ne = str(self.n.text)
 
-			X = []
 
-			self.k = 0
-
-			if pe == '':
-				X.append(1)
-			if fe == '':
-				X.append(2)
-			if rne == '':
-				X.append(3)
-			if a1e == '':
-				X.append(4)
-			if a2e == '':
-				X.append(5)
-			if b1e == '':
-				X.append(6)
-			if b2e == '':
-				X.append(7)
-
-			self.k = len(X)
-			t = len(X)
-
-			def sys(z):
-
-				i = 0
-
-				if 1 in X:
-					pev = z[i]
-					i = i + 1
-				else:
-					pev = float(pe)
-
-				if 2 in X:
-					fev = z[i]
-					i = i + 1
-				else:
-					fev = float(fe)
-
-				if 3 in X:
-					rnev = z[i]
-					i = i + 1
-				else:
-					rnev = float(rne)
-
-				if 4 in X:
-					a1ev = z[i]
-					i = i + 1
-				else:
-					a1ev = float(a1e)
-
-				if 5 in X:
-					a2ev = z[i]
-					i = i + 1
-				else:
-					a2ev = float(a2e)
-
-				if 6 in X:
-					b1ev = z[i]
-					i = i + 1
-				else:
-					b1ev = float(b1e)
-
-				if 7 in X:
-					b2ev = z[i]
-					i = i + 1
-				else:
-					b2ev = float(b2e)
-
-				F = np.zeros((4))
-
-				F[0] = -a1ev - np.degrees(np.arctan(-((pev / 2) - 1 + rnev) / fev))
-				F[1] = -a2ev + np.degrees(np.arctan(((pev / 2) + 1 - rnev) / (fev)))
-				F[2] = -b1ev + np.degrees(np.arctan(((pev / 2) + rnev) / fev))
-				F[3] = -b2ev - np.degrees(np.arctan(-((pev / 2) - rnev) / fev))
-
-				return F
-
-			r = fsolve(sys, [1, 1, 1, 1])
-
-			j = 0
-
-			if self.p.text == '':
-				pe = str(round(r[j], 3))
-				j = j + 1
-			if self.f.text == '':
-				fe = str(round(r[j], 3))
-				j = j + 1
-			if self.rn.text == '':
-				rne = str(round(r[j], 3))
-				j = j + 1
-			if self.a1.text == '':
-				a1e = str(round(r[j], 3))
-				j = j + 1
-			if self.a2.text == '':
-				a2e = str(round(r[j], 3))
-				j = j + 1
-			if self.b1.text == '':
-				b1e = str(round(r[j], 3))
-				j = j + 1
-			if self.b2.text == '':
-				b2e = str(round(r[j], 3))
-				j = j + 1
-
-
-			pe = str(round(float(pe),3))
-			fe = str(round(float(fe),3))
-			rne = str(round(float(rne),3))
-			a1e = str(round(float(a1e),3))
-			a2e = str(round(float(a2e),3))
-			#a3e = str(round(float(a3e),3))
-			b1e = str(round(float(b1e),3))
-			b2e = str(round(float(b2e),3))
-			#b3e = str(round(float(b3e),3))
+			##################   System_Solver  ################
+			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_solver1(pe,fe,rne,a1e,a2e,b1e,b2e)
 
 			############################# Drawing Triangles ######################################
 			global U
@@ -442,7 +338,7 @@ class VelocityTriangles(Screen):
 
 ################ Case of  Both Compartments filled #########################################
 			if self.check == 0:	
-				############### Passing the Results on the Second Screen  ############################
+				############### Passing the Results on the Second Screen  ####################
 				self.manager.get_screen('new').pText = pe
 				self.manager.get_screen('new').fText = fe
 				self.manager.get_screen('new').rnText = rne
@@ -571,6 +467,7 @@ class VelocityTriangles(Screen):
 			global Vth1
 			global Vth2
 
+
 			rt = float(D1e)/2
 			rh = float(Rh1e)*float(D1e)/2
 			rm = (rt+rh)/2
@@ -672,7 +569,7 @@ class VelocityTriangles(Screen):
 		Wth1h = -W1h * m.sin(m.radians(float(b1eh)))
 		Wth2h = W2h * m.sin(m.radians(float(b2eh)))
 
-		#############     Hub Triangles Drwaing       ############
+		#############     Drawing Hub Triangles       ############
 
 		Uhp = (Uh/Um)*U
 		difH = U - Uhp
@@ -1195,12 +1092,12 @@ class WindowManager(ScreenManager):
 	pass
 
 
-kv = Builder.load_file("VelocityTrianglesApp.kv")
+class MainApp(MDApp):
+	def __init__(self, **kwargs):
+		self.title = "VTA"
+		self.theme_cls.theme_style = "Dark"
+		self.theme_cls.primary_palette = "Blue"
+		super().__init__(**kwargs)
 
-class VelocityTrianglesApp(App):
-	def build(self):
-		return kv
 
-if __name__ == '__main__':
-	vt = VelocityTrianglesApp()
-	vt.run()
+MainApp().run()
