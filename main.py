@@ -17,8 +17,8 @@ from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
-from periptoseis import system_if
-from kivymd.uix.dialog import MDDialog
+from solver_if import system_if
+# from kivymd.uix.dialog import MDDialog
 
 
 
@@ -44,8 +44,8 @@ def secondPopup():
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
 	label = Label(text = ' This combination of variables \n'
-						 ' is not valid. It seems that with\n'
-						 ' this combination of variables \n'
+						 ' is not valid. It seems that \n'
+						 ' with this combination  \n'
 						 ' Loading coefficient \u03C8 or \n'
 						 ' Flow Coefficient \u03C6 tends to infinity.\n'
 						 ' Please try again with new varieables.',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
@@ -62,7 +62,7 @@ def thirdPopup():
 	show = P3()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding=30)
-	label = Label(text = ' Dimensional measurements missing.\n Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Dimensional measurements \n missing. Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
@@ -82,6 +82,50 @@ def fourthPopup():
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
 	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
+
+class Prpm(BoxLayout):
+	pass
+
+def rpmPopup():
+	show = Prpm()
+	# create content for the Popup
+	bl = BoxLayout(orientation='vertical',padding = 30)
+	label = Label(text = ' Revoloutions per minute have \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+	bl.add_widget(label)
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+	bl.add_widget(
+		Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
+	popupWindow.open()
+
+class Ph2t(BoxLayout):
+	pass
+
+def h2tPopup():
+	show = Ph2t()
+	# create content for the Popup
+	bl = BoxLayout(orientation='vertical',padding = 30)
+	label = Label(text = ' Hub to tip ratio has \n to be positive number \n and less than one. \n Please try again with \n a valid value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+	bl.add_widget(label)
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow.open()
+
+class Pdiam(BoxLayout):
+	pass
+
+def diamPopup():
+	show = Pdiam()
+	# create content for the Popup
+	bl = BoxLayout(orientation='vertical',padding = 30)
+	label = Label(text = ' Diameter  has \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+
+	bl.add_widget(label)
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow.open()
+
 
 class VelocityTriangles(Screen):
 	########## Window properties #########
@@ -467,16 +511,31 @@ class VelocityTriangles(Screen):
 			global Vth1
 			global Vth2
 
+			if self.k != 0:
+				if float(D1e) <= 0:
+					self.popup = diamPopup()
+					self.k = 0
+					self.check = 1
+
+				elif float(Rh1e) <= 0 or float(Rh1e) >= 1:
+					self.popup = h2tPopup()
+					self.k = 0
+					self.check = 1
+
+				elif float(Ne) <= 0:
+					self.popup = rpmPopup()
+					self.k = 0
+					self.check = 1
 
 			rt = float(D1e)/2
-			rh = float(Rh1e)*float(D1e)/2
+			rh = float(Rh1e)*rt
 			rm = (rt+rh)/2
 
-			Um = 0.01666666 * float(Ne) * rm
+			Um = (1/60) * float(Ne) * rm
 
-			Uh = 0.01666666 * float(Ne) * rh
+			Uh = (1/60) * float(Ne) * rh
 
-			Ut = 0.01666666 * float(Ne) * rt
+			Ut = (1/60)* float(Ne) * rt
 
 			Vx = float(fe)*Um
 
@@ -510,7 +569,7 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('new').Wth1Text = str(round(Wth1, 3))
 			self.manager.get_screen('new').Wth2Text = str(round(Wth2, 3))
 
-			self.check = 0
+
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				############### Passing empty slots  on the Second Screen  ##################

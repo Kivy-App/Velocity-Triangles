@@ -24,12 +24,17 @@ WindowManager:
     #         color :[1, 0, 0, 1]
     #         font_size :dp(18)
 
-
 <P2>:
 
 <P3>:
 
 <P4>:
+
+<Prpm>:
+
+<Ph2t>:
+
+<Pdiam>:
 
 <Label>
     id: labels
@@ -58,9 +63,9 @@ WindowManager:
 <MDSlider>
     size_hint_x: 0.7
     value_track: True
-    _track_color_normal: [0,0,0,1]
+    _track_color_normal: [.4,0.4,0.4,1]
     _track_color_active:[1,1,1,1]
-    thumb_color_down:[0,1,0,1]
+    thumb_color_down:[0,.6,.8,1]
     show_off:False
     hint:False
 
@@ -592,9 +597,11 @@ WindowManager:
                     id:VA_button
                     icon:'airplane'
                     pos_hint:{'center_x':0.5}
+                    size_hint_x: 0.4
                     text: "Velocity Analysis"
                     font_size:dp(14)
-                    # md_bg_color: [1,1,1,1]
+                    md_bg_color: [0.4,.4,.4,1]
+                    text_color: [1,1,1,1]
                     on_release:
                         root.systemsolver()
                         root.dml()
