@@ -19,6 +19,8 @@ from kivymd.app import MDApp
 from system_solver import system_solver1
 from solver_if import system_if
 # from kivymd.uix.dialog import MDDialog
+from kivymd.uix.navigationdrawer import NavigationLayout as NL
+
 
 
 
@@ -119,7 +121,7 @@ def diamPopup():
 	show = Pdiam()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Diameter  has \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Diameter  has to\n be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
@@ -162,6 +164,10 @@ class VelocityTriangles(Screen):
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
 	bbl = NumericProperty(0) ##### Bubble Variable #####
 
+	#### Values of checkboxes state ##########
+	ch1_value = ObjectProperty('normal')
+	ch2_value = ObjectProperty('normal')
+	ch3_value = ObjectProperty('normal')
 
 ############ Debuging for smaller screens #################
 	if Window.size[0] > 800 and Window.size[0] < 1000:
@@ -235,6 +241,7 @@ class VelocityTriangles(Screen):
 			Rh2e = str(self.rh2t2.text)
 			Rh3e = str(self.rh2t3.text)
 			Ne = str(self.n.text)
+
 
 
 			##################   System_Solver  ################
@@ -602,13 +609,29 @@ class VelocityTriangles(Screen):
 	def h2t_triangles(self):
 		a = Um * (1 - float(rne))
 		b = Vth2 - a
-		n = 0
+
+		# print(self.ch1_value)
+		# print(self.ch2_value)
+		# print(self.ch3_value)
+
+		if self.ch1_value == 'down' :
+			n = 0
+		elif self.ch2_value == 'down' :
+			n = -1
+		elif self.ch3_value == 'down' :
+			n = 2
+		else:
+			n = 0
 
 		#########    HUB    ##########
-		Vth1h = a * (rh / rm) ** n - b * (rm / rh)
+		Vth1h = a * ((rh / rm))** n - b * (rm / rh)
+		# print(Vth1h)
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
+		# print(Vth2h)
 		Vx1h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) - b * ((rm / rh) - 1))))
 		Vx2h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) + b * ((rm / rh) - 1))))
+		# Vx1h = m.sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*np.log(rh/rm))
+		# Vx2h = m.sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * np.log(rh / rm))
 		dVthh = Vth2h - Vth1h
 		rneh = 1 + (a / Um) * (2 * (rh / rm) ** (n - 1) - n - 1) / (n - 1)
 		feh1 = Vx1h / Uh
@@ -624,6 +647,7 @@ class VelocityTriangles(Screen):
 		V2h = Vx2h / m.cos(m.radians(float(a2eh)))
 		W1h = Vx1h / m.cos(m.radians(float(b1eh)))
 		W2h = Vx2h / m.cos(m.radians(float(b2eh)))
+
 
 		Wth1h = -W1h * m.sin(m.radians(float(b1eh)))
 		Wth2h = W2h * m.sin(m.radians(float(b2eh)))
@@ -903,20 +927,6 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('new').xR2dtText = str(xR2dt)
 		self.manager.get_screen('new').yR2dtText = str(yR2dt)
 
-		# print("a:" ,a)
-		# print(b)
-		# print(rneh)
-		# print(rnet)
-		# print(Vx1h)
-		# print(Vx1t)
-		# print(Vth1h)
-		# print(Vth2h)
-		# print(feh1)
-		# print(feh2)
-		# print(peh)
-		#
-		# print(a1eh)
-
 class NewWindow(Screen):
 
 	DPI = Metrics.dpi/96
@@ -1149,7 +1159,9 @@ class SimWindow(Screen):
 
 class WindowManager(ScreenManager):
 	pass
-
+#
+# class Navig(Screen,NL):
+# 	pass
 
 class MainApp(MDApp):
 	def __init__(self, **kwargs):
