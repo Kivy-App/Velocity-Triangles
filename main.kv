@@ -114,8 +114,8 @@ NavigationLayout:
 
         ####################  Overall Grid  ############################
                 GridLayout:
-                    rows: 13
-                    size_hint_y:1.41
+                    rows: 14
+                    size_hint_y:1.51
         ############ Overall Title ######################
         #            MDToolbar:
         #                size_hint_y:0.08
@@ -175,6 +175,46 @@ NavigationLayout:
         #                       icon_size:dp(15)
                                 pos_hint: {'center_x':0.5}
                                 on_press:vel_tr.showbubble() if vel_tr.bbl%2!=1 else vel_tr.destroybubble()
+
+                    GridLayout:
+                        cols: 2
+                        size_hint_y: 0.1
+                        canvas:
+                            Color:
+                                rgba: 0.6862,0.9333,0.9333,0.6
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+
+                            Color:
+                                rgba: 0,0,0,1
+                            Line:
+                                width: dp(1.5)
+                                rectangle: (self.x,self.y,self.width,self.height)
+                        Label:
+                            size_hint_x: 0.7
+                            text: 'Turbine'
+                            bold: True if ch1.active else False
+                            font_size: dp(20)
+
+                        MDCheckbox:
+                            id :ch1
+                            group: 'turm_comp'
+                            state: vel_tr.ch1_value
+                            on_state: vel_tr.ch1_value = self.state
+
+                        Label:
+                            size_hint_x: 0.7
+                            text: 'Compressor'
+                            bold: True if ch2.active else False
+                            font_size: dp(20)
+
+                        MDCheckbox:
+                            id :ch2
+                            group: 'turm_comp'
+                            state: vel_tr.ch2_value
+                            on_state: vel_tr.ch2_value = self.state
+
 
                     BoxLayout:
                         padding: 10
@@ -654,34 +694,35 @@ NavigationLayout:
                                 rectangle: (self.x,self.y,self.width,self.height)
 
                         Label:
-                            size_hint_x: 0.7
+                            size_hint_x: 0.8
                             text: 'Constant Angle Aproximation'
-                            bold: True if ch1.active else False
-
-                        MDCheckbox:
-                            id :ch1
-                            state: vel_tr.ch1_value
-                            on_state: vel_tr.ch1_value = self.state
-
-                        Label:
-                            size_hint_x: 0.7
-                            text: 'Free vortex design'
-                            bold: True if ch2.active else False
-
-                        MDCheckbox:
-                            id :ch2
-                            state: vel_tr.ch2_value
-                            on_state: vel_tr.ch2_value = self.state
-
-                        Label:
-                            size_hint_x: 0.7
-                            text: ' Forced vortex design'
                             bold: True if ch3.active else False
-
+                            font_size: dp(20)
                         MDCheckbox:
+                            size_hint_x: 0.2
                             id :ch3
                             state: vel_tr.ch3_value
                             on_state: vel_tr.ch3_value = self.state
+                        Label:
+                            size_hint_x: 0.8
+                            text: 'Free vortex design'
+                            bold: True if ch4.active else False
+                            font_size: dp(20)
+                        MDCheckbox:
+                            size_hint_x: 0.2
+                            id :ch4
+                            state: vel_tr.ch4_value
+                            on_state: vel_tr.ch4_value = self.state
+                        Label:
+                            size_hint_x: 0.8
+                            text: ' Forced vortex design'
+                            bold: True if ch5.active else False
+                            font_size: dp(20)
+                        MDCheckbox:
+                            size_hint_x: 0.2
+                            id :ch5
+                            state: vel_tr.ch5_value
+                            on_state: vel_tr.ch5_value = self.state
 
                     BoxLayout:
                         size_hint_y: 0.08
@@ -722,3 +763,5 @@ NavigationLayout:
         SimWindow:
     MDNavigationDrawer:
         id: nav_drawer
+        md_bg_color: [.85,.85,.85,1]
+        swipe_edge_width: dp(200)

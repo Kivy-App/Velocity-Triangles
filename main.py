@@ -168,6 +168,8 @@ class VelocityTriangles(Screen):
 	ch1_value = ObjectProperty('normal')
 	ch2_value = ObjectProperty('normal')
 	ch3_value = ObjectProperty('normal')
+	ch4_value = ObjectProperty('normal')
+	ch5_value = ObjectProperty('normal')
 
 ############ Debuging for smaller screens #################
 	if Window.size[0] > 800 and Window.size[0] < 1000:
@@ -345,40 +347,58 @@ class VelocityTriangles(Screen):
 			yR2d = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2d - 11.3))
 
 			######################### Choosing if it is Turbine or Compressor ###################
-			if float(pe) > 0.999:
-				if abs(x1-xL)>abs(x1-xR):
-					tc = 0  # turbine
-					tc_namem = 'Turbine Middle'
-					tc_nameh = 'Turbine Hub'
-					tc_namet = 'Turbine Tip'
-					ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
-					ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
-					ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
-				else:
-					tc = 1  # compressor
-					tc_namem = 'Compressor Middle'
-					tc_nameh = 'Compressor Hub'
-					tc_namet = 'Compressor Tip'
-					ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
-					ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
-					ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
+			if self.ch1_value == 'down':
+				tc = 0  # turbine
+				tc_namem = 'Turbine Middle'
+				tc_nameh = 'Turbine Hub'
+				tc_namet = 'Turbine Tip'
+				ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
+				ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
+				ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
+			elif self.ch2_value == 'down':
+				tc = 1  # compressor
+				tc_namem = 'Compressor Middle'
+				tc_nameh = 'Compressor Hub'
+				tc_namet = 'Compressor Tip'
+				ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
+				ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
+				ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 			else:
-				if abs(x1 - xL) > abs(x1 - xR):
-					tc = 1  # compressor
-					tc_namem = 'Compressor Middle'
-					tc_nameh = 'Compressor Hub'
-					tc_namet = 'Compressor Tip'
-					ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
-					ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
-					ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
+				if float(pe) > 0.999:
+					if abs(x1-xL)>abs(x1-xR):
+						tc = 0  # turbine
+						tc_namem = 'Turbine Middle'
+						tc_nameh = 'Turbine Hub'
+						tc_namet = 'Turbine Tip'
+						ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
+						ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
+						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
+					else:
+						tc = 1  # compressor
+						tc_namem = 'Compressor Middle'
+						tc_nameh = 'Compressor Hub'
+						tc_namet = 'Compressor Tip'
+						ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
+						ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
+						ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 				else:
-					tc = 0  # turbine
-					tc_namem = 'Turbine Middle'
-					tc_nameh = 'Turbine Hub'
-					tc_namet = 'Turbine Tip'
-					ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
-					ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
-					ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
+					if abs(x1 - xL) > abs(x1 - xR):
+						tc = 1  # compressor
+						tc_namem = 'Compressor Middle'
+						tc_nameh = 'Compressor Hub'
+						tc_namet = 'Compressor Tip'
+						ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
+						ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
+						ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
+					else:
+						tc = 0  # turbine
+						tc_namem = 'Turbine Middle'
+						tc_nameh = 'Turbine Hub'
+						tc_namet = 'Turbine Tip'
+						ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
+						ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
+						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
+
 
 #####################  Checking if the second compartment is completed ####################
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
@@ -610,15 +630,15 @@ class VelocityTriangles(Screen):
 		a = Um * (1 - float(rne))
 		b = Vth2 - a
 
-		# print(self.ch1_value)
-		# print(self.ch2_value)
 		# print(self.ch3_value)
+		# print(self.ch4_value)
+		# print(self.ch5_value)
 
-		if self.ch1_value == 'down' :
+		if self.ch3_value == 'down' :
 			n = 0
-		elif self.ch2_value == 'down' :
+		elif self.ch4_value == 'down' :
 			n = -1
-		elif self.ch3_value == 'down' :
+		elif self.ch5_value == 'down' :
 			n = 2
 		else:
 			n = 0
