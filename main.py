@@ -630,10 +630,6 @@ class VelocityTriangles(Screen):
 		a = Um * (1 - float(rne))
 		b = Vth2 - a
 
-		# print(self.ch3_value)
-		# print(self.ch4_value)
-		# print(self.ch5_value)
-
 		if self.ch3_value == 'down' :
 			n = 0
 		elif self.ch4_value == 'down' :
@@ -645,32 +641,30 @@ class VelocityTriangles(Screen):
 
 		#########    HUB    ##########
 		Vth1h = a * ((rh / rm))** n - b * (rm / rh)
-		# print(Vth1h)
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
-		# print(Vth2h)
 		Vx1h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) - b * ((rm / rh) - 1))))
 		Vx2h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) + b * ((rm / rh) - 1))))
 		# Vx1h = m.sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*np.log(rh/rm))
 		# Vx2h = m.sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * np.log(rh / rm))
 		dVthh = Vth2h - Vth1h
-		rneh = 1 + (a / Um) * (2 * (rh / rm) ** (n - 1) - n - 1) / (n - 1)
+		# rneh = 1 + (((a / Um) * (2 * ((rh / rm) ** (n - 1)) - n - 1)) / (n - 1))
+		rneh = 1 - (a/Um)*(rh/rm)**(n-1)
 		feh1 = Vx1h / Uh
 		feh2 = Vx2h / Uh
 		peh = dVthh/Uh
 
-		a1eh = - np.degrees(np.arctan(-((peh / 2) - 1 + rneh) / feh1))
-		a2eh = np.degrees(np.arctan(((peh / 2) + 1 - rneh) / feh2))
-		b1eh = np.degrees(np.arctan(((peh / 2) + rneh) / feh1))
-		b2eh = - np.degrees(np.arctan(-((peh / 2) - rneh) / feh2))
+		Wth1h = Vth1h - Uh
+		Wth2h = Vth2h - Uh
+
+		a1eh = -np.degrees(np.arctan(Vth1h/Vx1h))
+		a2eh = np.degrees(np.arctan(Vth2h / Vx2h))
+		b1eh = -np.degrees(np.arctan(Wth1h/Vx1h))
+		b2eh = np.degrees(np.arctan(Wth2h / Vx2h))
 
 		V1h = Vx1h / m.cos(m.radians(float(a1eh)))
 		V2h = Vx2h / m.cos(m.radians(float(a2eh)))
 		W1h = Vx1h / m.cos(m.radians(float(b1eh)))
 		W2h = Vx2h / m.cos(m.radians(float(b2eh)))
-
-
-		Wth1h = -W1h * m.sin(m.radians(float(b1eh)))
-		Wth2h = W2h * m.sin(m.radians(float(b2eh)))
 
 		#############     Drawing Hub Triangles       ############
 
@@ -679,9 +673,11 @@ class VelocityTriangles(Screen):
 		x0h = x0 + difH/2
 		x1h = x1 - difH / 2
 
-		xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
+		# xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
+		xLh = x0h + (Vth1h/Uh)*Uhp
 		yLh = y0 + Uhp * float(feh1)
-		xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
+		# xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
+		xRh = x0h + (Vth2h/Uh)*Uhp
 		yRh = y0 + Uhp * float(feh2)
 
 		while xRh > self.width - Window.size[0] * 80 / 400:
@@ -754,23 +750,32 @@ class VelocityTriangles(Screen):
 		# Vx1t = m.sqrt(Vx ** 2 - 2 * a * (a * np.log(rt / rm) - b * ((1 / rt) - (1 / rm))))
 		# Vx2t = m.sqrt(Vx ** 2 - 2 * a * (a * np.log(rt / rm) + b * ((1 / rt) - (1 / rm))))
 		dVtht = Vth2t - Vth1t
-		rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
+		# rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
+		rnet = 1- (a/Um)*(rt/rm)**(n-1)
 		fet1 = Vx1t / Ut
 		fet2 = Vx2t / Ut
 		pet = dVtht / Ut
 
-		a1et = - np.degrees(np.arctan(-((pet / 2) - 1 + rnet) / fet1))
-		a2et = np.degrees(np.arctan(((pet / 2) + 1 - rnet) / fet2))
-		b1et = np.degrees(np.arctan(((pet / 2) + rnet) / fet1))
-		b2et = - np.degrees(np.arctan(-((pet / 2) - rnet) / fet2))
+		Wth1t = Vth1t - Ut
+		Wth2t = Vth2t - Ut
+
+		a1et = -np.degrees(np.arctan(Vth1t / Vx1t))
+		a2et = np.degrees(np.arctan(Vth2t / Vx2t))
+		b1et = -np.degrees(np.arctan(Wth1t / Vx1t))
+		b2et = np.degrees(np.arctan(Wth2t / Vx2t))
+
+		# a1et = - np.degrees(np.arctan(-((pet / 2) - 1 + rnet) / fet1))
+		# a2et = np.degrees(np.arctan(((pet / 2) + 1 - rnet) / fet2))
+		# b1et = np.degrees(np.arctan(((pet / 2) + rnet) / fet1))
+		# b2et = - np.degrees(np.arctan(-((pet / 2) - rnet) / fet2))
 
 		V1t = Vx1t / m.cos(m.radians(float(a1et)))
 		V2t = Vx2t / m.cos(m.radians(float(a2et)))
 		W1t = Vx1t / m.cos(m.radians(float(b1et)))
 		W2t = Vx2t / m.cos(m.radians(float(b2et)))
 
-		Wth1t = -W1t * m.sin(m.radians(float(b1et)))
-		Wth2t = W2t * m.sin(m.radians(float(b2et)))
+		# Wth1t = -W1t * m.sin(m.radians(float(b1et)))
+		# Wth2t = W2t * m.sin(m.radians(float(b2et)))
 
 		#############     Tip Triangles Drwaing       ############
 
