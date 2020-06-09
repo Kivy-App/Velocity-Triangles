@@ -11,24 +11,19 @@
 #:import MDSeparator kivymd.uix.card.MDSeparator
 #:import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
 
-
-#WindowManager:
-#    VelocityTriangles:
-#    NewWindow:
-#    SimWindow:
-
-
-#NavigationLayout:
-#    MDNavigationDrawer:
-#        id: nav_drawer
-#        WindowManager:
-#            id: manager
-#            Screen:
-#                VelocityTriangles:
-#            Screen:
-#                NewWindow:
-#            Screen:
-#                SimWindow:
+<Content>:
+    BoxLayout:
+        orientation: "vertical"
+        md_bg_color: 1,1,1,1
+        canvas:
+            Color:
+                rgba: 1,1,1,1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        MDLabel:
+            text: "City"
+            color: 0,0,0,1
 
 <P>:
 
@@ -766,6 +761,15 @@ NavigationLayout:
         md_bg_color: [.9,.9,.9,1]
         swipe_edge_width: dp(200)
         width: dp(250)
+        MDCard:
+            MDSeparator:
+            BoxLayout:
+                size_hint_y: .3
+            BoxLayout:
+                size_hint_y: .7
+                MDIconButton:
+                    icon:'information'
+
 
 
 

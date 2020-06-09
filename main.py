@@ -18,24 +18,29 @@ from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
 from solver_if import system_if
-# from kivymd.uix.dialog import MDDialog
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.label import MDLabel
 from kivymd.uix.navigationdrawer import NavigationLayout as NL
 
-
-
+class Content(BoxLayout):
+	pass
 
 class P(BoxLayout):
 	pass
 
 def firstPopup():
-	show = P()
+	# show = P()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	# bl = BoxLayout(orientation='vertical',padding = 30)
+	label = 'You should not put less than 3 variables at the first segment'
+	# ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
-	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	# bl.add_widget(label)
+	#popupWindow = MDDialog(title = " Error ",text = label,size_hint=(None, None), size=('350dp' ,'350dp'), md_bg_color = [1,1,1,1])
+	popupWindow = MDDialog( title=" Error occurred",type = 'custom', content_cls = Content(), buttons=[MDFlatButton(text="CANCEL", text_color= [0,0,0,1]),
+                MDFlatButton(text="ACCEPT", text_color= [0,0,0,1])],size_hint=(None, None), size=('350dp' ,'350dp'))
+	#bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P2(BoxLayout):
@@ -267,47 +272,9 @@ class VelocityTriangles(Screen):
 			yR = y0 + U*float(fe)
 
 	######### While functions for triangles fitting #########
-			while xL < self.x + Window.size[0]*60/400:
-				x0 = x0 + 1
-				x1 = x1 - 1
+			while xL < self.x + Window.size[0]*60/400 or xR > self.width -  Window.size[0]*80/400 or yL >  Window.size[1]*220/700 \
+					or xR < self.x +  Window.size[0]*60/400 or xL > self.width -  Window.size[0] * 80 / 400:
 
-				U = x1 - x0
-				xL = x1 - U * float(rne) - U * float(pe) / 2
-				yL = y0 + U * float(fe)
-				xR = x1 - U * float(rne) + U * float(pe) / 2
-				yR = y0 + U * float(fe)
-
-			while xR < self.x +  Window.size[0]*60/400:
-				x0 = x0 + 1
-				x1 = x1 - 1
-
-				U = x1 - x0
-				xL = x1 - U * float(rne) - U * float(pe) / 2
-				yL = y0 + U * float(fe)
-				xR = x1 - U * float(rne) + U * float(pe) / 2
-				yR = y0 + U * float(fe)
-
-			while xR > self.width -  Window.size[0]*80/400:
-				x0 = x0 + 1
-				x1 = x1 - 1
-
-				U = x1 - x0
-				xL = x1 - U * float(rne) - U * float(pe) / 2
-				yL = y0 + U * float(fe)
-				xR = x1 - U * float(rne) + U * float(pe) / 2
-				yR = y0 + U * float(fe)
-
-			while xL > self.width -  Window.size[0]*80/400:
-				x0 = x0 + 1
-				x1 = x1 - 1
-
-				U = x1 - x0
-				xL = x1 - U * float(rne) - U * float(pe) / 2
-				yL = y0 + U * float(fe)
-				xR = x1 - U * float(rne) + U * float(pe) / 2
-				yR = y0 + U * float(fe)
-
-			while yL >  Window.size[1]*220/700:
 				x0 = x0 + 1
 				x1 = x1 - 1
 
@@ -522,7 +489,7 @@ class VelocityTriangles(Screen):
 
 		except:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
-			self.popup = firstPopup()
+			firstPopup()
 			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 
 ################          Dimendional Analisys           ################################
@@ -680,7 +647,9 @@ class VelocityTriangles(Screen):
 		xRh = x0h + (Vth2h/Uh)*Uhp
 		yRh = y0 + Uhp * float(feh2)
 
-		while xRh > self.width - Window.size[0] * 80 / 400:
+		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
+				or yLh > Window.size[1] * 220 / 700 or yRh > Window.size[1] * 220 / 700 \
+				or xLh > self.width - Window.size[0] * 80 / 400 or xRh < self.x + Window.size[0] * 80 / 400:
 			x0h = x0h + 1
 			x1h = x1h - 1
 			Uhp = x1h - x0h
@@ -689,35 +658,11 @@ class VelocityTriangles(Screen):
 			yLh = y0 + Uhp * float(feh1)
 			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 			yRh = y0 + Uhp * float(feh2)
-
-		while xLh < self.x + Window.size[0] * 80 / 400:
-			x0h = x0h + 1
-			x1h = x1h - 1
-			Uhp = x1h - x0h
-
-			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
-			yLh = y0 + Uhp * float(feh1)
-			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
-			yRh = y0 + Uhp * float(feh2)
-
-		while yLh > Window.size[1] * 220 / 700 or yRh > Window.size[1] * 220 / 700:
-			x0h = x0h + 1
-			x1h = x1h - 1
-			Uhp = x1h - x0h
-
-			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
-			yLh = y0 + Uhp * float(feh1)
-			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
-			yRh = y0 + Uhp * float(feh2)
-
-
-
 
 		a1dh = 180 + float(a1eh) - 90
 		a2dh = 180 - float(a2eh) - 90
 		b1dh = 180 - float(b1eh) - 90
 		b2dh = 180 - float(b2eh) - 90
-
 
 		############### Computing rotating arrow points  ############################
 
@@ -789,7 +734,9 @@ class VelocityTriangles(Screen):
 		xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 		yRt = y0 + Utp * float(fet2)
 
-		while xRt > self.width - Window.size[0] * 80 / 400:
+		while xRt > self.width - Window.size[0] * 80 / 400 or xLt < self.x + Window.size[0] * 80 / 400\
+			or yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700\
+			or xLt > self.width - Window.size[0] * 80 / 400 or xRt < self.x + Window.size[0] * 80 / 400:
 			x0t = x0t + 1
 			x1t = x1t - 1
 			Utp = x1t - x0t
@@ -799,25 +746,25 @@ class VelocityTriangles(Screen):
 			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 			yRt = y0 + Utp * float(fet2)
 
-		while xLt < self.x + Window.size[0] * 80 / 400:
-			x0t = x0t + 1
-			x1t = x1t - 1
-			Utp = x1t - x0t
-
-			xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
-			yLt = y0 + Utp * float(fet1)
-			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
-			yRt = y0 + Utp * float(fet2)
-
-		while yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700:
-			x0t = x0t + 1
-			x1t = x1t - 1
-			Utp = x1t - x0t
-
-			xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
-			yLt = y0 + Utp * float(fet1)
-			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
-			yRt = y0 + Utp * float(fet2)
+		# while xLt < self.x + Window.size[0] * 80 / 400:
+		# 	x0t = x0t + 1
+		# 	x1t = x1t - 1
+		# 	Utp = x1t - x0t
+		#
+		# 	xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
+		# 	yLt = y0 + Utp * float(fet1)
+		# 	xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
+		# 	yRt = y0 + Utp * float(fet2)
+		#
+		# while yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700:
+		# 	x0t = x0t + 1
+		# 	x1t = x1t - 1
+		# 	Utp = x1t - x0t
+		#
+		# 	xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
+		# 	yLt = y0 + Utp * float(fet1)
+		# 	xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
+		# 	yRt = y0 + Utp * float(fet2)
 
 		a1dt = 180 + float(a1et) - 90
 		a2dt = 180 - float(a2et) - 90
@@ -1197,3 +1144,6 @@ class MainApp(MDApp):
 
 
 MainApp().run()
+
+
+

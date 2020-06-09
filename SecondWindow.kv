@@ -1,4 +1,5 @@
 #:import MDRectangleFlatIconButton kivymd.uix.button.MDRectangleFlatIconButton
+#:import MDLabel kivymd.uix.label.MDLabel
 
 <NewWindow>:
 	name: "new"
@@ -1704,10 +1705,12 @@
 						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(17))
 
-                Label:
-                    pos: self.parent.x,self.parent.y + self.height/2 - dp(10)
-                    color:1,0,0,1
-                    text: 'Note that hub triangles are scaled down in order to fit' if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
+                MDLabel:
+                    pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
+                    font_style: 'Body1'
+                    text:
+                        'Hub triangles were ' + (str(round(100*(1-(float(root.UhpText)*float(root.UmText)/(float(root.UhText)*float(root.UText)))),1))) + ' %' + ' scaled down.'\
+                        if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
 
 
 ################################################### Tip Velocity Triangles ############################################################################
@@ -2595,10 +2598,12 @@
 						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(17))
 
-                Label:
-                    pos: self.parent.x,self.parent.y + self.height/2 - dp(10)
-                    color:1,0,0,1
-                    text: 'Note that tip triangles are scaled down in order to fit' if (float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText)) else ''
+                MDLabel:
+                    pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
+                    font_style: 'Body1'
+                    text:
+                        'Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down.'\
+                        if (float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText)) else ''
 
 
             BoxLayout:
