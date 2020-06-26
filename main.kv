@@ -1,5 +1,6 @@
 #: include SecondWindow.kv
 #: include SimpleWindow.kv
+#: include InfoScreen.kv
 #:import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
 #:import MDRoundFlatIconButton kivymd.uix.button.MDRoundFlatIconButton
 #:import MDIconButton kivymd.uix.button.MDIconButton
@@ -88,9 +89,10 @@
     group: 'st'
 
 NavigationLayout:
+    id:NL
     WindowManager:
         id: win_manager
-        transition: SlideTransition()
+        transition: NoTransition()
         VelocityTriangles:
             id: vel_tr
             name: "Main"
@@ -113,8 +115,6 @@ NavigationLayout:
             rh2t3:rh2t3
             n:n
 
-
-
             ScrollView:
                 size: root.height, root.width
                 size_hint: 1,1
@@ -123,18 +123,49 @@ NavigationLayout:
         ####################  Overall Grid  ############################
                 GridLayout:
                     rows: 15
-                    size_hint_y:1.55
+                    size_hint_y:1.95
         ############ Overall Title ######################
-                    MDToolbar:
-                        size_hint_y:0.08
-                        md_bg_color: [0.066,0.392,0.505,0.768]
-        #                font_style: 'H1'
-                        icon:"information"
-                        left_action_items: [["menu", lambda x: nav_drawer.set_state('open')]]
-                        anchor_title: 'center'
-                        elevation: dp(10)
                     GridLayout:
-                        cols:3
+                        cols:2
+                        size_hint_y: 0.08
+                        BoxLayout:
+                            size_hint_x:0.15
+                            padding:dp(2)
+                            orientation:'vertical'
+                            MDIconButton:
+                                id:info_button
+                                theme_text_color:'Custom'
+                                md_bg_color: [0,0,0,0]
+                                text_color: [1,1,1,1]
+                                user_font_size:dp(30)
+                                icon:'menu'
+                                allow_stretch: True
+                                pos_hint: {'center_x':0.5}
+                                on_release: nav_drawer.set_state('open')
+
+                        BoxLayout:
+                            size_hint_x: 0.85
+                            canvas:
+                                Color:
+                                    rgba:0,0,0,0
+                                Rectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                Color:
+                                    rgba: 1,1,1,1
+                                Line:
+                                    width: dp(1)
+                                    points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                            Label:
+                                text: '  VTA-APP'
+                                color: [1,1,1,1]
+                                font_name: 'BlackHanSans-Regular.ttf'
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                font_size: dp(30)
+
+                    BoxLayout:
                         size_hint_y:0.08
                         orientation: 'horizontal'
                         canvas:
@@ -144,21 +175,6 @@ NavigationLayout:
                                 pos: self.pos
                                 size: self.size
 
-#                        BoxLayout:
-#                            size_hint_x:0.1
-#                            padding:dp(2)
-#                            orientation:'vertical'
-#                            MDIconButton:
-#                                id:info_button
-#                                theme_text_color:'Custom'
-#                                md_bg_color: [0,0,0,0]
-#                                text_color: [0,0,0,1]
-#                                user_font_size:dp(30)
-#                                icon:'menu'
-#                                allow_stretch: True
-#                                pos_hint: {'center_x':0.5}
-#                                on_release: nav_drawer.set_state('open')
-
                         MDLabel:
                             size_hint_x:1
                             text: "Velocity Triangles Analysis "
@@ -167,21 +183,6 @@ NavigationLayout:
                             text_size: self.size
                             halign: 'center'
                             valign: 'middle'
-
-#                        BoxLayout:
-#                            size_hint_x:0.1
-#                            padding:dp(2)
-#                            orientation:'vertical'
-#                            MDIconButton:
-#                                id:info_button
-#                                theme_text_color:'Custom'
-#                                md_bg_color: [0,0,0,0]
-#                                user_font_size:dp(35)
-#                                icon:'information-outline'
-#                                allow_stretch: True
-#        #                       icon_size:dp(15)
-#                                pos_hint: {'center_x':0.5}
-#                                on_press:vel_tr.showbubble() if vel_tr.bbl%2!=1 else vel_tr.destroybubble()
 
                     GridLayout:
                         cols: 4
@@ -269,8 +270,8 @@ NavigationLayout:
         ########### Grid for the Text Inputs #########################
                     GridLayout:
                         spacing: dp(3)
-                        size_hint_y: 0.4
-                        cols: 4
+                        size_hint_y: 0.8
+                        cols: 2
                         canvas:
                             Color:
                                 rgba: 0.6862,0.9333,0.9333,0.737
@@ -280,24 +281,25 @@ NavigationLayout:
                                 size: self.size
 
                         Label:
-                            font_size:dp(11)
-                            text:"Loading Coefficient \u03C8 : "
+                            font_size:dp(14)
+                            text:"Loading Coefficient \u03C8  [ - ]"
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                            size_hint_x:0.33
-                        TextInput:
-                            id: p
-
-                            text: '2' if slider1.value==0  else str(round(slider1.value,3))
-
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ - ] "
+                            font_size:dp(14)
+                            text: "  "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: p
+                                text: '2' if slider1.value==0  else str(round(slider1.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider1
                             min: 0
@@ -305,22 +307,27 @@ NavigationLayout:
                             step: 0.01
                             value: 0
 
+
                         Label:
-                            font_size:dp(11)
-                            text:"Flow Coefficient \u03C6 : "
+                            font_size:dp(14)
+                            text:"Flow Coefficient \u03C6  [ - ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: f
-                            text: '1' if slider2.value==0  else str(round(slider2.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ - ] "
+                            font_size:dp(14)
+                            text: "  "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: f
+                                text: '1' if slider2.value==0  else str(round(slider2.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider2
                             min: 0
@@ -329,21 +336,25 @@ NavigationLayout:
                             value:0
 
                         Label:
-                            font_size:vel_tr.l*dp(11)
-                            text:"Reaction Coefficient Rn : "
+                            font_size:vel_tr.l*dp(14)
+                            text:"Reaction Coefficient Rn  [ - ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: rn
-                            text: '0.5' if slider3.value==0  else str(round(slider3.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ - ] "
+                            font_size:dp(14)
+                            text: "  "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: rn
+                                text: '0.5' if slider3.value==0  else str(round(slider3.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider3
                             min: 0
@@ -352,21 +363,25 @@ NavigationLayout:
                             value: 0
 
                         Label:
-                            font_size:dp(11)
-                            text:"Inlet absolute angle \u03B11 : "
+                            font_size:dp(14)
+                            text:"Inlet absolute angle \u03B11  [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: a1
-                            text: '' if slider4.value==0  else str(round(slider4.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: ""
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: a1
+                                text: '' if slider4.value==0  else str(round(slider4.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider4
                             min: -75
@@ -374,21 +389,25 @@ NavigationLayout:
                             step: 0.1
 
                         Label:
-                            font_size:dp(11)
-                            text:"Exit absolute angle \u03B12 : "
+                            font_size:dp(14)
+                            text:"Exit absolute angle \u03B12   [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: a2
-                            text: '' if slider5.value==0  else str(round(slider5.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: " "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: a2
+                                text: '' if slider5.value==0  else str(round(slider5.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider5
                             min: -75
@@ -396,22 +415,27 @@ NavigationLayout:
                             step: 0.1
 
                         Label:
-                            font_size:dp(11)
-                            text:"Inlet absolute angle \u03B13 : "
+                            font_size:dp(14)
+                            text:"Inlet absolute angle \u03B13  [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: a3
-                            text: '' if slider6.value==0  else str(round(slider6.value,3))
-                            disabled: not switch0.active
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: " "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: a3
+                                text: '' if slider6.value==0  else str(round(slider6.value,3))
+                                disabled: not switch0.active
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
+
                         MDSlider:
                             id: slider6
                             min: -75
@@ -420,21 +444,25 @@ NavigationLayout:
                             disabled: not switch0.active
 
                         Label:
-                            font_size:dp(11)
-                            text:"Inlet relative angle \u03B21 : "
+                            font_size:dp(14)
+                            text:"Inlet relative angle \u03B21  [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: b1
-                            text: '' if slider7.value==0  else str(round(slider7.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: " "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: b1
+                                text: '' if slider7.value==0  else str(round(slider7.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider7
                             min: -75
@@ -442,21 +470,25 @@ NavigationLayout:
                             step: 0.1
 
                         Label:
-                            font_size:dp(11)
-                            text:"Exit relative angle \u03B22 : "
+                            font_size:dp(14)
+                            text:"Exit relative angle \u03B22  [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: b2
-                            text: '' if slider8.value==0  else str(round(slider8.value,3))
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: ""
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: b2
+                                text: '' if slider8.value==0  else str(round(slider8.value,3))
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider8
                             min: -75
@@ -464,22 +496,26 @@ NavigationLayout:
                             step: 0.1
 
                         Label:
-                            font_size:dp(11)
-                            text:"Inlet relative angle \u03B23 : "
+                            font_size:dp(14)
+                            text:"Inlet relative angle \u03B23  [ \u00B0 ] "
                             text_size: self.size
-                            halign: 'right'
+                            halign: 'center'
                             valign: 'middle'
-                        TextInput:
-                            id: b3
-                            text: '' if slider9.value==0  else str(round(slider9.value,3))
-                            disabled: not switch0.active
+                            size_hint_x: 1.5
                         Label:
-                            font_size:dp(11)
-                            text: " [ \u00B0 ]"
+                            font_size:dp(14)
+                            text: " "
                             text_size: self.size
                             halign: 'left'
                             valign: 'middle'
-                            size_hint_x:0.3
+                        BoxLayout:
+                            orientation: 'vertical'
+                            TextInput:
+                                id: b3
+                                text: '' if slider9.value==0  else str(round(slider9.value,3))
+                                disabled: not switch0.active
+                                size_hint_x: .7
+                                pos_hint: {'center_x':.5}
                         MDSlider:
                             id: slider9
                             min: -75
@@ -779,6 +815,9 @@ NavigationLayout:
         HubScreen:
         TipScreen:
         CompScreen:
+        InfoScreen:
+
+
     MDNavigationDrawer:
         id: nav_drawer
         md_bg_color: [1,1,1,1]
@@ -803,14 +842,24 @@ NavigationLayout:
                     pos_hint: {'center_x':0.5}
                     icon:'home'
                     text:"Home"
+                    on_release:
+                        win_manager.current = "Main"
+                        nav_drawer.set_state('close')
+
+
                 MDRectangleFlatIconButton:
                     pos_hint: {'center_x':0.5}
                     icon:'information-outline'
                     text:"info"
+                    on_press:
+                        win_manager.current = "info"
+                        nav_drawer.set_state('close')
+
                 MDRectangleFlatIconButton:
                     pos_hint: {'center_x':0.5}
                     icon:'exit-to-app'
                     text:"Exit"
+                    on_press:app.stop()
 
             BoxLayout:
                 orientation: 'vertical'

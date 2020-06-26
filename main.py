@@ -1363,6 +1363,9 @@ class CompScreen(Screen):
 
 	pass
 
+class InfoScreen(Screen):
+	pass
+
 class WindowManager(ScreenManager):
 	pass
 
