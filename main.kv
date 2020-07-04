@@ -19,21 +19,17 @@
 
 
 
-<Content>:
-    BoxLayout:
-        orientation: "vertical"
-        md_bg_color: 1,1,1,1
-        canvas:
-            Color:
-                rgba: 1,1,1,1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-        MDLabel:
-            text: "City"
-            color: 0,0,0,1
 
 <P>:
+    orientation: "vertical"
+    spacing: "12dp"
+    size_hint_y: None
+    height: "120dp"
+
+
+
+
+
 
 <P2>:
 
@@ -821,15 +817,18 @@ NavigationLayout:
     MDNavigationDrawer:
         id: nav_drawer
         md_bg_color: [1,1,1,1]
-        swipe_edge_width: dp(200)
-        width: dp(250)
+        swipe_edge_width: dp(10)
+        width: dp(300)
         MDCard:
             orientation: 'vertical'
-            md_bg_color: [1,1,1,1]
-            BoxLayout:
+#            md_bg_color: [1,0,1,1]
+            MDBoxLayout:
+                md_bg_color: [0.2,0.2,.8,1]
                 size_hint_y: 0.5
                 FitImage:
-                    source: 'images/logos/logo3.png'
+                    source: 'images/logos/logo31.png'
+
+
             MDSeparator:
                 height: dp(2)
                 color: [0,0,0,1]
@@ -861,10 +860,46 @@ NavigationLayout:
                     text:"Exit"
                     on_press:app.stop()
 
-            BoxLayout:
-                orientation: 'vertical'
+            MDGridLayout:
+                rows: 2
                 pos_hint: {'center_x':0.5}
                 size_hint_y: 0.3
+                md_bg_color: [.8,.8,.8,1]
+                MDBoxLayout:
+                    size_hint_y: 0.02
+                    md_bg_color: [.8,.8,.8,1]
+                MDBoxLayout:
+                    md_bg_color: [.4,.4,.4,1]
+                    orientation: 'vertical'
+                    size_hint_y: 0.98
+                    padding: dp(15)
+
+                    MDBoxLayout:
+                        cols: 2
+                        orientation: 'horizontal'
+                        padding: dp(2)
+                        Image:
+                            source: 'images/apth2.png'
+                            size_hint_x: 0.2
+                        Label:
+                            size_hint_x: 0.8
+
+                    MDLabel:
+                        size_hint_y:0.6
+                        text: 'Version: 1.0'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+                    MDLabel:
+                        text: 'Aknowledgements: Dionisis Chala, Michail Tsinoglou'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+                    MDLabel:
+                        text: '\u00A9 2020 Aristotle University of Thessaloniki. All rights reserved'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+
+
+
 
 
 

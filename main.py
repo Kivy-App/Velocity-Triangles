@@ -30,16 +30,18 @@ class P(BoxLayout):
 	pass
 
 def firstPopup():
-	# show = P()
+	show = P()
 	# create content for the Popup
 	# bl = BoxLayout(orientation='vertical',padding = 30)
 	label = 'You should not put less than 3 variables at the first segment'
 	# ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	# bl.add_widget(label)
-	#popupWindow = MDDialog(title = " Error ",text = label,size_hint=(None, None), size=('350dp' ,'350dp'), md_bg_color = [1,1,1,1])
-	popupWindow = MDDialog( title=" Error occurred",type = 'custom', content_cls = Content(), buttons=[MDFlatButton(text="CANCEL", text_color= [0,0,0,1]),
-                MDFlatButton(text="ACCEPT", text_color= [0,0,0,1])],size_hint=(None, None), size=('350dp' ,'350dp'))
+	popupWindow =  MDDialog(
+    text="Oops! Something seems to have gone wrong!",size_hint=(None, 0.5),size=('350dp','100dp'),
+    radius=[20, 7, 20, 7],
+)
+	# popupWindow = Popup(title="", content=show, size_hint=(None, None), size=('350dp' ,'350dp'))
 	#bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
@@ -136,7 +138,7 @@ def diamPopup():
 
 class VelocityTriangles(Screen):
 	########## Window properties #########
-	# Config.set('graphics', 'resizable', True)
+	Config.set('graphics', 'resizable', True)
 	Window.size = (400, 700)
 	# Window.Keyboard_anim_args = {'d':.2 , "t": in_out_expo}
 	Window.softinput_mode = "below_target"
