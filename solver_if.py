@@ -43,8 +43,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 	else:
 		b2e = float(b2e)
 		b2 = np.radians(b2e)
-	print(X)
-	
+
 	k=len(X)
 	t=len(X)
 
@@ -273,14 +272,6 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			fe = -(2 * rne) / (np.tan(b2) - np.tan(b1))
 			a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
 			a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
-
-	# print("pe:", pe)
-	# print("fe:", fe)
-	# print("rne:", rne)
-	# print("a1e:", a1e)
-	# print("a2e:", a2e)
-	# print("b1e:", b1e)
-	# print("b2e:", b2e)
 
 	pe = str(round(float(pe),3))
 	fe = str(round(float(fe),3))

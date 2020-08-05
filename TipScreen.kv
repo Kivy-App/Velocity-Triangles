@@ -9,8 +9,42 @@
 		size_hint: 1,1
 		scroll_wheel_distance: '80dp'
         GridLayout:
-            size_hint_y: 1.84
-            rows: 8
+            size_hint_y: 1.92
+            rows: 9
+            GridLayout:
+                cols:2
+                size_hint_y: 0.08
+                BoxLayout:
+                    size_hint_x:0.15
+                    MDIconButton:
+                        id:info_button
+                        pos:self.parent.pos
+                        size:self.parent.size
+                        user_font_size:dp(30)
+                        icon:'menu'
+                        on_release: root.nav_drawer.set_state('open')
+
+                BoxLayout:
+                    size_hint_x: 0.85
+                    canvas:
+                        Color:
+                            rgba:0,0,0,0
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                        Color:
+                            rgba: 1,1,1,1
+                        Line:
+                            width: dp(1)
+                            points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                    Label:
+                        text: '  VTA-APP'
+                        color: [1,1,1,1]
+                        font_name: 'BlackHanSans-Regular.ttf'
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                        font_size: dp(30)
             ##### Title ####
             BoxLayout:
 				size_hint_y: 0.08
@@ -47,6 +81,11 @@
 			FloatLayout:
 				size_hint_y: 0.4
 				canvas:
+				    Color:
+                        rgba: 0.35,.45,0.55,1
+                    Line:
+                        width:dp(3)
+                        points:(self.x+self.width/2,self.y+self.height,self.x+self.width*0.75,self.y+self.height)
 					Color:
 						rgba: 0.6862,0.9333,0.9333,0.737
                     Rectangle:
@@ -860,13 +899,13 @@
 						points:
 							((float(root.xLtText),self.y + float(root.yRtText) + dp(20),float(root.xLtText)+ dp(20),self.y + float(root.yRtText) + dp(20) + dp(3),\
 							float(root.xLtText)+ dp(20),self.y + float(root.yRtText) + dp(20) - dp(3))\
-							if root.tc_namemText == 'Compressor Middle' else\
+							if root.tc_nametText == 'Compressor Tip' else\
 							(float(root.xRtText),self.y + float(root.yRtText) + dp(20),float(root.xRtText)- dp(20),self.y + float(root.yRtText) + dp(20) + dp(3),\
 							float(root.xRtText)- dp(20),self.y + float(root.yRtText) + dp(20) - dp(3)))\
 							if float(root.yRtText) > float(root.yLtText) else\
 							((float(root.xLtText),self.y + float(root.yLtText) + dp(20),float(root.xLtText)+ dp(20),self.y + float(root.yLtText) + dp(20) + dp(3),\
 							float(root.xLtText)+ dp(20),self.y + float(root.yLtText) + dp(20) - dp(3))\
-							if root.tc_namemText == 'Compressor Middle' else\
+							if root.tc_nametText == 'Compressor Tip' else\
 							(float(root.xRtText),self.y + float(root.yLtText) + dp(20),float(root.xRtText)- dp(20),self.y + float(root.yLtText) + dp(20) + dp(3),\
 							float(root.xRtText)- dp(20),self.y + float(root.yLtText) + dp(20) - dp(3)))
 
@@ -933,7 +972,7 @@
 						self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(35))
 
 				Label:
-					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
+					text:'1' if root.tc_nametText == 'Compressor Tip' else '3'
 					pos:
 						(-float(root.UtpText)/2-float(root.x0tText)+float(root.xLtText) - dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.yRtText) + dp(17))\

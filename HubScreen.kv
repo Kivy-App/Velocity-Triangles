@@ -9,8 +9,43 @@
 		size_hint: 1,1
 		scroll_wheel_distance: '80dp'
         GridLayout:
-            size_hint_y: 1.84
-            rows: 8
+            size_hint_y: 1.92
+            rows: 9
+    ############ Overall Title ######################
+            GridLayout:
+                cols:2
+                size_hint_y: 0.08
+                BoxLayout:
+                    size_hint_x:0.15
+                    MDIconButton:
+                        id:info_button
+                        size:self.parent.size
+                        pos:self.parent.pos
+                        user_font_size:dp(30)
+                        icon:'menu'
+                        on_release: root.nav_drawer.set_state('open')
+
+                BoxLayout:
+                    size_hint_x: 0.85
+                    canvas:
+                        Color:
+                            rgba:0,0,0,0
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+                        Color:
+                            rgba: 1,1,1,1
+                        Line:
+                            width: dp(1)
+                            points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                    Label:
+                        text: '  VTA-APP'
+                        color: [1,1,1,1]
+                        font_name: 'BlackHanSans-Regular.ttf'
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                        font_size: dp(30)
             ##### Title ####
             BoxLayout:
 				size_hint_y: 0.08
@@ -28,8 +63,10 @@
             BoxLayout:
                 size_hint_y:0.06
                 orientation: 'horizontal'
+
                 MDFlatButton:
                     text: 'HUB'
+
                 MDFlatButton:
                     text: 'MID'
                     on_release: root.manager.current = 'mid_sc'
@@ -40,10 +77,18 @@
                     text: 'Comp'
                     on_release: root.manager.current = 'comp_sc'
 
+
             ############# Image Box ##############
 			FloatLayout:
 				size_hint_y: 0.4
+
+
 				canvas:
+				    Color:
+                        rgba: 0.35,.45,0.55,1
+                    Line:
+                        width:dp(3)
+                        points:(self.x,self.y+self.height,self.x+self.width/4,self.y+self.height)
 					Color:
 						rgba: 0.6862,0.9333,0.9333,0.737
                     Rectangle:
@@ -849,13 +894,13 @@
 						points:
 							((float(root.xLhText),self.y + float(root.yLhText) + dp(20),float(root.xLhText)+ dp(20),self.y + float(root.yLhText) + dp(20) + dp(3),\
 							float(root.xLhText)+ dp(20),self.y + float(root.yLhText) + dp(20) - dp(3))\
-							if root.tc_namemText == 'Compressor Middle' else\
+							if root.tc_namehText == 'Compressor Hub' else\
 							(float(root.xRhText),self.y + float(root.yLhText) + dp(20),float(root.xRhText)- dp(20),self.y + float(root.yLhText) + dp(20) + dp(3),\
 							float(root.xRhText)- dp(20),self.y + float(root.yLhText) + dp(20) - dp(3)))\
 							if float(root.yLhText) > float(root.yRhText) else \
 							((float(root.xLhText),self.y + float(root.yRhText) + dp(20),float(root.xLhText)+ dp(20),self.y + float(root.yRhText) + dp(20) + dp(3),\
 							float(root.xLhText)+ dp(20),self.y + float(root.yRhText) + dp(20) - dp(3))\
-							if root.tc_namemText == 'Compressor Middle' else\
+							if root.tc_namehText == 'Compressor Hub' else\
 							(float(root.xRhText),self.y + float(root.yRhText) + dp(20),float(root.xRhText)- dp(20),self.y + float(root.yRhText) + dp(20) + dp(3),\
 							float(root.xRhText)- dp(20),self.y + float(root.yRhText) + dp(20) - dp(3)))
 
@@ -921,7 +966,7 @@
 						self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(35))
 
 				Label:
-					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
+					text:'1' if root.tc_namehText == 'Compressor Hub' else '3'
 					pos:
 						(-float(root.UhpText)/2-float(root.x0hText)+float(root.xLhText) - dp(15),\
 						self.parent.y - self.parent.height/2 + float(root.yLhText) + dp(17))\

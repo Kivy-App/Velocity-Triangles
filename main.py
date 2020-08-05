@@ -4,7 +4,7 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.lang import Builder
+# from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
 from kivy.uix.popup import Popup
@@ -13,15 +13,13 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-from scipy.optimize import fsolve
+# from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
-from system_solver import system_solver1
+# from system_solver import system_solver1
 from solver_if import system_if
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.label import MDLabel
-from kivymd.uix.navigationdrawer import NavigationLayout as NL
+
 
 class Content(BoxLayout):
 	pass
@@ -137,13 +135,11 @@ def diamPopup():
 
 
 class VelocityTriangles(Screen):
+
 	########## Window properties #########
 	Config.set('graphics', 'resizable', True)
 	Window.size = (400, 700)
-	# Window.Keyboard_anim_args = {'d':.2 , "t": in_out_expo}
 	Window.softinput_mode = "below_target"
-
-		
 
 	######### Variable properties ########
 	p  = ObjectProperty(None)
@@ -169,7 +165,6 @@ class VelocityTriangles(Screen):
 	l = NumericProperty(0)
 	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
-	bbl = NumericProperty(0) ##### Bubble Variable #####
 
 	#### Values of checkboxes state ##########
 	ch1_value = ObjectProperty('normal')
@@ -178,41 +173,18 @@ class VelocityTriangles(Screen):
 	ch4_value = ObjectProperty('normal')
 	ch5_value = ObjectProperty('normal')
 
-############ Debuging for smaller screens #################
-	if Window.size[0] > 800 and Window.size[0] < 1000:
-		l = 10 / 11
-	else:
-		l = 1
+# 		l = Label(text=' This application was created to extract an easy and fast velocity \n'
+# 					   ' analysis for one stage of a turbomachine. It can analize the \n'
+# 					   ' velocities of both compressor and turbine and it is divided into 2 \n'
+# 					   ' compartments. The first compartment extracts the non dimensional\n'
+# 					   ' velocity charts through input of coefficients and angles. To achieve\n'
+# 					   ' the non dimensional analysis you should complete 3 off the first \n'
+# 					   ' segments inputs. The second compartment extracts the dimensional\n'
+# 					   ' analysis. At the second compartment you should fill all the enabled\n'
+# 					   ' input slots. Note that the first compartments can work without\n'
+# 					   ' filling the second but it doesnt work the other way around.\n'
+# 					   ' [color=ff3333][b] To dismiss info panel press the info button once more. [/b][/color]'
 
-	DPI = Metrics.dpi/96
-
-############ Function of creating info bubble ############
-	def showbubble(self):
-		self.bbl += 1
-		global bubb
-		bubb = Bubble(orientation='vertical', size_hint=(0.98, 0.27), arrow_pos='top_right',
-						  pos_hint={'x': 0.01, 'y': 0.65}, background_color = (1, 0, 0, 1))
-		l = Label(text=' This application was created to extract an easy and fast velocity \n'
-					   ' analysis for one stage of a turbomachine. It can analize the \n'
-					   ' velocities of both compressor and turbine and it is divided into 2 \n'
-					   ' compartments. The first compartment extracts the non dimensional\n'
-					   ' velocity charts through input of coefficients and angles. To achieve\n'
-					   ' the non dimensional analysis you should complete 3 off the first \n'
-					   ' segments inputs. The second compartment extracts the dimensional\n'
-					   ' analysis. At the second compartment you should fill all the enabled\n'
-					   ' input slots. Note that the first compartments can work without\n'
-					   ' filling the second but it doesnt work the other way around.\n'
-					   ' [color=ff3333][b] To dismiss info panel press the info button once more. [/b][/color]'
-				  , markup = True
-				  ,halign='left', valign='top'
-				  ,color=[1,1,1,1], font_size='12dp')
-		bubb.add_widget(l)
-		self.add_widget(bubb)
-
-############ Function of destroying info bubble ############
-	def destroybubble(self):
-		self.remove_widget(bubb)
-		self.bbl += 1
 
 	def systemsolver(self):
 		try:
@@ -251,10 +223,8 @@ class VelocityTriangles(Screen):
 			Rh3e = str(self.rh2t3.text)
 			Ne = str(self.n.text)
 
-
-
 			##################   System_Solver  ################
-			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_solver1(pe,fe,rne,a1e,a2e,b1e,b2e)
+			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_if(pe,fe,rne,a1e,a2e,b1e,b2e)
 
 			############################# Drawing Triangles ######################################
 			global U
@@ -265,8 +235,6 @@ class VelocityTriangles(Screen):
 
 			x0,y0 = Window.size[0]*130/400,Window.size[1]*80/700
 			x1,y1 = Window.size[0]*270/400,Window.size[1]*80/700
-			# x0, y0 = self.width/2 - 100, Window.size[1] * 150 / 700
-			# x1, y1 = self.width/2 + 100, Window.size[1] * 150 / 700
 			U = x1-x0
 			xL = x1 - U*float(rne)-U*float(pe)/2
 			yL = y0 + U*float(fe)
