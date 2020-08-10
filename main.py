@@ -13,10 +13,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-# from scipy.optimize import fsolve
+from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
-# from system_solver import system_solver1
+from system_solver import system_solver1
 from solver_if import system_if
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.expansionpanel import MDExpansionPanel
@@ -224,7 +224,7 @@ class VelocityTriangles(Screen):
 			Ne = str(self.n.text)
 
 			##################   System_Solver  ################
-			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_if(pe,fe,rne,a1e,a2e,b1e,b2e)
+			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_solver1(pe,fe,rne,a1e,a2e,b1e,b2e)
 
 			############################# Drawing Triangles ######################################
 			global U
@@ -1065,15 +1065,15 @@ class MidScreen(Screen):
 	y0Text = StringProperty('0')
 	x1Text = StringProperty('0')
 	y1Text = StringProperty('0')
-	UText = StringProperty('0')
+	UText = StringProperty('1')
 	xLText = StringProperty('0')
 	yLText = StringProperty('0')
 	xRText = StringProperty('0')
 	yRText = StringProperty('0')
 
-	UmText = StringProperty('0')
-	UtText = StringProperty('0')
-	UhText = StringProperty('0')
+	UmText = StringProperty('1')
+	UtText = StringProperty('1')
+	UhText = StringProperty('1')
 	VxText = StringProperty('0')
 	V1Text = StringProperty('0')
 	V2Text = StringProperty('0')
@@ -1124,7 +1124,7 @@ class HubScreen(Screen):
 	b1hText = StringProperty('0')
 	b2hText = StringProperty('0')
 
-	UhText = StringProperty('0')
+	UhText = StringProperty('1')
 	UmText = StringProperty('1')
 	Vx1hText = StringProperty('0')
 	Vx2hText = StringProperty('0')
@@ -1143,7 +1143,7 @@ class HubScreen(Screen):
 	x0hText = StringProperty('0')
 	x1hText = StringProperty('0')
 	UhpText = StringProperty('0')
-	UText = StringProperty('0')
+	UText = StringProperty('1')
 	xLhText = StringProperty('0')
 	yLhText = StringProperty('0')
 	xRhText = StringProperty('0')
@@ -1189,7 +1189,7 @@ class TipScreen(Screen):
 	b1tText = StringProperty('0')
 	b2tText = StringProperty('0')
 
-	UtText = StringProperty('0')
+	UtText = StringProperty('1')
 	UmText = StringProperty('1')
 	Vx1tText = StringProperty('0')
 	Vx2tText = StringProperty('0')

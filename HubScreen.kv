@@ -927,10 +927,10 @@
 							self.y + float(root.y1Text) + dp(20),float(root.xLhText) - dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
 
 	###################   Labels   ##########################
-				Label:
-					pos: (float(root.ptnh_xText),self.parent.y - self.parent.height/2 + dp(30))
-					text: root.tc_namehText
-					color: 1,0,0,1
+#				Label:
+#					pos: (float(root.ptnh_xText),self.parent.y - self.parent.height/2 + dp(30))
+#					text: root.tc_namehText
+#					color: 1,0,0,1
 
 				Label:
 					text: 'U'
@@ -990,6 +990,8 @@
                     text:
                         'Hub triangles were ' + (str(round(100*(1-(float(root.UhpText)*float(root.UmText)/(float(root.UhText)*float(root.UText)))),1))) + ' %' + ' scaled down.'\
                         if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
+
+
             GridLayout:
 				cols:2
 				size_hint_y: 0.1
