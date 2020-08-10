@@ -19,9 +19,9 @@ from kivymd.app import MDApp
 # from system_solver import system_solver1
 from solver_if import system_if
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.expansionpanel import MDExpansionPanel
 
-
-class Content(BoxLayout):
+class Content(BoxLayout):    ######## WHAT IS THAT ??????  #####
 	pass
 
 class P(BoxLayout):
@@ -978,7 +978,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').xR2dtText = str(xR2dt)
 		self.manager.get_screen('comp_sc').yR2dtText = str(yR2dt)
 		
-		
+
 
 class NewWindow(Screen):
 
