@@ -1,5 +1,11 @@
+#<Description>:
+#    Label:
+#        text: 'hello'
+
+
 <InfoScreen>:
     name:"info"
+
     BoxLayout:
         orientation:"vertical"
         GridLayout:
@@ -17,6 +23,7 @@
 
             BoxLayout:
                 size_hint_x: 0.85
+
                 canvas:
                     Color:
                         rgba:0,0,0,0
@@ -36,9 +43,18 @@
                     halign: 'left'
                     valign: 'middle'
                     font_size: dp(30)
-        BoxLayout:
+
+        GridLayout:
             size_hint_y:0.92
-            Label:
-                text: 'info'
+            id: 'panel_container'
+            cols: 1
+
+#            MDExpansionPanelOneLine:
+#                text: 'info'
+#                on_press: root.kati
+#            MDExpansionPanelOneLine:
+#                text: 'info'
+#                content : Description()
+
 
 

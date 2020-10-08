@@ -13,7 +13,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-from scipy.optimize import fsolve
+# from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
@@ -31,16 +31,12 @@ def firstPopup():
 	show = P()
 	# create content for the Popup
 	# bl = BoxLayout(orientation='vertical',padding = 30)
-	label = 'You should not put less than 3 variables at the first segment'
-	# ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
-
+	# label = Label(text = 'You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[0, 0, 0, 1],font_size = '18dp')
+	#
 	# bl.add_widget(label)
-	popupWindow =  MDDialog(
-    text="Oops! Something seems to have gone wrong!",size_hint=(None, 0.5),size=('350dp','100dp'),
-    radius=[20, 7, 20, 7],
-)
-	# popupWindow = Popup(title="", content=show, size_hint=(None, None), size=('350dp' ,'350dp'))
-	#bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+
+	popupWindow = Popup(title="Error", content=show, size_hint=(None, None), size=('350dp','350dp'))
+	# bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P2(BoxLayout):
@@ -977,7 +973,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').yR2utText = str(yR2ut)
 		self.manager.get_screen('comp_sc').xR2dtText = str(xR2dt)
 		self.manager.get_screen('comp_sc').yR2dtText = str(yR2dt)
-		
+
 
 
 class NewWindow(Screen):
@@ -1333,14 +1329,17 @@ class CompScreen(Screen):
 
 	pass
 
+# class Description(BoxLayout):
+# 	pass
+
 class InfoScreen(Screen):
 	pass
+
 
 class WindowManager(ScreenManager):
 	pass
 
-# class WindowManager1(ScreenManager):
-# 	pass
+
 
 class MainApp(MDApp):
 	def __init__(self, **kwargs):
@@ -1348,6 +1347,10 @@ class MainApp(MDApp):
 		self.theme_cls.theme_style = "Dark"
 		self.theme_cls.primary_palette = "Blue"
 		super().__init__(**kwargs)
+
+		# def on_start(self):
+		# 	panel = MDExpansionPanel(title='info', icon='images/perigramma.png', content = Description())
+		# 	self.root.ids.panel_container.add_widget(panel)
 
 
 MainApp().run()
