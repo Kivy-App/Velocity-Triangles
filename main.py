@@ -13,7 +13,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-# from scipy.optimize import fsolve
+from scipy.optimize import fsolve
 from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
