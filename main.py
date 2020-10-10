@@ -18,7 +18,7 @@ from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
 from solver_if import system_if
-from kivymd.uix.dialog import MDDialog
+# from kivymd.uix.dialog import MDDialog
 from kivymd.uix.expansionpanel import MDExpansionPanel
 
 class Content(BoxLayout):    ######## WHAT IS THAT ??????  #####
