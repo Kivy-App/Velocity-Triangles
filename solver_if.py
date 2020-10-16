@@ -1,7 +1,7 @@
 import numpy as np
 
-
-def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
+def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
+	
 
 	X = []
 
@@ -44,10 +44,10 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		b2e = float(b2e)
 		b2 = np.radians(b2e)
 
-	k = len(X)
-	t = len(X)
+	k=len(X)
+	t=len(X)
 
-	# ############################## ψ,φ,Rn ######################################
+	############################### ψ,φ,Rn ######################################
 
 	if X == [4, 5, 6, 7]:  # p,f,r
 		a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
@@ -55,7 +55,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
 		b2e = np.degrees(np.arctan(((pe / 2) - rne) / fe))
 
-	# ############################## μόνο γωνίες ######################################
+	############################### μόνο γωνίες ######################################
 
 	if X == [1, 2, 3, 7]:  # a1,a2,b1
 		pe = (np.tan(a1) + np.tan(a2)) / (np.tan(b1) - np.tan(a1))
@@ -81,7 +81,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		rne = (np.tan(b2) - np.tan(b1)) / (2 * (np.tan(b2) - np.tan(a2)))
 		a1e = -np.degrees(np.arctan(np.tan(a2) - np.tan(b1) - np.tan(b2)))
 
-	# ############################## ψ,φ,γωνίες ######################################
+	############################### ψ,φ,γωνίες ######################################
 
 	if X == [3, 5, 6, 7]:  # p,f,a1
 		rne = fe * np.tan(a1) - pe / 2 + 1
@@ -107,7 +107,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 		b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
 
-	# ############################## φ,Rn,γωνίες ######################################
+	############################### φ,Rn,γωνίες ######################################
 
 	if X == [1, 5, 6, 7]:  # f,r,a1
 		pe = 2 * (fe * np.tan(a1) + 1 - rne)
@@ -133,7 +133,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 		b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
 
-	# ############################## ψ,Rn,γωνίες ######################################
+	############################### ψ,Rn,γωνίες ######################################
 
 	if X == [2, 5, 6, 7]:  # p,r,a1
 		fe = (pe / 2 - 1 + rne) / np.tan(a1)
@@ -159,12 +159,13 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 		b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
 
-	# ############################## ψ,2 γωνίες ######################################
+	############################### ψ,2 γωνίες ######################################
 
 		# a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
 		# a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 		# b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
 		# b2e = np.degrees(np.arctan(((pe / 2) - rne) / fe))
+
 
 	if X == [2, 3, 6, 7]:  # p,a1,a2
 		rne = (pe * np.tan(a1) + 2 * np.tan(a1) - pe * np.tan(a2) + 2 * np.tan(a2)) / (2 * (np.tan(a1) + np.tan(a2)))
@@ -198,11 +199,11 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 
 	if X == [2, 3, 4, 5]:  # p,b1,b2
 		fe = pe / (np.tan(b1) + np.tan(b2))
-		rne = (-pe / 2) * ((np.tan(b2) - np.tan(b1)) / (np.tan(b1) + np.tan(b2)))
+		rne = (-pe / 2) * ((np.tan(b2) - np.tan(b1)) /  (np.tan(b1) + np.tan(b2)))
 		a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 
-	# ############################## φ,2 γωνίες ######################################
+	############################### φ,2 γωνίες ######################################
 
 	if X == [1, 3, 6, 7]:  # f,a1,a2
 		pe = fe * (np.tan(a1) + np.tan(a2))
@@ -240,7 +241,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 
-	# ############################## Rn,2 γωνίες ######################################
+	############################### Rn,2 γωνίες ######################################
 
 	# if  X == [1,2,6,7]:               #r,a1,a2
 
@@ -261,7 +262,7 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 		b1e = np.degrees(np.arctan(2 * rne * np.tan(a2) - 2 * rne * np.tan(b2) + np.tan(b2)))
 
 	if X == [1, 2, 4, 5]:  # r,b1,b2
-		if rne == 0 and b1e == b2e:
+		if rne == 0 and  b1e == b2e:
 			pe = 1
 			fe = (pe / 2 + rne) / np.tan(b1)
 			a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
@@ -272,14 +273,14 @@ def system_if(pe, fe, rne, a1e, a2e, b1e, b2e):
 			a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
 			a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
 
-	pe = str(round(float(pe), 3))
-	fe = str(round(float(fe), 3))
-	rne = str(round(float(rne), 3))
-	a1e = str(round(float(a1e), 3))
-	a2e = str(round(float(a2e), 3))
-	# a3e = str(round(float(a3e), 3))
-	b1e = str(round(float(b1e), 3))
-	b2e = str(round(float(b2e), 3))
-	# b3e = str(round(float(b3e), 3))
+	pe = str(round(float(pe),3))
+	fe = str(round(float(fe),3))
+	rne = str(round(float(rne),3))
+	a1e = str(round(float(a1e),3))
+	a2e = str(round(float(a2e),3))
+	#a3e = str(round(float(a3e),3))
+	b1e = str(round(float(b1e),3))
+	b2e = str(round(float(b2e),3))
+	#b3e = str(round(float(b3e),3))
 
-	return pe, fe, rne, a1e, a2e, b1e, b2e, k, t
+	return pe,fe,rne,a1e,a2e,b1e,b2e,k,t
