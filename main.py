@@ -4,7 +4,6 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-# from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
 from kivy.uix.popup import Popup
@@ -13,41 +12,40 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-# from scipy.optimize import fsolve
-from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 from system_solver import system_solver1
 from solver_if import system_if
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.expansionpanel import MDExpansionPanel
 
 
 class Content(BoxLayout):
 	pass
 
+
 class P(BoxLayout):
 	pass
+
 
 def firstPopup():
 	show = P()
 	# create content for the Popup
-	# bl = BoxLayout(orientation='vertical',padding = 30)
-	# label = Label(text = 'You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[0, 0, 0, 1],font_size = '18dp')
-	#
-	# bl.add_widget(label)
+	bl = BoxLayout(orientation='vertical',padding=30)
+	label = Label(text='You should not put less than 3 \n variables at the first segment',halign='center',valign='middle', color=[0, 0, 0, 1], font_size='18dp')
 
-	popupWindow = Popup(title="Error", content=show, size_hint=(None, None), size=('350dp','350dp'))
-	# bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	bl.add_widget(label)
+	popupWindow = Popup(title="Error", content=show, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
+
 
 class P2(BoxLayout):
 	pass
 
+
 def secondPopup():
 	show = P2()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' This combination of variables \n'
+	bl = BoxLayout(orientation='vertical', padding=30)
+	label = Label(text=' This combination of variables \n'
 						 ' is not valid. It seems that \n'
 						 ' with this combination  \n'
 						 ' Loading coefficient \u03C8 or \n'
@@ -55,49 +53,55 @@ def secondPopup():
 						 ' Please try again with new varieables.',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
+
 
 class P3(BoxLayout):
 	pass
 
+
 def thirdPopup():
 	show = P3()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding=30)
-	label = Label(text = ' Dimensional measurements \n missing. Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical', padding=30)
+	label = Label(text=' Dimensional measurements \n missing. Please fill all the \n required measurements ', halign='center', valign='middle', color=[1, 0, 0, 1], font_size='18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
+
 
 class P4(BoxLayout):
 	pass
 
+
 def fourthPopup():
 	show = P3()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' You should not put more than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical',padding=30)
+	label = Label(text=' You should not put more than 3 \n variables at the first segment', halign='center', valign='middle', color=[1, 0, 0, 1], font_size='18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
+
 
 class Prpm(BoxLayout):
 	pass
 
+
 def rpmPopup():
 	show = Prpm()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Revoloutions per minute have \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical', padding=30)
+	label = Label(text=' Revoloutions per minute have \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
 	bl.add_widget(
 		Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
@@ -108,26 +112,28 @@ class Ph2t(BoxLayout):
 def h2tPopup():
 	show = Ph2t()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Hub to tip ratio has \n to be positive number \n and less than one. \n Please try again with \n a valid value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical', padding=30)
+	label = Label(text=' Hub to tip ratio has \n to be positive number \n and less than one. \n Please try again with \n a valid value' , halign='center', valign='middle', color=[1, 0, 0, 1], font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
+
 
 class Pdiam(BoxLayout):
 	pass
 
+
 def diamPopup():
 	show = Pdiam()
 	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Diameter  has to\n be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical', padding= 30)
+	label = Label(text = ' Diameter  has to\n be positive number. \n Please try again with \n a positive value', halign='center', valign='middle', color=[1, 0, 0, 1], font_size='18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp', '350dp'))
+	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
 	popupWindow.open()
 
 
@@ -139,8 +145,8 @@ class VelocityTriangles(Screen):
 	Window.softinput_mode = "below_target"
 
 	######### Variable properties ########
-	p  = ObjectProperty(None)
-	f  = ObjectProperty(None)
+	p = ObjectProperty(None)
+	f = ObjectProperty(None)
 	rn = ObjectProperty(None)
 	a1 = ObjectProperty(None)
 	a2 = ObjectProperty(None)
@@ -160,10 +166,10 @@ class VelocityTriangles(Screen):
 
 	n = ObjectProperty(None)
 	l = NumericProperty(0)
-	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
-	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
+	k = NumericProperty(0)  # ## Debugging tool for less than 3 variables and for not changing window ######
+	t = NumericProperty(0)  # ## Debugging tool for more than 3 variables ####
 
-	#### Values of checkboxes state ##########
+	# ### Values of checkboxes state ##########
 	ch1_value = ObjectProperty('normal')
 	ch2_value = ObjectProperty('normal')
 	ch3_value = ObjectProperty('normal')
@@ -194,8 +200,8 @@ class VelocityTriangles(Screen):
 			global rne
 			global i
 
-			pe  = str(self.p.text)
-			fe  = str(self.f.text)
+			pe = str(self.p.text)
+			fe = str(self.f.text)
 			rne = str(self.rn.text)
 			a1e = str(self.a1.text)
 			a2e = str(self.a2.text)
@@ -220,27 +226,27 @@ class VelocityTriangles(Screen):
 			Rh3e = str(self.rh2t3.text)
 			Ne = str(self.n.text)
 
-			##################   System_Solver  ################
-			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_solver1(pe,fe,rne,a1e,a2e,b1e,b2e)
+			# #################   System_Solver  ################
+			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t = system_solver1(pe, fe, rne, a1e, a2e, b1e, b2e)
 
-			############################# Drawing Triangles ######################################
+			# ############################ Drawing Triangles ######################################
 			global U
 			global x0
 			global y0
 			global x1
 			global y1
 
-			x0,y0 = Window.size[0]*130/400,Window.size[1]*80/700
-			x1,y1 = Window.size[0]*270/400,Window.size[1]*80/700
+			x0, y0 = Window.size[0]*130/400,Window.size[1]*80/700
+			x1, y1 = Window.size[0]*270/400,Window.size[1]*80/700
 			U = x1-x0
 			xL = x1 - U*float(rne)-U*float(pe)/2
 			yL = y0 + U*float(fe)
-			xR = x1 - U*float(rne) +U*float(pe)/2
+			xR = x1 - U*float(rne)+U*float(pe)/2
 			yR = y0 + U*float(fe)
 
-	######### While functions for triangles fitting #########
-			while xL < self.x + Window.size[0]*60/400 or xR > self.width -  Window.size[0]*80/400 or yL >  Window.size[1]*220/700 \
-					or xR < self.x +  Window.size[0]*60/400 or xL > self.width -  Window.size[0] * 80 / 400:
+	# ######## While functions for triangles fitting #########
+			while xL < self.x + Window.size[0]*60/400 or xR > self.width - Window.size[0]*80/400 or yL > Window.size[1]*220/700\
+					or xR < self.x + Window.size[0]*60/400 or xL > self.width - Window.size[0] * 80 / 400:
 
 				x0 = x0 + 1
 				x1 = x1 - 1
@@ -251,14 +257,14 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			############### Computing base angles  ############################
+			# ############## Computing base angles  ############################
 
 			a1d = 180 + float(a1e) - 90
 			a2d = 180 - float(a2e) - 90
 			b1d = 180 - float(b1e) - 90
 			b2d = 180 - float(b2e) - 90
 
-			############### Computing rotating arrow points  ############################
+			# ############## Computing rotating arrow points  ############################
 
 			xL1u = x0 + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1d + 11.3))
 			yL1u = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1d + 11.3))
@@ -280,7 +286,7 @@ class VelocityTriangles(Screen):
 			xR2d = x1 + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2d - 11.3))
 			yR2d = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2d - 11.3))
 
-			######################### Choosing if it is Turbine or Compressor ###################
+			# ######################## Choosing if it is Turbine or Compressor ###################
 			if self.ch1_value == 'down':
 				tc = 0  # turbine
 				tc_namem = 'Turbine Middle'
@@ -334,16 +340,16 @@ class VelocityTriangles(Screen):
 						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 
 
-#####################  Checking if the second compartment is completed ####################
+# ####################  Checking if the second compartment is completed ####################
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				self.check = 1
 			else:
 				self.check = 0
-############################################################################################
+# ###########################################################################################
 
-################ Case of  Both Compartments filled #########################################
+# ############### Case of  Both Compartments filled #########################################
 			if self.check == 0:	
-				############### Passing the Results on the Second Screen  ####################
+				# ############## Passing the Results on the Second Screen  ####################
 				self.manager.get_screen('mid_sc').pText = pe
 				self.manager.get_screen('mid_sc').fText = fe
 				self.manager.get_screen('mid_sc').rnText = rne
@@ -354,7 +360,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('mid_sc').b2Text = b2e
 				self.manager.get_screen('mid_sc').b3Text = b3e
 	
-				############### Passing the Triangles Points on the Second Screen  ##################
+				# ############## Passing the Triangles Points on the Second Screen  ##################
 				self.manager.get_screen('mid_sc').x0Text = str(x0)
 				self.manager.get_screen('mid_sc').y0Text = str(y0)
 				self.manager.get_screen('hub_sc').y0Text = str(y0)
@@ -369,7 +375,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('mid_sc').xRText = str(xR)
 				self.manager.get_screen('mid_sc').yRText = str(yR)
 	
-				############### Passing the Arrow Points on the Second Screen  ##################
+				# ############## Passing the Arrow Points on the Second Screen  ##################
 				self.manager.get_screen('mid_sc').xL1uText = str(xL1u)
 				self.manager.get_screen('mid_sc').yL1uText = str(yL1u)
 				self.manager.get_screen('mid_sc').xL1dText = str(xL1d)
@@ -390,7 +396,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('mid_sc').xR2dText = str(xR2d)
 				self.manager.get_screen('mid_sc').yR2dText = str(yR2d)
 	
-				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
+				# ############## Passing the compressor or turbine text and possition on the Second Screen  ##################
 				self.manager.get_screen('mid_sc').tc_namemText = tc_namem
 				self.manager.get_screen('mid_sc').tc_namehText = tc_nameh
 				self.manager.get_screen('mid_sc').tc_nametText = tc_namet
@@ -404,7 +410,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('tip_sc').ptnt_xText = str(ptnt_x)
 
 
-				############### Passing the Triangles Points on the Second Screen  ##################
+				# ############## Passing the Triangles Points on the Second Screen  ##################
 				self.manager.get_screen('comp_sc').x0Text = str(x0)
 				self.manager.get_screen('comp_sc').y0Text = str(y0)
 				self.manager.get_screen('comp_sc').x1Text = str(x1)
@@ -415,7 +421,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('comp_sc').xRText = str(xR)
 				self.manager.get_screen('comp_sc').yRText = str(yR)
 
-				############### Passing the Arrow Points on the Second Screen  ##################
+				# ############## Passing the Arrow Points on the Second Screen  ##################
 				self.manager.get_screen('comp_sc').xL1uText = str(xL1u)
 				self.manager.get_screen('comp_sc').yL1uText = str(yL1u)
 				self.manager.get_screen('comp_sc').xL1dText = str(xL1d)
@@ -440,9 +446,9 @@ class VelocityTriangles(Screen):
 
 
 
-			################ Case of  the First Compartment filled #########################################
+			# ############### Case of  the First Compartment filled #########################################
 			else:
-				############### Passing the Results on the Second Screen  ############################
+				# ############## Passing the Results on the Second Screen  ############################
 				self.manager.get_screen('simple').pText = pe
 				self.manager.get_screen('simple').fText = fe
 				self.manager.get_screen('simple').rnText = rne
@@ -453,7 +459,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('simple').b2Text = b2e
 				self.manager.get_screen('simple').b3Text = b3e
 
-				############### Passing the Triangles Points on the Second Screen  ##################
+				# ############## Passing the Triangles Points on the Second Screen  ##################
 				self.manager.get_screen('simple').x0Text = str(x0)
 				self.manager.get_screen('simple').y0Text = str(y0)
 				self.manager.get_screen('simple').x1Text = str(x1)
@@ -464,7 +470,7 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('simple').xRText = str(xR)
 				self.manager.get_screen('simple').yRText = str(yR)
 
-				############### Passing the Arrow Points on the Second Screen  ##################
+				# ############## Passing the Arrow Points on the Second Screen  ##################
 				self.manager.get_screen('simple').xL1uText = str(xL1u)
 				self.manager.get_screen('simple').yL1uText = str(yL1u)
 				self.manager.get_screen('simple').xL1dText = str(xL1d)
@@ -485,13 +491,13 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('simple').xR2dText = str(xR2d)
 				self.manager.get_screen('simple').yR2dText = str(yR2d)
 
-				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
+				# ############## Passing the compressor or turbine text and possition on the Second Screen  ##################
 				self.manager.get_screen('simple').tc_namemText = tc_namem
 				self.manager.get_screen('simple').ptnm_xText = str(ptnm_x)
 
 
 
-################ Debugging Section #################
+# ############### Debugging Section #################
 			if self.k == 4:
 				if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
 					self.popup = secondPopup()
@@ -501,11 +507,11 @@ class VelocityTriangles(Screen):
 				self.k = 0
 
 		except:
-		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
+		# ######### It goes in to except if only variables are less than 3. So if is unnecesery #########
 			firstPopup()
 			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 
-################          Dimendional Analisys           ################################
+# ###############          Dimendional Analisys           ################################
 	def dml(self):
 		try:
 			global rh
@@ -556,14 +562,13 @@ class VelocityTriangles(Screen):
 
 			W2 = Vx / m.cos(m.radians(float(b2e)))
 
-
 			Vth1 = -V1 * m.sin(m.radians(float(a1e)))
 			Vth2 = V2 * m.sin(m.radians(float(a2e)))
 			Wth1 = -W1 * m.sin(m.radians(float(b1e)))
 			Wth2 = W2 * m.sin(m.radians(float(b2e)))
 
 
-			############### Passing the Results on the Second Screen  ##################
+			# ############## Passing the Results on the Second Screen  ##################
 			self.manager.get_screen('mid_sc').UmText = str(round(Um, 3))
 			self.manager.get_screen('mid_sc').VxText = str(round(Vx, 3))
 			self.manager.get_screen('mid_sc').V1Text = str(round(V1, 3))
@@ -579,7 +584,7 @@ class VelocityTriangles(Screen):
 
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
-				############### Passing empty slots  on the Second Screen  ##################
+				# ############## Passing empty slots  on the Second Screen  ##################
 				self.manager.get_screen('simple').UmText = ''
 				self.manager.get_screen('simple').UhText = ''
 				self.manager.get_screen('simple').UtText = ''
@@ -605,7 +610,7 @@ class VelocityTriangles(Screen):
 					self.k = 0
 					self.check = 1
 
-#######################     Radial Balance  Computation   #######################
+# ######################     Radial Balance  Computation   #######################
 	def h2t_triangles(self):
 		a = Um * (1 - float(rne))
 		b = Vth2 - a
@@ -620,7 +625,7 @@ class VelocityTriangles(Screen):
 			n = 2
 
 
-		#########    HUB    ##########
+		# ########    HUB    ##########
 		Vth1h = a * ((rh / rm))** n - b * (rm / rh)
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
 		Vx1h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) - b * ((rm / rh) - 1))))
@@ -647,7 +652,7 @@ class VelocityTriangles(Screen):
 		W1h = Vx1h / m.cos(m.radians(float(b1eh)))
 		W2h = Vx2h / m.cos(m.radians(float(b2eh)))
 
-		#############     Drawing Hub Triangles       ############
+		# ############     Drawing Hub Triangles       ############
 
 		Uhp = (Uh/Um)*U
 		difH = U - Uhp
@@ -678,7 +683,7 @@ class VelocityTriangles(Screen):
 		b1dh = 180 - float(b1eh) - 90
 		b2dh = 180 - float(b2eh) - 90
 
-		############### Computing rotating arrow points  ############################
+		# ############## Computing rotating arrow points  ############################
 
 		xL1uh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dh + 11.3))
 		yL1uh = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dh + 11.3))
@@ -701,7 +706,7 @@ class VelocityTriangles(Screen):
 		yR2dh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dh - 11.3))
 
 
-		#########    TIP    ##########
+		# ########    TIP    ##########
 		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
 		Vth2t = a * (rt / rm) ** n + b * (rm / rt)
 		Vx1t = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rt / rm) - b * ((rm / rt) - 1))))
@@ -736,7 +741,7 @@ class VelocityTriangles(Screen):
 		# Wth1t = -W1t * m.sin(m.radians(float(b1et)))
 		# Wth2t = W2t * m.sin(m.radians(float(b2et)))
 
-		#############     Tip Triangles Drwaing       ############
+		# ############     Tip Triangles Drwaing       ############
 
 		Utp = (Ut / Um) * U
 		difT = U - Utp
@@ -785,7 +790,7 @@ class VelocityTriangles(Screen):
 		b1dt = 180 - float(b1et) - 90
 		b2dt = 180 - float(b2et) - 90
 
-		############### Computing rotating arrow points  ############################
+		# ############## Computing rotating arrow points  ############################
 
 		xL1ut = x0t + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dt + 11.3))
 		yL1ut = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dt + 11.3))
@@ -807,7 +812,7 @@ class VelocityTriangles(Screen):
 		xR2dt = x1t + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dt - 11.3))
 		yR2dt = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dt - 11.3))
 
-		############### Passing Hub Results #################
+		# ############## Passing Hub Results #################
 		self.manager.get_screen('hub_sc').phText = str(round(peh, 3))
 		self.manager.get_screen('hub_sc').fh1Text = str(round(feh1, 3))
 		self.manager.get_screen('hub_sc').fh2Text = str(round(feh2, 3))
@@ -861,7 +866,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('hub_sc').yR2dhText = str(yR2dh)
 
 
-		####### Hub drawing variables #####
+		# ###### Hub drawing variables #####
 		self.manager.get_screen('comp_sc').x0hText = str(x0h)
 		self.manager.get_screen('comp_sc').x1hText = str(x1h)
 		self.manager.get_screen('comp_sc').UhpText = str(Uhp)
@@ -870,7 +875,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').xRhText = str(xRh)
 		self.manager.get_screen('comp_sc').yRhText = str(yRh)
 
-		#################    Hub  Arrows      ###############
+		# ################    Hub  Arrows      ###############
 		self.manager.get_screen('comp_sc').xL1uhText = str(xL1uh)
 		self.manager.get_screen('comp_sc').yL1uhText = str(yL1uh)
 		self.manager.get_screen('comp_sc').xL1dhText = str(xL1dh)
@@ -892,7 +897,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').yR2dhText = str(yR2dh)
 		
 
-		############### Passing Tip Results #################
+		# ############## Passing Tip Results #################
 		self.manager.get_screen('tip_sc').ptText = str(round(pet, 3))
 		self.manager.get_screen('tip_sc').ft1Text = str(round(fet1, 3))
 		self.manager.get_screen('tip_sc').ft2Text = str(round(fet2, 3))
@@ -915,7 +920,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('tip_sc').Wth1tText = str(round(Wth1t, 3))
 		self.manager.get_screen('tip_sc').Wth2tText = str(round(Wth2t, 3))
 		
-		##########   Drawing variables   ##########
+		# #########   Drawing variables   ##########
 		self.manager.get_screen('tip_sc').x0tText = str(x0t)
 		self.manager.get_screen('tip_sc').x1tText = str(x1t)
 		self.manager.get_screen('tip_sc').UtpText = str(Utp)
@@ -924,7 +929,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('tip_sc').xRtText = str(xRt)
 		self.manager.get_screen('tip_sc').yRtText = str(yRt)
 
-		#################    Tip Arrows      ###############
+		# ################    Tip Arrows      ###############
 		self.manager.get_screen('tip_sc').xL1utText = str(xL1ut)
 		self.manager.get_screen('tip_sc').yL1utText = str(yL1ut)
 		self.manager.get_screen('tip_sc').xL1dtText = str(xL1dt)
@@ -945,7 +950,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('tip_sc').xR2dtText = str(xR2dt)
 		self.manager.get_screen('tip_sc').yR2dtText = str(yR2dt)
 
-		##########   Drawing variables   ##########
+		# #########   Drawing variables   ##########
 		self.manager.get_screen('comp_sc').x0tText = str(x0t)
 		self.manager.get_screen('comp_sc').x1tText = str(x1t)
 		self.manager.get_screen('comp_sc').UtpText = str(Utp)
@@ -954,7 +959,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').xRtText = str(xRt)
 		self.manager.get_screen('comp_sc').yRtText = str(yRt)
 
-		#################    Tip Arrows      ###############
+		# ################    Tip Arrows      ###############
 		self.manager.get_screen('comp_sc').xL1utText = str(xL1ut)
 		self.manager.get_screen('comp_sc').yL1utText = str(yL1ut)
 		self.manager.get_screen('comp_sc').xL1dtText = str(xL1dt)
@@ -976,11 +981,10 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('comp_sc').yR2dtText = str(yR2dt)
 
 
-
 class NewWindow(Screen):
-
 	DPI = Metrics.dpi/96
 	check = NumericProperty(0)
+
 
 class SimWindow(Screen):
 	DPI = Metrics.dpi / 96
@@ -1042,6 +1046,7 @@ class SimWindow(Screen):
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
 
+
 class MidScreen(Screen):
 	check = NumericProperty(0)
 
@@ -1101,9 +1106,6 @@ class MidScreen(Screen):
 	yR2uText = StringProperty('0')
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
-
-	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
 
 
 class HubScreen(Screen):
@@ -1170,7 +1172,6 @@ class HubScreen(Screen):
 	ptnh_xText = StringProperty('0')
 
 
-
 class TipScreen(Screen):
 	check = NumericProperty(0)
 
@@ -1234,9 +1235,10 @@ class TipScreen(Screen):
 	tc_nametText = StringProperty('0')
 	ptnt_xText = StringProperty('0')
 
+
 class CompScreen(Screen):
 
-	####### MID #########
+	# ###### MID #########
 	x0Text = StringProperty('0')
 	y0Text = StringProperty('0')
 	x1Text = StringProperty('0')
@@ -1267,7 +1269,7 @@ class CompScreen(Screen):
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
 
-	###### HUB  #####
+	# ##### HUB  #####
 	x0hText = StringProperty('0')
 	x1hText = StringProperty('0')
 	UhpText = StringProperty('0')
@@ -1296,7 +1298,7 @@ class CompScreen(Screen):
 	xR2dhText = StringProperty('0')
 	yR2dhText = StringProperty('0')
 
-	######## TIP #######
+	# ####### TIP #######
 	x0tText = StringProperty('0')
 	x1tText = StringProperty('0')
 	UtpText = StringProperty('0')
@@ -1328,10 +1330,6 @@ class CompScreen(Screen):
 	tc_namemText = StringProperty('0')
 	ptnm_xText = StringProperty('0')
 
-	pass
-
-# class Description(BoxLayout):
-# 	pass
 
 class InfoScreen(Screen):
 	pass
@@ -1341,17 +1339,12 @@ class WindowManager(ScreenManager):
 	pass
 
 
-
 class MainApp(MDApp):
 	def __init__(self, **kwargs):
 		self.title = "VTA"
 		self.theme_cls.theme_style = "Dark"
 		self.theme_cls.primary_palette = "Blue"
 		super().__init__(**kwargs)
-
-		# def on_start(self):
-		# 	panel = MDExpansionPanel(title='info', icon='images/perigramma.png', content = Description())
-		# 	self.root.ids.panel_container.add_widget(panel)
 
 
 MainApp().run()
