@@ -21,7 +21,8 @@ from solver_if import system_if
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.expansionpanel import MDExpansionPanel
 
-class Content(BoxLayout):    ######## WHAT IS THAT ??????  #####
+
+class Content(BoxLayout):
 	pass
 
 class P(BoxLayout):
