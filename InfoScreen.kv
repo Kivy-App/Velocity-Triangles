@@ -1,8 +1,6 @@
 <InfoScreen>:
     name:"info"
 
-
-
     BoxLayout:
         orientation:"vertical"
         size_hint: 1,1
@@ -41,6 +39,7 @@
                     halign: 'left'
                     valign: 'middle'
                     font_size: dp(30)
+
         ScrollView:
             size: root.height, root.width
             size_hint: 1,1
@@ -48,47 +47,89 @@
 
             MDGridLayout:
                 size_hint: 1,1.2
-                rows:4
+                rows:6
                 md_bg_color:1,1,1,1
-
 
                 MDBoxLayout:
                     size_hint_y: .1
                     orientation:"vertical"
                     padding: dp(10),dp(0)
-                    canvas:
-                        Color:
-                            rgba: 0,0,0,1
-                        Line:
-                            width: dp(1.5)
-                            points: [self.x,self.y,self.x+self.width/3,self.y]
-
-                    Label:
-                        text:'Description'
-                        text_size: self.size
-                        halign: 'left'
-                        valign: 'bottom'
-                        font_size: dp(20)
-
-                MDBoxLayout:
-                    size_hint_y: .4
-
-                MDBoxLayout:
-                    size_hint_y: .1
-                    orientation:"vertical"
-                    canvas:
-                        Color:
-                            rgba: 0,0,0,1
-                        Line:
-                            width: dp(1)
-                            points: [self.x,self.y,self.x+self.width,self.y]
 
                     Label:
                         text:'Description'
                         text_size: self.size
                         halign: 'left'
                         valign: 'middle'
+                        font_size: dp(20)
+                        underline: True
 
                 MDBoxLayout:
-                    size_hint_y: .4
+                    size_hint_y: .2
+                    Label:
+                        padding: dp(30),dp(0)
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                        text:
+                            'Welcome to VTA-APP. This application calculates and ' +\
+                            'designs the velocity triangles in a stage of an axial turbomachine.' +\
+                            'The results are given in four segments for the three radial points Hub-Mid-Tip ' +\
+                            'and their comparison. If you want to know how to use the app properly read more below.'
+
+                MDBoxLayout:
+                    size_hint_y: .1
+                    orientation:"vertical"
+                    padding: dp(10),dp(0)
+
+                    Label:
+                        text:'How to use'
+                        text_size: self.size
+                        font_size: dp(20)
+                        halign: 'left'
+                        valign: 'middle'
+                        underline: True
+
+                MDBoxLayout:
+                    size_hint_y: .3
+                    Label:
+                        padding: dp(30),dp(0)
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                        text:
+                            'The app consists of two main sections, Non Dimensional and Dimensional ' +\
+                            'In the first section you should enter exactly three input variables and at the ' +\
+                            'second you should fill in all available inputs. Note that the first ' +\
+                            'section can operate independently of the second. Optionally, you can select the type stages, '+\
+                            'compressor or turbine and velocity profile.'
+
+                MDBoxLayout:
+                    size_hint_y: .1
+                    orientation:"vertical"
+                    padding: dp(10),dp(0)
+#                    canvas:
+#                        Color:
+#                            rgba: 0,0,0,1
+#                        Line:
+#                            width: dp(1.5)
+#                            points: [self.x,self.y,self.x+self.width/3,self.y]
+                    Label:
+                        text:'Angle Convention'
+                        text_size: self.size
+                        font_size: dp(20)
+                        halign: 'left'
+                        valign: 'bottom'
+                        underline: True
+
+                MDBoxLayout:
+                    size_hint_y: .3
+                    Label:
+                        padding: dp(30),dp(0)
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+                        text:
+                            'In order to measure the angles we use the horizontal level.'
+
+
 

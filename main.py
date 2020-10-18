@@ -21,6 +21,7 @@ from solver_if import system_if
 from kivymd.uix.dialog import MDDialog
 
 
+
 class Content(BoxLayout):
 	pass
 
@@ -38,7 +39,7 @@ def firstPopup():
 	popupWindow =  MDDialog(
     text="Oops! Something seems to have gone wrong!",size_hint=(None, 0.5),size=('350dp','100dp'),
     radius = [20, 7, 20, 7],
-)
+	)
 	# popupWindow = Popup(title="", content=show, size_hint=(None, None), size=('350dp' ,'350dp'))
 	#bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
@@ -63,7 +64,7 @@ def secondPopup():
 	popupWindow.open()
 
 class P3(BoxLayout):
-	pass
+	pass 
 
 def thirdPopup():
 	show = P3()
