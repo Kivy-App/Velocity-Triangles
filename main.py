@@ -403,7 +403,9 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('mid_sc').ptnt_xText = str(ptnt_x)
 
 				self.manager.get_screen('hub_sc').tc_namehText = tc_nameh
+				self.manager.get_screen('hub_sc').tc_namemText = tc_namem
 				self.manager.get_screen('tip_sc').tc_nametText = tc_namet
+				self.manager.get_screen('tip_sc').tc_namemText = tc_namem
 				self.manager.get_screen('hub_sc').ptnh_xText = str(ptnh_x)
 				self.manager.get_screen('tip_sc').ptnt_xText = str(ptnt_x)
 
