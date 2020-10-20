@@ -41,22 +41,23 @@
 
 <MDSwitch>
     size_hint:0.15,1
-    _thumb_color :[0.2,.2,.2,1]
+    thumb_color :[0.2,.2,.2,1]
+    _track_color_active: [1,0.4,0,0.9]
+    thumb_color_down: [1,0.4,0,0.9]
 
 <MDSlider>
     size_hint_x: 0.7
     value_track: True
     _track_color_normal: [.4,0.4,0.4,1]
-    _track_color_active:[1,1,1,1]
-    thumb_color_down:[0,.6,.8,1]
+    _track_color_active:[0.6,0.6,0.6,1]
+    thumb_color_down:[1,0.4,0,0.8]
     show_off:False
     hint:False
 
 <MDCheckbox>
     size_hint_x: 0.3
-    color: [0,0,0,1]
-#    selected_color: [0,0,1,1]
-    unselected_color: [0,0,0,1]
+    selected_color: [1,0.4,0,0.85]
+    unselected_color: [0.2,0.2,0.2,1]
     group: 'st'
 
 NavigationLayout:
@@ -90,22 +91,25 @@ NavigationLayout:
             BoxLayout:
                 orientation: 'vertical'
                 size_hint: 1,1
-                GridLayout:
+                MDGridLayout:
                     cols:2
                     size_hint_y: 0.08
+                    md_bg_color:0.18,0.18,0.18,1
+
                     MDBoxLayout:
                         size_hint:0.15,1
                         MDIconButton:
                             id:info_button
                             user_font_size:dp(30)
                             icon:'menu'
-                            pos:self.parent.x,self.parent.height
-                            size:self.width,self.height
+                            pos:self.parent.pos
+                            size:self.parent.size
+                            theme_text_color: 'Custom'
+                            text_color: 1,1,1,1
                             on_release: nav_drawer.set_state('open')
 
                     MDBoxLayout:
                         size_hint: 0.85,1
-                        md_bg_color:0,0,0,0
                         canvas:
                             Color:
                                 rgba: 1,1,1,1
@@ -124,15 +128,14 @@ NavigationLayout:
                 ScrollView:
                     size: root.height, root.width
                     size_hint: 1,0.92
-                    scroll_wheel_distance: '40dp'
+                    scroll_wheel_distance: '150dp'
 
             ####################  Overall Grid  ############################
                     GridLayout:
-                        rows: 15
-                        size_hint_y:2.2
+                        rows: 16
+                        size_hint_y:2.32
                         MDBoxLayout:
                             size_hint_y:0.08
-#                            md_bg_color: 0.166,0.492,0.605,0.768
                             md_bg_color: 1,0.4,0,0.8
                             MDLabel:
                                 padding: dp(10),dp(0)
@@ -150,7 +153,6 @@ NavigationLayout:
                         MDBoxLayout:
                             padding: 10
                             size_hint_y: 0.08
-#                            md_bg_color:0.333,0.596,0.635,0.9
                             md_bg_color:1,0.55,0,0.8
                             Label:
                                 text:'Repeating Stage'
@@ -175,7 +177,7 @@ NavigationLayout:
                         MDGridLayout:
                             cols: 2
                             size_hint_y: 0.08
-                            md_bg_color:1,1,1,1
+
                             Label:
                                 size_hint_x: 0.25
                                 padding: dp(40),dp(0)
@@ -217,15 +219,12 @@ NavigationLayout:
             ############ Keno anamesa sto switch kai ta inputs ###########################
                         MDBoxLayout:
                             size_hint_y: 0.01
-#                            md_bg_color:0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
 
             ########### Grid for the Text Inputs #########################
                         MDGridLayout:
                             cols:2
                             size_hint_y: 0.8
-#                            md_bg_color: 0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
+
                             MDGridLayout:
                                 spacing: dp(3)
                                 rows:18
@@ -416,14 +415,11 @@ NavigationLayout:
                         MDBoxLayout:
                             size_hint_y: 0.01
                             padding:dp(5)
-#                            md_bg_color:0.6862,0.9333,0.9333,0.737
-                            md_bg_color: 1,1,1,1
 
             ############ Second Title ##########
                         MDBoxLayout:
                             size_hint_y: 0.08
                             padding:dp(5)
-#                            md_bg_color:0.066,0.392,0.505,0.768
                             md_bg_color:1,0.4,0,0.8
                             Label:
                                 text: " Dimensional Analysis "
@@ -437,8 +433,8 @@ NavigationLayout:
                         MDBoxLayout:
                             size_hint_y: 0.08
                             padding: dp(11)
-#                            md_bg_color:0.333,0.596,0.635,0.9
                             md_bg_color:1,0.55,0,0.8
+
                             Label:
                                 font_size: dp(15)
                                 bold: False if switch1.active else True
@@ -455,14 +451,10 @@ NavigationLayout:
                         MDBoxLayout:
                             size_hint_y: 0.01
                             padding:dp(5)
-#                            md_bg_color:0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
 
                         MDGridLayout:
                             cols:2
                             size_hint_y: 0.62
-#                            md_bg_color:0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
                             MDGridLayout:
                                 rows:14
                                 spacing: dp(3)
@@ -586,13 +578,10 @@ NavigationLayout:
                         MDBoxLayout:
                             size_hint_y: 0.01
                             padding:dp(5)
-#                            md_bg_color:0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
 
                         MDBoxLayout:
                             size_hint_y: 0.08
                             padding:dp(5)
-#                            md_bg_color:0.066,0.392,0.505,0.768
                             md_bg_color:1,0.4,0,0.8
                             Label:
                                 text: " Velocity Profile "
@@ -606,8 +595,6 @@ NavigationLayout:
                         MDGridLayout:
                             cols: 2
                             size_hint_y: 0.12
-#                            md_bg_color:0.6862,0.9333,0.9333,0.6
-                            md_bg_color:1,1,1,1
 
                             Label:
                                 size_hint_x: 0.3
@@ -657,8 +644,6 @@ NavigationLayout:
                             size_hint_y: 0.08
                             padding: dp(10)
                             orientation:'vertical'
-#                            md_bg_color: 0.6862,0.9333,0.9333,0.737
-                            md_bg_color:1,1,1,1
 
                             MDRoundFlatIconButton:
                                 id:VA_button
@@ -681,6 +666,27 @@ NavigationLayout:
                                     if vel_tr.check == 1 and vel_tr.k == 4:\
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(10),dp(0)
+                            size_hint: 1,0.12
+                            md_bg_color:0.18,0.18,0.18,1
+                            canvas:
+                                Color:
+                                    rgba: 0.8,0.8,0.8,0.5
+                                Line:
+                                    width: dp(7.5)
+                                    points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                            Label:
+                                text: 'Velocity Triangles Analysis App/main menu '
+                                font_size: dp(14)
+                                color: 1,1,1,1
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+
+
 
         NewWindow:
         SimWindow:

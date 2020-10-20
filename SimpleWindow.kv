@@ -1,891 +1,815 @@
 <SimWindow>:
 	name: "simple"
 
-	ScrollView:
-		size: root.height, root.width
-		size_hint: 1,1
-		scroll_wheel_distance: '40dp'
+	BoxLayout:
+	    orientation: 'vertical'
+	    size_hint: 1,1
 
-		GridLayout:
-			rows: 7
-			size_hint: 1,1.71
+        MDGridLayout:
+            cols:2
+            size_hint_y: 0.08
+            md_bg_color:0.18,0.18,0.18,1
+            BoxLayout:
+                size_hint_x:0.15
+                MDIconButton:
+                    id:info_button
+                    pos:self.parent.pos
+                    size:self.parent.size
+                    user_font_size:dp(30)
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    icon:'menu'
+                    on_release: root.nav_drawer.set_state('open')
+
+            BoxLayout:
+                size_hint_x: 0.85
+                canvas:
+                    Color:
+                        rgba:0,0,0,0
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        width: dp(1)
+                        points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                Label:
+                    text: '  VTA-APP'
+                    color: [1,1,1,1]
+                    font_name: 'BlackHanSans-Regular.ttf'
+                    text_size: self.size
+                    halign: 'left'
+                    valign: 'middle'
+                    font_size: dp(30)
+
+        ScrollView:
+            size: root.height, root.width
+            size_hint: 1,0.92
+            scroll_wheel_distance: '150dp'
 
             GridLayout:
-                cols:2
-                size_hint_y: 0.08
-                BoxLayout:
-                    size_hint_x:0.15
-                    MDIconButton:
-                        id:info_button
-                        pos:self.parent.pos
-                        size:self.parent.size
-                        user_font_size:dp(30)
-                        icon:'menu'
-                        on_release: root.nav_drawer.set_state('open')
-
-                BoxLayout:
-                    size_hint_x: 0.85
-                    canvas:
-                        Color:
-                            rgba:0,0,0,0
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-                        Color:
-                            rgba: 1,1,1,1
-                        Line:
-                            width: dp(1)
-                            points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                rows: 7
+                size_hint: 1,1.75
+    ############ First Title ####################
+                MDBoxLayout:
+                    size_hint_y: 0.08
+                    md_bg_color: 1,0.4,0,0.8
                     Label:
-                        text: '  VTA-APP'
-                        color: [1,1,1,1]
-                        font_name: 'BlackHanSans-Regular.ttf'
+                        padding: dp(10),dp(0)
+                        text: 'Non Dimensional Analysis'
+                        font_size: dp(23)
+                        bold: True
+                        underline: True
                         text_size: self.size
                         halign: 'left'
                         valign: 'middle'
-                        font_size: dp(30)
-############ First Title ####################
-			BoxLayout:
-				size_hint_y: 0.08
-				canvas:
-					Color:
-						rgba: 0.066,0.392,0.505,0.768
-					Rectangle:
-						pos: self.pos
-						size: self.size
-
-				Label:
-					text: 'Velocity Analysis'
-					font_size: dp(25)
-					bold: True
-
-############ Image Box ##############
-			FloatLayout:
-				size_hint_y: 0.4
-				canvas:
-					Color:
-						rgba: 0.6862,0.9333,0.9333,0.737
-                    Rectangle:
-                        size: self.size
-                        pos: self.pos
-                    Color:
-                        rgba: 1,1,1,1
-					Rectangle:
-						source: "images/new_images/comp_mid.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_mid.png"
-						size: self.width - dp(20),self.height - dp(20)
-						pos: self.x + dp(10),self.y + dp(10)
-                    Color:
-                        rgba: 0,0,0,1
-                    Line:
-                        width: dp(1.5)
-                        rectangle: (self.x + dp(10),self.y + dp(10),self.width - dp(20),self.height - dp(20))
-
-
-
-
-			BoxLayout:
-				size_hint_y: 0.08
-				canvas:
-					Color:
-						rgba: 0.066,0.392,0.505,0.768
-					Rectangle:
-						pos: self.pos
-						size: self.size
-					Color:
-						rgba:0,0,0,1
-					Line:
-						width: dp(1.5)
-						points: (self.x, self.y + self.height, self.x + self.width, self.y + self.height)
-					Line:
-						width: dp(3)
-						points: (self.x, self.y , self.x, self.y + self.height)
-					Line:
-						width: dp(3)
-						points: (self.x + self.width, self.y,self.x+ self.width, self.y + self.height)
-
-					Line:
-						width: dp(3)
-						points: (self.x, self.y, self.x + self.width, self.y)
-				Label:
-					text: 'Middle Velocity Triangles'
-					font_size: dp(20)
-					bold: True
-
-	######################GRid me ta grapta apotelesmata #############################
-			GridLayout:
-				cols:2
-				size_hint_y: 0.67
-
-	###############   Grid gia diaxorismo titlou apo ta apotelesmata #######################
-				GridLayout:
-					rows:2
-					size_hint_x:0.5
-
-	##################################   Titlos    ####################################
-					BoxLayout:
-						size_hint_y:0.12
-						spacing:10
-						canvas:
-							Color:
-								rgba: 0.066,0.392,0.505,0.768
-							Rectangle:
-								pos: self.pos
-								size: self.size
-							Color:
-								rgba:0,0,0,1
-#                            Line:
-#                                width: dp(1.5)
-#                                points: (self.x,self.y + self.height, self.x+self.width,self.y + self.height)
-							Line:
-								width: dp(3.)
-								points: (self.x, self.y, self.x, self.y+self.height)
-							Line:
-								width: dp(3.)
-								points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
-						Label:
-							text:'Coefficients and Angles'
-							font_size: dp(15)
-							bold:True
-							text_size: self.size
-							halign: 'center'
-							valign: 'middle'
-
-	################   Grid apotelespata aristera    ###########################
-					GridLayout:
-						cols:3
-						canvas:
-							Color:
-								rgba: 0.6862,0.9333,0.9333,0.737
-							Rectangle:
-								pos: self.pos
-								size: self.size
-							Color:
-								rgba:0,0,0,1
-							Line:
-								width: dp(3.)
-								points: (self.x, self.y, self.x, self.y+self.height)
-							Line:
-								width: dp(3.)
-								points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
-							Line:
-								width: dp(3)
-								points: (self.x, self.y, self.x + self.width, self.y)
-							Line:
-								width: dp(1.5)
-								points: (self.x, self.y+self.height, self.x + self.width, self.y+self.height)
-
-						GridLayout:
-							rows:9
-							size_hint_x:0.67
-
-							Label:
-								font_size:dp(11)
-								text:"Loading Coefficient \u03C8 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Flow Coefficient \u03C6 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Reaction Coefficient Rn : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Inlet absolute angle \u03B11 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Exit absolute angle \u03B12 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Inlet absolute angle \u03B13 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Inlet relative angle \u03B21 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Exit relative angle \u03B22 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:"Inlet relative angle \u03B23 : "
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-
-						GridLayout:
-							rows:9
-							size_hint_x:0.22
-
-							Label:
-								text: root.pText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.fText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.rnText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.a2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.b2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								#text: root.b3Text
-								text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-
-						GridLayout:
-							rows:9
-							size_hint_x:0.11
-
-							Label:
-								text: '[ - ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ - ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ - ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								#text: root.b3Text
-								text:'[ \u00B0 ]'
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-
-	############ Deksi grid to opoio diaxorizei ton titlo apo ta deksio apotelesmata ####################
-				GridLayout:
-					rows:2
-					size_hint_x:0.5
-	##################  Titlos ###############################
-					BoxLayout:
-						size_hint_y:0.12
-						spacing:10
-						canvas:
-							Color:
-								rgba: (0.066,0.392,0.505,0.768) if root.check == 1 else (0.6862,0.9333,0.9333,0.737)
-							Rectangle:
-								pos: self.pos
-								size: self.size
-							Color:
-								rgba: (0,0,0,1) if root.check == 1 else (0,0,0,0)
-
-							Line:
-								width: dp(3.)
-								points: (self.x+ self.width, self.y,self.x+ self.width, self.y + self.height)
-#                           Line:
-#                               width: dp(1.5)
-#                               points: (self.x, self.y + self.height,self.x+ self.width, self.y + self.height)
-
-
-						Label:
-							text:'Dimensional Velocities' if root.check == 1 else ''
-							font_size: dp(15)
-							bold:True
-							text_size: self.size
-							halign: 'center'
-							valign: 'middle'
-
-	################   Grid apotelespatvn deksia   ########################
-					GridLayout:
-						cols:3
-						canvas:
-							Color:
-								rgba: 0.6862,0.9333,0.9333,0.737
-							Rectangle:
-								pos: self.pos
-								size: self.size
-							Color:
-								rgba: (0,0,0,1) if root.check == 1 else (0,0,0,0)
-							Line:
-								width: dp(3.)
-								points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
-							Line:
-								width: dp(1.5)
-								points: (self.x, self.y+self.height,self.x+ self.width, self.y+self.height)
-							Line:
-								width: dp(3)
-								points: (self.x, self.y,self.x+ self.width, self.y)
-
-						GridLayout:
-							rows:11
-							size_hint_x:0.55
-
-							Label:
-								font_size:dp(11)
-								text:' Middle rotational \n speed Um   ' if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-
-							Label:
-								font_size:dp(11)
-								text:" Axial Velocity Vx " if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:" Exit absolute \n velocity V2   " if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:" Exit relative \n velocity W2   "  if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-							Label:
-								font_size:dp(11)
-								text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-							Label:
-								font_size:dp(11)
-								text:" Absolute rotary \n velocity V\u03B82  " if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-							Label:
-								font_size:dp(11)
-								text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-							Label:
-								font_size:dp(11)
-								text:" Absolute rotary \n velocity W\u03B82  " if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-							Label:
-								font_size:dp(11)
-								text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 1 else ''
-								text_size: self.size
-								halign: 'right'
-								valign: 'middle'
-
-
-						GridLayout:
-							rows:11
-							size_hint_x:0.25
-
-							Label:
-								text: root.UmText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-
-							Label:
-								text: root.VxText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.V1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								#text: root.a1Text if slider0.value == 0 else '------'
-								text: root.V2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.W1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.W2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.Vth1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.Vth2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.Wth1Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.Wth2Text
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-							Label:
-								text: root.DVthText
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'center'
-								valign: 'middle'
-						GridLayout:
-							rows:11
-							size_hint_x:0.2
-
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text:'[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text:'[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								text: '[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-							Label:
-								#text: root.b3Text
-								text:'[ m/s ]' if root.check == 1 else ''
-								font_size:dp(11)
-								text_size: self.size
-								halign: 'left'
-								valign: 'middle'
-
-
-
-
-	########Box sthn mesh . Kato apo ta apotelesmata (Ekei pou tha einai ta trigwna) ###########
-			FloatLayout:
-				size_hint_y: 0.45
-				canvas:
-					Color:
-						rgba: 0.6862,0.9333,0.9333,0.737
-					Rectangle:
-						pos: self.pos
-						size: self.size
-
-	################ Drawing Area for the triangles  ##########################
-					Color:
-						rgba:0.5862,0.9333,0.9333,0.737
-					Rectangle:
-						pos:self.x+20, self.y + 20
-						size:self.width-40, self.height-40
-
-					Color:
-						rgba:0,0,0,1
-					Line:
-						width: dp(1.)
-						rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
-
-	###################    Color of the Lines    ##################
-					Color:
-						rgba:0,0,0,1
-	###################    U line    ##########################
-					Line:
-						width: dp(1.5)
-						points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y1Text))
-
-
-	###################    V1 Line    ##########################
-					Line:
-						width: dp(1.5)
-						points: (float(root.x0Text),self.y +float(root.y0Text),float(root.xRText),self.y +float(root.yRText))
-
-	###################    W1 Line    ##########################
-					Line:
-						width: dp(1.5)
-						points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xRText),self.y + float(root.yRText))
-
-	###################    W2 Line    ##########################
-					Line:
-						width: dp(1.5)
-						points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xLText),self.y + float(root.yLText))
-
-	###################    V2 Line    ##########################
-					Line:
-						width: dp(1.5)
-						points: (float(root.x0Text),self.y + float(root.y0Text),float(root.xLText),self.y + float(root.yLText))
-
-	########### Lines, Dash lines and Labels ###################
-	###################    U dashLine    ##########################
-					Line:
-						width: dp(1)
-						points: (float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x1Text),self.y + float(root.y1Text)-dp(20))
-
-	###################    U Dash lines    ##########################
-					Line:
-						width: dp(1)
-						points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text),self.y + float(root.y0Text)-dp(30))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-					Line:
-						width: dp(1)
-						points: (float(root.x1Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y0Text)-dp(30))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-
-	###################    Vx Line    ##########################
-					Line:
-						width: dp(1)
-						points:
-							(float(root.x1Text) + dp(20),self.y + float(root.y0Text),float(root.x1Text) + dp(20),self.y + float(root.yRText))\
-							if float(root.xRText) < float(root.x1Text) else\
-							(float(root.xRText)+ dp(20),self.y + float(root.y0Text),float(root.xRText)+ dp(20),self.y + float(root.yRText))
-
-	###################    Vx Dash lines    ##########################
-					Line:
-						width: dp(1)
-						points:
-							(float(root.x1Text),self.y + float(root.y1Text),float(root.x1Text) + dp(30),self.y + float(root.y0Text))\
-							if float(root.xRText) < float(root.x1Text) else\
-							(float(root.x1Text),self.y + float(root.y0Text),float(root.xRText) + dp(30) ,self.y + float(root.y1Text))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-					Line:
-						width: dp(1)
-						points:
-							(float(root.xRText),self.y + float(root.yRText),float(root.x1Text) + dp(30),self.y + float(root.yRText))\
-							if float(root.xRText) < float(root.x1Text)  else\
-							(float(root.xRText),self.y + float(root.yRText),float(root.xRText)+dp(30),self.y + float(root.yRText))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-
-	###################   ΔVθ   Line    ##########################
-					Line:
-						width: dp(1)
-						points: (float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xRText),self.y + float(root.yRText) + dp(20))
-
-	###################    ΔVθ  Dash lines    ##########################
-					Line:
-						width: dp(1)
-						points: (float(root.xLText),self.y + float(root.yLText),float(root.xLText),self.y + float(root.yLText)+dp(30))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-					Line:
-						width: dp(1)
-						points: (float(root.xRText),self.y + float(root.yRText),float(root.xRText),self.y + float(root.yRText)+dp(30))
-						dash_length: dp(5)
-						dash_offset: dp(5)
-
-	################### Circles of stages numbers ###############################
-					Line:
-						width: dp(1.)
-						circle:
-							(float(root.xLText) - dp(15),self.y + float(root.yLText) + dp(17),dp(10))
-
-					Line:
-						width: dp(1.)
-						circle:
-							(float(root.xRText) + dp(15),self.y + float(root.yLText) + dp(17),dp(10))
-
-
-
-				 ################################  Arrows   ##########################################
-	################### Base Velocity Arrows   ##########################
-
-	                ################## U Arrow ########################
-	                Color:
-                        rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
-					Triangle:
-						points:float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
-
-                    ################## The other 4 Base Arrows ########################
-                    Color:
-                        rgba: (0,0,0,1)
-					Triangle:
-						points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL1uText),self.y + float(root.yL1uText),float(root.xL1dText),self.y + float(root.yL1dText)
-
-					Triangle:
-						points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL2uText),self.y + float(root.yL2uText),float(root.xL2dText),self.y + float(root.yL2dText)
-
-					Triangle:
-						points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR1uText),self.y + float(root.yR1uText),float(root.xR1dText),self.y + float(root.yR1dText)
-
-					Triangle:
-						points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR2uText),self.y + float(root.yR2uText),float(root.xR2dText),self.y + float(root.yR2dText)
-
-	##################  U Line Arrows  ####################
-	                Color:
-                        rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 40 else (0,0,0,1)
-					Triangle:
-						points:
-							float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x0Text)+dp(20),\
-							self.y + float(root.y0Text)-dp(20)+dp(3),float(root.x0Text)+dp(20),self.y + float(root.y0Text)-dp(20)-dp(3)
-					Triangle:
-						points:
-							float(root.x1Text),self.y + float(root.y1Text)-dp(20),float(root.x1Text)-dp(20),\
-							self.y + float(root.y1Text)-dp(20)+dp(3),float(root.x1Text)-dp(20),self.y + float(root.y1Text)-dp(20)-dp(3)
-
-	##################  ΔVθ Line Arrows  ####################
-                    Color:
-                        rgba: (1,1,1,0) if float(root.xRText) - float(root.xLText) < 25 else (0,0,0,1)
-					Triangle:
-						points:
-							(float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-							float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3))\
-							if root.tc_namemText == 'Compressor Middle' else\
-							(float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
-							float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
-
-	#####################  Vx Line Arrows  ####################
-	                Color:
-	                    rgba: (1,1,1,0) if (float(root.yRText) - float(root.y1Text)) < 25 else (0,0,0,1)
-					Triangle:
-						points:
-							(float(root.x1Text) + dp(20),self.y + float(root.y1Text),float(root.x1Text) + dp(20) + dp(3),\
-							self.y + float(root.y1Text)+dp(20),float(root.x1Text) + dp(20) - dp(3),self.y + float(root.y1Text)+dp(20))\
-							if float(root.xRText) < float(root.x1Text) else\
-							(float(root.xRText)+ dp(20),self.y + float(root.y1Text),float(root.xRText)+ dp(20) + dp(3),\
-							self.y + float(root.y1Text) + dp(20),float(root.xRText)+ dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
-
-	###################   Labels   ##########################
-				Label:
-					pos: (float(root.ptnm_xText),self.parent.y - self.parent.height/2 + dp(30))
-					text: root.tc_namemText
-					color: 1,0,0,1
-
-				Label:
-					text: 'U'
-					pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(45)
-
-				Label:
-					text: 'Vx'
-					pos:
-						(self.parent.x + float(root.UText)/2 + dp(35),\
-						self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)\
-						if float(root.x1Text) > float(root.xRText) else\
-						(self.parent.x - self.parent.width/2 + float(root.xRText) + dp(40),\
-						self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)
-
-				Label:
-					text: '\u0394V\u03B8'
-					pos:
-						-float(root.UText)/2-float(root.x0Text)+float(root.xLText)+float(root.UText)*float(root.pText)/2,\
-						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
-
-				Label:
-					text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
-					pos:
-						-float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
-
-				Label:
-					text:'2'
-					pos:
-						-float(root.UText)/2-float(root.x0Text)+float(root.xRText) + dp(15),\
-						self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
-
-            GridLayout:
-				cols:2
-				size_hint_y: 0.1
-				canvas:
-					Color:
-						rgba: 0.6862,0.97,0.97,0.6
-					Rectangle:
-						pos: self.pos
-						size: self.size
-#                size_hint_y: 0.15
-				BoxLayout:
-					size_hint_x:0.3
-					padding:dp(10)
-					spacing:dp(10)
-					MDRectangleFlatIconButton:
-						icon:'arrow-left-bold'
-						md_bg_color:[0.4,.4,.4,1]
-						text_color: [1,1,1,1]
-						size_hint:0.25,1
-						text:"Back"
-						on_release:
-							root.manager.current = "Main"
-							root.manager.transition.direction = "right"
-
-				BoxLayout:
-					size_hint_x:0.7
+
+    ############ Image Box ##############
+                FloatLayout:
+                    size_hint_y: 0.4
+                    canvas:
+                        Color:
+                            rgba: 1,1,1,1
+                        Rectangle:
+                            source: "images/new_images/comp_mid.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_mid.png"
+                            size: self.width - dp(20),self.height - dp(20)
+                            pos: self.x + dp(10),self.y + dp(10)
+#                        Color:
+#                            rgba: 0,0,0,1
+#                        Line:
+#                            width: dp(1)
+#                            rectangle: (self.x + dp(10),self.y + dp(10),self.width - dp(20),self.height - dp(20))
+
+                MDBoxLayout:
+                    size_hint_y: 0.08
+                    md_bg_color:1,0.55,0,0.8
+                    Label:
+                        padding: dp(10),dp(0)
+                        text: 'Middle Velocity Triangles'
+                        font_size: dp(20)
+                        bold: True
+                        underline: True
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
+
+        ######################GRid me ta grapta apotelesmata #############################
+                GridLayout:
+                    cols:2
+                    size_hint_y: 0.67
+
+        ###############   Grid gia diaxorismo titlou apo ta apotelesmata #######################
+                    GridLayout:
+                        rows:2
+                        size_hint_x:0.5
+
+        ##################################   Titlos    ####################################
+                        BoxLayout:
+                            size_hint_y:0.12
+                            spacing:10
+                            Label:
+                                text:'Coefficients and Angles'
+                                font_size: dp(16)
+                                bold:True
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+                                underline: True
+
+        ################   Grid apotelespata aristera    ###########################
+                        GridLayout:
+                            cols:3
+                            GridLayout:
+                                rows:9
+                                size_hint_x:0.67
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Loading Coefficient \u03C8 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Flow Coefficient \u03C6 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Reaction Coefficient Rn : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Inlet absolute angle \u03B11 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Exit absolute angle \u03B12 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Inlet absolute angle \u03B13 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Inlet relative angle \u03B21 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Exit relative angle \u03B22 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:"Inlet relative angle \u03B23 : "
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+
+                            GridLayout:
+                                rows:9
+                                size_hint_x:0.22
+
+                                Label:
+                                    text: root.pText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.fText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.rnText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.a2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.b2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    #text: root.b3Text
+                                    text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+
+                            GridLayout:
+                                rows:9
+                                size_hint_x:0.11
+
+                                Label:
+                                    text: '[ - ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ - ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ - ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    #text: root.b3Text
+                                    text:'[ \u00B0 ]'
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+
+        ############ Deksi grid to opoio diaxorizei ton titlo apo ta deksio apotelesmata ####################
+                    GridLayout:
+                        rows:2
+                        size_hint_x:0.5
+        ##################  Titlos ###############################
+                        BoxLayout:
+                            size_hint_y:0.12
+                            spacing:10
+                            canvas:
+                                Color:
+                                    rgba: (0,0,0,1) if root.check == 1 else (0,0,0,0)
+                                Line:
+                                    width: dp(3.)
+                                    points: (self.x+ self.width, self.y,self.x+ self.width, self.y + self.height)
+                            Label:
+                                text:'Dimensional Velocities' if root.check == 1 else ''
+                                font_size: dp(15)
+                                bold:True
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'middle'
+
+        ################   Grid apotelespatvn deksia   ########################
+                        GridLayout:
+                            cols:3
+                            canvas:
+                                Color:
+                                    rgba: (0,0,0,1) if root.check == 1 else (0,0,0,0)
+                                Line:
+                                    width: dp(3.)
+                                    points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
+                                Line:
+                                    width: dp(1.5)
+                                    points: (self.x, self.y+self.height,self.x+ self.width, self.y+self.height)
+                                Line:
+                                    width: dp(3)
+                                    points: (self.x, self.y,self.x+ self.width, self.y)
+
+                            GridLayout:
+                                rows:11
+                                size_hint_x:0.55
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:' Middle rotational \n speed Um   ' if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Axial Velocity Vx " if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:(" Inlet relative \n velocity V1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity V3   ") if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Exit absolute \n velocity V2   " if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:(" Inlet relative \n velocity W1   "if root.tc_namemText == 'Compressor Middle' else " Exit relative \n velocity W3   ") if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Exit relative \n velocity W2   "  if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+                                Label:
+                                    font_size:dp(11)
+                                    text:(" Absolute rotary \n velocity V\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Absolute rotary \n velocity V\u03B83   ") if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Absolute rotary \n velocity V\u03B82  " if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+                                Label:
+                                    font_size:dp(11)
+                                    text:(" Relative rotary \n velocity W\u03B81   " if root.tc_namemText == 'Compressor Middle' else " Relative rotary \n velocity W\u03B83   ") if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Absolute rotary \n velocity W\u03B82  " if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+                                Label:
+                                    font_size:dp(11)
+                                    text:" Difference of rotary \n velocity DV\u03B8   " if root.check == 1 else ''
+                                    text_size: self.size
+                                    halign: 'right'
+                                    valign: 'middle'
+
+
+                            GridLayout:
+                                rows:11
+                                size_hint_x:0.25
+
+                                Label:
+                                    text: root.UmText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+
+                                Label:
+                                    text: root.VxText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.V1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    #text: root.a1Text if slider0.value == 0 else '------'
+                                    text: root.V2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.W1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.W2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.Vth1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.Vth2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.Wth1Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.Wth2Text
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                Label:
+                                    text: root.DVthText
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                            GridLayout:
+                                rows:11
+                                size_hint_x:0.2
+
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text:'[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text:'[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    text: '[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+                                Label:
+                                    #text: root.b3Text
+                                    text:'[ m/s ]' if root.check == 1 else ''
+                                    font_size:dp(11)
+                                    text_size: self.size
+                                    halign: 'left'
+                                    valign: 'middle'
+
+        ########Box sthn mesh . Kato apo ta apotelesmata (Ekei pou tha einai ta trigwna) ###########
+                FloatLayout:
+                    size_hint_y: 0.45
+                    canvas:
+        ################ Drawing Area for the triangles  ##########################
+                        Color:
+                            rgba:0,0,0,1
+                        Line:
+                            width: dp(1.)
+                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+
+        ###################    Color of the Lines    ##################
+                        Color:
+                            rgba:0,0,0,1
+        ###################    U line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y1Text))
+
+
+        ###################    V1 Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x0Text),self.y +float(root.y0Text),float(root.xRText),self.y +float(root.yRText))
+
+        ###################    W1 Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xRText),self.y + float(root.yRText))
+
+        ###################    W2 Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xLText),self.y + float(root.yLText))
+
+        ###################    V2 Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.xLText),self.y + float(root.yLText))
+
+        ########### Lines, Dash lines and Labels ###################
+        ###################    U dashLine    ##########################
+                        Line:
+                            width: dp(1)
+                            points: (float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x1Text),self.y + float(root.y1Text)-dp(20))
+
+        ###################    U Dash lines    ##########################
+                        Line:
+                            width: dp(1)
+                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text),self.y + float(root.y0Text)-dp(30))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+                        Line:
+                            width: dp(1)
+                            points: (float(root.x1Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y0Text)-dp(30))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+
+        ###################    Vx Line    ##########################
+                        Line:
+                            width: dp(1)
+                            points:
+                                (float(root.x1Text) + dp(20),self.y + float(root.y0Text),float(root.x1Text) + dp(20),self.y + float(root.yRText))\
+                                if float(root.xRText) < float(root.x1Text) else\
+                                (float(root.xRText)+ dp(20),self.y + float(root.y0Text),float(root.xRText)+ dp(20),self.y + float(root.yRText))
+
+        ###################    Vx Dash lines    ##########################
+                        Line:
+                            width: dp(1)
+                            points:
+                                (float(root.x1Text),self.y + float(root.y1Text),float(root.x1Text) + dp(30),self.y + float(root.y0Text))\
+                                if float(root.xRText) < float(root.x1Text) else\
+                                (float(root.x1Text),self.y + float(root.y0Text),float(root.xRText) + dp(30) ,self.y + float(root.y1Text))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+                        Line:
+                            width: dp(1)
+                            points:
+                                (float(root.xRText),self.y + float(root.yRText),float(root.x1Text) + dp(30),self.y + float(root.yRText))\
+                                if float(root.xRText) < float(root.x1Text)  else\
+                                (float(root.xRText),self.y + float(root.yRText),float(root.xRText)+dp(30),self.y + float(root.yRText))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+
+        ###################   ΔVθ   Line    ##########################
+                        Line:
+                            width: dp(1)
+                            points: (float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xRText),self.y + float(root.yRText) + dp(20))
+
+        ###################    ΔVθ  Dash lines    ##########################
+                        Line:
+                            width: dp(1)
+                            points: (float(root.xLText),self.y + float(root.yLText),float(root.xLText),self.y + float(root.yLText)+dp(30))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+                        Line:
+                            width: dp(1)
+                            points: (float(root.xRText),self.y + float(root.yRText),float(root.xRText),self.y + float(root.yRText)+dp(30))
+                            dash_length: dp(5)
+                            dash_offset: dp(5)
+
+        ################### Circles of stages numbers ###############################
+                        Line:
+                            width: dp(1.)
+                            circle:
+                                (float(root.xLText) - dp(15),self.y + float(root.yLText) + dp(17),dp(10))
+
+                        Line:
+                            width: dp(1.)
+                            circle:
+                                (float(root.xRText) + dp(15),self.y + float(root.yLText) + dp(17),dp(10))
+
+                     ################################  Arrows   ##########################################
+        ################### Base Velocity Arrows   ##########################
+
+                        ################## U Arrow ########################
+                        Color:
+                            rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
+                        Triangle:
+                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
+
+                        ################## The other 4 Base Arrows ########################
+                        Color:
+                            rgba: (0,0,0,1)
+                        Triangle:
+                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL1uText),self.y + float(root.yL1uText),float(root.xL1dText),self.y + float(root.yL1dText)
+
+                        Triangle:
+                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL2uText),self.y + float(root.yL2uText),float(root.xL2dText),self.y + float(root.yL2dText)
+
+                        Triangle:
+                            points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR1uText),self.y + float(root.yR1uText),float(root.xR1dText),self.y + float(root.yR1dText)
+
+                        Triangle:
+                            points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR2uText),self.y + float(root.yR2uText),float(root.xR2dText),self.y + float(root.yR2dText)
+
+        ##################  U Line Arrows  ####################
+                        Color:
+                            rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 40 else (0,0,0,1)
+                        Triangle:
+                            points:
+                                float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x0Text)+dp(20),\
+                                self.y + float(root.y0Text)-dp(20)+dp(3),float(root.x0Text)+dp(20),self.y + float(root.y0Text)-dp(20)-dp(3)
+                        Triangle:
+                            points:
+                                float(root.x1Text),self.y + float(root.y1Text)-dp(20),float(root.x1Text)-dp(20),\
+                                self.y + float(root.y1Text)-dp(20)+dp(3),float(root.x1Text)-dp(20),self.y + float(root.y1Text)-dp(20)-dp(3)
+
+        ##################  ΔVθ Line Arrows  ####################
+                        Color:
+                            rgba: (1,1,1,0) if float(root.xRText) - float(root.xLText) < 25 else (0,0,0,1)
+                        Triangle:
+                            points:
+                                (float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
+                                float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3))\
+                                if root.tc_namemText == 'Compressor Middle' else\
+                                (float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
+                                float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
+
+        #####################  Vx Line Arrows  ####################
+                        Color:
+                            rgba: (1,1,1,0) if (float(root.yRText) - float(root.y1Text)) < 25 else (0,0,0,1)
+                        Triangle:
+                            points:
+                                (float(root.x1Text) + dp(20),self.y + float(root.y1Text),float(root.x1Text) + dp(20) + dp(3),\
+                                self.y + float(root.y1Text)+dp(20),float(root.x1Text) + dp(20) - dp(3),self.y + float(root.y1Text)+dp(20))\
+                                if float(root.xRText) < float(root.x1Text) else\
+                                (float(root.xRText)+ dp(20),self.y + float(root.y1Text),float(root.xRText)+ dp(20) + dp(3),\
+                                self.y + float(root.y1Text) + dp(20),float(root.xRText)+ dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
+
+        ###################   Labels   ##########################
+                    Label:
+                        pos: (float(root.ptnm_xText),self.parent.y - self.parent.height/2 + dp(30))
+                        text: root.tc_namemText
+                        color: 1,0,0,1
+
+                    Label:
+                        text: 'U'
+                        pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(45)
+
+                    Label:
+                        text: 'Vx'
+                        pos:
+                            (self.parent.x + float(root.UText)/2 + dp(35),\
+                            self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)\
+                            if float(root.x1Text) > float(root.xRText) else\
+                            (self.parent.x - self.parent.width/2 + float(root.xRText) + dp(40),\
+                            self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)
+
+                    Label:
+                        text: '\u0394V\u03B8'
+                        pos:
+                            -float(root.UText)/2-float(root.x0Text)+float(root.xLText)+float(root.UText)*float(root.pText)/2,\
+                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
+
+                    Label:
+                        text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
+                        pos:
+                            -float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
+                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
+
+                    Label:
+                        text:'2'
+                        pos:
+                            -float(root.UText)/2-float(root.x0Text)+float(root.xRText) + dp(15),\
+                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
+
+                GridLayout:
+                    cols:2
+                    size_hint_y: 0.1
+                    BoxLayout:
+                        size_hint_x:0.3
+                        padding:dp(10)
+                        spacing:dp(10)
+                        MDRectangleFlatIconButton:
+                            icon:'arrow-left-bold'
+                            md_bg_color:[0.4,.4,.4,1]
+                            text_color: [1,1,1,1]
+                            size_hint:0.25,1
+                            text:"Back"
+                            on_release:
+                                root.manager.current = "Main"
+                                root.manager.transition.direction = "right"
+
+                    BoxLayout:
+                        size_hint_x:0.7
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10),dp(0)
+                    size_hint: 1,0.12
+                    md_bg_color:0.18,0.18,0.18,1
+                    canvas:
+                        Color:
+                            rgba: 0.8,0.8,0.8,0.5
+                        Line:
+                            width: dp(7.5)
+                            points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                    Label:
+                        text: 'Velocity Triangles Analysis App/Non dimensional results '
+                        font_size: dp(14)
+                        color: 1,1,1,1
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'

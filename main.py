@@ -1348,7 +1348,7 @@ class WindowManager(ScreenManager):
 class MainApp(MDApp):
 	def __init__(self, **kwargs):
 		self.title = "VTA"
-		self.theme_cls.theme_style = "Dark"
+		self.theme_cls.theme_style = "Light"
 		self.theme_cls.primary_palette = "Blue"
 		super().__init__(**kwargs)
 
