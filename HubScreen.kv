@@ -1,5 +1,5 @@
 <MDFlatButton>:
-    md_bg_color:0.5,.6,0.7,1
+#    md_bg_color: 1,0.4,0,0.8
     size_hint:0.25,1
 
 <HubScreen>:
@@ -59,23 +59,26 @@
 #					text: 'Velocity Analysis'
 #					font_size: dp(25)
 #					bold: True
+
         ##### Buttons ####
         BoxLayout:
             size_hint_y:0.06
             orientation: 'horizontal'
-
             MDFlatButton:
                 text: 'HUB'
-
+                md_bg_color: 1,0.4,0,0.8
             MDFlatButton:
                 text: 'MID'
                 on_release: root.manager.current = 'mid_sc'
+                md_bg_color: 1,0.4,0,0.8
             MDFlatButton:
                 text: 'TIP'
                 on_release: root.manager.current = 'tip_sc'
+                md_bg_color: 1,0.4,0,0.8
             MDFlatButton:
                 text: 'Comp'
                 on_release: root.manager.current = 'comp_sc'
+                md_bg_color: 1,0.4,0,0.8
 
         ScrollView:
             size: root.height, root.width
@@ -89,26 +92,26 @@
                     size_hint_y: 0.4
                     canvas:
                         Color:
-                            rgba: 0.35,.45,0.55,1
+                            rgba: 0,0,0,1
                         Line:
                             width:dp(3)
                             points:(self.x,self.y+self.height,self.x+self.width/4,self.y+self.height)
-                        Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
+#                        Color:
+#                            rgba: 0.6862,0.9333,0.9333,0.737
+#                        Rectangle:
+#                            size: self.size
+#                            pos: self.pos
                         Color:
                             rgba: 1,1,1,1
                         Rectangle:
                             source: "images/new_images/comp_hub.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_hub.png"
                             size: self.width - dp(20),self.height - dp(20)
                             pos: self.x + dp(10),self.y + dp(10)
-                        Color:
-                            rgba: 0,0,0,1
-                        Line:
-                            width: dp(1.5)
-                            rectangle: (self.x + dp(10),self.y + dp(10),self.width - dp(20),self.height - dp(20))
+#                        Color:
+#                            rgba: 0,0,0,1
+#                        Line:
+#                            width: dp(1.5)
+#                            rectangle: (self.x + dp(10),self.y + dp(10),self.width - dp(20),self.height - dp(20))
                 #################################################### Hub Velocity Triangles ############################################################################
 
                 BoxLayout:
@@ -116,30 +119,34 @@
                     size_hint_y: 0.08
                     canvas:
                         Color:
-                            rgba: 0.066,0.392,0.505,0.768
+                            rgba: 1,0.55,0,0.8
                         Rectangle:
                             pos: self.pos
                             size: self.size
-                        Color:
-                            rgba:0,0,0,1
-                        Line:
-                            width: dp(1.5)
-                            points: (self.x, self.y + self.height, self.x + self.width, self.y + self.height)
-                        Line:
-                            width: dp(3)
-                            points: (self.x, self.y , self.x, self.y + self.height)
-                        Line:
-                            width: dp(3)
-                            points: (self.x + self.width, self.y,self.x+ self.width, self.y + self.height)
-
-                        Line:
-                            width: dp(3)
-                            points: (self.x, self.y, self.x + self.width, self.y)
+#                        Color:
+#                            rgba:0,0,0,1
+#                        Line:
+#                            width: dp(1.5)
+#                            points: (self.x, self.y + self.height, self.x + self.width, self.y + self.height)
+#                        Line:
+#                            width: dp(3)
+#                            points: (self.x, self.y , self.x, self.y + self.height)
+#                        Line:
+#                            width: dp(3)
+#                            points: (self.x + self.width, self.y,self.x+ self.width, self.y + self.height)
+#
+#                        Line:
+#                            width: dp(3)
+#                            points: (self.x, self.y, self.x + self.width, self.y)
                     Label:
+                        padding: dp(10),dp(0)
                         text: 'Hub Velocity Triangles'
                         font_size: dp(20)
                         bold: True
-
+                        underline: True
+                        text_size: self.size
+                        halign:'left'
+                        valign: 'middle'
 
                 GridLayout:
                     cols:2
@@ -154,27 +161,25 @@
                         BoxLayout:
                             size_hint_y:0.12
                             spacing:10
-                            canvas:
-                                Color:
-                                    rgba: 0.066,0.392,0.505,0.768
-                                Rectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                Color:
-                                    rgba:0,0,0,1
-    #                            Line:
-    #                                width: dp(1.5)
-    #                                points: (self.x,self.y + self.height, self.x+self.width,self.y + self.height)
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x, self.y, self.x, self.y+self.height)
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
+#                            canvas:
+#                                Color:
+#                                    rgba: 0.066,0.392,0.505,0.768
+#                                Rectangle:
+#                                    pos: self.pos
+#                                    size: self.size
+#                                Color:
+#                                    rgba:0,0,0,1
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x, self.y, self.x, self.y+self.height)
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
                             Label:
                                 text:'Coefficients and Angles'
-                                font_size: dp(15)
+                                font_size: dp(16)
                                 bold:True
+                                underline: True
                                 text_size: self.size
                                 halign: 'center'
                                 valign: 'middle'
@@ -182,31 +187,30 @@
         ################   Grid apotelespata aristera    ###########################
                         GridLayout:
                             cols:3
-                            canvas:
-                                Color:
-                                    rgba: 0.6862,0.9333,0.9333,0.737
-                                Rectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                Color:
-                                    rgba:0,0,0,1
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x, self.y, self.x, self.y+self.height)
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
-                                Line:
-                                    width: dp(3)
-                                    points: (self.x, self.y, self.x + self.width, self.y)
-                                Line:
-                                    width: dp(1.5)
-                                    points: (self.x, self.y+self.height, self.x + self.width, self.y+self.height)
+#                            canvas:
+#                                Color:
+#                                    rgba: 0.6862,0.9333,0.9333,0.737
+#                                Rectangle:
+#                                    pos: self.pos
+#                                    size: self.size
+#                                Color:
+#                                    rgba:0,0,0,1
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x, self.y, self.x, self.y+self.height)
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x+self.width, self.y, self.x + self.width, self.y+self.height)
+#                                Line:
+#                                    width: dp(3)
+#                                    points: (self.x, self.y, self.x + self.width, self.y)
+#                                Line:
+#                                    width: dp(1.5)
+#                                    points: (self.x, self.y+self.height, self.x + self.width, self.y+self.height)
 
                             GridLayout:
                                 rows:10
                                 size_hint_x:0.67
-
                                 Label:
                                     font_size:dp(11)
                                     text:"Loading Coefficient \u03C8 : "
@@ -409,27 +413,24 @@
                         BoxLayout:
                             size_hint_y:0.12
                             spacing:10
-                            canvas:
-                                Color:
-                                    rgba: (0.066,0.392,0.505,0.768)
-                                Rectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                Color:
-                                    rgba: (0,0,0,1)
-
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x+ self.width, self.y,self.x+ self.width, self.y + self.height)
-    #                           Line:
-    #                               width: dp(1.5)
-    #                               points: (self.x, self.y + self.height,self.x+ self.width, self.y + self.height)
-
+#                            canvas:
+#                                Color:
+#                                    rgba: (0.066,0.392,0.505,0.768)
+#                                Rectangle:
+#                                    pos: self.pos
+#                                    size: self.size
+#                                Color:
+#                                    rgba: (0,0,0,1)
+#
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x+ self.width, self.y,self.x+ self.width, self.y + self.height)
 
                             Label:
                                 text:'Dimensional Velocities'
-                                font_size: dp(15)
+                                font_size: dp(16)
                                 bold:True
+                                underline: True
                                 text_size: self.size
                                 halign: 'center'
                                 valign: 'middle'
@@ -437,23 +438,23 @@
         ################   Grid apotelespatvn deksia   ########################
                         GridLayout:
                             cols:3
-                            canvas:
-                                Color:
-                                    rgba: 0.6862,0.9333,0.9333,0.737
-                                Rectangle:
-                                    pos: self.pos
-                                    size: self.size
-                                Color:
-                                    rgba: (0,0,0,1)
-                                Line:
-                                    width: dp(3.)
-                                    points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
-                                Line:
-                                    width: dp(1.5)
-                                    points: (self.x, self.y+self.height,self.x+ self.width, self.y+self.height)
-                                Line:
-                                    width: dp(3)
-                                    points: (self.x, self.y,self.x+ self.width, self.y)
+#                            canvas:
+#                                Color:
+#                                    rgba: 0.6862,0.9333,0.9333,0.737
+#                                Rectangle:
+#                                    pos: self.pos
+#                                    size: self.size
+#                                Color:
+#                                    rgba: (0,0,0,1)
+#                                Line:
+#                                    width: dp(3.)
+#                                    points: (self.x+self.width, self.y, self.x+self.width, self.y+self.height)
+#                                Line:
+#                                    width: dp(1.5)
+#                                    points: (self.x, self.y+self.height,self.x+ self.width, self.y+self.height)
+#                                Line:
+#                                    width: dp(3)
+#                                    points: (self.x, self.y,self.x+ self.width, self.y)
 
                             GridLayout:
                                 rows:12
@@ -692,14 +693,14 @@
                     size_hint_y: 0.45
                     canvas:
                         Color:
-                            rgba: 0.6862,0.9333,0.9333,0.737
+                            rgba: 1,1,1,1
                         Rectangle:
                             pos: self.pos
                             size: self.size
 
         ################ Drawing Area for the triangles  ##########################
                         Color:
-                            rgba:0.5862,0.9333,0.9333,0.737
+                            rgba:1,1,1,1
                         Rectangle:
                             pos:self.x + dp(20), self.y + dp(20)
                             size:self.width - dp(40), self.height - dp(40)
@@ -997,13 +998,12 @@
                 GridLayout:
                     cols:2
                     size_hint_y: 0.1
-                    canvas:
-                        Color:
-    #						rgba: 0.6862,0.9333,0.9333,0.737
-                            rgba: 0.6862,0.97,0.97,0.6
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+#                    canvas:
+#                        Color:
+#                            rgba: 0.6862,0.97,0.97,0.6
+#                        Rectangle:
+#                            pos: self.pos
+#                            size: self.size
     #                size_hint_y: 0.15
                     BoxLayout:
                         size_hint_x:0.3
