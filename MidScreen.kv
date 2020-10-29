@@ -69,10 +69,10 @@
                 orientation: 'horizontal'
                 canvas:
                     Color:
-                        rgba: 0,0,0,1
+                        rgba: 0.2,0.2,0.2,1
                     Line:
                         width: dp(1.5)
-                        points: (self.x+self.width/4,self.y+dp(2),self.x+self.width/2,self.y+dp(2))
+                        points: (self.x + dp(2)+self.width/4,self.y+dp(2.5),self.x+dp(2)+self.width/2,self.y+dp(2.5))
 
         ScrollView:
             size: root.height, root.width
@@ -109,6 +109,13 @@
                 GridLayout:
                     cols:2
                     size_hint_y: 0.67
+                    canvas:
+                        Color:
+                            rgba: 0,0,0,1
+                        Line:
+                            width: dp(1)
+                            points: (self.x+self.width/2+dp(2),self.y,self.x+self.width/2+dp(2),self.y+0.88*self.height)
+
         ###############   Grid gia diaxorismo titlou apo ta apotelesmata #######################
                     GridLayout:
                         rows:2
@@ -117,8 +124,6 @@
         ##################################   Titlos    ####################################
                         BoxLayout:
                             size_hint_y:0.12
-                            spacing:10
-                            canvas:
                             Label:
                                 text:'Coefficients and Angles'
                                 font_size: dp(16)
@@ -327,7 +332,6 @@
         ##################  Titlos ###############################
                         BoxLayout:
                             size_hint_y:0.12
-                            spacing:10
                             Label:
                                 text:'Dimensional Velocities'
                                 font_size: dp(16)
@@ -568,7 +572,6 @@
                 FloatLayout:
                     size_hint_y: 0.45
                     canvas:
-
                         Color:
                             rgba:0,0,0,1
                         Line:
@@ -805,7 +808,7 @@
                             width: dp(7.5)
                             points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
                     Label:
-                        text: 'Velocity Triangles Analysis App/Dimensional Analysis/Hub '
+                        text: 'Velocity Triangles Analysis App/Dimensional Analysis/Middle '
                         font_size: dp(14)
                         color: 1,1,1,1
                         text_size: self.size
