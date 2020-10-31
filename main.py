@@ -19,9 +19,7 @@ from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 # from system_solver import system_solver1
 from solver_if import system_if
-from kivymd.uix.dialog import MDDialog
-
-
+# from kivymd.uix.dialog import MDDialog
 
 class Content(BoxLayout):
 	pass
@@ -33,7 +31,7 @@ def firstPopup():
 	show = P()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = 'You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
+	label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
 	bl.add_widget(label)
 
@@ -234,8 +232,8 @@ class VelocityTriangles(Screen):
 			global x1
 			global y1
 
-			x0,y0 = Window.size[0]*130/400,Window.size[1]*80/700
-			x1,y1 = Window.size[0]*270/400,Window.size[1]*80/700
+			x0,y0 = Window.size[0]*130/400,Window.size[1]*60/700
+			x1,y1 = Window.size[0]*270/400,Window.size[1]*60/700
 			U = x1-x0
 			xL = x1 - U*float(rne)-U*float(pe)/2
 			yL = y0 + U*float(fe)
@@ -243,7 +241,7 @@ class VelocityTriangles(Screen):
 			yR = y0 + U*float(fe)
 
 	######### While functions for triangles fitting #########
-			while xL < self.x + Window.size[0]*60/400 or xR > self.width -  Window.size[0]*80/400 or yL >  Window.size[1]*220/700 \
+			while xL < self.x + Window.size[0]*60/400 or xR > self.width -  Window.size[0]*80/400 or yL >  Window.size[1]*200/700 \
 					or xR < self.x +  Window.size[0]*60/400 or xL > self.width -  Window.size[0] * 80 / 400:
 
 				x0 = x0 + 1
@@ -502,14 +500,14 @@ class VelocityTriangles(Screen):
 				if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
 					self.popup = secondPopup()
 					self.k = 0
-			if t < 4:
-				self.popup = fourthPopup()
-				self.k = 0
+			# if t < 4:
+			# 	self.popup = fourthPopup()
+			# 	self.k = 0
 
 		except:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
-			firstPopup()
-			self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
+				firstPopup()
+				self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 
 ################          Dimendional Analisys           ################################
 	def dml(self):
@@ -668,7 +666,7 @@ class VelocityTriangles(Screen):
 		yRh = y0 + Uhp * float(feh2)
 
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
-				or yLh > Window.size[1] * 220 / 700 or yRh > Window.size[1] * 220 / 700 \
+				or yLh > Window.size[1] * 200 / 700 or yRh > Window.size[1] * 200 / 700 \
 				or xLh > self.width - Window.size[0] * 80 / 400 or xRh < self.x + Window.size[0] * 80 / 400:
 			x0h = x0h + 1
 			x1h = x1h - 1
@@ -755,7 +753,7 @@ class VelocityTriangles(Screen):
 		yRt = y0 + Utp * float(fet2)
 
 		while xRt > self.width - Window.size[0] * 80 / 400 or xLt < self.x + Window.size[0] * 80 / 400\
-			or yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700\
+			or yLt > Window.size[1]*200/700 or yRt > Window.size[1]*200/700\
 			or xLt > self.width - Window.size[0] * 80 / 400 or xRt < self.x + Window.size[0] * 80 / 400:
 			x0t = x0t + 1
 			x1t = x1t - 1
