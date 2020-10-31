@@ -4,6 +4,7 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.uix.button import MDRoundFlatButton
 # from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
@@ -31,17 +32,16 @@ class P(BoxLayout):
 def firstPopup():
 	show = P()
 	# create content for the Popup
-	# bl = BoxLayout(orientation='vertical',padding = 30)
-	label = 'You should not put less than 3 variables at the first segment'
-	# ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	bl = BoxLayout(orientation='vertical',padding = 30)
+	label = Label(text = 'You should not put less than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
-	# bl.add_widget(label)
-	popupWindow =  MDDialog(
-    text="Oops! Something seems to have gone wrong!",size_hint=(None, 0.5),size=('350dp','100dp'),
-    radius = [20, 7, 20, 7],
-	)
-	# popupWindow = Popup(title="", content=show, size_hint=(None, None), size=('350dp' ,'350dp'))
-	#bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	bl.add_widget(label)
+
+	popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,0.8], content= bl,\
+						size_hint=(None, None), size=('350dp' ,'350dp'))
+
+	bl.add_widget(MDRoundFlatButton(text='OK got it !!!',md_bg_color = [1,0.55,0,0.8],text_color=[1,1,1,1],\
+							   size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
 class P2(BoxLayout):
