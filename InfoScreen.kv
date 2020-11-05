@@ -112,12 +112,7 @@
                     size_hint_y: .1
                     orientation:"vertical"
                     padding: dp(10),dp(0)
-#                    canvas:
-#                        Color:
-#                            rgba: 0,0,0,1
-#                        Line:
-#                            width: dp(1.5)
-#                            points: [self.x,self.y,self.x+self.width/3,self.y]
+
                     Label:
                         text:'Angle Convention'
                         text_size: self.size
@@ -137,7 +132,7 @@
                         valign: 'middle'
                         text:
                             'In order to measure the angles we use the horizontal level.'
-
                     Image:
-                        size_hint_y: 0.8
+                        size_hint: 0.9,1
+                        pos_hint: {'x':0.05,'y':0}
                         source: 'images/new_images/info-photo.png'

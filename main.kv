@@ -131,7 +131,6 @@ NavigationLayout:
                             size_hint:.3,.8
                             pos_hint: {'x':0.2,'y':0.1}
 
-
                     MDBoxLayout:
                         size_hint: 0.65,1
                         Label:
@@ -666,20 +665,16 @@ NavigationLayout:
                                 id:VA_button
                                 icon:'airplane'
                                 pos_hint:{'center_x':0.5}
-                                size_hint_x: 0.4
-                                text: " Go !"
+                                size_hint_x: 0.3
+                                text: "  Go !"
                                 md_bg_color: [.4,.4,.4,1]
                                 text_color: [1,1,1,1]
-                                on_release:
+                                on_press:
                                     vel_tr.systemsolver()
                                     vel_tr.dml();
 
-                                    if vel_tr.k == 4 :\
-                                    sv_main.scroll_y = 1
-
                                     if vel_tr.check == 0 and vel_tr.k == 4:\
                                     vel_tr.h2t_triangles();
-
 
                                     if vel_tr.check == 0 and vel_tr.k == 4:\
                                     win_manager.current = "hub_sc";
@@ -688,6 +683,9 @@ NavigationLayout:
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
 
+                                on_release:
+                                    if vel_tr.k == 4 :\
+                                    sv_main.scroll_y = 1
 
                         MDBoxLayout:
                             orientation: 'vertical'

@@ -55,11 +55,13 @@
                     text: 'HUB'
                     on_press:
                         root.manager.current = 'hub_sc'
+                    on_release:
                         sv_tip.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
                     on_press:
                         root.manager.current = 'mid_sc'
+                    on_release:
                         sv_tip.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
@@ -69,6 +71,7 @@
                     text: 'Comp'
                     on_press:
                         root.manager.current = 'comp_sc'
+                    on_release:
                         sv_tip.scroll_y = 1
 
             BoxLayout:

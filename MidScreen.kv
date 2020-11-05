@@ -54,22 +54,25 @@
                 cols: 4
                 MDFlatButton:
                     text: 'HUB'
-                    on_release:
+                    on_press:
                         root.manager.current = 'hub_sc'
+                    on_release:
                         sv_mid.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
-                    on_release:
+                    on_press:
                         sv_mid.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
-                    on_release:
+                    on_press:
                         root.manager.current = 'tip_sc'
+                    on_release:
                         sv_mid.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
-                    on_release:
+                    on_press:
                         root.manager.current = 'comp_sc'
+                    on_release:
                         sv_mid.scroll_y = 1
 
             BoxLayout:
