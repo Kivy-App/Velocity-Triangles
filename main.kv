@@ -4,16 +4,17 @@
 #: include CompScreen.kv
 #: include SimpleWindow.kv
 #: include InfoScreen.kv
-#:import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
-#:import MDIconButton kivymd.uix.button.MDIconButton
-#:import MDFlatButton kivymd.uix.button.MDFlatButton
-#:import MDSlider kivymd.uix.slider.MDSlider
-#:import MDLabel kivymd.uix.label.MDLabel
-#:import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
-#:import MDSeparator kivymd.uix.card.MDSeparator
-#:import MDBoxLayout kivymd.uix.boxlayout.MDBoxLayout
-#:import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
+#: import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
+#: import MDIconButton kivymd.uix.button.MDIconButton
+#: import MDFlatButton kivymd.uix.button.MDFlatButton
+#: import MDSlider kivymd.uix.slider.MDSlider
+#: import MDLabel kivymd.uix.label.MDLabel
+#: import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#: import MDSeparator kivymd.uix.card.MDSeparator
+#: import MDBoxLayout kivymd.uix.boxlayout.MDBoxLayout
+#: import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
 #: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import ScrollEffect kivy.effects.dampedscroll.ScrollEffect
 
 <P>:
 #    BoxLayout:
@@ -101,7 +102,7 @@ NavigationLayout:
                 orientation: 'vertical'
                 size_hint: 1,1
                 MDGridLayout:
-                    cols:2
+                    cols:3
                     size_hint_y: 0.08
                     md_bg_color:0.18,0.18,0.18,1
 
@@ -118,27 +119,37 @@ NavigationLayout:
                             on_release: nav_drawer.set_state('open')
 
                     MDBoxLayout:
-                        size_hint: 0.85,1
+                        size_hint: 0.2,1
                         canvas:
                             Color:
                                 rgba: 1,1,1,1
                             Line:
                                 width: dp(1)
                                 points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                        Image:
+                            source: 'images/logos/logo-alternative.png'
+                            size_hint:.3,.8
+                            pos_hint: {'x':0.2,'y':0.1}
+
+
+                    MDBoxLayout:
+                        size_hint: 0.65,1
                         Label:
-                            text: '  VTA-APP'
+                            size_hint:.7,1
+                            text: ' VTA-APP'
                             color: [1,1,1,1]
                             font_name: 'BlackHanSans-Regular.ttf'
                             text_size: self.parent.size
                             halign: 'left'
                             valign: 'middle'
-                            font_size: dp(30)
+                            font_size: dp(28)
 
                 ScrollView:
                     size: root.height, root.width
                     size_hint: 1,0.92
                     scroll_wheel_distance: '150dp'
-
+                    effect_cls: 'ScrollEffect'
+                    id: sv_main
             ####################  Overall Grid  ############################
                     GridLayout:
                         rows: 16
@@ -371,51 +382,51 @@ NavigationLayout:
                                     id: slider1
                                     min: 0
                                     max: 2.5
-                                    step: 0.01
+                                    step: 0.1
                                     value: 0
                                 MDSlider:
                                     id: slider2
                                     min: 0
                                     max: 2
-                                    step: 0.01
+                                    step: 0.1
                                     value:0
                                 MDSlider:
                                     id: slider3
-                                    min: 0
+                                    min: -0.5
                                     max: 1.5
-                                    step: 0.01
+                                    step: 0.1
                                     value: 0
                                 MDSlider:
                                     id: slider4
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                 MDSlider:
                                     id: slider5
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                 MDSlider:
                                     id: slider6
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                     disabled: not switch0.active
                                 MDSlider:
                                     id: slider7
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                 MDSlider:
                                     id: slider8
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                 MDSlider:
                                     id: slider9
                                     min: -75
                                     max: 75
-                                    step: 0.1
+                                    step: 1
                                     disabled: not switch0.active
 
                         MDBoxLayout:
@@ -661,10 +672,14 @@ NavigationLayout:
                                 text_color: [1,1,1,1]
                                 on_release:
                                     vel_tr.systemsolver()
-                                    vel_tr.dml()
+                                    vel_tr.dml();
 
-                                    if vel_tr.check == 0 :\
+                                    if vel_tr.k == 4 :\
+                                    sv_main.scroll_y = 1
+
+                                    if vel_tr.check == 0 and vel_tr.k == 4:\
                                     vel_tr.h2t_triangles();
+
 
                                     if vel_tr.check == 0 and vel_tr.k == 4:\
                                     win_manager.current = "hub_sc";
@@ -672,6 +687,7 @@ NavigationLayout:
                                     if vel_tr.check == 1 and vel_tr.k == 4:\
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
+
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -717,9 +733,11 @@ NavigationLayout:
             orientation: 'vertical'
             MDBoxLayout:
                 md_bg_color: [1,1,1,1]
-                size_hint_y: 0.4
-                FitImage:
-                    source: 'images/logos/logo28b.png'
+                size_hint_y: 0.3
+                Image:
+                    source: 'images/logos/logo-alternative.png'
+                    size_hint: 0.8,0.8
+                    pos_hint: {'x':0.1,'y':0.1}
 
             MDSeparator:
                 height: dp(2)
@@ -751,10 +769,14 @@ NavigationLayout:
                     text:"Exit"
                     on_press:app.stop()
 
+            MDBoxLayout:
+                md_bg_color: [.8,.8,.8,1]
+                size_hint_y: 0.1
+
             MDGridLayout:
                 rows: 2
                 pos_hint: {'center_x':0.5}
-                size_hint_y: 0.4
+                size_hint_y: 0.3
                 md_bg_color: [.8,.8,.8,1]
                 MDBoxLayout:
                     size_hint_y: 0.02
@@ -770,8 +792,8 @@ NavigationLayout:
                         orientation: 'horizontal'
                         padding: dp(2)
                         Image:
-                            source: 'images/apth.png'
-                            size_hint_x: 0.2
+                            source: 'images/lfmt.png'
+                            size_hint_x: 0.8
                         Label:
                             size_hint_x: 0.8
 
@@ -781,7 +803,7 @@ NavigationLayout:
                         color: 1,1,1,1
                         font_size: dp(15)
                     MDLabel:
-                        text: 'Aknowledgements: Dionisis Chala, Michail Tsinoglou'
+                        text: 'Acknowledgements: Dionisis Chala, Michail Tsinoglou'
                         color: 1,1,1,1
                         font_size: dp(15)
                     MDLabel:

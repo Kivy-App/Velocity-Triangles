@@ -53,15 +53,23 @@
                 cols: 4
                 MDFlatButton:
                     text: 'HUB'
-                    on_press: root.manager.current = 'hub_sc'
+                    on_press:
+                        root.manager.current = 'hub_sc'
+                        sv_tip.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
-                    on_press: root.manager.current = 'mid_sc'
+                    on_press:
+                        root.manager.current = 'mid_sc'
+                        sv_tip.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
+                    on_press:
+                        sv_tip.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
-                    on_press: root.manager.current = 'comp_sc'
+                    on_press:
+                        root.manager.current = 'comp_sc'
+                        sv_tip.scroll_y = 1
 
             BoxLayout:
                 size_hint_y: 0.02
@@ -77,6 +85,9 @@
             size: root.height, root.width
             size_hint: 1,0.86
             scroll_wheel_distance: '150dp'
+            effect_cls: 'ScrollEffect'
+            id: sv_tip
+
             GridLayout:
                 size_hint_y: 1.82
                 rows: 7

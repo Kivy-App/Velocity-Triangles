@@ -4,7 +4,7 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.button import MDRoundFlatButton
+from kivymd.uix.button import MDRaisedButton
 # from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
@@ -31,14 +31,14 @@ def firstPopup():
 	show = P()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
+	label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',\
+				  valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 	bl.add_widget(label)
 
-	popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,0.8], content= bl,\
+	popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
 						size_hint=(None, None), size=('350dp' ,'350dp'))
 
-	bl.add_widget(MDRoundFlatButton(text='OK got it !!!',md_bg_color = [1,0.55,0,0.8],text_color=[1,1,1,1],\
+	bl.add_widget(MDRaisedButton(text='OK got it !!!',theme_text_color = 'Custom',text_color = [1,0.55,0,0.8],md_bg_color = [1,1,1,1],\
 							   size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
 	popupWindow.open()
 
@@ -77,17 +77,6 @@ def thirdPopup():
 
 class P4(BoxLayout):
 	pass
-
-def fourthPopup():
-	show = P3()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' You should not put more than 3 \n variables at the first segment',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
-	popupWindow.open()
 
 class Prpm(BoxLayout):
 	pass
@@ -232,8 +221,8 @@ class VelocityTriangles(Screen):
 			global x1
 			global y1
 
-			x0,y0 = Window.size[0]*130/400,Window.size[1]*60/700
-			x1,y1 = Window.size[0]*270/400,Window.size[1]*60/700
+			x0,y0 = Window.size[0]*130/400,Window.size[1]*70/700
+			x1,y1 = Window.size[0]*270/400,Window.size[1]*70/700
 			U = x1-x0
 			xL = x1 - U*float(rne)-U*float(pe)/2
 			yL = y0 + U*float(fe)
@@ -442,8 +431,6 @@ class VelocityTriangles(Screen):
 
 				self.manager.get_screen('comp_sc').tc_namemText = tc_namem
 
-
-
 			################ Case of  the First Compartment filled #########################################
 			else:
 				############### Passing the Results on the Second Screen  ############################
@@ -493,16 +480,11 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('simple').tc_namemText = tc_namem
 				self.manager.get_screen('simple').ptnm_xText = str(ptnm_x)
 
-
-
 ################ Debugging Section #################
 			if self.k == 4:
 				if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
 					self.popup = secondPopup()
 					self.k = 0
-			# if t < 4:
-			# 	self.popup = fourthPopup()
-			# 	self.k = 0
 
 		except:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
@@ -526,17 +508,16 @@ class VelocityTriangles(Screen):
 				if float(D1e) <= 0:
 					self.popup = diamPopup()
 					self.k = 0
-					self.check = 1
 
 				elif float(Rh1e) <= 0 or float(Rh1e) >= 1:
 					self.popup = h2tPopup()
 					self.k = 0
-					self.check = 1
+
 
 				elif float(Ne) <= 0:
 					self.popup = rpmPopup()
 					self.k = 0
-					self.check = 1
+
 
 			rt = float(D1e)/2
 			rh = float(Rh1e)*rt
@@ -583,24 +564,7 @@ class VelocityTriangles(Screen):
 
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
-				############### Passing empty slots  on the Second Screen  ##################
-				self.manager.get_screen('simple').UmText = ''
-				self.manager.get_screen('simple').UhText = ''
-				self.manager.get_screen('simple').UtText = ''
-				self.manager.get_screen('simple').VxText = ''
-				self.manager.get_screen('simple').V1Text = ''
-				self.manager.get_screen('simple').V2Text = ''
-				self.manager.get_screen('simple').W1Text = ''
-				self.manager.get_screen('simple').W2Text = ''
-				self.manager.get_screen('simple').DVthText = ''
-				self.manager.get_screen('simple').DVthText = ''
-				self.manager.get_screen('simple').Vth1Text = ''
-				self.manager.get_screen('simple').Vth2Text = ''
-				self.manager.get_screen('simple').Wth1Text = ''
-				self.manager.get_screen('simple').Wth2Text = ''
-
 				self.check = 1
-
 			else:
 				if self.k == 0:
 					self.check = 1
@@ -615,7 +579,7 @@ class VelocityTriangles(Screen):
 		b = Vth2 - a
 
 		if self.ch3_value == 'normal' and self.ch3_value == 'normal' and self.ch3_value == 'normal':
-			n=0
+			n = 0
 		if self.ch3_value == 'down' :
 			n = 0
 		if self.ch4_value == 'down' :
@@ -763,26 +727,6 @@ class VelocityTriangles(Screen):
 			yLt = y0 + Utp * float(fet1)
 			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 			yRt = y0 + Utp * float(fet2)
-
-		# while xLt < self.x + Window.size[0] * 80 / 400:
-		# 	x0t = x0t + 1
-		# 	x1t = x1t - 1
-		# 	Utp = x1t - x0t
-		#
-		# 	xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
-		# 	yLt = y0 + Utp * float(fet1)
-		# 	xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
-		# 	yRt = y0 + Utp * float(fet2)
-		#
-		# while yLt > Window.size[1]*220/700 or yRt > Window.size[1]*220/700:
-		# 	x0t = x0t + 1
-		# 	x1t = x1t - 1
-		# 	Utp = x1t - x0t
-		#
-		# 	xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
-		# 	yLt = y0 + Utp * float(fet1)
-		# 	xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
-		# 	yRt = y0 + Utp * float(fet2)
 
 		a1dt = 180 + float(a1et) - 90
 		a2dt = 180 - float(a2et) - 90
@@ -1339,9 +1283,6 @@ class InfoScreen(Screen):
 
 class WindowManager(ScreenManager):
 	pass
-
-# class WindowManager1(ScreenManager):
-# 	pass
 
 class MainApp(MDApp):
 	def __init__(self, **kwargs):

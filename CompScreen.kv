@@ -55,15 +55,23 @@
                 orientation: 'horizontal'
                 MDFlatButton:
                     text: 'HUB'
-                    on_release: root.manager.current = 'hub_sc'
+                    on_release:
+                        root.manager.current = 'hub_sc'
+                        sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
-                    on_release: root.manager.current = 'mid_sc'
+                    on_release:
+                        root.manager.current = 'mid_sc'
+                        sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
-                    on_release: root.manager.current = 'tip_sc'
+                    on_release:
+                        root.manager.current = 'tip_sc'
+                        sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
+                    on_release:
+                        sv_comp.scroll_y = 1
 
             BoxLayout:
                 size_hint_y: 0.02
@@ -79,6 +87,8 @@
             size: root.height, root.width
             size_hint: 1,0.86
             scroll_wheel_distance: '150dp'
+            effect_cls: 'ScrollEffect'
+            id: sv_comp
             GridLayout:
                 size_hint_y: 1.17
                 rows: 7
