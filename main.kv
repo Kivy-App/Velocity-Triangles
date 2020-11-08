@@ -127,7 +127,7 @@ NavigationLayout:
                                 width: dp(1)
                                 points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
                         Image:
-                            source: 'images/logos/icon_orange4.png'
+                            source: 'images/logos/logo-alternative.png'
                             size_hint:.3,.8
                             pos_hint: {'x':0.2,'y':0.1}
 
@@ -668,7 +668,7 @@ NavigationLayout:
                                 text: "  Go !"
                                 md_bg_color: [.4,.4,.4,1]
                                 text_color: [1,1,1,1]
-                                on_release:
+                                on_press:
                                     vel_tr.systemsolver()
                                     vel_tr.dml();
 
@@ -682,7 +682,6 @@ NavigationLayout:
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
 
-                                on_press:
                                     if vel_tr.k == 4 :\
                                     sv_main.scroll_y = 1
 

@@ -18,7 +18,7 @@
                     size:self.parent.size
                     theme_text_color: 'Custom'
                     text_color: 1,1,1,1
-                    on_release: nav_drawer.set_state('open')
+                    on_release: root.nav_drawer.set_state('open')
 
             MDBoxLayout:
                 size_hint: 0.2,1
@@ -54,21 +54,18 @@
                 orientation: 'horizontal'
                 MDFlatButton:
                     text: 'HUB'
-                    on_release:
-                        root.manager.current = 'hub_sc'
                     on_press:
+                        root.manager.current = 'hub_sc'
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
-                    on_release:
-                        root.manager.current = 'mid_sc'
                     on_press:
+                        root.manager.current = 'mid_sc'
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
-                    on_release:
-                        root.manager.current = 'tip_sc'
                     on_press:
+                        root.manager.current = 'tip_sc'
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
@@ -312,9 +309,10 @@
                             text_color: [1,1,1,1]
                             size_hint:0.25,1
                             text:"Back"
-                            on_release:
+                            on_press:
                                 root.manager.current = "Main"
                                 root.manager.transition.direction = "right"
+                                sv_comp.scroll_y = 1
 
                     BoxLayout:
                         size_hint_x:0.7
