@@ -1,0 +1,819 @@
+#: include HubScreen.kv
+#: include MidScreen.kv
+#: include TipScreen.kv
+#: include CompScreen.kv
+#: include SimpleWindow.kv
+#: include InfoScreen.kv
+#: import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
+#: import MDIconButton kivymd.uix.button.MDIconButton
+#: import MDFlatButton kivymd.uix.button.MDFlatButton
+#: import MDSlider kivymd.uix.slider.MDSlider
+#: import MDLabel kivymd.uix.label.MDLabel
+#: import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#: import MDSeparator kivymd.uix.card.MDSeparator
+#: import MDBoxLayout kivymd.uix.boxlayout.MDBoxLayout
+#: import MDCheckbox kivymd.uix.selectioncontrol.MDCheckbox
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import ScrollEffect kivy.effects.dampedscroll.ScrollEffect
+
+<P>:
+#    BoxLayout:
+#        Label:
+#            size_hint_y: 0.6
+#            text: 'kati'
+#        Button:
+#            text: 'OK got it !'
+#            size_hint:0.7,0.3
+#            on_press: root.popupWindow.dismiss()
+
+<P2>:
+<P3>:
+<P4>:
+<Prpm>:
+<Ph2t>:
+<Pdiam>:
+
+<Label>
+    id: labels
+    color: [0,0,0,1]
+
+<TextInput>
+    write_tab: False
+    input_filter:'float'
+    cursor_color: 0.2,0.5,0,0.8
+    cursor_width: '2dp'
+    multiline:False
+
+<MDRectangleFlatIconButton>:
+    text_color:0,0,0,1
+    size_hint: 1,0.33
+    md_bg_color: 1,1,1,1
+
+<MDSwitch>
+    size_hint:0.15,1
+    thumb_color :[0.2,.2,.2,1]
+    _track_color_active: [1,0.4,0,0.9]
+    thumb_color_down: [1,0.4,0,0.9]
+
+<MDSlider>
+    size_hint_x: 0.7
+    value_track: True
+    _track_color_normal: [.4,0.4,0.4,1]
+    _track_color_active:[0.6,0.6,0.6,1]
+    thumb_color_down:[1,0.4,0,0.8]
+    show_off:False
+    hint:False
+
+<MDCheckbox>
+    size_hint_x: 0.3
+    selected_color: [1,0.4,0,0.85]
+    unselected_color: [0.2,0.2,0.2,1]
+    group: 'st'
+
+NavigationLayout:
+    id:NL
+    WindowManager:
+        id: win_manager
+        transition: NoTransition()
+        VelocityTriangles:
+            id: vel_tr
+            name: "Main"
+
+            p:p
+            f:f
+            rn:rn
+            a1:a1
+            a2:a2
+            a3:a3
+            b1:b1
+            b2:b2
+            b3:b3
+
+            d1:d1
+            d2:d2
+            d3:d3
+            rh2t1:rh2t1
+            rh2t2:rh2t2
+            rh2t3:rh2t3
+            n:n
+
+        ############ Overall Title ######################
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1,1
+                MDGridLayout:
+                    cols:3
+                    size_hint_y: 0.08
+                    md_bg_color:0.18,0.18,0.18,1
+
+                    MDBoxLayout:
+                        size_hint:0.15,1
+                        MDIconButton:
+                            id:info_button
+                            user_font_size:dp(30)
+                            icon:'menu'
+                            pos:self.parent.pos
+                            size:self.parent.size
+                            theme_text_color: 'Custom'
+                            text_color: 1,1,1,1
+                            on_release: nav_drawer.set_state('open')
+
+                    MDBoxLayout:
+                        size_hint: 0.2,1
+                        canvas:
+                            Color:
+                                rgba: 1,1,1,1
+                            Line:
+                                width: dp(1)
+                                points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                        Image:
+                            source: 'images/logos/icon_orange4.png'
+                            size_hint:.3,.8
+                            pos_hint: {'x':0.2,'y':0.1}
+
+                    MDBoxLayout:
+                        size_hint: 0.65,1
+                        Label:
+                            text: 'VTA-APP'
+                            color: [1,1,1,1]
+                            font_name: 'BlackHanSans-Regular.ttf'
+                            text_size: self.parent.size
+                            halign: 'left'
+                            valign: 'middle'
+                            font_size: dp(28)
+
+                ScrollView:
+                    size: root.height, root.width
+                    size_hint: 1,0.92
+                    scroll_wheel_distance: '150dp'
+                    effect_cls: 'ScrollEffect'
+                    id: sv_main
+            ####################  Overall Grid  ############################
+                    GridLayout:
+                        rows: 16
+                        size_hint_y:2.44
+                        MDBoxLayout:
+                            size_hint_y:0.08
+                            md_bg_color: 1,0.4,0,0.8
+                            MDLabel:
+                                padding: dp(10),dp(0)
+                                text: "Non Dimensional "
+                                bold: True
+                                underline: True
+                                font_size:dp(23)
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+
+                        MDBoxLayout:
+                            padding: 10
+                            size_hint_y: 0.08
+                            md_bg_color:1,0.55,0,0.8
+                            Label:
+                                text:'Repeating Stage'
+                                bold: False if switch0.active else True
+                                font_size: dp(15)
+                                size_hint:0.4,1
+                                halign: 'left'
+                                valign: 'middle'
+
+                            MDSwitch:
+                                id: switch0
+
+                            Label:
+                                text:'   Non Repeating Stage'
+                                bold: True if switch0.active else False
+                                font_size: dp(15)
+                                size_hint:0.45,1
+                                halign: 'right'
+                                valign: 'middle'
+
+
+                        MDGridLayout:
+                            cols: 2
+                            size_hint_y: 0.08
+
+                            Label:
+                                size_hint_x: 0.25
+                                padding: dp(40),dp(0)
+                                text: 'Turbine'
+                                bold: True if ch1.active else False
+                                font_size: dp(17)
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+
+                            MDCheckbox:
+                                id :ch1
+                                group: 'tur_comp'
+                                state: vel_tr.ch1_value
+                                size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                on_state: vel_tr.ch1_value = self.state
+
+                            Label:
+                                size_hint_x: 0.25
+                                padding: dp(40),dp(0)
+                                text: 'Compressor'
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                bold: True if ch2.active else False
+                                font_size: dp(17)
+
+                            MDCheckbox:
+                                id :ch2
+                                group: 'tur_comp'
+                                state: vel_tr.ch2_value
+                                size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                on_state: vel_tr.ch2_value = self.state
+
+            ############ Keno anamesa sto switch kai ta inputs ###########################
+                        MDBoxLayout:
+                            size_hint_y: 0.01
+
+            ########### Grid for the Text Inputs #########################
+                        MDGridLayout:
+                            cols:2
+                            size_hint_y: 0.8
+
+                            MDGridLayout:
+                                spacing: dp(3)
+                                rows:18
+                                size_hint_x:0.6
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Loading Coefficient \u03C8  [ - ]"
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: p
+                                        text: '2' if slider1.value==0  else str(round(slider1.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Flow Coefficient \u03C6  [ - ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: f
+                                        text: '1' if slider2.value==0  else str(round(slider2.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Reaction Coefficient Rn  [ - ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: rn
+                                        text: '0.5' if slider3.value==0  else str(round(slider3.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Inlet absolute angle \u03B11  [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: a1
+                                        text: '' if slider4.value==0  else str(round(slider4.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Exit absolute angle \u03B12   [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: a2
+                                        text: '' if slider5.value==0  else str(round(slider5.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Inlet absolute angle \u03B13  [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: a3
+                                        text: '' if slider6.value==0  else str(round(slider6.value,3))
+                                        disabled: not switch0.active
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Inlet relative angle \u03B21  [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: b1
+                                        text: '' if slider7.value==0  else str(round(slider7.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Exit relative angle \u03B22  [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: b2
+                                        text: '' if slider8.value==0  else str(round(slider8.value,3))
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Inlet relative angle \u03B23  [ \u00B0 ] "
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: b3
+                                        text: '' if slider9.value==0  else str(round(slider9.value,3))
+                                        disabled: not switch0.active
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                            MDGridLayout:
+                                rows:9
+                                size_hint_x:0.4
+                                MDSlider:
+                                    id: slider1
+                                    min: 0
+                                    max: 2.5
+                                    step: 0.1
+                                    value: 0
+                                MDSlider:
+                                    id: slider2
+                                    min: 0
+                                    max: 2
+                                    step: 0.1
+                                    value:0
+                                MDSlider:
+                                    id: slider3
+                                    min: -0.5
+                                    max: 1.5
+                                    step: 0.1
+                                    value: 0
+                                MDSlider:
+                                    id: slider4
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                MDSlider:
+                                    id: slider5
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                MDSlider:
+                                    id: slider6
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                    disabled: not switch0.active
+                                MDSlider:
+                                    id: slider7
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                MDSlider:
+                                    id: slider8
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                MDSlider:
+                                    id: slider9
+                                    min: -75
+                                    max: 75
+                                    step: 1
+                                    disabled: not switch0.active
+
+                        MDBoxLayout:
+                            size_hint_y: 0.01
+                            padding:dp(5)
+
+            ############ Second Title ##########
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            padding:dp(5)
+                            md_bg_color:1,0.4,0,0.8
+                            Label:
+                                text: " Dimensional Analysis "
+                                bold: True
+                                underline: True
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                font_size:dp(23)
+
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            padding: dp(11)
+                            md_bg_color:1,0.55,0,0.8
+
+                            Label:
+                                font_size: dp(15)
+                                bold: False if switch1.active else True
+                                text:"Parallel Annulus"
+                                size_hint_x: 0.45
+                            MDSwitch:
+                                id: switch1
+                            Label:
+                                font_size: dp(15)
+                                bold: True if switch1.active else False
+                                text:"    Non Parallel Annulus"
+                                size_hint_x: 0.45
+
+                        MDBoxLayout:
+                            size_hint_y: 0.01
+                            padding:dp(5)
+
+                        MDGridLayout:
+                            cols:2
+                            size_hint_y: 0.62
+                            MDGridLayout:
+                                rows:14
+                                spacing: dp(3)
+                                size_hint_x:0.6
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Tip Diameter at Stage 1 [ m ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        multiline: False
+                                        id: d1
+                                        text:"2"
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Tip Diameter at Stage 2 [ m ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        disabled: not switch1.active
+                                        multiline: False
+                                        id: d2
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:"Tip Diameter at Stage 3 [ m ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        id: d3
+                                        disabled: not switch1.active
+                                        multiline: False
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:" Hub2Tip ratio at Stage 1 [ - ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        multiline: False
+                                        id: rh2t1
+                                        text:"0.8"
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:" Hub2Tip ratio at Stage 2 [ - ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        disabled: not switch1.active
+                                        multiline: False
+                                        id: rh2t2
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:" Hub2Tip ratio at Stage 3 [ - ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        disabled: not switch1.active
+                                        multiline: False
+                                        id: rh2t3
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                                Label:
+                                    font_size:dp(14)
+                                    text:" Rotational Speed [ rpm ] "
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    size_hint_x: 1.5
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    TextInput:
+                                        multiline: False
+                                        id: n
+                                        text:"4000"
+                                        size_hint_x: .7
+                                        pos_hint: {'center_x':.5}
+
+                            Label:
+                                size_hint_x:0.4
+                                text: ''
+
+                        MDBoxLayout:
+                            size_hint_y: 0.01
+                            padding:dp(5)
+
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            padding:dp(5)
+                            md_bg_color:1,0.4,0,0.8
+                            Label:
+                                text: " Velocity Profile "
+                                bold: True
+                                underline: True
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                font_size:dp(23)
+
+                        MDGridLayout:
+                            cols: 2
+                            size_hint_y: 0.12
+
+                            Label:
+                                size_hint_x: 0.3
+                                text: 'Constant Angle '
+                                bold: True if ch3.active else False
+                                size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                padding: dp(10),dp(0)
+                                font_size: dp(17)
+                            MDCheckbox:
+                                id :ch3
+                                state: vel_tr.ch3_value
+                                halign: 'left'
+                                on_state: vel_tr.ch3_value = self.state
+                            Label:
+                                size_hint_x: 0.3
+                                text: 'Free vortex '
+                                size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                padding: dp(10),dp(0)
+                                bold: True if ch4.active else False
+                                font_size: dp(17)
+                            MDCheckbox:
+                                id :ch4
+                                state: vel_tr.ch4_value
+                                halign: 'left'
+                                on_state: vel_tr.ch4_value = self.state
+                            Label:
+                                size_hint_x: 0.3
+                                text: ' Forced vortex '
+                                size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+                                padding: dp(10),dp(0)
+                                bold: True if ch5.active else False
+                                font_size: dp(17)
+                            MDCheckbox:
+                                id :ch5
+                                state: vel_tr.ch5_value
+                                halign: 'left'
+                                on_state: vel_tr.ch5_value = self.state
+
+
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            padding: dp(10)
+                            orientation:'vertical'
+
+                            MDRoundFlatIconButton:
+                                id:VA_button
+                                icon:'airplane'
+                                pos_hint:{'center_x':0.5}
+                                size_hint_x: 0.3
+                                text: "  Go !"
+                                md_bg_color: [.4,.4,.4,1]
+                                text_color: [1,1,1,1]
+                                on_release:
+                                    vel_tr.systemsolver()
+                                    vel_tr.dml();
+
+                                    if vel_tr.check == 0 and vel_tr.k == 4:\
+                                    vel_tr.h2t_triangles();
+
+                                    if vel_tr.check == 0 and vel_tr.k == 4:\
+                                    win_manager.current = "hub_sc";
+
+                                    if vel_tr.check == 1 and vel_tr.k == 4:\
+                                    win_manager.current = "simple"
+                                    win_manager.transition.direction = 'left'
+
+                                on_press:
+                                    if vel_tr.k == 4 :\
+                                    sv_main.scroll_y = 1
+
+                        MDBoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(10),dp(0)
+                            size_hint: 1,0.12
+                            md_bg_color:0.18,0.18,0.18,1
+                            canvas:
+                                Color:
+                                    rgba: 0.8,0.8,0.8,0.5
+                                Line:
+                                    width: dp(7.5)
+                                    points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                            Label:
+                                text: 'Velocity Triangles Analysis App/main menu '
+                                font_size: dp(14)
+                                color: 1,1,1,1
+                                text_size: self.size
+                                halign: 'left'
+                                valign: 'middle'
+
+
+
+        NewWindow:
+        SimWindow:
+            nav_drawer: nav_drawer
+        MidScreen:
+            nav_drawer: nav_drawer
+        HubScreen:
+            nav_drawer: nav_drawer
+        TipScreen:
+            nav_drawer: nav_drawer
+        CompScreen:
+            nav_drawer: nav_drawer
+        InfoScreen:
+            nav_drawer: nav_drawer
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        md_bg_color: [1,1,1,1]
+        swipe_edge_width: dp(10)
+        width: dp(300)
+        MDCard:
+            orientation: 'vertical'
+            MDBoxLayout:
+                md_bg_color: [1,1,1,1]
+                size_hint_y: 0.3
+                Image:
+                    source: 'images/logos/icon_orange2.png'
+                    size_hint: 0.8,0.8
+                    pos_hint: {'x':0.1,'y':0.1}
+
+            MDSeparator:
+                height: dp(2)
+                color: [0,0,0,1]
+            BoxLayout:
+                orientation: 'vertical'
+                pos_hint: {'center_x':0.5}
+                size_hint_y: 0.2
+
+                MDRectangleFlatIconButton:
+                    pos_hint: {'center_x':0.5}
+                    icon:'home'
+                    text:"Home"
+                    on_release:
+                        win_manager.current = "Main"
+                        nav_drawer.set_state('close')
+
+                MDRectangleFlatIconButton:
+                    pos_hint: {'center_x':0.5}
+                    icon:'information-outline'
+                    text:"info"
+                    on_press:
+                        win_manager.current = "info"
+                        nav_drawer.set_state('close')
+
+                MDRectangleFlatIconButton:
+                    pos_hint: {'center_x':0.5}
+                    icon:'exit-to-app'
+                    text:"Exit"
+                    on_press:app.stop()
+
+            MDBoxLayout:
+                md_bg_color: [.8,.8,.8,1]
+                size_hint_y: 0.1
+
+            MDGridLayout:
+                rows: 2
+                pos_hint: {'center_x':0.5}
+                size_hint_y: 0.3
+                md_bg_color: [.8,.8,.8,1]
+                MDBoxLayout:
+                    size_hint_y: 0.02
+                    md_bg_color: [.8,.8,.8,1]
+                MDBoxLayout:
+                    md_bg_color: [.4,.4,.4,1]
+                    orientation: 'vertical'
+                    size_hint_y: 0.98
+                    padding: dp(15)
+
+                    MDBoxLayout:
+                        cols: 2
+                        orientation: 'horizontal'
+                        padding: dp(2)
+                        Image:
+                            source: 'images/lfmt.png'
+                            size_hint_x: 0.8
+                        Label:
+                            size_hint_x: 0.8
+
+                    MDLabel:
+                        size_hint_y:0.6
+                        text: 'Version: 1.0'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+                    MDLabel:
+                        text: 'Acknowledgements: Dionisis Chala, Michail Tsinoglou'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+                    MDLabel:
+                        text: '\u00A9 2020 Aristotle University of Thessaloniki. All rights reserved'
+                        color: 1,1,1,1
+                        font_size: dp(15)
+
+
+
+
+
+
+
+
+
+
