@@ -127,15 +127,14 @@ NavigationLayout:
                                 width: dp(1)
                                 points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
                         Image:
-                            source: 'images/logos/logo-alternative.png'
+                            source: 'images/logos/icon_orange4.png'
                             size_hint:.3,.8
                             pos_hint: {'x':0.2,'y':0.1}
 
                     MDBoxLayout:
                         size_hint: 0.65,1
                         Label:
-                            size_hint:.7,1
-                            text: ' VTA-APP'
+                            text: 'VTA-APP'
                             color: [1,1,1,1]
                             font_name: 'BlackHanSans-Regular.ttf'
                             text_size: self.parent.size
@@ -669,7 +668,7 @@ NavigationLayout:
                                 text: "  Go !"
                                 md_bg_color: [.4,.4,.4,1]
                                 text_color: [1,1,1,1]
-                                on_press:
+                                on_release:
                                     vel_tr.systemsolver()
                                     vel_tr.dml();
 
@@ -683,7 +682,7 @@ NavigationLayout:
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
 
-                                on_release:
+                                on_press:
                                     if vel_tr.k == 4 :\
                                     sv_main.scroll_y = 1
 
@@ -733,7 +732,7 @@ NavigationLayout:
                 md_bg_color: [1,1,1,1]
                 size_hint_y: 0.3
                 Image:
-                    source: 'images/logos/logo-alternative.png'
+                    source: 'images/logos/icon_orange2.png'
                     size_hint: 0.8,0.8
                     pos_hint: {'x':0.1,'y':0.1}
 

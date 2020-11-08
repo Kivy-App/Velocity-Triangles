@@ -5,43 +5,46 @@
         orientation:"vertical"
         size_hint: 1,1
         MDGridLayout:
-            cols:2
-            size_hint_y: 0.08
+            cols:3
+            size_hint_y: 0.09
             md_bg_color:0.18,0.18,0.18,1
-            BoxLayout:
-                size_hint_x:0.15
+
+            MDBoxLayout:
+                size_hint:0.15,1
                 MDIconButton:
                     id:info_button
+                    user_font_size:dp(30)
+                    icon:'menu'
                     pos:self.parent.pos
                     size:self.parent.size
-                    user_font_size:dp(30)
                     theme_text_color: 'Custom'
                     text_color: 1,1,1,1
-                    icon:'menu'
-                    on_release: root.nav_drawer.set_state('open')
+                    on_release:root.nav_drawer.set_state('open')
 
-            BoxLayout:
-                size_hint_x: 0.85
-
+            MDBoxLayout:
+                size_hint: 0.2,1
                 canvas:
-                    Color:
-                        rgba:0,0,0,0
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
                     Color:
                         rgba: 1,1,1,1
                     Line:
                         width: dp(1)
                         points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                Image:
+                    source: 'images/logos/icon_orange4.png'
+                    size_hint:.3,.8
+                    pos_hint: {'x':0.2,'y':0.1}
+
+            MDBoxLayout:
+                size_hint: 0.65,1
                 Label:
-                    text: '  VTA-APP'
+                    text: 'VTA-APP'
                     color: [1,1,1,1]
                     font_name: 'BlackHanSans-Regular.ttf'
-                    text_size: self.size
+                    text_size: self.parent.size
                     halign: 'left'
                     valign: 'middle'
-                    font_size: dp(30)
+                    font_size: dp(28)
+
 
         ScrollView:
             size: root.height, root.width
@@ -135,4 +138,4 @@
                     Image:
                         size_hint: 0.9,1
                         pos_hint: {'x':0.05,'y':0}
-                        source: 'images/new_images/info-photo.png'
+                        source: 'images/new_images/info-photo.PNG'

@@ -4,42 +4,45 @@
         orientation: 'vertical'
         size_hint: 1,1
         MDGridLayout:
-            cols:2
+            cols:3
             size_hint_y: 0.08
             md_bg_color:0.18,0.18,0.18,1
-            BoxLayout:
-                size_hint_x:0.15
+
+            MDBoxLayout:
+                size_hint:0.15,1
                 MDIconButton:
                     id:info_button
+                    user_font_size:dp(30)
+                    icon:'menu'
                     pos:self.parent.pos
                     size:self.parent.size
                     theme_text_color: 'Custom'
                     text_color: 1,1,1,1
-                    user_font_size:dp(30)
-                    icon:'menu'
-                    on_release: root.nav_drawer.set_state('open')
+                    on_release: nav_drawer.set_state('open')
 
-            BoxLayout:
-                size_hint_x: 0.85
+            MDBoxLayout:
+                size_hint: 0.2,1
                 canvas:
-                    Color:
-                        rgba:0,0,0,0
-                    Rectangle:
-                        pos: self.pos
-                        size: self.size
                     Color:
                         rgba: 1,1,1,1
                     Line:
                         width: dp(1)
                         points: [self.x,self.y+dp(10),self.x,self.y+self.height-dp(10)]
+                Image:
+                    source: 'images/logos/icon_orange4.png'
+                    size_hint:.3,.8
+                    pos_hint: {'x':0.2,'y':0.1}
+
+            MDBoxLayout:
+                size_hint: 0.65,1
                 Label:
-                    text: '  VTA-APP'
+                    text: 'VTA-APP'
                     color: [1,1,1,1]
                     font_name: 'BlackHanSans-Regular.ttf'
-                    text_size: self.size
+                    text_size: self.parent.size
                     halign: 'left'
                     valign: 'middle'
-                    font_size: dp(30)
+                    font_size: dp(28)
 
         ##### Buttons ####
         GridLayout:
@@ -51,21 +54,21 @@
                 orientation: 'horizontal'
                 MDFlatButton:
                     text: 'HUB'
-                    on_press:
-                        root.manager.current = 'hub_sc'
                     on_release:
+                        root.manager.current = 'hub_sc'
+                    on_press:
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'MID'
-                    on_press:
-                        root.manager.current = 'mid_sc'
                     on_release:
+                        root.manager.current = 'mid_sc'
+                    on_press:
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'TIP'
-                    on_press:
-                        root.manager.current = 'tip_sc'
                     on_release:
+                        root.manager.current = 'tip_sc'
+                    on_press:
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
