@@ -4,7 +4,7 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.button import MDRaisedButton
+from kivymd.uix.button import MDFillRoundFlatButton
 # from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
@@ -20,6 +20,15 @@ from kivymd.app import MDApp
 # from system_solver import system_solver1
 from solver_if import system_if
 # from kivymd.uix.dialog import MDDialog
+import csv
+from openpyxl import Workbook
+from openpyxl import load_workbook
+
+
+workbook = Workbook()
+sheet = workbook.active
+
+
 
 class Content(BoxLayout):
 	pass
@@ -38,8 +47,10 @@ def firstPopup():
 	popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
 						size_hint=(None, None), size=('350dp' ,'350dp'))
 
-	bl.add_widget(MDRaisedButton(text='OK got it !!!',theme_text_color = 'Custom',text_color = [1,0.55,0,0.8],md_bg_color = [1,1,1,1],\
-							   size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	btn = MDFillRoundFlatButton(text='OK got it !!!',\
+							   size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 class P2(BoxLayout):
@@ -50,15 +61,20 @@ def secondPopup():
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
 	label = Label(text = ' This combination of variables \n'
-						 ' is not valid. It seems that \n'
-						 ' with this combination  \n'
-						 ' Loading coefficient \u03C8 or \n'
-						 ' Flow Coefficient \u03C6 tends to infinity.\n'
-						 ' Please try again with new varieables.',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+						 ' is not valid. \n'
+						 'b1 has to be greater than a1 and \n'
+						 'a2 has to be greater than b2 \n'
+						 ' Please try again with new varieables',halign = 'center',valign = 'middle', color =[1,1,1,1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
+						content=bl,\
+						size_hint=(None, None), size=('350dp', '350dp'))
+
+	btn = MDFillRoundFlatButton(text='OK got it !!!', text_color=[0.5, 1, 1, 1],\
+								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 class P3(BoxLayout):
@@ -68,11 +84,17 @@ def thirdPopup():
 	show = P3()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding=30)
-	label = Label(text = ' Dimensional measurements \n missing. Please fill all the \n required measurements ',halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Dimensional measurements \n missing. Please fill all the \n required measurements.',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
+						content=bl, \
+						size_hint=(None, None), size=('350dp', '350dp'))
+
+	btn = MDFillRoundFlatButton(text='OK got it !!!', \
+								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 class P4(BoxLayout):
@@ -85,12 +107,17 @@ def rpmPopup():
 	show = Prpm()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Revoloutions per minute have \n to be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Revoloutions per minute have \n to be positive number. Please \n try  again with  a positive value.' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(
-		Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss))
+	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
+						content=bl,\
+						size_hint=(None, None), size=('350dp', '350dp'))
+
+	btn = MDFillRoundFlatButton(text='OK got it !!!',\
+								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 class Ph2t(BoxLayout):
@@ -100,11 +127,17 @@ def h2tPopup():
 	show = Ph2t()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Hub to tip ratio has \n to be positive number \n and less than one. \n Please try again with \n a valid value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Hub to tip ratio has to be positive \n number and less than one.Please \n try again with  a valid value.' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
+						content=bl, \
+						size_hint=(None, None), size=('350dp', '350dp'))
+
+	btn = MDFillRoundFlatButton(text='OK got it !!!', \
+								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 class Pdiam(BoxLayout):
@@ -114,11 +147,17 @@ def diamPopup():
 	show = Pdiam()
 	# create content for the Popup
 	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Diameter  has to\n be positive number. \n Please try again with \n a positive value' ,halign = 'center',valign = 'middle', color =[1, 0, 0, 1],font_size = '18dp')
+	label = Label(text = ' Diameter  has to be positive number. \n Please try again with a positive value' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
 	bl.add_widget(label)
-	popupWindow = Popup(title=" Error ", content=bl, size_hint=(None, None), size=('350dp' ,'350dp'))
-	bl.add_widget(Button(text='OK got it !!!', size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss))
+	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
+						content=bl, \
+						size_hint=(None, None), size=('350dp', '350dp'))
+
+	btn = MDFillRoundFlatButton(text='OK got it !!!', \
+								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
+
+	bl.add_widget(btn)
 	popupWindow.open()
 
 
@@ -154,6 +193,7 @@ class VelocityTriangles(Screen):
 	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
 
+	j = NumericProperty(0)
 	#### Values of checkboxes state ##########
 	ch1_value = ObjectProperty('normal')
 	ch2_value = ObjectProperty('normal')
@@ -213,6 +253,51 @@ class VelocityTriangles(Screen):
 
 			##################   System_Solver  ################
 			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_if(pe,fe,rne,a1e,a2e,b1e,b2e)
+
+			# with open('data.csv', 'w', newline='') as file:
+			# 	writer = csv.writer(file)
+			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
+			# 	writer.writerow([str(pe),str(fe),str(rne),str(a1e),str(a2e),str(b1e),str(b2e)])
+
+			# sheet["A1"] = "ψ"
+			# sheet["B1"] = "φ"
+			# sheet["C1"] = "Rn"
+			# sheet["D1"] = "α1"
+			# sheet["E1"] = "α2"
+			# sheet["F1"] = "β1"
+			# sheet["G1"] = "β2"
+			# #
+			# # workbook = load_workbook(filename="data_base.xlsx")
+			# j = sheet.max_row + 1
+			# sheet["A" + str(j)] = str(pe)
+			# sheet["B" + str(j)] = str(fe)
+			# sheet["C" + str(j)] = str(rne)
+			# sheet["D" + str(j)] = str(a1e)
+			# sheet["E" + str(j)] = str(a2e)
+			# sheet["F" + str(j)] = str(b1e)
+			# sheet["G" + str(j)] = str(b2e)
+
+			# for i in range(2,sheet.max_row):
+			# 	if sheet["A"+ str(i)].value == sheet["A"+ str(j)].value and\
+			# 			sheet["B"+ str(i)].value == sheet["B"+ str(j)].value and\
+			# 			sheet["C"+ str(i)].value == sheet["C"+ str(j)].value and\
+			# 			sheet["D"+ str(i)].value == sheet["D"+ str(j)].value and\
+			# 			sheet["E"+ str(i)].value == sheet["E"+ str(j)].value and\
+			# 			sheet["F"+ str(i)].value == sheet["F"+ str(j)].value and\
+			# 			sheet["G"+ str(i)].value == sheet["G"+ str(j)].value:
+			# 		pass
+			# 	else:
+			# 		sheet["A" + str(j)] = str(pe)
+			# 		sheet["B" + str(j)] = str(fe)
+			# 		sheet["C" + str(j)] = str(rne)
+			# 		sheet["D" + str(j)] = str(a1e)
+			# 		sheet["E" + str(j)] = str(a2e)
+			# 		sheet["F" + str(j)] = str(b1e)
+			# 		sheet["G" + str(j)] = str(b2e)
+
+			# print(sheet.max_row)
+			#
+			# workbook.save(filename="data_base.xlsx")
 
 			############################# Drawing Triangles ######################################
 			global U
@@ -1185,6 +1270,7 @@ class TipScreen(Screen):
 class CompScreen(Screen):
 
 	####### MID #########
+
 	x0Text = StringProperty('0')
 	y0Text = StringProperty('0')
 	x1Text = StringProperty('0')
@@ -1288,9 +1374,9 @@ class MainApp(MDApp):
 	def __init__(self, **kwargs):
 		self.title = "VTA"
 		self.theme_cls.theme_style = "Light"
-		self.theme_cls.primary_palette = "Blue"
+		self.theme_cls.primary_palette = "DeepOrange"
+		self.theme_cls.secondary_palette = "Black"
 		super().__init__(**kwargs)
-
 
 MainApp().run()
 
