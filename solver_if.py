@@ -1,4 +1,9 @@
 import numpy as np
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.button import MDFillRoundFlatButton
+
 
 def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
@@ -45,6 +50,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	k=len(X)
 	t=len(X)
+
 
 	############################### ψ,φ,Rn ######################################
 
@@ -244,7 +250,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	if X == [1, 3, 4, 6]:  # f,a2,b2 ##########################
 		if a2 == b2:
-			a2 =+ 1
+			a2 = + 1
 		pe = 1
 		rne = (1 / 2) * (-2 * fe * np.tan(a2) + pe + 2)
 		a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))
@@ -258,14 +264,26 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	############################### Rn,2 γωνίες ######################################
 
-	# if  X == [1,2,6,7]:               #r,a1,a2   $$$$$$ na ginei idio me to b1,b2
+	if X == [1,2,6,7]:#r,a1,a2   $$$$$$ na ginei idio me to b1,b2
+		if rne == 1 or a1e == a2e:
+			fe = 1
+			pe = fe * (np.tan(a1) + np.tan(a2))
+			b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
+			b2e = np.degrees(np.arctan(((pe / 2) - rne) / fe))
+		else:
+			fe = 2*(rne-1)/(np.tan(a1)-np.tan(a2))
+			pe = fe*(np.tan(a1)+np.tan(a2))
+			b1e = np.degrees(np.arctan(((pe / 2) + rne) / fe))
+			b2e = np.degrees(np.arctan(((pe / 2) - rne) / fe))
+
 	# if  X == [1,2,5,6]:               #r,a1,b2
+		# error_popup()
+		# k = 0
 	# if  X == [1,2,4,7]:               #r,a2,b1
 	
 	if X == [1, 2, 5, 7]:  # r,a1,b1
 		if a1 == b1:
-			a1 =+ 1
-
+			a1 = + 1
 		pe = (2 * (rne * np.tan(a1) - rne * np.tan(b1) + np.tan(b1))) / (np.tan(b1) - np.tan(a1))
 		fe = 1 / (np.tan(b1) - np.tan(a1))
 		a2e = np.degrees(np.arctan(((pe / 2) + 1 - rne) / fe))
@@ -273,14 +291,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	if X == [1, 2, 4, 6]:  # r,a2,b2
 		if a2 == b2:
-			a2 =+ 1
+			a2 = + 1
 		pe = (2 * (-rne * np.tan(a2) + rne * np.tan(b2) - np.tan(b2))) / (np.tan(b2) - np.tan(a2))
 		fe = 1 / (np.tan(a2) - np.tan(b2))
 		a1e = -np.degrees(np.arctan(-2 * rne * np.tan(a2) + np.tan(a2) + 2 * rne * np.tan(b2) - 2 * np.tan(b2)))
 		b1e = np.degrees(np.arctan(2 * rne * np.tan(a2) - 2 * rne * np.tan(b2) + np.tan(b2)))
 
 	if X == [1, 2, 4, 5]:  # r,b1,b2 ################################
-		if rne == 0 and  b1e == b2e:
+		if rne == 0 and b1e == b2e:
 			pe = 1
 			fe = (pe / 2 + rne) / np.tan(b1)
 			a1e = np.degrees(np.arctan(((pe / 2) - 1 + rne) / fe))

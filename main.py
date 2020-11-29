@@ -4,161 +4,19 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivymd.uix.button import MDFillRoundFlatButton
 # from kivy.lang import Builder
 from kivy.properties import StringProperty
 import math as m
-from kivy.uix.popup import Popup
-from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
 from kivy.metrics import Metrics
 import numpy as np
-# from scipy.optimize import fsolve
-from kivy.uix.bubble import Bubble
 from kivymd.app import MDApp
 # from system_solver import system_solver1
 from solver_if import system_if
-# from kivymd.uix.dialog import MDDialog
 import csv
-from openpyxl import Workbook
-from openpyxl import load_workbook
+from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup
+from creating_database import create_database_nd
 
 
-workbook = Workbook()
-sheet = workbook.active
-
-
-
-class Content(BoxLayout):
-	pass
-
-class P(BoxLayout):
-	pass
-
-def firstPopup():
-	show = P()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',\
-				  valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-	bl.add_widget(label)
-
-	popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
-						size_hint=(None, None), size=('350dp' ,'350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!',\
-							   size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
-
-class P2(BoxLayout):
-	pass
-
-def secondPopup():
-	show = P2()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' This combination of variables \n'
-						 ' is not valid. \n'
-						 'b1 has to be greater than a1 and \n'
-						 'a2 has to be greater than b2 \n'
-						 ' Please try again with new varieables',halign = 'center',valign = 'middle', color =[1,1,1,1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-						content=bl,\
-						size_hint=(None, None), size=('350dp', '350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!', text_color=[0.5, 1, 1, 1],\
-								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
-
-class P3(BoxLayout):
-	pass 
-
-def thirdPopup():
-	show = P3()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding=30)
-	label = Label(text = ' Dimensional measurements \n missing. Please fill all the \n required measurements.',halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-						content=bl, \
-						size_hint=(None, None), size=('350dp', '350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!', \
-								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
-
-class P4(BoxLayout):
-	pass
-
-class Prpm(BoxLayout):
-	pass
-
-def rpmPopup():
-	show = Prpm()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Revoloutions per minute have \n to be positive number. Please \n try  again with  a positive value.' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-						content=bl,\
-						size_hint=(None, None), size=('350dp', '350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!',\
-								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
-
-class Ph2t(BoxLayout):
-	pass
-
-def h2tPopup():
-	show = Ph2t()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Hub to tip ratio has to be positive \n number and less than one.Please \n try again with  a valid value.' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-						content=bl, \
-						size_hint=(None, None), size=('350dp', '350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!', \
-								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
-
-class Pdiam(BoxLayout):
-	pass
-
-def diamPopup():
-	show = Pdiam()
-	# create content for the Popup
-	bl = BoxLayout(orientation='vertical',padding = 30)
-	label = Label(text = ' Diameter  has to be positive number. \n Please try again with a positive value' ,halign = 'center',valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
-	bl.add_widget(label)
-	popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-						content=bl, \
-						size_hint=(None, None), size=('350dp', '350dp'))
-
-	btn = MDFillRoundFlatButton(text='OK got it !!!', \
-								size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
-
-	bl.add_widget(btn)
-	popupWindow.open()
 
 
 class VelocityTriangles(Screen):
@@ -252,7 +110,8 @@ class VelocityTriangles(Screen):
 			Ne = str(self.n.text)
 
 			##################   System_Solver  ################
-			pe,fe,rne,a1e,a2e,b1e,b2e,self.k,t = system_if(pe,fe,rne,a1e,a2e,b1e,b2e)
+			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
+
 
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
@@ -268,14 +127,7 @@ class VelocityTriangles(Screen):
 			# sheet["G1"] = "β2"
 			# #
 			# # workbook = load_workbook(filename="data_base.xlsx")
-			# j = sheet.max_row + 1
-			# sheet["A" + str(j)] = str(pe)
-			# sheet["B" + str(j)] = str(fe)
-			# sheet["C" + str(j)] = str(rne)
-			# sheet["D" + str(j)] = str(a1e)
-			# sheet["E" + str(j)] = str(a2e)
-			# sheet["F" + str(j)] = str(b1e)
-			# sheet["G" + str(j)] = str(b2e)
+
 
 			# for i in range(2,sheet.max_row):
 			# 	if sheet["A"+ str(i)].value == sheet["A"+ str(j)].value and\
@@ -409,6 +261,7 @@ class VelocityTriangles(Screen):
 						ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
 						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 
+			# create_database_nd(pe, fe, rne, a1e, a2e, b1e, b2e, tc)
 
 #####################  Checking if the second compartment is completed ####################
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
@@ -603,7 +456,6 @@ class VelocityTriangles(Screen):
 					self.popup = rpmPopup()
 					self.k = 0
 
-
 			rt = float(D1e)/2
 			rh = float(Rh1e)*rt
 			rm = (rt+rh)/2
@@ -625,7 +477,6 @@ class VelocityTriangles(Screen):
 			W1 = Vx / m.cos(m.radians(float(b1e)))
 
 			W2 = Vx / m.cos(m.radians(float(b2e)))
-
 
 			Vth1 = -V1 * m.sin(m.radians(float(a1e)))
 			Vth2 = V2 * m.sin(m.radians(float(a2e)))

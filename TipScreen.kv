@@ -4,6 +4,7 @@
 
 <TipScreen>:
     name: 'tip_sc'
+
     BoxLayout:
         orientation: 'vertical'
         size_hint: 1,1
@@ -22,7 +23,7 @@
                     size:self.parent.size
                     theme_text_color: 'Custom'
                     text_color: 1,1,1,1
-                    on_release: nav_drawer.set_state('open')
+                    on_release: root.nav_drawer.set_state('open')
 
             MDFloatLayout:
                 size_hint: 0.17,1
