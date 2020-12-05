@@ -1,3 +1,4 @@
+
 <CompScreen>:
     name: 'comp_sc'
     BoxLayout:
@@ -72,6 +73,7 @@
                         sv_comp.scroll_y = 1
                 MDFlatButton:
                     text: 'Comp'
+                    theme_text_color: 'Custom'
                     on_press:
                         sv_comp.scroll_y = 1
 
@@ -92,8 +94,8 @@
             effect_cls: 'ScrollEffect'
             id: sv_comp
             GridLayout:
-                size_hint_y: 1.17
-                rows: 7
+                size_hint_y: 1.62
+                rows: 8
                 ############# Image Box ##############
                 FloatLayout:
                     size_hint_y: 0.4
@@ -101,9 +103,9 @@
                         Color:
                             rgba: 1,1,1,1
                         Rectangle:
-                            source: "images/new_images/comp_mid.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_mid.png"
-                            size: self.width - dp(20),self.height - dp(20)
-                            pos: self.x + dp(10),self.y + dp(10)
+                            source: "images/new_images/Compressor_blades.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/Turbine_blades.png"
+                            size: self.width ,self.height
+                            pos: self.x ,self.y
 
                 MDBoxLayout:
                     size_hint_y: 0.08
@@ -159,7 +161,12 @@
                             width: dp(1.5)
                             points: (float(root.x0tText),self.y + float(root.y0Text),float(root.xLtText),self.y + float(root.yLtText))
 
-
+                        Color:
+                            rgba:(0,0,0,0) if float(root.x1tText) - float(root.x0tText) < 30 else (1,0,0,1)
+                        Triangle:
+                            points:
+                                float(root.x0tText),self.y + float(root.y0Text),float(root.x0tText)+dp(25),\
+                                self.y + float(root.y0Text)+dp(5),float(root.x0tText)+dp(25),self.y + float(root.y0Text)-dp(5)
 
     ########################     MIDDLE       #################################################
 
@@ -170,7 +177,6 @@
                         Line:
                             width: dp(1.5)
                             points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y1Text))
-
 
         ###################    V1 Line    ##########################
                         Line:
@@ -192,6 +198,13 @@
                             width: dp(1.5)
                             points: (float(root.x0Text),self.y + float(root.y0Text),float(root.xLText),self.y + float(root.yLText))
 
+                        Color:
+                            rgba: (0,0,0,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
+                        Triangle:
+                            points:
+                                float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),\
+                                self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
+
     #########################     HUB     ##################################################
 
         ###################    Color of the Lines    ##################
@@ -201,7 +214,6 @@
                         Line:
                             width: dp(1.5)
                             points: (float(root.x0hText),self.y + float(root.y0Text),float(root.x1hText),self.y + float(root.y1Text))
-
 
         ###################    V1h Line    ##########################
                         Line:
@@ -223,79 +235,96 @@
                             width: dp(1.5)
                             points: (float(root.x0hText),self.y + float(root.y0Text),float(root.xLhText),self.y + float(root.yLhText))
 
-
+                        Color:
+                            rgba: (0,0,0,0) if float(root.x1hText) - float(root.x0hText) < 30 else (0,0,1,1)
+                        Triangle:
+                            points:
+                                float(root.x0hText),self.y + float(root.y0Text),float(root.x0hText)+dp(25),\
+                                self.y + float(root.y0Text)+dp(5),float(root.x0hText)+dp(25),self.y + float(root.y0Text)-dp(5)
 
                         #############  Top right corner box ############
-                        Color:
-                            rgba: 1,1,1,1
-                        Rectangle:
-                            pos:self.x + self.width - dp(120),self.y + self.height - dp(90)
-                            size:dp(90),dp(60)
 
                         Color:
                             rgba: 0,0,0,1
                         Line:
                             width: dp(1)
-                            rectangle: (self.x + self.width - dp(120),self.y + self.height - dp(90),dp(90),dp(60))
+                            rectangle: (self.x + self.width - dp(115),self.y + dp(25),dp(90),dp(40))
 
-                        ##### TIP ###
+                        ##### HUB ###
                         Color:
                             rgba:0,0,1,1
                         Line:
                             width: dp(1)
-                            points: (self.x + self.width - dp(80),self.y + self.height - dp(45),self.x + self.width - dp(40),self.y + self.height - dp(45))
-
-                        Color:
-                            rgba: (0,0,0,1) if float(root.x1tText) - float(root.x0tText) < 30 else (1,0,0,1)
-                        Triangle:
-                            points:
-                                float(root.x0tText),self.y + float(root.y0Text),float(root.x0tText)+dp(25),\
-                                self.y + float(root.y0Text)+dp(5),float(root.x0tText)+dp(25),self.y + float(root.y0Text)-dp(5)
-
+                            points: (self.x + self.width - dp(80),self.y + dp(57.5),self.x + self.width - dp(40),self.y + dp(57.5))
 
                         ##### MID ###
                         Color:
                             rgba: (0,0,0,1) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
                         Line:
                             width: dp(1)
-                            points: (self.x + self.width - dp(80),self.y + self.height - dp(60),self.x + self.width - dp(40),self.y + self.height - dp(60))
+                            points: (self.x + self.width - dp(80),self.y + dp(45),self.x + self.width - dp(40),self.y + dp(45))
 
-                        Color:
-                            rgba: (0,0,0,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
-                        Triangle:
-                            points:
-                                float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),\
-                                self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
-
-                        #####  HUB  #####
+                        #####  TIP  #####
                         Color:
                             rgba:1,0,0,1
                         Line:
                             width: dp(1)
-                            points: (self.x + self.width - dp(80),self.y + self.height - dp(75),self.x + self.width - dp(40),self.y + self.height - dp(75))
-
-                        Color:
-                            rgba:(0,0,0,0) if float(root.x1hText) - float(root.x0hText) < 30 else (0,0,1,1)
-                        Triangle:
-                            points:
-                                float(root.x0hText),self.y + float(root.y0Text),float(root.x0hText)+dp(25),\
-                                self.y + float(root.y0Text)+dp(5),float(root.x0hText)+dp(25),self.y + float(root.y0Text)-dp(5)
+                            points: (self.x + self.width - dp(80),self.y + dp(32.5),self.x + self.width - dp(40),self.y + dp(32.5))
 
                     Label:
-                        font_size: dp(12)
-                        pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(45)
+                        font_size: dp(11)
+                        pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(58.5)
                         text: 'Hub'
 
                     Label:
-                        font_size: dp(12)
-                        pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(60)
+                        font_size: dp(11)
+                        pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(46)
                         text: 'Mid'
 
                     Label:
-                        font_size: dp(12)
-                        pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(75)
+                        font_size: dp(11)
+                        pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(33.5)
                         text: 'Tip'
 
+                FloatLayout:
+                    size_hint_y: 0.45
+                    canvas:
+                        Color:
+                            rgba:0,0,0,1
+                        Line:
+                            width: dp(1.)
+                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+
+                        Color:
+                            rgba: 0,0,1,1
+#                        Line:
+#                            width: dp(1.5)
+#                            points:
+#                                (self.x+self.width/2 - float(root.BaseText)/2,self.y+self.height/4,
+#                                self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_1Text),
+#                                self.y+self.height/4 + float(root.z_midText))
+#                        Line:
+#                            width: dp(1.5)
+#                            points:
+#                                (self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_1Text),self.y+self.height/4 + float(root.z_midText),
+#                                self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_2Text),
+#                                self.y+self.height/4 - float(root.z_endText))
+        ###################    V1h Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x0hText),self.y +float(root.y0_2Text),float(root.xRhText),self.y +float(root.yRh_2Text))
+
+        ###################    V2h Line    ##########################
+                        Line:
+                            width: dp(1.5)
+                            points: (float(root.x0hText),self.y + float(root.y0_2Text),float(root.xLhText),self.y + float(root.yLh_2Text))
+
+                        Line:
+                            width: dp(2)
+                            bezier:
+                                (float(root.xLhText),self.y + float(root.yLh_2Text),
+                                float(root.x0hText),self.y +float(root.y0_2Text),
+                                float(root.xRhText),self.y +float(root.yRh_2Text))
 
     ####################    Button  ####################
                 GridLayout:

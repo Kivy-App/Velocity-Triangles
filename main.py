@@ -11,13 +11,39 @@ from kivy.metrics import Metrics
 import numpy as np
 from kivymd.app import MDApp
 # from system_solver import system_solver1
-from solver_if import system_if
+from solver_if import system_if,system_X
 import csv
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup
 from creating_database import create_database_nd
+###########################################################################################
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.button import MDFillRoundFlatButton
 
+def error_Popup():
+    # show = P()
+    #create content for the Popup
+    bl = BoxLayout(orientation='vertical',padding = 30)
+    label = Label(text ='This combination of non dimensional \n'\
+						'input has infinite solutions. Please \n'\
+						'fill in one more coefficient or angle ',halign = 'center',\
+                  valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
+    bl.add_widget(label)
 
+    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
+                        size_hint=(None, None), size=('350dp' ,'350dp'))
+
+    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+                               size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
+
+	# text_input = TextInput(text="Text input")
+	# bl.add_widget(text_input)
+
+    bl.add_widget(btn)
+    popupWindow.open()
 
 class VelocityTriangles(Screen):
 
@@ -110,46 +136,12 @@ class VelocityTriangles(Screen):
 			Ne = str(self.n.text)
 
 			##################   System_Solver  ################
-			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
-
-
+			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
+			self.manager.get_screen('mid_sc').XText = str(X)
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
 			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
 			# 	writer.writerow([str(pe),str(fe),str(rne),str(a1e),str(a2e),str(b1e),str(b2e)])
-
-			# sheet["A1"] = "ψ"
-			# sheet["B1"] = "φ"
-			# sheet["C1"] = "Rn"
-			# sheet["D1"] = "α1"
-			# sheet["E1"] = "α2"
-			# sheet["F1"] = "β1"
-			# sheet["G1"] = "β2"
-			# #
-			# # workbook = load_workbook(filename="data_base.xlsx")
-
-
-			# for i in range(2,sheet.max_row):
-			# 	if sheet["A"+ str(i)].value == sheet["A"+ str(j)].value and\
-			# 			sheet["B"+ str(i)].value == sheet["B"+ str(j)].value and\
-			# 			sheet["C"+ str(i)].value == sheet["C"+ str(j)].value and\
-			# 			sheet["D"+ str(i)].value == sheet["D"+ str(j)].value and\
-			# 			sheet["E"+ str(i)].value == sheet["E"+ str(j)].value and\
-			# 			sheet["F"+ str(i)].value == sheet["F"+ str(j)].value and\
-			# 			sheet["G"+ str(i)].value == sheet["G"+ str(j)].value:
-			# 		pass
-			# 	else:
-			# 		sheet["A" + str(j)] = str(pe)
-			# 		sheet["B" + str(j)] = str(fe)
-			# 		sheet["C" + str(j)] = str(rne)
-			# 		sheet["D" + str(j)] = str(a1e)
-			# 		sheet["E" + str(j)] = str(a2e)
-			# 		sheet["F" + str(j)] = str(b1e)
-			# 		sheet["G" + str(j)] = str(b2e)
-
-			# print(sheet.max_row)
-			#
-			# workbook.save(filename="data_base.xlsx")
 
 			############################# Drawing Triangles ######################################
 			global U
@@ -426,6 +418,11 @@ class VelocityTriangles(Screen):
 
 		except:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
+			X = system_X(pe,fe,rne,a1e,a2e,b1e,b2e)
+			if X == [1,2,4,5] or X == [1,2,6,7] or X == [1, 2, 4, 7] or X == [1, 2, 5, 6] or X == [1, 3, 5, 7] or X == [1, 3, 4, 6]:
+				error_Popup()
+				self.k = 0
+			else:
 				firstPopup()
 				self.k = 0  # mia allh timh oxi 4 gia na mhn allazei window
 
@@ -668,6 +665,14 @@ class VelocityTriangles(Screen):
 		a2dt = 180 - float(a2et) - 90
 		b1dt = 180 - float(b1et) - 90
 		b2dt = 180 - float(b2et) - 90
+
+		y0_2  = y0 + Window.size[1] * 150 / 700
+		yLh_2 = y0_2 - Uhp * float(feh1)
+		yRh_2 = y0_2 - Uhp * float(feh2)
+		self.manager.get_screen('comp_sc').y0_2Text = str(round(y0_2, 3))
+		self.manager.get_screen('comp_sc').yLh_2Text = str(round(yLh_2, 3))
+		self.manager.get_screen('comp_sc').yRh_2Text = str(round(yRh_2, 3))
+
 
 		############### Computing rotating arrow points  ############################
 
@@ -931,7 +936,7 @@ class MidScreen(Screen):
 
 	tc_namemText = StringProperty('0')
 	ptnm_xText = StringProperty('0')
-	
+	XText = StringProperty('0')
 	pText = StringProperty('0')
 	fText = StringProperty('0')
 	rnText = StringProperty('0')
@@ -1119,6 +1124,10 @@ class TipScreen(Screen):
 	ptnt_xText = StringProperty('0')
 
 class CompScreen(Screen):
+
+	y0_2Text = StringProperty('0')
+	yLh_2Text = StringProperty('0')
+	yRh_2Text = StringProperty('0')
 
 	####### MID #########
 

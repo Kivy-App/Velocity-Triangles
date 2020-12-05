@@ -57,12 +57,12 @@
             id: sv_info
 
             MDGridLayout:
-                size_hint: 1,1.2
-                rows:6
+                size_hint: 1,1.26
+                rows:7
                 md_bg_color:1,1,1,1
 
                 BoxLayout:
-                    size_hint_y: 0.08
+                    size_hint_y: 0.05
                     orientation:"vertical"
                     padding: dp(10),dp(0)
 
@@ -80,15 +80,15 @@
                         padding: dp(30),dp(0)
                         text_size: self.size
                         halign: 'left'
-                        valign: 'middle'
+                        valign: 'top'
                         text:
-                            'Welcome to VTA-APP. This application calculates and ' +\
-                            'designs the velocity triangles in a stage of an axial turbomachine.' +\
-                            'The results are given in four segments for the three radial points Hub-Mid-Tip ' +\
+                            'Welcome to VTA-APP. This application calculates and ' \
+                            'designs the velocity triangles in a stage of an axial turbomachine.' \
+                            'The results are given in four segments for the three radial points Hub-Mid-Tip ' \
                             'and their comparison. If you want to know how to use the app properly read more below.'
 
                 MDBoxLayout:
-                    size_hint_y: .1
+                    size_hint_y: .05
                     orientation:"vertical"
                     padding: dp(10),dp(0)
 
@@ -106,16 +106,16 @@
                         padding: dp(30),dp(0)
                         text_size: self.size
                         halign: 'left'
-                        valign: 'middle'
+                        valign: 'top'
                         text:
-                            'The app consists of two main sections, Non Dimensional and Dimensional ' +\
-                            'In the first section you should enter exactly three input variables and at the ' +\
-                            'second you should fill in all available inputs. Note that the first ' +\
-                            'section can operate independently of the second. Optionally, you can select the type stages, '+\
+                            'The app consists of two main sections, Non Dimensional and Dimensional ' \
+                            'In the first section you should enter exactly three input variables and at the ' \
+                            'second you should fill in all available inputs. Note that the first ' \
+                            'section can operate independently of the second. Optionally, you can select the type stages, '\
                             'compressor or turbine and velocity profile.'
 
                 MDBoxLayout:
-                    size_hint_y: .1
+                    size_hint_y: .05
                     orientation:"vertical"
                     padding: dp(10),dp(0)
 
@@ -129,7 +129,7 @@
 
                 MDGridLayout:
                     rows: 2
-                    size_hint_y: .3
+                    size_hint_y: .4
                     Label:
                         size_hint_y: 0.2
                         padding: dp(30),dp(0)
@@ -137,10 +137,31 @@
                         halign: 'left'
                         valign: 'middle'
                         text:
-                            'In order to measure the angles we use the horizontal level.'
+                            'In order to measure the angles we use the horizontal level.'\
+                            'Positive angles are those that tend to increase flow\'s swirl.'
+
                     BoxLayout:
                         size_hint: 1,0.8
                         Image:
                             size_hint: 0.9,1
                             pos_hint: {'x':0.05,'y':0}
                             source: 'images/new_images/info-photo.png'
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10),dp(0)
+                    size_hint: 1,0.11
+                    md_bg_color:0.18,0.18,0.18,1
+                    canvas:
+                        Color:
+                            rgba: 0.8,0.8,0.8,0.5
+                        Line:
+                            width: dp(7.5)
+                            points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                    Label:
+                        text: 'Velocity Triangles Analysis App/Info'
+                        font_size: dp(14)
+                        color: 1,1,1,1
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'
