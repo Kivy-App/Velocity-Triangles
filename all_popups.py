@@ -3,6 +3,25 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.button import MDFillRoundFlatButton
 
+def error_Popup():
+    # show = P()
+    #create content for the Popup
+    bl = BoxLayout(orientation='vertical',padding = 30)
+    label = Label(text ='This combination of non dimensional \n'\
+						'input has infinite solutions. Please \n'\
+						'fill in one more coefficient or angle ',halign = 'center',\
+                  valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
+
+    bl.add_widget(label)
+
+    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
+                        size_hint=(None, None), size=('350dp' ,'350dp'))
+
+    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+                               size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
+
+    bl.add_widget(btn)
+    popupWindow.open()
 
 class P(BoxLayout):
     pass

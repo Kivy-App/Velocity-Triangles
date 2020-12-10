@@ -12,38 +12,16 @@ import numpy as np
 from kivymd.app import MDApp
 # from system_solver import system_solver1
 from solver_if import system_if,system_X
-import csv
-from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup
-from creating_database import create_database_nd
+# import csv
+from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
+# from creating_database import create_database_nd
 ###########################################################################################
-from kivy.uix.popup import Popup
-from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.button import MDFillRoundFlatButton
+# from kivy.uix.popup import Popup
+# from kivy.uix.label import Label
+# from kivy.uix.textinput import TextInput
+# from kivy.uix.boxlayout import BoxLayout
+# from kivymd.uix.button import MDFillRoundFlatButton
 
-def error_Popup():
-    # show = P()
-    #create content for the Popup
-    bl = BoxLayout(orientation='vertical',padding = 30)
-    label = Label(text ='This combination of non dimensional \n'\
-						'input has infinite solutions. Please \n'\
-						'fill in one more coefficient or angle ',halign = 'center',\
-                  valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
-
-    bl.add_widget(label)
-
-    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
-                        size_hint=(None, None), size=('350dp' ,'350dp'))
-
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
-                               size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
-
-	# text_input = TextInput(text="Text input")
-	# bl.add_widget(text_input)
-
-    bl.add_widget(btn)
-    popupWindow.open()
 
 class VelocityTriangles(Screen):
 
@@ -84,19 +62,6 @@ class VelocityTriangles(Screen):
 	ch3_value = ObjectProperty('normal')
 	ch4_value = ObjectProperty('normal')
 	ch5_value = ObjectProperty('normal')
-
-# 		l = Label(text=' This application was created to extract an easy and fast velocity \n'
-# 					   ' analysis for one stage of a turbomachine. It can analize the \n'
-# 					   ' velocities of both compressor and turbine and it is divided into 2 \n'
-# 					   ' compartments. The first compartment extracts the non dimensional\n'
-# 					   ' velocity charts through input of coefficients and angles. To achieve\n'
-# 					   ' the non dimensional analysis you should complete 3 off the first \n'
-# 					   ' segments inputs. The second compartment extracts the dimensional\n'
-# 					   ' analysis. At the second compartment you should fill all the enabled\n'
-# 					   ' input slots. Note that the first compartments can work without\n'
-# 					   ' filling the second but it doesnt work the other way around.\n'
-# 					   ' [color=ff3333][b] To dismiss info panel press the info button once more. [/b][/color]'
-
 
 	def systemsolver(self):
 		try:
@@ -666,12 +631,12 @@ class VelocityTriangles(Screen):
 		b1dt = 180 - float(b1et) - 90
 		b2dt = 180 - float(b2et) - 90
 
-		y0_2  = y0 + Window.size[1] * 150 / 700
-		yLh_2 = y0_2 - Uhp * float(feh1)
-		yRh_2 = y0_2 - Uhp * float(feh2)
-		self.manager.get_screen('comp_sc').y0_2Text = str(round(y0_2, 3))
-		self.manager.get_screen('comp_sc').yLh_2Text = str(round(yLh_2, 3))
-		self.manager.get_screen('comp_sc').yRh_2Text = str(round(yRh_2, 3))
+		# y0_2  = y0 + Window.size[1] * 150 / 700
+		# yLh_2 = y0_2 - Uhp * float(feh1)
+		# yRh_2 = y0_2 - Uhp * float(feh2)
+		# self.manager.get_screen('comp_sc').y0_2Text = str(round(y0_2, 3))
+		# self.manager.get_screen('comp_sc').yLh_2Text = str(round(yLh_2, 3))
+		# self.manager.get_screen('comp_sc').yRh_2Text = str(round(yRh_2, 3))
 
 
 		############### Computing rotating arrow points  ############################
@@ -1125,9 +1090,9 @@ class TipScreen(Screen):
 
 class CompScreen(Screen):
 
-	y0_2Text = StringProperty('0')
-	yLh_2Text = StringProperty('0')
-	yRh_2Text = StringProperty('0')
+	# y0_2Text = StringProperty('0')
+	# yLh_2Text = StringProperty('0')
+	# yRh_2Text = StringProperty('0')
 
 	####### MID #########
 

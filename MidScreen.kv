@@ -107,8 +107,8 @@
                             rgba: 1,1,1,1
                         Rectangle:
                             source: "images/new_images/comp_mid.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_mid.png"
-                            size: self.width - dp(20),self.height - dp(20)
-                            pos: self.x + dp(10),self.y + dp(10)
+                            size: self.width,self.height
+                            pos: self.x ,self.y
                 MDBoxLayout:
                     size_hint_y: 0.08
                     md_bg_color:1,0.55,0,0.8

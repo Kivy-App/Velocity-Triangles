@@ -94,8 +94,8 @@
             effect_cls: 'ScrollEffect'
             id: sv_comp
             GridLayout:
-                size_hint_y: 1.62
-                rows: 8
+                size_hint_y: 1.17
+                rows: 7
                 ############# Image Box ##############
                 FloatLayout:
                     size_hint_y: 0.4
@@ -103,7 +103,7 @@
                         Color:
                             rgba: 1,1,1,1
                         Rectangle:
-                            source: "images/new_images/Compressor_blades.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/Turbine_blades.png"
+                            source: "images/new_images/comp_full1.png" if root.tc_namemText == 'Compressor Middle' else "images/new_images/turb_full.png"
                             size: self.width ,self.height
                             pos: self.x ,self.y
 
@@ -286,45 +286,34 @@
                         pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(33.5)
                         text: 'Tip'
 
-                FloatLayout:
-                    size_hint_y: 0.45
-                    canvas:
-                        Color:
-                            rgba:0,0,0,1
-                        Line:
-                            width: dp(1.)
-                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
-
-                        Color:
-                            rgba: 0,0,1,1
+#                FloatLayout:
+#                    size_hint_y: 0.45
+#                    canvas:
+#                        Color:
+#                            rgba:0,0,0,1
+#                        Line:
+#                            width: dp(1.)
+#                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+#
+#                        Color:
+#                            rgba: 0,0,1,1
+#
+#        ###################    V1h Line    ##########################
 #                        Line:
 #                            width: dp(1.5)
-#                            points:
-#                                (self.x+self.width/2 - float(root.BaseText)/2,self.y+self.height/4,
-#                                self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_1Text),
-#                                self.y+self.height/4 + float(root.z_midText))
+#                            points: (float(root.x0hText),self.y +float(root.y0_2Text),float(root.xRhText),self.y +float(root.yRh_2Text))
+#
+#        ###################    V2h Line    ##########################
 #                        Line:
 #                            width: dp(1.5)
-#                            points:
-#                                (self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_1Text),self.y+self.height/4 + float(root.z_midText),
-#                                self.x+self.width/2 - float(root.BaseText)/2 + float(root.x_2Text),
-#                                self.y+self.height/4 - float(root.z_endText))
-        ###################    V1h Line    ##########################
-                        Line:
-                            width: dp(1.5)
-                            points: (float(root.x0hText),self.y +float(root.y0_2Text),float(root.xRhText),self.y +float(root.yRh_2Text))
-
-        ###################    V2h Line    ##########################
-                        Line:
-                            width: dp(1.5)
-                            points: (float(root.x0hText),self.y + float(root.y0_2Text),float(root.xLhText),self.y + float(root.yLh_2Text))
-
-                        Line:
-                            width: dp(2)
-                            bezier:
-                                (float(root.xLhText),self.y + float(root.yLh_2Text),
-                                float(root.x0hText),self.y +float(root.y0_2Text),
-                                float(root.xRhText),self.y +float(root.yRh_2Text))
+#                            points: (float(root.x0hText),self.y + float(root.y0_2Text),float(root.xLhText),self.y + float(root.yLh_2Text))
+#
+#                        Line:
+#                            width: dp(2)
+#                            bezier:
+#                                (float(root.xLhText),self.y + float(root.yLh_2Text),
+#                                float(root.x0hText),self.y +float(root.y0_2Text),
+#                                float(root.xRhText),self.y +float(root.yRh_2Text))
 
     ####################    Button  ####################
                 GridLayout:
