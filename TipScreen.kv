@@ -1,7 +1,3 @@
-#<MDFlatButton>:
-#    md_bg_color: 1,0.4,0,0.8
-#    size_hint:0.25,1
-
 <TipScreen>:
     name: 'tip_sc'
 
@@ -843,13 +839,6 @@
                                 if float(root.xLtText) > float(root.x0tText) else\
                                 (float(root.xLtText) - dp(20),self.y + float(root.y1Text),float(root.xLtText) - dp(20) + dp(3),\
                                 self.y + float(root.y1Text) + dp(20),float(root.xLtText) - dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
-
-
-        ###################   Labels   ##########################
-#                    Label:
-#                        pos: (float(root.ptnt_xText),self.parent.y - self.parent.height/2 + dp(30))
-#                        text: root.tc_nametText
-#                        color: 1,0,0,1
 
                     Label:
                         text: 'U'

@@ -1,26 +1,21 @@
-from kivy.app import App
 from kivy.config import Config
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-# from kivy.lang import Builder
 from kivy.properties import StringProperty
-import math as m
+from math import radians,degrees,log,atan,cos,sin,sqrt
 from kivy.metrics import Metrics
-import numpy as np
 from kivymd.app import MDApp
-# from system_solver import system_solver1
 from solver_if import system_if,system_X
-# import csv
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
-# from creating_database import create_database_nd
+from computing_arrows import arrows
+
 ###########################################################################################
-# from kivy.uix.popup import Popup
-# from kivy.uix.label import Label
-# from kivy.uix.textinput import TextInput
-# from kivy.uix.boxlayout import BoxLayout
-# from kivymd.uix.button import MDFillRoundFlatButton
+#from kivy.app import App
+# from kivy.lang import Builder
+# import csv
+# from creating_database import create_database_nd
 
 
 class VelocityTriangles(Screen):
@@ -103,6 +98,7 @@ class VelocityTriangles(Screen):
 			##################   System_Solver  ################
 			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
 			self.manager.get_screen('mid_sc').XText = str(X)
+			self.manager.get_screen('simple').XText = str(X)
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
 			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
@@ -136,34 +132,35 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-			############### Computing base angles  ############################
-
-			a1d = 180 + float(a1e) - 90
-			a2d = 180 - float(a2e) - 90
-			b1d = 180 - float(b1e) - 90
-			b2d = 180 - float(b2e) - 90
-
-			############### Computing rotating arrow points  ############################
-
-			xL1u = x0 + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1d + 11.3))
-			yL1u = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1d + 11.3))
-			xL1d = x0 + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1d - 11.3))
-			yL1d = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1d - 11.3))
-
-			xL2u = x0 + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2d + 11.3))
-			yL2u = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2d + 11.3))
-			xL2d = x0 + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2d - 11.3))
-			yL2d = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2d - 11.3))
-
-			xR1u = x1 - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1d + 11.3))
-			yR1u = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1d + 11.3))
-			xR1d = x1 - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1d - 11.3))
-			yR1d = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1d - 11.3))
-
-			xR2u = x1 + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2d + 11.3))
-			yR2u = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2d + 11.3))
-			xR2d = x1 + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2d - 11.3))
-			yR2d = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2d - 11.3))
+			xL1u, yL1u, xL1d, yL1d, xL2u, yL2u, xL2d, yL2d, xR1u, yR1u, xR1d, yR1d, xR2u, yR2u, xR2d, yR2d = arrows(x0,y0,x1,y1,a1e,a2e,b1e,b2e)
+			# ############### Computing base angles  ############################
+			#
+			# a1d = 180 + float(a1e) - 90
+			# a2d = 180 - float(a2e) - 90
+			# b1d = 180 - float(b1e) - 90
+			# b2d = 180 - float(b2e) - 90
+			#
+			# ############### Computing rotating arrow points  ############################
+			#
+			# xL1u = x0 + (Window.size[0] / 400) * 25 * cos(radians(a1d + 11.3))
+			# yL1u = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1d + 11.3))
+			# xL1d = x0 + (Window.size[0] / 400) * 25 * cos(radians(a1d - 11.3))
+			# yL1d = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1d - 11.3))
+			#
+			# xL2u = x0 + (Window.size[0] / 400) * 25 * cos(radians(a2d + 11.3))
+			# yL2u = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2d + 11.3))
+			# xL2d = x0 + (Window.size[0] / 400) * 25 * cos(radians(a2d - 11.3))
+			# yL2d = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2d - 11.3))
+			#
+			# xR1u = x1 - (Window.size[0] / 400) * 25 * cos(radians(b1d + 11.3))
+			# yR1u = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1d + 11.3))
+			# xR1d = x1 - (Window.size[0] / 400) * 25 * cos(radians(b1d - 11.3))
+			# yR1d = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1d - 11.3))
+			#
+			# xR2u = x1 + (Window.size[0] / 400) * 25 * cos(radians(b2d + 11.3))
+			# yR2u = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2d + 11.3))
+			# xR2d = x1 + (Window.size[0] / 400) * 25 * cos(radians(b2d - 11.3))
+			# yR2d = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2d - 11.3))
 
 			######################### Choosing if it is Turbine or Compressor ###################
 			if self.ch1_value == 'down':
@@ -432,18 +429,18 @@ class VelocityTriangles(Screen):
 
 			dvth = float(pe)*Um
 
-			V1 = Vx/m.cos(m.radians(float(a1e)))
+			V1 = Vx/cos(radians(float(a1e)))
 
-			V2 = Vx/m.cos(m.radians(float(a2e)))
+			V2 = Vx/cos(radians(float(a2e)))
 
-			W1 = Vx / m.cos(m.radians(float(b1e)))
+			W1 = Vx / cos(radians(float(b1e)))
 
-			W2 = Vx / m.cos(m.radians(float(b2e)))
+			W2 = Vx / cos(radians(float(b2e)))
 
-			Vth1 = -V1 * m.sin(m.radians(float(a1e)))
-			Vth2 = V2 * m.sin(m.radians(float(a2e)))
-			Wth1 = -W1 * m.sin(m.radians(float(b1e)))
-			Wth2 = W2 * m.sin(m.radians(float(b2e)))
+			Vth1 = -V1 * sin(radians(float(a1e)))
+			Vth2 = V2 * sin(radians(float(a2e)))
+			Wth1 = -W1 * sin(radians(float(b1e)))
+			Wth2 = W2 * sin(radians(float(b2e)))
 
 
 			############### Passing the Results on the Second Screen  ##################
@@ -473,8 +470,7 @@ class VelocityTriangles(Screen):
 
 #######################     Radial Balance  Computation   #######################
 	def h2t_triangles(self):
-		a = Um * (1 - float(rne))
-		b = Vth2 - a
+
 
 		if self.ch3_value == 'normal' and self.ch3_value == 'normal' and self.ch3_value == 'normal':
 			n = 0
@@ -485,14 +481,16 @@ class VelocityTriangles(Screen):
 		if self.ch5_value == 'down' :
 			n = 2
 
+		a = Um * (1 - float(rne))
+		b = Vth2 - a
 
 		#########    HUB    ##########
 		Vth1h = a * ((rh / rm))** n - b * (rm / rh)
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
-		Vx1h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) - b * ((rm / rh) - 1))))
-		Vx2h = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rh / rm) + b * ((rm / rh) - 1))))
-		# Vx1h = m.sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*np.log(rh/rm))
-		# Vx2h = m.sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * np.log(rh / rm))
+		Vx1h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) - b * ((rm / rh) - 1))))
+		Vx2h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) + b * ((rm / rh) - 1))))
+		# Vx1h = sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*log(rh/rm))
+		# Vx2h = sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * log(rh / rm))
 		dVthh = Vth2h - Vth1h
 		# rneh = 1 + (((a / Um) * (2 * ((rh / rm) ** (n - 1)) - n - 1)) / (n - 1))
 		rneh = 1 - (a/Um)*(rh/rm)**(n-1)
@@ -503,15 +501,15 @@ class VelocityTriangles(Screen):
 		Wth1h = Vth1h - Uh
 		Wth2h = Vth2h - Uh
 
-		a1eh = -np.degrees(np.arctan(Vth1h/Vx1h))
-		a2eh = np.degrees(np.arctan(Vth2h / Vx2h))
-		b1eh = -np.degrees(np.arctan(Wth1h/Vx1h))
-		b2eh = np.degrees(np.arctan(Wth2h / Vx2h))
+		a1eh = -degrees(atan(Vth1h/Vx1h))
+		a2eh = degrees(atan(Vth2h / Vx2h))
+		b1eh = -degrees(atan(Wth1h/Vx1h))
+		b2eh = degrees(atan(Wth2h / Vx2h))
 
-		V1h = Vx1h / m.cos(m.radians(float(a1eh)))
-		V2h = Vx2h / m.cos(m.radians(float(a2eh)))
-		W1h = Vx1h / m.cos(m.radians(float(b1eh)))
-		W2h = Vx2h / m.cos(m.radians(float(b2eh)))
+		V1h = Vx1h / cos(radians(float(a1eh)))
+		V2h = Vx2h / cos(radians(float(a2eh)))
+		W1h = Vx1h / cos(radians(float(b1eh)))
+		W2h = Vx2h / cos(radians(float(b2eh)))
 
 		#############     Drawing Hub Triangles       ############
 
@@ -527,6 +525,7 @@ class VelocityTriangles(Screen):
 		xRh = x0h + (Vth2h/Uh)*Uhp
 		yRh = y0 + Uhp * float(feh2)
 
+
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
 				or yLh > Window.size[1] * 200 / 700 or yRh > Window.size[1] * 200 / 700 \
 				or xLh > self.width - Window.size[0] * 80 / 400 or xRh < self.x + Window.size[0] * 80 / 400:
@@ -539,41 +538,42 @@ class VelocityTriangles(Screen):
 			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 			yRh = y0 + Uhp * float(feh2)
 
-		a1dh = 180 + float(a1eh) - 90
-		a2dh = 180 - float(a2eh) - 90
-		b1dh = 180 - float(b1eh) - 90
-		b2dh = 180 - float(b2eh) - 90
-
-		############### Computing rotating arrow points  ############################
-
-		xL1uh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dh + 11.3))
-		yL1uh = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dh + 11.3))
-		xL1dh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dh - 11.3))
-		yL1dh = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dh - 11.3))
-
-		xL2uh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2dh + 11.3))
-		yL2uh = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2dh + 11.3))
-		xL2dh = x0h + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2dh - 11.3))
-		yL2dh = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2dh - 11.3))
-
-		xR1uh = x1h - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1dh + 11.3))
-		yR1uh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1dh + 11.3))
-		xR1dh = x1h - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1dh - 11.3))
-		yR1dh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1dh - 11.3))
-
-		xR2uh = x1h + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dh + 11.3))
-		yR2uh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dh + 11.3))
-		xR2dh = x1h + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dh - 11.3))
-		yR2dh = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dh - 11.3))
+		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh, xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
+		# a1dh = 180 + float(a1eh) - 90
+		# a2dh = 180 - float(a2eh) - 90
+		# b1dh = 180 - float(b1eh) - 90
+		# b2dh = 180 - float(b2eh) - 90
+		#
+		# ############### Computing rotating arrow points  ############################
+		#
+		# xL1uh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a1dh + 11.3))
+		# yL1uh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dh + 11.3))
+		# xL1dh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a1dh - 11.3))
+		# yL1dh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dh - 11.3))
+		#
+		# xL2uh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a2dh + 11.3))
+		# yL2uh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dh + 11.3))
+		# xL2dh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a2dh - 11.3))
+		# yL2dh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dh - 11.3))
+		#
+		# xR1uh = x1h - (Window.size[0] / 400) * 25 * cos(radians(b1dh + 11.3))
+		# yR1uh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dh + 11.3))
+		# xR1dh = x1h - (Window.size[0] / 400) * 25 * cos(radians(b1dh - 11.3))
+		# yR1dh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dh - 11.3))
+		#
+		# xR2uh = x1h + (Window.size[0] / 400) * 25 * cos(radians(b2dh + 11.3))
+		# yR2uh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dh + 11.3))
+		# xR2dh = x1h + (Window.size[0] / 400) * 25 * cos(radians(b2dh - 11.3))
+		# yR2dh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dh - 11.3))
 
 
 		#########    TIP    ##########
 		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
 		Vth2t = a * (rt / rm) ** n + b * (rm / rt)
-		Vx1t = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rt / rm) - b * ((rm / rt) - 1))))
-		Vx2t = m.sqrt(abs(Vx ** 2 - 2 * a * (np.log(rt / rm) + b * ((rm / rt) - 1))))
-		# Vx1t = m.sqrt(Vx ** 2 - 2 * a * (a * np.log(rt / rm) - b * ((1 / rt) - (1 / rm))))
-		# Vx2t = m.sqrt(Vx ** 2 - 2 * a * (a * np.log(rt / rm) + b * ((1 / rt) - (1 / rm))))
+		Vx1t = sqrt(abs(Vx ** 2 - 2 * a * (log(rt / rm) - b * ((rm / rt) - 1))))
+		Vx2t = sqrt(abs(Vx ** 2 - 2 * a * (log(rt / rm) + b * ((rm / rt) - 1))))
+		# Vx1t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) - b * ((1 / rt) - (1 / rm))))
+		# Vx2t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) + b * ((1 / rt) - (1 / rm))))
 		dVtht = Vth2t - Vth1t
 		# rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
 		rnet = 1- (a/Um)*(rt/rm)**(n-1)
@@ -584,23 +584,19 @@ class VelocityTriangles(Screen):
 		Wth1t = Vth1t - Ut
 		Wth2t = Vth2t - Ut
 
-		a1et = -np.degrees(np.arctan(Vth1t / Vx1t))
-		a2et = np.degrees(np.arctan(Vth2t / Vx2t))
-		b1et = -np.degrees(np.arctan(Wth1t / Vx1t))
-		b2et = np.degrees(np.arctan(Wth2t / Vx2t))
+		a1et = -degrees(atan(Vth1t / Vx1t))
+		a2et = degrees(atan(Vth2t / Vx2t))
+		b1et = -degrees(atan(Wth1t / Vx1t))
+		b2et = degrees(atan(Wth2t / Vx2t))
 
-		# a1et = - np.degrees(np.arctan(-((pet / 2) - 1 + rnet) / fet1))
-		# a2et = np.degrees(np.arctan(((pet / 2) + 1 - rnet) / fet2))
-		# b1et = np.degrees(np.arctan(((pet / 2) + rnet) / fet1))
-		# b2et = - np.degrees(np.arctan(-((pet / 2) - rnet) / fet2))
 
-		V1t = Vx1t / m.cos(m.radians(float(a1et)))
-		V2t = Vx2t / m.cos(m.radians(float(a2et)))
-		W1t = Vx1t / m.cos(m.radians(float(b1et)))
-		W2t = Vx2t / m.cos(m.radians(float(b2et)))
+		V1t = Vx1t / cos(radians(float(a1et)))
+		V2t = Vx2t / cos(radians(float(a2et)))
+		W1t = Vx1t / cos(radians(float(b1et)))
+		W2t = Vx2t / cos(radians(float(b2et)))
 
-		# Wth1t = -W1t * m.sin(m.radians(float(b1et)))
-		# Wth2t = W2t * m.sin(m.radians(float(b2et)))
+		# Wth1t = -W1t * sin(radians(float(b1et)))
+		# Wth2t = W2t * sin(radians(float(b2et)))
 
 		#############     Tip Triangles Drwaing       ############
 
@@ -626,10 +622,12 @@ class VelocityTriangles(Screen):
 			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 			yRt = y0 + Utp * float(fet2)
 
-		a1dt = 180 + float(a1et) - 90
-		a2dt = 180 - float(a2et) - 90
-		b1dt = 180 - float(b1et) - 90
-		b2dt = 180 - float(b2et) - 90
+		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut, xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
+
+		# a1dt = 180 + float(a1et) - 90
+		# a2dt = 180 - float(a2et) - 90
+		# b1dt = 180 - float(b1et) - 90
+		# b2dt = 180 - float(b2et) - 90
 
 		# y0_2  = y0 + Window.size[1] * 150 / 700
 		# yLh_2 = y0_2 - Uhp * float(feh1)
@@ -641,25 +639,25 @@ class VelocityTriangles(Screen):
 
 		############### Computing rotating arrow points  ############################
 
-		xL1ut = x0t + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dt + 11.3))
-		yL1ut = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dt + 11.3))
-		xL1dt = x0t + (Window.size[0] / 400) * 25 * m.cos(m.radians(a1dt - 11.3))
-		yL1dt = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a1dt - 11.3))
-
-		xL2ut = x0t + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2dt + 11.3))
-		yL2ut = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2dt + 11.3))
-		xL2dt = x0t + (Window.size[0] / 400) * 25 * m.cos(m.radians(a2dt - 11.3))
-		yL2dt = y0 + (Window.size[1] / 700) * 25 * m.sin(m.radians(a2dt - 11.3))
-
-		xR1ut = x1t - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1dt + 11.3))
-		yR1ut = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1dt + 11.3))
-		xR1dt = x1t - (Window.size[0] / 400) * 25 * m.cos(m.radians(b1dt - 11.3))
-		yR1dt = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b1dt - 11.3))
-
-		xR2ut = x1t + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dt + 11.3))
-		yR2ut = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dt + 11.3))
-		xR2dt = x1t + (Window.size[0] / 400) * 25 * m.cos(m.radians(b2dt - 11.3))
-		yR2dt = y1 + (Window.size[1] / 700) * 25 * m.sin(m.radians(b2dt - 11.3))
+		# xL1ut = x0t + (Window.size[0] / 400) * 25 * cos(radians(a1dt + 11.3))
+		# yL1ut = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dt + 11.3))
+		# xL1dt = x0t + (Window.size[0] / 400) * 25 * cos(radians(a1dt - 11.3))
+		# yL1dt = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dt - 11.3))
+		#
+		# xL2ut = x0t + (Window.size[0] / 400) * 25 * cos(radians(a2dt + 11.3))
+		# yL2ut = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dt + 11.3))
+		# xL2dt = x0t + (Window.size[0] / 400) * 25 * cos(radians(a2dt - 11.3))
+		# yL2dt = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dt - 11.3))
+		#
+		# xR1ut = x1t - (Window.size[0] / 400) * 25 * cos(radians(b1dt + 11.3))
+		# yR1ut = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dt + 11.3))
+		# xR1dt = x1t - (Window.size[0] / 400) * 25 * cos(radians(b1dt - 11.3))
+		# yR1dt = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dt - 11.3))
+		#
+		# xR2ut = x1t + (Window.size[0] / 400) * 25 * cos(radians(b2dt + 11.3))
+		# yR2ut = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dt + 11.3))
+		# xR2dt = x1t + (Window.size[0] / 400) * 25 * cos(radians(b2dt - 11.3))
+		# yR2dt = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dt - 11.3))
 
 		############### Passing Hub Results #################
 		self.manager.get_screen('hub_sc').phText = str(round(peh, 3))
@@ -896,6 +894,7 @@ class SimWindow(Screen):
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
 
+	XText = StringProperty('0')
 class MidScreen(Screen):
 	check = NumericProperty(0)
 
@@ -955,9 +954,6 @@ class MidScreen(Screen):
 	yR2uText = StringProperty('0')
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
-
-	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
 
 
 class HubScreen(Screen):
