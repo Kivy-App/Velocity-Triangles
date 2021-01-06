@@ -1,7 +1,4 @@
-#: include HubScreen.kv
-#: include MidScreen.kv
-#: include TipScreen.kv
-#: include CompScreen.kv
+#: include ResultsScreen.kv
 #: include SimpleWindow.kv
 #: include InfoScreen.kv
 #: import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
@@ -16,13 +13,18 @@
 #: import NoTransition kivy.uix.screenmanager.NoTransition
 #: import ScrollEffect kivy.effects.dampedscroll.ScrollEffect
 
-<P>:
-<P2>:
-<P3>:
-<P4>:
-<Prpm>:
-<Ph2t>:
-<Pdiam>:
+#<P>:
+#<P2>:
+#<P3>:
+#<P4>:
+#<Prpm>:
+#<Ph2t>:
+#<Pdiam>:
+<MDCheckbox>
+    ripple_scale:0
+    size: self.size
+    halign: 'left'
+    valign: 'middle'
 
 <Label>
     id: labels
@@ -65,7 +67,7 @@ NavigationLayout:
     id:NL
     WindowManager:
         id: win_manager
-        transition: NoTransition()
+#        transition: SlTransition()
         VelocityTriangles:
             id: vel_tr
             name: "Main"
@@ -189,7 +191,7 @@ NavigationLayout:
                             size_hint_y: 0.08
 
                             Label:
-                                size_hint_x: 0.25
+                                size_hint_x: 0.45
                                 padding: dp(40),dp(0)
                                 text: 'Turbine'
                                 bold: True if ch1.active else False
@@ -202,13 +204,10 @@ NavigationLayout:
                                 id :ch1
                                 group: 'tur_comp'
                                 state: vel_tr.ch1_value
-                                size: self.size
-                                halign: 'left'
-                                valign: 'middle'
                                 on_state: vel_tr.ch1_value = self.state
 
                             Label:
-                                size_hint_x: 0.25
+                                size_hint_x: 0.45
                                 padding: dp(40),dp(0)
                                 text: 'Compressor'
                                 text_size: self.size
@@ -221,9 +220,6 @@ NavigationLayout:
                                 id :ch2
                                 group: 'tur_comp'
                                 state: vel_tr.ch2_value
-                                size: self.size
-                                halign: 'left'
-                                valign: 'middle'
                                 on_state: vel_tr.ch2_value = self.state
 
             ############ Keno anamesa sto switch kai ta inputs ###########################
@@ -618,7 +614,6 @@ NavigationLayout:
                             MDCheckbox:
                                 id :ch3
                                 state: vel_tr.ch3_value
-                                halign: 'left'
                                 on_state: vel_tr.ch3_value = self.state
                             Label:
                                 size_hint_x: 0.3
@@ -632,7 +627,6 @@ NavigationLayout:
                             MDCheckbox:
                                 id :ch4
                                 state: vel_tr.ch4_value
-                                halign: 'left'
                                 on_state: vel_tr.ch4_value = self.state
                             Label:
                                 size_hint_x: 0.3
@@ -646,9 +640,7 @@ NavigationLayout:
                             MDCheckbox:
                                 id :ch5
                                 state: vel_tr.ch5_value
-                                halign: 'left'
                                 on_state: vel_tr.ch5_value = self.state
-
 
                         MDBoxLayout:
                             size_hint_y: 0.08
@@ -671,14 +663,15 @@ NavigationLayout:
                                     vel_tr.h2t_triangles();
 
                                     if vel_tr.check == 0 and vel_tr.k == 4:\
-                                    win_manager.current = "hub_sc";
+                                    win_manager.current = "res_sc";
+                                    win_manager.transition.direction = 'left'
 
                                     if vel_tr.check == 1 and vel_tr.k == 4:\
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
 
-                                    if vel_tr.k == 4 :\
-                                    sv_main.scroll_y = 1
+#                                    if vel_tr.k == 4 :\
+#                                    sv_main.scroll_y = 1
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -700,18 +693,9 @@ NavigationLayout:
                                 valign: 'middle'
 
 
-
-        NewWindow:
         SimWindow:
             nav_drawer: nav_drawer
-        MidScreen:
-            nav_drawer: nav_drawer
-        HubScreen:
-            nav_drawer: nav_drawer
-        TipScreen:
-            id:tip
-            nav_drawer: nav_drawer
-        CompScreen:
+        Results:
             nav_drawer: nav_drawer
         InfoScreen:
             nav_drawer: nav_drawer
@@ -740,6 +724,7 @@ NavigationLayout:
                 size_hint_y: 0.2
 
                 MDRectangleFlatIconButton:
+                    ripple_scale : 0
                     pos_hint: {'center_x':0.5}
                     icon:'home'
                     text:"Home"
@@ -748,6 +733,7 @@ NavigationLayout:
                         nav_drawer.set_state('close')
 
                 MDRectangleFlatIconButton:
+                    ripple_scale : 0
                     pos_hint: {'center_x':0.5}
                     icon:'information-outline'
                     text:"info"
@@ -756,6 +742,7 @@ NavigationLayout:
                         nav_drawer.set_state('close')
 
                 MDRectangleFlatIconButton:
+                    ripple_scale : 0
                     pos_hint: {'center_x':0.5}
                     icon:'exit-to-app'
                     text:"Exit"

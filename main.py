@@ -5,11 +5,12 @@ from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from math import radians,degrees,log,atan,cos,sin,sqrt
-from kivy.metrics import Metrics
 from kivymd.app import MDApp
 from solver_if import system_if,system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
+from kivymd.uix.tab import MDTabsBase
+from kivy.uix.boxlayout import BoxLayout
 
 ###########################################################################################
 #from kivy.app import App
@@ -17,6 +18,8 @@ from computing_arrows import arrows
 # import csv
 # from creating_database import create_database_nd
 
+class Tab(BoxLayout,MDTabsBase):
+	pass
 
 class VelocityTriangles(Screen):
 
@@ -97,7 +100,7 @@ class VelocityTriangles(Screen):
 
 			##################   System_Solver  ################
 			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
-			self.manager.get_screen('mid_sc').XText = str(X)
+			self.manager.get_screen('res_sc').XText = str(X)
 			self.manager.get_screen('simple').XText = str(X)
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
@@ -133,87 +136,30 @@ class VelocityTriangles(Screen):
 				yR = y0 + U * float(fe)
 
 			xL1u, yL1u, xL1d, yL1d, xL2u, yL2u, xL2d, yL2d, xR1u, yR1u, xR1d, yR1d, xR2u, yR2u, xR2d, yR2d = arrows(x0,y0,x1,y1,a1e,a2e,b1e,b2e)
-			# ############### Computing base angles  ############################
-			#
-			# a1d = 180 + float(a1e) - 90
-			# a2d = 180 - float(a2e) - 90
-			# b1d = 180 - float(b1e) - 90
-			# b2d = 180 - float(b2e) - 90
-			#
-			# ############### Computing rotating arrow points  ############################
-			#
-			# xL1u = x0 + (Window.size[0] / 400) * 25 * cos(radians(a1d + 11.3))
-			# yL1u = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1d + 11.3))
-			# xL1d = x0 + (Window.size[0] / 400) * 25 * cos(radians(a1d - 11.3))
-			# yL1d = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1d - 11.3))
-			#
-			# xL2u = x0 + (Window.size[0] / 400) * 25 * cos(radians(a2d + 11.3))
-			# yL2u = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2d + 11.3))
-			# xL2d = x0 + (Window.size[0] / 400) * 25 * cos(radians(a2d - 11.3))
-			# yL2d = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2d - 11.3))
-			#
-			# xR1u = x1 - (Window.size[0] / 400) * 25 * cos(radians(b1d + 11.3))
-			# yR1u = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1d + 11.3))
-			# xR1d = x1 - (Window.size[0] / 400) * 25 * cos(radians(b1d - 11.3))
-			# yR1d = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1d - 11.3))
-			#
-			# xR2u = x1 + (Window.size[0] / 400) * 25 * cos(radians(b2d + 11.3))
-			# yR2u = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2d + 11.3))
-			# xR2d = x1 + (Window.size[0] / 400) * 25 * cos(radians(b2d - 11.3))
-			# yR2d = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2d - 11.3))
 
 			######################### Choosing if it is Turbine or Compressor ###################
 			if self.ch1_value == 'down':
 				tc = 0  # turbine
 				tc_namem = 'Turbine Middle'
-				tc_nameh = 'Turbine Hub'
-				tc_namet = 'Turbine Tip'
-				ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
-				ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
-				ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 			elif self.ch2_value == 'down':
 				tc = 1  # compressor
 				tc_namem = 'Compressor Middle'
-				tc_nameh = 'Compressor Hub'
-				tc_namet = 'Compressor Tip'
-				ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
-				ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
-				ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 			else:
 				if float(pe) > 0.999:
 					if abs(x1-xL)>abs(x1-xR):
 						tc = 0  # turbine
 						tc_namem = 'Turbine Middle'
-						tc_nameh = 'Turbine Hub'
-						tc_namet = 'Turbine Tip'
-						ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
-						ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
-						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
 					else:
 						tc = 1  # compressor
 						tc_namem = 'Compressor Middle'
-						tc_nameh = 'Compressor Hub'
-						tc_namet = 'Compressor Tip'
-						ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
-						ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
-						ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 				else:
 					if abs(x1 - xL) > abs(x1 - xR):
 						tc = 1  # compressor
 						tc_namem = 'Compressor Middle'
-						tc_nameh = 'Compressor Hub'
-						tc_namet = 'Compressor Tip'
-						ptnm_x = self.x - self.width / 2 + Window.size[0] * 91 / 400
-						ptnh_x = self.x - self.width / 2 + Window.size[0] * 82 / 400
-						ptnt_x = self.x - self.width / 2 + Window.size[0] * 80 / 400
 					else:
 						tc = 0  # turbine
 						tc_namem = 'Turbine Middle'
-						tc_nameh = 'Turbine Hub'
-						tc_namet = 'Turbine Tip'
-						ptnm_x = self.x - self.width / 2 + Window.size[0] * 76 / 400
-						ptnh_x = self.x - self.width / 2 + Window.size[0] * 67 / 400
-						ptnt_x = self.x - self.width / 2 + Window.size[0] * 65 / 400
+
 
 			# create_database_nd(pe, fe, rne, a1e, a2e, b1e, b2e, tc)
 
@@ -227,101 +173,54 @@ class VelocityTriangles(Screen):
 ################ Case of  Both Compartments filled #########################################
 			if self.check == 0:	
 				############### Passing the Results on the Second Screen  ####################
-				self.manager.get_screen('mid_sc').pText = pe
-				self.manager.get_screen('mid_sc').fText = fe
-				self.manager.get_screen('mid_sc').rnText = rne
-				self.manager.get_screen('mid_sc').a1Text = a1e
-				self.manager.get_screen('mid_sc').a2Text = a2e
-				self.manager.get_screen('mid_sc').a3Text = a3e
-				self.manager.get_screen('mid_sc').b1Text = b1e
-				self.manager.get_screen('mid_sc').b2Text = b2e
-				self.manager.get_screen('mid_sc').b3Text = b3e
-	
+
+				################ MID segment variables ##########################
+				self.manager.get_screen('res_sc').pText = pe
+				self.manager.get_screen('res_sc').fText = fe
+				self.manager.get_screen('res_sc').rnText = rne
+				self.manager.get_screen('res_sc').a1Text = a1e
+				self.manager.get_screen('res_sc').a2Text = a2e
+				self.manager.get_screen('res_sc').a3Text = a3e
+				self.manager.get_screen('res_sc').b1Text = b1e
+				self.manager.get_screen('res_sc').b2Text = b2e
+				self.manager.get_screen('res_sc').b3Text = b3e
+				
 				############### Passing the Triangles Points on the Second Screen  ##################
-				self.manager.get_screen('mid_sc').x0Text = str(x0)
-				self.manager.get_screen('mid_sc').y0Text = str(y0)
-				self.manager.get_screen('hub_sc').y0Text = str(y0)
-				self.manager.get_screen('tip_sc').y0Text = str(y0)
-				self.manager.get_screen('mid_sc').x1Text = str(x1)
-				self.manager.get_screen('mid_sc').y1Text = str(y1)
-				self.manager.get_screen('hub_sc').y1Text = str(y1)
-				self.manager.get_screen('tip_sc').y1Text = str(y1)
-				self.manager.get_screen('mid_sc').UText = str(U)
-				self.manager.get_screen('mid_sc').xLText = str(xL)
-				self.manager.get_screen('mid_sc').yLText = str(yL)
-				self.manager.get_screen('mid_sc').xRText = str(xR)
-				self.manager.get_screen('mid_sc').yRText = str(yR)
+				self.manager.get_screen('res_sc').x0Text = str(x0)
+				self.manager.get_screen('res_sc').y0Text = str(y0)
+				self.manager.get_screen('res_sc').x1Text = str(x1)
+				self.manager.get_screen('res_sc').y1Text = str(y1)
+				self.manager.get_screen('res_sc').UText = str(U)
+				self.manager.get_screen('res_sc').xLText = str(xL)
+				self.manager.get_screen('res_sc').yLText = str(yL)
+				self.manager.get_screen('res_sc').xRText = str(xR)
+				self.manager.get_screen('res_sc').yRText = str(yR)
 	
 				############### Passing the Arrow Points on the Second Screen  ##################
-				self.manager.get_screen('mid_sc').xL1uText = str(xL1u)
-				self.manager.get_screen('mid_sc').yL1uText = str(yL1u)
-				self.manager.get_screen('mid_sc').xL1dText = str(xL1d)
-				self.manager.get_screen('mid_sc').yL1dText = str(yL1d)
+				self.manager.get_screen('res_sc').xL1uText = str(xL1u)
+				self.manager.get_screen('res_sc').yL1uText = str(yL1u)
+				self.manager.get_screen('res_sc').xL1dText = str(xL1d)
+				self.manager.get_screen('res_sc').yL1dText = str(yL1d)
 	
-				self.manager.get_screen('mid_sc').xL2uText = str(xL2u)
-				self.manager.get_screen('mid_sc').yL2uText = str(yL2u)
-				self.manager.get_screen('mid_sc').xL2dText = str(xL2d)
-				self.manager.get_screen('mid_sc').yL2dText = str(yL2d)
+				self.manager.get_screen('res_sc').xL2uText = str(xL2u)
+				self.manager.get_screen('res_sc').yL2uText = str(yL2u)
+				self.manager.get_screen('res_sc').xL2dText = str(xL2d)
+				self.manager.get_screen('res_sc').yL2dText = str(yL2d)
 	
-				self.manager.get_screen('mid_sc').xR1uText = str(xR1u)
-				self.manager.get_screen('mid_sc').yR1uText = str(yR1u)
-				self.manager.get_screen('mid_sc').xR1dText = str(xR1d)
-				self.manager.get_screen('mid_sc').yR1dText = str(yR1d)
+				self.manager.get_screen('res_sc').xR1uText = str(xR1u)
+				self.manager.get_screen('res_sc').yR1uText = str(yR1u)
+				self.manager.get_screen('res_sc').xR1dText = str(xR1d)
+				self.manager.get_screen('res_sc').yR1dText = str(yR1d)
 	
-				self.manager.get_screen('mid_sc').xR2uText = str(xR2u)
-				self.manager.get_screen('mid_sc').yR2uText = str(yR2u)
-				self.manager.get_screen('mid_sc').xR2dText = str(xR2d)
-				self.manager.get_screen('mid_sc').yR2dText = str(yR2d)
+				self.manager.get_screen('res_sc').xR2uText = str(xR2u)
+				self.manager.get_screen('res_sc').yR2uText = str(yR2u)
+				self.manager.get_screen('res_sc').xR2dText = str(xR2d)
+				self.manager.get_screen('res_sc').yR2dText = str(yR2d)
 	
 				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
-				self.manager.get_screen('mid_sc').tc_namemText = tc_namem
-				self.manager.get_screen('mid_sc').tc_namehText = tc_nameh
-				self.manager.get_screen('mid_sc').tc_nametText = tc_namet
-				self.manager.get_screen('mid_sc').ptnm_xText = str(ptnm_x)
-				self.manager.get_screen('mid_sc').ptnh_xText = str(ptnh_x)
-				self.manager.get_screen('mid_sc').ptnt_xText = str(ptnt_x)
+				self.manager.get_screen('res_sc').tc_namemText = tc_namem
 
-				self.manager.get_screen('hub_sc').tc_namehText = tc_nameh
-				self.manager.get_screen('hub_sc').tc_namemText = tc_namem
-				self.manager.get_screen('tip_sc').tc_nametText = tc_namet
-				self.manager.get_screen('tip_sc').tc_namemText = tc_namem
-				self.manager.get_screen('hub_sc').ptnh_xText = str(ptnh_x)
-				self.manager.get_screen('tip_sc').ptnt_xText = str(ptnt_x)
-
-
-				############### Passing the Triangles Points on the Second Screen  ##################
-				self.manager.get_screen('comp_sc').x0Text = str(x0)
-				self.manager.get_screen('comp_sc').y0Text = str(y0)
-				self.manager.get_screen('comp_sc').x1Text = str(x1)
-				self.manager.get_screen('comp_sc').y1Text = str(y1)
-				self.manager.get_screen('comp_sc').UText = str(U)
-				self.manager.get_screen('comp_sc').xLText = str(xL)
-				self.manager.get_screen('comp_sc').yLText = str(yL)
-				self.manager.get_screen('comp_sc').xRText = str(xR)
-				self.manager.get_screen('comp_sc').yRText = str(yR)
-
-				############### Passing the Arrow Points on the Second Screen  ##################
-				self.manager.get_screen('comp_sc').xL1uText = str(xL1u)
-				self.manager.get_screen('comp_sc').yL1uText = str(yL1u)
-				self.manager.get_screen('comp_sc').xL1dText = str(xL1d)
-				self.manager.get_screen('comp_sc').yL1dText = str(yL1d)
-
-				self.manager.get_screen('comp_sc').xL2uText = str(xL2u)
-				self.manager.get_screen('comp_sc').yL2uText = str(yL2u)
-				self.manager.get_screen('comp_sc').xL2dText = str(xL2d)
-				self.manager.get_screen('comp_sc').yL2dText = str(yL2d)
-
-				self.manager.get_screen('comp_sc').xR1uText = str(xR1u)
-				self.manager.get_screen('comp_sc').yR1uText = str(yR1u)
-				self.manager.get_screen('comp_sc').xR1dText = str(xR1d)
-				self.manager.get_screen('comp_sc').yR1dText = str(yR1d)
-
-				self.manager.get_screen('comp_sc').xR2uText = str(xR2u)
-				self.manager.get_screen('comp_sc').yR2uText = str(yR2u)
-				self.manager.get_screen('comp_sc').xR2dText = str(xR2d)
-				self.manager.get_screen('comp_sc').yR2dText = str(yR2d)
-
-				self.manager.get_screen('comp_sc').tc_namemText = tc_namem
+				############################################################################################
 
 			################ Case of  the First Compartment filled #########################################
 			else:
@@ -370,7 +269,7 @@ class VelocityTriangles(Screen):
 
 				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
 				self.manager.get_screen('simple').tc_namemText = tc_namem
-				self.manager.get_screen('simple').ptnm_xText = str(ptnm_x)
+
 
 ################ Debugging Section #################
 			if self.k == 4:
@@ -444,17 +343,17 @@ class VelocityTriangles(Screen):
 
 
 			############### Passing the Results on the Second Screen  ##################
-			self.manager.get_screen('mid_sc').UmText = str(round(Um, 3))
-			self.manager.get_screen('mid_sc').VxText = str(round(Vx, 3))
-			self.manager.get_screen('mid_sc').V1Text = str(round(V1, 3))
-			self.manager.get_screen('mid_sc').V2Text = str(round(V2, 3))
-			self.manager.get_screen('mid_sc').W1Text = str(round(W1, 3))
-			self.manager.get_screen('mid_sc').W2Text = str(round(W2, 3))
-			self.manager.get_screen('mid_sc').DVthText = str(round(dvth, 3))
-			self.manager.get_screen('mid_sc').Vth1Text = str(round(Vth1, 3))
-			self.manager.get_screen('mid_sc').Vth2Text = str(round(Vth2, 3))
-			self.manager.get_screen('mid_sc').Wth1Text = str(round(Wth1, 3))
-			self.manager.get_screen('mid_sc').Wth2Text = str(round(Wth2, 3))
+			self.manager.get_screen('res_sc').UmText = str(round(Um, 3))
+			self.manager.get_screen('res_sc').VxText = str(round(Vx, 3))
+			self.manager.get_screen('res_sc').V1Text = str(round(V1, 3))
+			self.manager.get_screen('res_sc').V2Text = str(round(V2, 3))
+			self.manager.get_screen('res_sc').W1Text = str(round(W1, 3))
+			self.manager.get_screen('res_sc').W2Text = str(round(W2, 3))
+			self.manager.get_screen('res_sc').DVthText = str(round(dvth, 3))
+			self.manager.get_screen('res_sc').Vth1Text = str(round(Vth1, 3))
+			self.manager.get_screen('res_sc').Vth2Text = str(round(Vth2, 3))
+			self.manager.get_screen('res_sc').Wth1Text = str(round(Wth1, 3))
+			self.manager.get_screen('res_sc').Wth2Text = str(round(Wth2, 3))
 
 
 		except:
@@ -489,6 +388,8 @@ class VelocityTriangles(Screen):
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
 		Vx1h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) - b * ((rm / rh) - 1))))
 		Vx2h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) + b * ((rm / rh) - 1))))
+		print(a)
+		print(b)
 		# Vx1h = sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*log(rh/rm))
 		# Vx2h = sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * log(rh / rm))
 		dVthh = Vth2h - Vth1h
@@ -539,33 +440,6 @@ class VelocityTriangles(Screen):
 			yRh = y0 + Uhp * float(feh2)
 
 		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh, xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
-		# a1dh = 180 + float(a1eh) - 90
-		# a2dh = 180 - float(a2eh) - 90
-		# b1dh = 180 - float(b1eh) - 90
-		# b2dh = 180 - float(b2eh) - 90
-		#
-		# ############### Computing rotating arrow points  ############################
-		#
-		# xL1uh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a1dh + 11.3))
-		# yL1uh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dh + 11.3))
-		# xL1dh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a1dh - 11.3))
-		# yL1dh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dh - 11.3))
-		#
-		# xL2uh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a2dh + 11.3))
-		# yL2uh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dh + 11.3))
-		# xL2dh = x0h + (Window.size[0] / 400) * 25 * cos(radians(a2dh - 11.3))
-		# yL2dh = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dh - 11.3))
-		#
-		# xR1uh = x1h - (Window.size[0] / 400) * 25 * cos(radians(b1dh + 11.3))
-		# yR1uh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dh + 11.3))
-		# xR1dh = x1h - (Window.size[0] / 400) * 25 * cos(radians(b1dh - 11.3))
-		# yR1dh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dh - 11.3))
-		#
-		# xR2uh = x1h + (Window.size[0] / 400) * 25 * cos(radians(b2dh + 11.3))
-		# yR2uh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dh + 11.3))
-		# xR2dh = x1h + (Window.size[0] / 400) * 25 * cos(radians(b2dh - 11.3))
-		# yR2dh = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dh - 11.3))
-
 
 		#########    TIP    ##########
 		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
@@ -636,211 +510,118 @@ class VelocityTriangles(Screen):
 		# self.manager.get_screen('comp_sc').yLh_2Text = str(round(yLh_2, 3))
 		# self.manager.get_screen('comp_sc').yRh_2Text = str(round(yRh_2, 3))
 
-
-		############### Computing rotating arrow points  ############################
-
-		# xL1ut = x0t + (Window.size[0] / 400) * 25 * cos(radians(a1dt + 11.3))
-		# yL1ut = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dt + 11.3))
-		# xL1dt = x0t + (Window.size[0] / 400) * 25 * cos(radians(a1dt - 11.3))
-		# yL1dt = y0 + (Window.size[1] / 700) * 25 * sin(radians(a1dt - 11.3))
-		#
-		# xL2ut = x0t + (Window.size[0] / 400) * 25 * cos(radians(a2dt + 11.3))
-		# yL2ut = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dt + 11.3))
-		# xL2dt = x0t + (Window.size[0] / 400) * 25 * cos(radians(a2dt - 11.3))
-		# yL2dt = y0 + (Window.size[1] / 700) * 25 * sin(radians(a2dt - 11.3))
-		#
-		# xR1ut = x1t - (Window.size[0] / 400) * 25 * cos(radians(b1dt + 11.3))
-		# yR1ut = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dt + 11.3))
-		# xR1dt = x1t - (Window.size[0] / 400) * 25 * cos(radians(b1dt - 11.3))
-		# yR1dt = y1 + (Window.size[1] / 700) * 25 * sin(radians(b1dt - 11.3))
-		#
-		# xR2ut = x1t + (Window.size[0] / 400) * 25 * cos(radians(b2dt + 11.3))
-		# yR2ut = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dt + 11.3))
-		# xR2dt = x1t + (Window.size[0] / 400) * 25 * cos(radians(b2dt - 11.3))
-		# yR2dt = y1 + (Window.size[1] / 700) * 25 * sin(radians(b2dt - 11.3))
-
 		############### Passing Hub Results #################
-		self.manager.get_screen('hub_sc').phText = str(round(peh, 3))
-		self.manager.get_screen('hub_sc').fh1Text = str(round(feh1, 3))
-		self.manager.get_screen('hub_sc').fh2Text = str(round(feh2, 3))
-		self.manager.get_screen('hub_sc').rnhText = str(round(rneh, 3))
-		self.manager.get_screen('hub_sc').a1hText = str(round(a1eh, 3))
-		self.manager.get_screen('hub_sc').a2hText = str(round(a2eh, 3))
-		self.manager.get_screen('hub_sc').b1hText = str(round(b1eh, 3))
-		self.manager.get_screen('hub_sc').b2hText = str(round(b2eh, 3))
+		self.manager.get_screen('res_sc').phText = str(round(peh, 3))
+		self.manager.get_screen('res_sc').fh1Text = str(round(feh1, 3))
+		self.manager.get_screen('res_sc').fh2Text = str(round(feh2, 3))
+		self.manager.get_screen('res_sc').rnhText = str(round(rneh, 3))
+		self.manager.get_screen('res_sc').a1hText = str(round(a1eh, 3))
+		self.manager.get_screen('res_sc').a2hText = str(round(a2eh, 3))
+		self.manager.get_screen('res_sc').b1hText = str(round(b1eh, 3))
+		self.manager.get_screen('res_sc').b2hText = str(round(b2eh, 3))
 
-		self.manager.get_screen('hub_sc').UhText = str(round(Uh, 3))
-		self.manager.get_screen('hub_sc').Vx1hText = str(round(Vx1h, 3))
-		self.manager.get_screen('hub_sc').Vx2hText = str(round(Vx2h, 3))
-		self.manager.get_screen('hub_sc').V1hText = str(round(V1h, 3))
-		self.manager.get_screen('hub_sc').V2hText = str(round(V2h, 3))
-		self.manager.get_screen('hub_sc').W1hText = str(round(W1h, 3))
-		self.manager.get_screen('hub_sc').W2hText = str(round(W2h, 3))
-		self.manager.get_screen('hub_sc').DVthhText = str(round(dVthh, 3))
-		self.manager.get_screen('hub_sc').Vth1hText = str(round(Vth1h, 3))
-		self.manager.get_screen('hub_sc').Vth2hText = str(round(Vth2h, 3))
-		self.manager.get_screen('hub_sc').Wth1hText = str(round(Wth1h, 3))
-		self.manager.get_screen('hub_sc').Wth2hText = str(round(Wth2h, 3))
-
-		####### Hub drawing variables #####
-		self.manager.get_screen('hub_sc').x0hText = str(x0h)
-		self.manager.get_screen('hub_sc').x1hText = str(x1h)
-		self.manager.get_screen('hub_sc').UhpText = str(Uhp)
-		self.manager.get_screen('hub_sc').xLhText = str(xLh)
-		self.manager.get_screen('hub_sc').yLhText = str(yLh)
-		self.manager.get_screen('hub_sc').xRhText = str(xRh)
-		self.manager.get_screen('hub_sc').yRhText = str(yRh)
-
-		#################    Hub  Arrows      ###############
-		self.manager.get_screen('hub_sc').xL1uhText = str(xL1uh)
-		self.manager.get_screen('hub_sc').yL1uhText = str(yL1uh)
-		self.manager.get_screen('hub_sc').xL1dhText = str(xL1dh)
-		self.manager.get_screen('hub_sc').yL1dhText = str(yL1dh)
-
-		self.manager.get_screen('hub_sc').xL2uhText = str(xL2uh)
-		self.manager.get_screen('hub_sc').yL2uhText = str(yL2uh)
-		self.manager.get_screen('hub_sc').xL2dhText = str(xL2dh)
-		self.manager.get_screen('hub_sc').yL2dhText = str(yL2dh)
-
-		self.manager.get_screen('hub_sc').xR1uhText = str(xR1uh)
-		self.manager.get_screen('hub_sc').yR1uhText = str(yR1uh)
-		self.manager.get_screen('hub_sc').xR1dhText = str(xR1dh)
-		self.manager.get_screen('hub_sc').yR1dhText = str(yR1dh)
-
-		self.manager.get_screen('hub_sc').xR2uhText = str(xR2uh)
-		self.manager.get_screen('hub_sc').yR2uhText = str(yR2uh)
-		self.manager.get_screen('hub_sc').xR2dhText = str(xR2dh)
-		self.manager.get_screen('hub_sc').yR2dhText = str(yR2dh)
-
+		self.manager.get_screen('res_sc').UhText = str(round(Uh, 3))
+		self.manager.get_screen('res_sc').Vx1hText = str(round(Vx1h, 3))
+		self.manager.get_screen('res_sc').Vx2hText = str(round(Vx2h, 3))
+		self.manager.get_screen('res_sc').V1hText = str(round(V1h, 3))
+		self.manager.get_screen('res_sc').V2hText = str(round(V2h, 3))
+		self.manager.get_screen('res_sc').W1hText = str(round(W1h, 3))
+		self.manager.get_screen('res_sc').W2hText = str(round(W2h, 3))
+		self.manager.get_screen('res_sc').DVthhText = str(round(dVthh, 3))
+		self.manager.get_screen('res_sc').Vth1hText = str(round(Vth1h, 3))
+		self.manager.get_screen('res_sc').Vth2hText = str(round(Vth2h, 3))
+		self.manager.get_screen('res_sc').Wth1hText = str(round(Wth1h, 3))
+		self.manager.get_screen('res_sc').Wth2hText = str(round(Wth2h, 3))
 
 		####### Hub drawing variables #####
-		self.manager.get_screen('comp_sc').x0hText = str(x0h)
-		self.manager.get_screen('comp_sc').x1hText = str(x1h)
-		self.manager.get_screen('comp_sc').UhpText = str(Uhp)
-		self.manager.get_screen('comp_sc').xLhText = str(xLh)
-		self.manager.get_screen('comp_sc').yLhText = str(yLh)
-		self.manager.get_screen('comp_sc').xRhText = str(xRh)
-		self.manager.get_screen('comp_sc').yRhText = str(yRh)
+		self.manager.get_screen('res_sc').x0hText = str(x0h)
+		self.manager.get_screen('res_sc').x1hText = str(x1h)
+		self.manager.get_screen('res_sc').UhpText = str(Uhp)
+		self.manager.get_screen('res_sc').xLhText = str(xLh)
+		self.manager.get_screen('res_sc').yLhText = str(yLh)
+		self.manager.get_screen('res_sc').xRhText = str(xRh)
+		self.manager.get_screen('res_sc').yRhText = str(yRh)
 
 		#################    Hub  Arrows      ###############
-		self.manager.get_screen('comp_sc').xL1uhText = str(xL1uh)
-		self.manager.get_screen('comp_sc').yL1uhText = str(yL1uh)
-		self.manager.get_screen('comp_sc').xL1dhText = str(xL1dh)
-		self.manager.get_screen('comp_sc').yL1dhText = str(yL1dh)
+		self.manager.get_screen('res_sc').xL1uhText = str(xL1uh)
+		self.manager.get_screen('res_sc').yL1uhText = str(yL1uh)
+		self.manager.get_screen('res_sc').xL1dhText = str(xL1dh)
+		self.manager.get_screen('res_sc').yL1dhText = str(yL1dh)
 
-		self.manager.get_screen('comp_sc').xL2uhText = str(xL2uh)
-		self.manager.get_screen('comp_sc').yL2uhText = str(yL2uh)
-		self.manager.get_screen('comp_sc').xL2dhText = str(xL2dh)
-		self.manager.get_screen('comp_sc').yL2dhText = str(yL2dh)
+		self.manager.get_screen('res_sc').xL2uhText = str(xL2uh)
+		self.manager.get_screen('res_sc').yL2uhText = str(yL2uh)
+		self.manager.get_screen('res_sc').xL2dhText = str(xL2dh)
+		self.manager.get_screen('res_sc').yL2dhText = str(yL2dh)
 
-		self.manager.get_screen('comp_sc').xR1uhText = str(xR1uh)
-		self.manager.get_screen('comp_sc').yR1uhText = str(yR1uh)
-		self.manager.get_screen('comp_sc').xR1dhText = str(xR1dh)
-		self.manager.get_screen('comp_sc').yR1dhText = str(yR1dh)
+		self.manager.get_screen('res_sc').xR1uhText = str(xR1uh)
+		self.manager.get_screen('res_sc').yR1uhText = str(yR1uh)
+		self.manager.get_screen('res_sc').xR1dhText = str(xR1dh)
+		self.manager.get_screen('res_sc').yR1dhText = str(yR1dh)
 
-		self.manager.get_screen('comp_sc').xR2uhText = str(xR2uh)
-		self.manager.get_screen('comp_sc').yR2uhText = str(yR2uh)
-		self.manager.get_screen('comp_sc').xR2dhText = str(xR2dh)
-		self.manager.get_screen('comp_sc').yR2dhText = str(yR2dh)
-		
+		self.manager.get_screen('res_sc').xR2uhText = str(xR2uh)
+		self.manager.get_screen('res_sc').yR2uhText = str(yR2uh)
+		self.manager.get_screen('res_sc').xR2dhText = str(xR2dh)
+		self.manager.get_screen('res_sc').yR2dhText = str(yR2dh)
+
 
 		############### Passing Tip Results #################
-		self.manager.get_screen('tip_sc').ptText = str(round(pet, 3))
-		self.manager.get_screen('tip_sc').ft1Text = str(round(fet1, 3))
-		self.manager.get_screen('tip_sc').ft2Text = str(round(fet2, 3))
-		self.manager.get_screen('tip_sc').rntText = str(round(rnet, 3))
-		self.manager.get_screen('tip_sc').a1tText = str(round(a1et, 3))
-		self.manager.get_screen('tip_sc').a2tText = str(round(a2et, 3))
-		self.manager.get_screen('tip_sc').b1tText = str(round(b1et, 3))
-		self.manager.get_screen('tip_sc').b2tText = str(round(b2et, 3))
+		self.manager.get_screen('res_sc').ptText = str(round(pet, 3))
+		self.manager.get_screen('res_sc').ft1Text = str(round(fet1, 3))
+		self.manager.get_screen('res_sc').ft2Text = str(round(fet2, 3))
+		self.manager.get_screen('res_sc').rntText = str(round(rnet, 3))
+		self.manager.get_screen('res_sc').a1tText = str(round(a1et, 3))
+		self.manager.get_screen('res_sc').a2tText = str(round(a2et, 3))
+		self.manager.get_screen('res_sc').b1tText = str(round(b1et, 3))
+		self.manager.get_screen('res_sc').b2tText = str(round(b2et, 3))
 
-		self.manager.get_screen('tip_sc').UtText = str(round(Ut, 3))
-		self.manager.get_screen('tip_sc').Vx1tText = str(round(Vx1t, 3))
-		self.manager.get_screen('tip_sc').Vx2tText = str(round(Vx2t, 3))
-		self.manager.get_screen('tip_sc').V1tText = str(round(V1t, 3))
-		self.manager.get_screen('tip_sc').V2tText = str(round(V2t, 3))
-		self.manager.get_screen('tip_sc').W1tText = str(round(W1t, 3))
-		self.manager.get_screen('tip_sc').W2tText = str(round(W2t, 3))
-		self.manager.get_screen('tip_sc').DVthtText = str(round(dVtht, 3))
-		self.manager.get_screen('tip_sc').Vth1tText = str(round(Vth1t, 3))
-		self.manager.get_screen('tip_sc').Vth2tText = str(round(Vth2t, 3))
-		self.manager.get_screen('tip_sc').Wth1tText = str(round(Wth1t, 3))
-		self.manager.get_screen('tip_sc').Wth2tText = str(round(Wth2t, 3))
+		self.manager.get_screen('res_sc').UtText = str(round(Ut, 3))
+		self.manager.get_screen('res_sc').Vx1tText = str(round(Vx1t, 3))
+		self.manager.get_screen('res_sc').Vx2tText = str(round(Vx2t, 3))
+		self.manager.get_screen('res_sc').V1tText = str(round(V1t, 3))
+		self.manager.get_screen('res_sc').V2tText = str(round(V2t, 3))
+		self.manager.get_screen('res_sc').W1tText = str(round(W1t, 3))
+		self.manager.get_screen('res_sc').W2tText = str(round(W2t, 3))
+		self.manager.get_screen('res_sc').DVthtText = str(round(dVtht, 3))
+		self.manager.get_screen('res_sc').Vth1tText = str(round(Vth1t, 3))
+		self.manager.get_screen('res_sc').Vth2tText = str(round(Vth2t, 3))
+		self.manager.get_screen('res_sc').Wth1tText = str(round(Wth1t, 3))
+		self.manager.get_screen('res_sc').Wth2tText = str(round(Wth2t, 3))
 		
 		##########   Drawing variables   ##########
-		self.manager.get_screen('tip_sc').x0tText = str(x0t)
-		self.manager.get_screen('tip_sc').x1tText = str(x1t)
-		self.manager.get_screen('tip_sc').UtpText = str(Utp)
-		self.manager.get_screen('tip_sc').xLtText = str(xLt)
-		self.manager.get_screen('tip_sc').yLtText = str(yLt)
-		self.manager.get_screen('tip_sc').xRtText = str(xRt)
-		self.manager.get_screen('tip_sc').yRtText = str(yRt)
+		self.manager.get_screen('res_sc').x0tText = str(x0t)
+		self.manager.get_screen('res_sc').x1tText = str(x1t)
+		self.manager.get_screen('res_sc').UtpText = str(Utp)
+		self.manager.get_screen('res_sc').xLtText = str(xLt)
+		self.manager.get_screen('res_sc').yLtText = str(yLt)
+		self.manager.get_screen('res_sc').xRtText = str(xRt)
+		self.manager.get_screen('res_sc').yRtText = str(yRt)
 
 		#################    Tip Arrows      ###############
-		self.manager.get_screen('tip_sc').xL1utText = str(xL1ut)
-		self.manager.get_screen('tip_sc').yL1utText = str(yL1ut)
-		self.manager.get_screen('tip_sc').xL1dtText = str(xL1dt)
-		self.manager.get_screen('tip_sc').yL1dtText = str(yL1dt)
+		self.manager.get_screen('res_sc').xL1utText = str(xL1ut)
+		self.manager.get_screen('res_sc').yL1utText = str(yL1ut)
+		self.manager.get_screen('res_sc').xL1dtText = str(xL1dt)
+		self.manager.get_screen('res_sc').yL1dtText = str(yL1dt)
 
-		self.manager.get_screen('tip_sc').xL2utText = str(xL2ut)
-		self.manager.get_screen('tip_sc').yL2utText = str(yL2ut)
-		self.manager.get_screen('tip_sc').xL2dtText = str(xL2dt)
-		self.manager.get_screen('tip_sc').yL2dtText = str(yL2dt)
+		self.manager.get_screen('res_sc').xL2utText = str(xL2ut)
+		self.manager.get_screen('res_sc').yL2utText = str(yL2ut)
+		self.manager.get_screen('res_sc').xL2dtText = str(xL2dt)
+		self.manager.get_screen('res_sc').yL2dtText = str(yL2dt)
 
-		self.manager.get_screen('tip_sc').xR1utText = str(xR1ut)
-		self.manager.get_screen('tip_sc').yR1utText = str(yR1ut)
-		self.manager.get_screen('tip_sc').xR1dtText = str(xR1dt)
-		self.manager.get_screen('tip_sc').yR1dtText = str(yR1dt)
+		self.manager.get_screen('res_sc').xR1utText = str(xR1ut)
+		self.manager.get_screen('res_sc').yR1utText = str(yR1ut)
+		self.manager.get_screen('res_sc').xR1dtText = str(xR1dt)
+		self.manager.get_screen('res_sc').yR1dtText = str(yR1dt)
 
-		self.manager.get_screen('tip_sc').xR2utText = str(xR2ut)
-		self.manager.get_screen('tip_sc').yR2utText = str(yR2ut)
-		self.manager.get_screen('tip_sc').xR2dtText = str(xR2dt)
-		self.manager.get_screen('tip_sc').yR2dtText = str(yR2dt)
-
-		##########   Drawing variables   ##########
-		self.manager.get_screen('comp_sc').x0tText = str(x0t)
-		self.manager.get_screen('comp_sc').x1tText = str(x1t)
-		self.manager.get_screen('comp_sc').UtpText = str(Utp)
-		self.manager.get_screen('comp_sc').xLtText = str(xLt)
-		self.manager.get_screen('comp_sc').yLtText = str(yLt)
-		self.manager.get_screen('comp_sc').xRtText = str(xRt)
-		self.manager.get_screen('comp_sc').yRtText = str(yRt)
-
-		#################    Tip Arrows      ###############
-		self.manager.get_screen('comp_sc').xL1utText = str(xL1ut)
-		self.manager.get_screen('comp_sc').yL1utText = str(yL1ut)
-		self.manager.get_screen('comp_sc').xL1dtText = str(xL1dt)
-		self.manager.get_screen('comp_sc').yL1dtText = str(yL1dt)
-
-		self.manager.get_screen('comp_sc').xL2utText = str(xL2ut)
-		self.manager.get_screen('comp_sc').yL2utText = str(yL2ut)
-		self.manager.get_screen('comp_sc').xL2dtText = str(xL2dt)
-		self.manager.get_screen('comp_sc').yL2dtText = str(yL2dt)
-
-		self.manager.get_screen('comp_sc').xR1utText = str(xR1ut)
-		self.manager.get_screen('comp_sc').yR1utText = str(yR1ut)
-		self.manager.get_screen('comp_sc').xR1dtText = str(xR1dt)
-		self.manager.get_screen('comp_sc').yR1dtText = str(yR1dt)
-
-		self.manager.get_screen('comp_sc').xR2utText = str(xR2ut)
-		self.manager.get_screen('comp_sc').yR2utText = str(yR2ut)
-		self.manager.get_screen('comp_sc').xR2dtText = str(xR2dt)
-		self.manager.get_screen('comp_sc').yR2dtText = str(yR2dt)
-		
-		
-
-class NewWindow(Screen):
-
-	DPI = Metrics.dpi/96
-	check = NumericProperty(0)
+		self.manager.get_screen('res_sc').xR2utText = str(xR2ut)
+		self.manager.get_screen('res_sc').yR2utText = str(yR2ut)
+		self.manager.get_screen('res_sc').xR2dtText = str(xR2dt)
+		self.manager.get_screen('res_sc').yR2dtText = str(yR2dt)
 
 class SimWindow(Screen):
-	DPI = Metrics.dpi / 96
-	
+
 	check = NumericProperty(0)
 
 	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
 
 	pText = StringProperty('0')
 	fText = StringProperty('0')
@@ -895,72 +676,12 @@ class SimWindow(Screen):
 	yR2dText = StringProperty('0')
 
 	XText = StringProperty('0')
-class MidScreen(Screen):
+
+class Results(Screen):
+	######### HUB ######
 	check = NumericProperty(0)
 
 	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
-	XText = StringProperty('0')
-	pText = StringProperty('0')
-	fText = StringProperty('0')
-	rnText = StringProperty('0')
-	a1Text = StringProperty('0')
-	a2Text = StringProperty('0')
-	a3Text = StringProperty('0')
-	b1Text = StringProperty('0')
-	b2Text = StringProperty('0')
-	b3Text = StringProperty('0')
-
-	x0Text = StringProperty('0')
-	y0Text = StringProperty('0')
-	x1Text = StringProperty('0')
-	y1Text = StringProperty('0')
-	UText = StringProperty('0')
-	xLText = StringProperty('0')
-	yLText = StringProperty('0')
-	xRText = StringProperty('0')
-	yRText = StringProperty('0')
-
-	UmText = StringProperty('0')
-	UtText = StringProperty('0')
-	UhText = StringProperty('0')
-	VxText = StringProperty('0')
-	V1Text = StringProperty('0')
-	V2Text = StringProperty('0')
-	W1Text = StringProperty('0')
-	W2Text = StringProperty('0')
-	DVthText = StringProperty('0')
-	Vth1Text = StringProperty('0')
-	Vth2Text = StringProperty('0')
-	Wth1Text = StringProperty('0')
-	Wth2Text = StringProperty('0')
-
-	xL1uText = StringProperty('0')
-	yL1uText = StringProperty('0')
-	xL1dText = StringProperty('0')
-	yL1dText = StringProperty('0')
-
-	xL2uText = StringProperty('0')
-	yL2uText = StringProperty('0')
-	xL2dText = StringProperty('0')
-	yL2dText = StringProperty('0')
-
-	xR1uText = StringProperty('0')
-	yR1uText = StringProperty('0')
-	xR1dText = StringProperty('0')
-	yR1dText = StringProperty('0')
-
-	xR2uText = StringProperty('0')
-	yR2uText = StringProperty('0')
-	xR2dText = StringProperty('0')
-	yR2dText = StringProperty('0')
-
-
-class HubScreen(Screen):
-	check = NumericProperty(0)
-
-	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
 
 	phText = StringProperty('0')
 	fh1Text = StringProperty('0')
@@ -1017,15 +738,73 @@ class HubScreen(Screen):
 	yR2dhText = StringProperty('0')
 
 	tc_namehText = StringProperty('0')
-	ptnh_xText = StringProperty('0')
 
 
-
-class TipScreen(Screen):
+	######### MID ######
 	check = NumericProperty(0)
 
 	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
+
+	XText = StringProperty('0')
+	pText = StringProperty('0')
+	fText = StringProperty('0')
+	rnText = StringProperty('0')
+	a1Text = StringProperty('0')
+	a2Text = StringProperty('0')
+	a3Text = StringProperty('0')
+	b1Text = StringProperty('0')
+	b2Text = StringProperty('0')
+	b3Text = StringProperty('0')
+
+	x0Text = StringProperty('0')
+	y0Text = StringProperty('0')
+	x1Text = StringProperty('0')
+	y1Text = StringProperty('0')
+	UText = StringProperty('0')
+	xLText = StringProperty('0')
+	yLText = StringProperty('0')
+	xRText = StringProperty('0')
+	yRText = StringProperty('0')
+
+	UmText = StringProperty('0')
+	UtText = StringProperty('0')
+	UhText = StringProperty('0')
+	VxText = StringProperty('0')
+	V1Text = StringProperty('0')
+	V2Text = StringProperty('0')
+	W1Text = StringProperty('0')
+	W2Text = StringProperty('0')
+
+	DVthText = StringProperty('0')
+	Vth1Text = StringProperty('0')
+	Vth2Text = StringProperty('0')
+	Wth1Text = StringProperty('0')
+	Wth2Text = StringProperty('0')
+
+	xL1uText = StringProperty('0')
+	yL1uText = StringProperty('0')
+	xL1dText = StringProperty('0')
+	yL1dText = StringProperty('0')
+
+	xL2uText = StringProperty('0')
+	yL2uText = StringProperty('0')
+	xL2dText = StringProperty('0')
+	yL2dText = StringProperty('0')
+
+	xR1uText = StringProperty('0')
+	yR1uText = StringProperty('0')
+	xR1dText = StringProperty('0')
+	yR1dText = StringProperty('0')
+
+	xR2uText = StringProperty('0')
+	yR2uText = StringProperty('0')
+	xR2dText = StringProperty('0')
+	yR2dText = StringProperty('0')
+
+	######### TIP ######
+	check = NumericProperty(0)
+
+	tc_namemText = StringProperty('0')
 
 	ptText = StringProperty('0')
 	ft1Text = StringProperty('0')
@@ -1082,108 +861,7 @@ class TipScreen(Screen):
 	yR2dtText = StringProperty('0')
 
 	tc_nametText = StringProperty('0')
-	ptnt_xText = StringProperty('0')
 
-class CompScreen(Screen):
-
-	# y0_2Text = StringProperty('0')
-	# yLh_2Text = StringProperty('0')
-	# yRh_2Text = StringProperty('0')
-
-	####### MID #########
-
-	x0Text = StringProperty('0')
-	y0Text = StringProperty('0')
-	x1Text = StringProperty('0')
-	y1Text = StringProperty('0')
-	UText = StringProperty('0')
-	xLText = StringProperty('0')
-	yLText = StringProperty('0')
-	xRText = StringProperty('0')
-	yRText = StringProperty('0')
-
-	xL1uText = StringProperty('0')
-	yL1uText = StringProperty('0')
-	xL1dText = StringProperty('0')
-	yL1dText = StringProperty('0')
-
-	xL2uText = StringProperty('0')
-	yL2uText = StringProperty('0')
-	xL2dText = StringProperty('0')
-	yL2dText = StringProperty('0')
-
-	xR1uText = StringProperty('0')
-	yR1uText = StringProperty('0')
-	xR1dText = StringProperty('0')
-	yR1dText = StringProperty('0')
-
-	xR2uText = StringProperty('0')
-	yR2uText = StringProperty('0')
-	xR2dText = StringProperty('0')
-	yR2dText = StringProperty('0')
-
-	###### HUB  #####
-	x0hText = StringProperty('0')
-	x1hText = StringProperty('0')
-	UhpText = StringProperty('0')
-	xLhText = StringProperty('0')
-	yLhText = StringProperty('0')
-	xRhText = StringProperty('0')
-	yRhText = StringProperty('0')
-
-	xL1uhText = StringProperty('0')
-	yL1uhText = StringProperty('0')
-	xL1dhText = StringProperty('0')
-	yL1dhText = StringProperty('0')
-
-	xL2uhText = StringProperty('0')
-	yL2uhText = StringProperty('0')
-	xL2dhText = StringProperty('0')
-	yL2dhText = StringProperty('0')
-
-	xR1uhText = StringProperty('0')
-	yR1uhText = StringProperty('0')
-	xR1dhText = StringProperty('0')
-	yR1dhText = StringProperty('0')
-
-	xR2uhText = StringProperty('0')
-	yR2uhText = StringProperty('0')
-	xR2dhText = StringProperty('0')
-	yR2dhText = StringProperty('0')
-
-	######## TIP #######
-	x0tText = StringProperty('0')
-	x1tText = StringProperty('0')
-	UtpText = StringProperty('0')
-	xLtText = StringProperty('0')
-	yLtText = StringProperty('0')
-	xRtText = StringProperty('0')
-	yRtText = StringProperty('0')
-
-	xL1utText = StringProperty('0')
-	yL1utText = StringProperty('0')
-	xL1dtText = StringProperty('0')
-	yL1dtText = StringProperty('0')
-
-	xL2utText = StringProperty('0')
-	yL2utText = StringProperty('0')
-	xL2dtText = StringProperty('0')
-	yL2dtText = StringProperty('0')
-
-	xR1utText = StringProperty('0')
-	yR1utText = StringProperty('0')
-	xR1dtText = StringProperty('0')
-	yR1dtText = StringProperty('0')
-
-	xR2utText = StringProperty('0')
-	yR2utText = StringProperty('0')
-	xR2dtText = StringProperty('0')
-	yR2dtText = StringProperty('0')
-
-	tc_namemText = StringProperty('0')
-	ptnm_xText = StringProperty('0')
-
-	pass
 
 class InfoScreen(Screen):
 	pass

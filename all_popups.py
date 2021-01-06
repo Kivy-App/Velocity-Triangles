@@ -8,36 +8,39 @@ def error_Popup():
     #create content for the Popup
     bl = BoxLayout(orientation='vertical',padding = 30)
     label = Label(text ='This combination of non dimensional \n'\
-						'input has infinite solutions. Please \n'\
-						'fill in one more coefficient or angle ',halign = 'center',\
+                        'input has infinite solutions. Please \n'\
+                        'fill in one more coefficient or angle ',halign = 'center',
                   valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
 
     bl.add_widget(label)
 
-    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
-                        size_hint=(None, None), size=('350dp' ,'350dp'))
+    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color=[1,0.4,0,1], content=bl,
+                        size_hint=(None, None), size=('350dp','350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
-                               size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
+                                size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
 
     bl.add_widget(btn)
     popupWindow.open()
 
+
 class P(BoxLayout):
+
     pass
+
 
 def firstPopup():
     show = P()
     #create content for the Popup
     bl = BoxLayout(orientation='vertical',padding = 30)
-    label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',\
+    label = Label(text = 'You should put exactly 3 \n variables at the first segment',halign = 'center',
                   valign = 'middle', color =[1, 1, 1, 1],font_size = '18dp')
     bl.add_widget(label)
 
-    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,\
+    popupWindow = Popup(title="ERROR",title_color=[1,0,0,1],title_size = '25dp',separator_color= [1,0.4,0,1], content= bl,
                         size_hint=(None, None), size=('350dp' ,'350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
                                size_hint=(0.7,0.3), pos_hint={'center_x': 0.5}, on_release = popupWindow.dismiss)
 
     bl.add_widget(btn)
@@ -58,10 +61,10 @@ def secondPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-                        content=bl,\
+                        content=bl,
                         size_hint=(None, None), size=('350dp', '350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!', text_color=[0.5, 1, 1, 1],\
+    btn = MDFillRoundFlatButton(text='OK got it !!!', text_color=[0.5, 1, 1, 1],
                                 size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
 
     bl.add_widget(btn)
@@ -78,10 +81,10 @@ def thirdPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-                        content=bl,\
+                        content=bl,
                         size_hint=(None, None), size=('350dp', '350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
                                 size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
 
     bl.add_widget(btn)
@@ -101,10 +104,10 @@ def rpmPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-                    content=bl,\
+                    content=bl,
                     size_hint=(None, None), size=('350dp', '350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
                             size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
 
     bl.add_widget(btn)
@@ -121,10 +124,10 @@ def h2tPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-                        content=bl,\
+                        content=bl,
                         size_hint=(None, None), size=('350dp', '350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
                                 size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
 
     bl.add_widget(btn)
@@ -141,10 +144,10 @@ def diamPopup():
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],
-                        content=bl,\
+                        content=bl,
                         size_hint=(None, None), size=('350dp', '350dp'))
 
-    btn = MDFillRoundFlatButton(text='OK got it !!!',\
+    btn = MDFillRoundFlatButton(text='OK got it !!!',
                                 size_hint=(0.7, 0.3), pos_hint={'center_x': 0.5}, on_release=popupWindow.dismiss)
 
     bl.add_widget(btn)
