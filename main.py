@@ -388,8 +388,6 @@ class VelocityTriangles(Screen):
 		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
 		Vx1h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) - b * ((rm / rh) - 1))))
 		Vx2h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) + b * ((rm / rh) - 1))))
-		print(a)
-		print(b)
 		# Vx1h = sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*log(rh/rm))
 		# Vx2h = sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * log(rh / rm))
 		dVthh = Vth2h - Vth1h
