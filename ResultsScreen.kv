@@ -869,6 +869,7 @@
                                         root.manager.transition.direction = "right"
 
 
+
                             BoxLayout:
                                 size_hint_x:0.7
 
@@ -2456,8 +2457,8 @@
 #                                pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
 #                                font_style: 'Body1'
 #                                text:
-#                                    'Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down.'\
-#                                    if (float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText)) else ''
+#                                    ('Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down in order to fit.')\
+#                                    if ((float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText))) else ''
 
                         GridLayout:
                             cols:2
@@ -2509,8 +2510,8 @@
                     effect_cls: 'ScrollEffect'
                     id: sv_comp
                     GridLayout:
-                        size_hint_y: 1.195
-                        rows: 7
+                        size_hint_y: 2.255
+                        rows: 9
                         ############# Image Box ##############
                         FloatLayout:
                             size_hint_y: 0.4
@@ -2674,7 +2675,7 @@
 
                                 ##### MID ###
                                 Color:
-                                    rgba: (0,0,0,1) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
+                                    rgba: 0,0,0,1
                                 Line:
                                     width: dp(1)
                                     points: (self.x + self.width - dp(80),self.y + dp(45),self.x + self.width - dp(40),self.y + dp(45))
@@ -2701,35 +2702,208 @@
                                 pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(33.5)
                                 text: 'Tip'
 
-        #                FloatLayout:
-        #                    size_hint_y: 0.45
-        #                    canvas:
-        #                        Color:
-        #                            rgba:0,0,0,1
-        #                        Line:
-        #                            width: dp(1.)
-        #                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
-        #
-        #                        Color:
-        #                            rgba: 0,0,1,1
-        #
-        #        ###################    V1h Line    ##########################
-        #                        Line:
-        #                            width: dp(1.5)
-        #                            points: (float(root.x0hText),self.y +float(root.y0_2Text),float(root.xRhText),self.y +float(root.yRh_2Text))
-        #
-        #        ###################    V2h Line    ##########################
-        #                        Line:
-        #                            width: dp(1.5)
-        #                            points: (float(root.x0hText),self.y + float(root.y0_2Text),float(root.xLhText),self.y + float(root.yLh_2Text))
-        #
-        #                        Line:
-        #                            width: dp(2)
-        #                            bezier:
-        #                                (float(root.xLhText),self.y + float(root.yLh_2Text),
-        #                                float(root.x0hText),self.y +float(root.y0_2Text),
-        #                                float(root.xRhText),self.y +float(root.yRh_2Text))
+#################################   Stator Camber Line drawings   ################################
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            md_bg_color: 1,0.55,0,0.8
 
+                            Label:
+                                padding: dp(10),dp(0)
+                                text: 'Stator mean camber lines'
+                                font_size: dp(20)
+                                bold: True
+                                underline: True
+                                text_size: self.size
+                                halign:'left'
+                                valign: 'middle'
+                        FloatLayout:
+                            size_hint_y: 0.45
+                            canvas:
+                                Color:
+                                    rgba:0,0,0,1
+                                Line:
+                                    width: dp(1.)
+                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+                            ############# Hub Stator Camber Lines  #################
+                                Color:
+                                    rgba: 0,0,1,1
+                                Line:
+                                    width: dp(2)
+                                    bezier:
+                                        (float(root.xLh_cambText),self.y + float(root.yLh_cambText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRh_cambText),self.y +float(root.yRh_cambText))
+
+                            ############# Mid Stator Camber Lines  #################
+                                Color:
+                                    rgba: 0,0,0,1
+                                Line:
+                                    width: dp(2)
+                                    bezier:
+                                        (float(root.xLm_cambText),self.y + float(root.yLm_cambText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRm_cambText),self.y +float(root.yRm_cambText))
+
+                            ############# Tip Stator Camber Lines  #################
+                                Color:
+                                    rgba: 1,0,0,1
+                                Line:
+                                    width: dp(2)
+                                    bezier:
+                                        (float(root.xLt_cambText),self.y + float(root.yLt_cambText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRt_cambText),self.y +float(root.yRt_cambText))
+
+                                               #############  Top right corner box ############
+
+                                Color:
+                                    rgba: 0,0,0,1
+                                Line:
+                                    width: dp(1)
+                                    rectangle: (self.x + self.width - dp(115),self.y + self.height - dp(65),dp(90),dp(40))
+
+                                ##### HUB ###
+                                Color:
+                                    rgba:0,0,1,1
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y +self.height - dp(32.5),self.x + self.width - dp(40),self.y + self.height - dp(32.5))
+
+                                ##### MID ###
+                                Color:
+                                    rgba: (0,0,0,1)
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y + self.height - dp(45),self.x + self.width - dp(40),self.y + self.height - dp(45))
+
+                                #####  TIP  #####
+                                Color:
+                                    rgba:1,0,0,1
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y + self.height  - dp(57.5),self.x + self.width - dp(40),self.y + self.height - dp(57.5))
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(30.5)
+                                text: 'Hub'
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(43)
+                                text: 'Mid'
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(55.5)
+                                text: 'Tip'
+
+                        MDBoxLayout:
+                            size_hint_y: 0.08
+                            md_bg_color: 1,0.55,0,0.8
+
+                            Label:
+                                padding: dp(10),dp(0)
+                                text: 'Rotor mean camber lines'
+                                font_size: dp(20)
+                                bold: True
+                                underline: True
+                                text_size: self.size
+                                halign:'left'
+                                valign: 'middle'
+
+                        FloatLayout:
+                            size_hint_y: 0.45
+                            canvas:
+                                Color:
+                                    rgba:0,0,0,1
+                                Line:
+                                    width: dp(1.)
+                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+                            ############# Hub Rotor Camber Lines  #################
+                                Color:
+                                    rgba: 0,0,1,1
+
+#                ###################    V1h Line    ##########################
+                                Line:
+                                    width: dp(1.5)
+                                    points: (float(root.xLh_cambText),self.y +float(root.yLh_rotorText),float(root.xs_centText),self.y +float(root.ys_centText))
+
+                ###################    V2h Line    ##########################
+                                Line:
+                                    width: dp(1.5)
+                                    points: (float(root.xs_centText),self.y + float(root.ys_centText),float(root.xRh_cambText),self.y + float(root.yRh_rotorText))
+##
+                                Line:
+                                    width: dp(2)
+                                    bezier:
+                                        (float(root.xLh_cambText),self.y + float(root.yLh_rotorText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRh_cambText),self.y +float(root.yRh_rotorText))
+
+                            ############# Mid Rotor Camber Lines  #################
+#                                Color:
+#                                    rgba: 0,0,0,1
+#                                Line:
+#                                    width: dp(2)
+#                                    bezier:
+#                                        (float(root.xLm_cambText),self.y + float(root.yLm_cambText),
+#                                        float(root.xs_centText),self.y +float(root.ys_centText),
+#                                        float(root.xRm_cambText),self.y +float(root.yRm_cambText))
+
+                            ############# Tip Rotor Camber Lines  #################
+#                                Color:
+#                                    rgba: 1,0,0,1
+#                                Line:
+#                                    width: dp(2)
+#                                    bezier:
+#                                        (float(root.xLt_cambText),self.y + float(root.yLt_cambText),
+#                                        float(root.xs_centText),self.y +float(root.ys_centText),
+#                                        float(root.xRt_cambText),self.y +float(root.yRt_cambText))
+
+                                               #############  Top right corner box ############
+
+                                Color:
+                                    rgba: 0,0,0,1
+                                Line:
+                                    width: dp(1)
+                                    rectangle: (self.x + self.width - dp(115),self.y + self.height - dp(65),dp(90),dp(40))
+
+                                ##### HUB ###
+                                Color:
+                                    rgba:0,0,1,1
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y +self.height - dp(32.5),self.x + self.width - dp(40),self.y + self.height - dp(32.5))
+
+                                ##### MID ###
+                                Color:
+                                    rgba: (0,0,0,1)
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y + self.height - dp(45),self.x + self.width - dp(40),self.y + self.height - dp(45))
+
+                                #####  TIP  #####
+                                Color:
+                                    rgba:1,0,0,1
+                                Line:
+                                    width: dp(1)
+                                    points: (self.x + self.width - dp(80),self.y + self.height  - dp(57.5),self.x + self.width - dp(40),self.y + self.height - dp(57.5))
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(30.5)
+                                text: 'Hub'
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(43)
+                                text: 'Mid'
+
+                            Label:
+                                font_size: dp(11)
+                                pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(55.5)
+                                text: 'Tip'
             ####################    Button  ####################
                         GridLayout:
                             cols:2
@@ -2749,6 +2923,7 @@
                                         root.manager.current = "Main"
                                         root.manager.transition.direction = "right"
 #                                        sv_comp.scroll_y = 1
+
 
                             BoxLayout:
                                 size_hint_x:0.7

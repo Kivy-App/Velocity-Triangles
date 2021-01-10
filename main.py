@@ -4,14 +4,14 @@ from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
-from math import radians,degrees,log,atan,cos,sin,sqrt
+from math import radians,degrees,log,atan,cos,sin,sqrt,tan
 from kivymd.app import MDApp
 from solver_if import system_if,system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
 from kivymd.uix.tab import MDTabsBase
 from kivy.uix.boxlayout import BoxLayout
-
+from Camber import camber_stator, mid_camb_stator
 ###########################################################################################
 #from kivy.app import App
 # from kivy.lang import Builder
@@ -134,6 +134,17 @@ class VelocityTriangles(Screen):
 				yL = y0 + U * float(fe)
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
+
+		######################  Hub Camber line drawing ##################################
+			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb = mid_camb_stator(U,fe,rne,pe,y0)
+
+			self.manager.get_screen('res_sc').yLm_cambText = str(round(yLm_camb, 3))
+			self.manager.get_screen('res_sc').xLm_cambText = str(round(xLm_camb, 3))
+			self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
+			self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
+			self.manager.get_screen('res_sc').yRm_cambText = str(round(yRm_camb, 3))
+			self.manager.get_screen('res_sc').xRm_cambText = str(round(xRm_camb, 3))
+		#############################################################################################
 
 			xL1u, yL1u, xL1d, yL1d, xL2u, yL2u, xL2d, yL2d, xR1u, yR1u, xR1d, yR1d, xR2u, yR2u, xR2d, yR2d = arrows(x0,y0,x1,y1,a1e,a2e,b1e,b2e)
 
@@ -425,6 +436,8 @@ class VelocityTriangles(Screen):
 		yRh = y0 + Uhp * float(feh2)
 
 
+
+
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
 				or yLh > Window.size[1] * 200 / 700 or yRh > Window.size[1] * 200 / 700 \
 				or xLh > self.width - Window.size[0] * 80 / 400 or xRh < self.x + Window.size[0] * 80 / 400:
@@ -436,6 +449,20 @@ class VelocityTriangles(Screen):
 			yLh = y0 + Uhp * float(feh1)
 			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 			yRh = y0 + Uhp * float(feh2)
+
+#####################  Hub Camber line drawing ##################################
+		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yRh_rotor, yLh_rotor = camber_stator(y0,Uhp,Uh,feh2,feh1,Vth1h,Vth2h,Wth1h,Wth2h)
+
+		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
+		self.manager.get_screen('res_sc').xLh_cambText = str(round(xLh_camb, 3))
+		self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
+		self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
+		self.manager.get_screen('res_sc').yRh_cambText = str(round(yRh_camb, 3))
+		self.manager.get_screen('res_sc').xRh_cambText = str(round(xRh_camb, 3))
+		self.manager.get_screen('res_sc').yRh_rotorText = str(round(yRh_rotor, 3))
+		self.manager.get_screen('res_sc').yLh_rotorText = str(round(yLh_rotor, 3))
+############################################################################################
+
 
 		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh, xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
 
@@ -496,17 +523,17 @@ class VelocityTriangles(Screen):
 
 		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut, xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
 
-		# a1dt = 180 + float(a1et) - 90
-		# a2dt = 180 - float(a2et) - 90
-		# b1dt = 180 - float(b1et) - 90
-		# b2dt = 180 - float(b2et) - 90
 
-		# y0_2  = y0 + Window.size[1] * 150 / 700
-		# yLh_2 = y0_2 - Uhp * float(feh1)
-		# yRh_2 = y0_2 - Uhp * float(feh2)
-		# self.manager.get_screen('comp_sc').y0_2Text = str(round(y0_2, 3))
-		# self.manager.get_screen('comp_sc').yLh_2Text = str(round(yLh_2, 3))
-		# self.manager.get_screen('comp_sc').yRh_2Text = str(round(yRh_2, 3))
+#####################  Tip Camber drawings ############
+		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yRt_rotor, yLt_rotor = camber_stator(y0, Utp, Ut, fet2, fet1, Vth1t, Vth2t, Wth1t, Wth2t)
+
+		self.manager.get_screen('res_sc').yLt_cambText = str(round(yLt_camb, 3))
+		self.manager.get_screen('res_sc').xLt_cambText = str(round(xLt_camb, 3))
+		self.manager.get_screen('res_sc').yRt_cambText = str(round(yRt_camb, 3))
+		self.manager.get_screen('res_sc').xRt_cambText = str(round(xRt_camb, 3))
+		self.manager.get_screen('res_sc').yRt_rotorText = str(round(yRt_rotor, 3))
+		self.manager.get_screen('res_sc').yLt_rotorText = str(round(yLt_rotor, 3))
+#######################################################################################
 
 		############### Passing Hub Results #################
 		self.manager.get_screen('res_sc').phText = str(round(peh, 3))
@@ -572,6 +599,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').b1tText = str(round(b1et, 3))
 		self.manager.get_screen('res_sc').b2tText = str(round(b2et, 3))
 
+		self.manager.get_screen('res_sc').UtpText = str(Utp)
 		self.manager.get_screen('res_sc').UtText = str(round(Ut, 3))
 		self.manager.get_screen('res_sc').Vx1tText = str(round(Vx1t, 3))
 		self.manager.get_screen('res_sc').Vx2tText = str(round(Vx2t, 3))
@@ -588,7 +616,6 @@ class VelocityTriangles(Screen):
 		##########   Drawing variables   ##########
 		self.manager.get_screen('res_sc').x0tText = str(x0t)
 		self.manager.get_screen('res_sc').x1tText = str(x1t)
-		self.manager.get_screen('res_sc').UtpText = str(Utp)
 		self.manager.get_screen('res_sc').xLtText = str(xLt)
 		self.manager.get_screen('res_sc').yLtText = str(yLt)
 		self.manager.get_screen('res_sc').xRtText = str(xRt)
@@ -739,10 +766,6 @@ class Results(Screen):
 
 
 	######### MID ######
-	check = NumericProperty(0)
-
-	tc_namemText = StringProperty('0')
-
 	XText = StringProperty('0')
 	pText = StringProperty('0')
 	fText = StringProperty('0')
@@ -755,18 +778,13 @@ class Results(Screen):
 	b3Text = StringProperty('0')
 
 	x0Text = StringProperty('0')
-	y0Text = StringProperty('0')
 	x1Text = StringProperty('0')
-	y1Text = StringProperty('0')
-	UText = StringProperty('0')
 	xLText = StringProperty('0')
 	yLText = StringProperty('0')
 	xRText = StringProperty('0')
 	yRText = StringProperty('0')
 
-	UmText = StringProperty('0')
 	UtText = StringProperty('0')
-	UhText = StringProperty('0')
 	VxText = StringProperty('0')
 	V1Text = StringProperty('0')
 	V2Text = StringProperty('0')
@@ -800,10 +818,6 @@ class Results(Screen):
 	yR2dText = StringProperty('0')
 
 	######### TIP ######
-	check = NumericProperty(0)
-
-	tc_namemText = StringProperty('0')
-
 	ptText = StringProperty('0')
 	ft1Text = StringProperty('0')
 	ft2Text = StringProperty('0')
@@ -812,9 +826,6 @@ class Results(Screen):
 	a2tText = StringProperty('0')
 	b1tText = StringProperty('0')
 	b2tText = StringProperty('0')
-
-	UtText = StringProperty('0')
-	UmText = StringProperty('1')
 	Vx1tText = StringProperty('0')
 	Vx2tText = StringProperty('0')
 	V1tText = StringProperty('0')
@@ -827,12 +838,9 @@ class Results(Screen):
 	Wth1tText = StringProperty('0')
 	Wth2tText = StringProperty('0')
 
-	y0Text = StringProperty('0')
-	y1Text = StringProperty('0')
 	x0tText = StringProperty('0')
 	x1tText = StringProperty('0')
 	UtpText = StringProperty('0')
-	UText = StringProperty('0')
 	xLtText = StringProperty('0')
 	yLtText = StringProperty('0')
 	xRtText = StringProperty('0')
@@ -860,6 +868,27 @@ class Results(Screen):
 
 	tc_nametText = StringProperty('0')
 
+	yLh_cambText = StringProperty('0')
+	xLh_cambText = StringProperty('0')
+	xs_centText = StringProperty('0')
+	ys_centText = StringProperty('0')
+	yRh_cambText = StringProperty('0')
+	xRh_cambText = StringProperty('0')
+
+	yLt_cambText = StringProperty('0')
+	xLt_cambText = StringProperty('0')
+	yRt_cambText = StringProperty('0')
+	xRt_cambText = StringProperty('0')
+
+	yLm_cambText = StringProperty('0')
+	xLm_cambText = StringProperty('0')
+	yRm_cambText = StringProperty('0')
+	xRm_cambText = StringProperty('0')
+
+	yRh_rotorText = StringProperty('0')
+	yLh_rotorText = StringProperty('0')
+	yRt_rotorText = StringProperty('0')
+	yLt_rotorText = StringProperty('0')
 
 class InfoScreen(Screen):
 	pass

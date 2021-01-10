@@ -67,7 +67,6 @@ NavigationLayout:
     id:NL
     WindowManager:
         id: win_manager
-#        transition: SlTransition()
         VelocityTriangles:
             id: vel_tr
             name: "Main"
@@ -698,6 +697,8 @@ NavigationLayout:
         Results:
             nav_drawer: nav_drawer
         InfoScreen:
+            id: info
+            transition : NoTransition()
             nav_drawer: nav_drawer
 
     MDNavigationDrawer:
@@ -705,6 +706,7 @@ NavigationLayout:
         md_bg_color: [1,1,1,1]
         swipe_edge_width: dp(10)
         width: dp(300)
+        transition: NoTransition()
         MDCard:
             orientation: 'vertical'
             MDBoxLayout:
@@ -731,6 +733,7 @@ NavigationLayout:
                     on_release:
                         win_manager.current = "Main"
                         nav_drawer.set_state('close')
+                        win_manager.transition.direction = 'down'
 
                 MDRectangleFlatIconButton:
                     ripple_scale : 0
@@ -740,6 +743,9 @@ NavigationLayout:
                     on_press:
                         win_manager.current = "info"
                         nav_drawer.set_state('close')
+                        win_manager.transition.direction = 'up'
+
+
 
                 MDRectangleFlatIconButton:
                     ripple_scale : 0
