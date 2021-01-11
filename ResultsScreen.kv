@@ -2728,7 +2728,7 @@
                                 Color:
                                     rgba: 0,0,1,1
                                 Line:
-                                    width: dp(2)
+                                    width: dp(1.5)
                                     bezier:
                                         (float(root.xLh_cambText),self.y + float(root.yLh_cambText),
                                         float(root.xs_centText),self.y +float(root.ys_centText),
@@ -2738,7 +2738,7 @@
                                 Color:
                                     rgba: 0,0,0,1
                                 Line:
-                                    width: dp(2)
+                                    width: dp(1.5)
                                     bezier:
                                         (float(root.xLm_cambText),self.y + float(root.yLm_cambText),
                                         float(root.xs_centText),self.y +float(root.ys_centText),
@@ -2748,7 +2748,7 @@
                                 Color:
                                     rgba: 1,0,0,1
                                 Line:
-                                    width: dp(2)
+                                    width: dp(1.5)
                                     bezier:
                                         (float(root.xLt_cambText),self.y + float(root.yLt_cambText),
                                         float(root.xs_centText),self.y +float(root.ys_centText),
@@ -2824,42 +2824,32 @@
                                 Color:
                                     rgba: 0,0,1,1
 
-#                ###################    V1h Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.xLh_cambText),self.y +float(root.yLh_rotorText),float(root.xs_centText),self.y +float(root.ys_centText))
-
-                ###################    V2h Line    ##########################
-                                Line:
-                                    width: dp(1.5)
-                                    points: (float(root.xs_centText),self.y + float(root.ys_centText),float(root.xRh_cambText),self.y + float(root.yRh_rotorText))
-##
-                                Line:
-                                    width: dp(2)
                                     bezier:
                                         (float(root.xLh_cambText),self.y + float(root.yLh_rotorText),
                                         float(root.xs_centText),self.y +float(root.ys_centText),
                                         float(root.xRh_cambText),self.y +float(root.yRh_rotorText))
 
                             ############# Mid Rotor Camber Lines  #################
-#                                Color:
-#                                    rgba: 0,0,0,1
-#                                Line:
-#                                    width: dp(2)
-#                                    bezier:
-#                                        (float(root.xLm_cambText),self.y + float(root.yLm_cambText),
-#                                        float(root.xs_centText),self.y +float(root.ys_centText),
-#                                        float(root.xRm_cambText),self.y +float(root.yRm_cambText))
+                                Color:
+                                    rgba: 0,0,0,1
+                                Line:
+                                    width: dp(1.5)
+                                    bezier:
+                                        (float(root.xLm_cambText),self.y + float(root.yLm_rotorText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRm_cambText),self.y +float(root.yRm_rotorText))
 
                             ############# Tip Rotor Camber Lines  #################
-#                                Color:
-#                                    rgba: 1,0,0,1
-#                                Line:
-#                                    width: dp(2)
-#                                    bezier:
-#                                        (float(root.xLt_cambText),self.y + float(root.yLt_cambText),
-#                                        float(root.xs_centText),self.y +float(root.ys_centText),
-#                                        float(root.xRt_cambText),self.y +float(root.yRt_cambText))
+                                Color:
+                                    rgba: 1,0,0,1
+                                Line:
+                                    width: dp(1.5)
+                                    bezier:
+                                        (float(root.xLt_cambText),self.y + float(root.yLt_rotorText),
+                                        float(root.xs_centText),self.y +float(root.ys_centText),
+                                        float(root.xRt_cambText),self.y +float(root.yRt_rotorText))
 
                                                #############  Top right corner box ############
 

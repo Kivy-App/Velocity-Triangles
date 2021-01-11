@@ -136,7 +136,7 @@ class VelocityTriangles(Screen):
 				yR = y0 + U * float(fe)
 
 		######################  Hub Camber line drawing ##################################
-			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb = mid_camb_stator(U,fe,rne,pe,y0)
+			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb, yLm_rotor, yRm_rotor = mid_camb_stator(U,fe,rne,pe,y0)
 
 			self.manager.get_screen('res_sc').yLm_cambText = str(round(yLm_camb, 3))
 			self.manager.get_screen('res_sc').xLm_cambText = str(round(xLm_camb, 3))
@@ -144,6 +144,8 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
 			self.manager.get_screen('res_sc').yRm_cambText = str(round(yRm_camb, 3))
 			self.manager.get_screen('res_sc').xRm_cambText = str(round(xRm_camb, 3))
+			self.manager.get_screen('res_sc').yLm_rotorText = str(round(yLm_rotor, 3))
+			self.manager.get_screen('res_sc').yRm_rotorText = str(round(yRm_rotor, 3))
 		#############################################################################################
 
 			xL1u, yL1u, xL1d, yL1d, xL2u, yL2u, xL2d, yL2d, xR1u, yR1u, xR1d, yR1d, xR2u, yR2u, xR2d, yR2d = arrows(x0,y0,x1,y1,a1e,a2e,b1e,b2e)
@@ -451,7 +453,7 @@ class VelocityTriangles(Screen):
 			yRh = y0 + Uhp * float(feh2)
 
 #####################  Hub Camber line drawing ##################################
-		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yRh_rotor, yLh_rotor = camber_stator(y0,Uhp,Uh,feh2,feh1,Vth1h,Vth2h,Wth1h,Wth2h)
+		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yLh_rotor, yRh_rotor = camber_stator(y0,Uhp,Uh,feh2,feh1,Vth1h,Vth2h,Wth1h,Wth2h)
 
 		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
 		self.manager.get_screen('res_sc').xLh_cambText = str(round(xLh_camb, 3))
@@ -525,7 +527,7 @@ class VelocityTriangles(Screen):
 
 
 #####################  Tip Camber drawings ############
-		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yRt_rotor, yLt_rotor = camber_stator(y0, Utp, Ut, fet2, fet1, Vth1t, Vth2t, Wth1t, Wth2t)
+		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yLt_rotor, yRt_rotor = camber_stator(y0, Utp, Ut, fet2, fet1, Vth1t, Vth2t, Wth1t, Wth2t)
 
 		self.manager.get_screen('res_sc').yLt_cambText = str(round(yLt_camb, 3))
 		self.manager.get_screen('res_sc').xLt_cambText = str(round(xLt_camb, 3))
@@ -889,6 +891,8 @@ class Results(Screen):
 	yLh_rotorText = StringProperty('0')
 	yRt_rotorText = StringProperty('0')
 	yLt_rotorText = StringProperty('0')
+	yRm_rotorText = StringProperty('0')
+	yLm_rotorText = StringProperty('0')
 
 class InfoScreen(Screen):
 	pass
