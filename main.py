@@ -4,16 +4,16 @@ from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
-from math import radians,degrees,log,atan,cos,sin,sqrt,tan
+from math import radians,degrees,log,atan,cos,sin,sqrt
 from kivymd.app import MDApp
 from solver_if import system_if,system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
 from kivymd.uix.tab import MDTabsBase
 from kivy.uix.boxlayout import BoxLayout
-from Camber import camber_stator, mid_camb_stator
+from Camber import cambers, mid_cambers
+from Draw_functions import drawing_triangles,calculating_variables
 ###########################################################################################
-#from kivy.app import App
 # from kivy.lang import Builder
 # import csv
 # from creating_database import create_database_nd
@@ -72,8 +72,8 @@ class VelocityTriangles(Screen):
 			global rne
 			global i
 
-			pe  = str(self.p.text)
-			fe  = str(self.f.text)
+			pe = str(self.p.text)
+			fe = str(self.f.text)
 			rne = str(self.rn.text)
 			a1e = str(self.a1.text)
 			a2e = str(self.a2.text)
@@ -123,8 +123,8 @@ class VelocityTriangles(Screen):
 			yR = y0 + U*float(fe)
 
 	######### While functions for triangles fitting #########
-			while xL < self.x + Window.size[0]*60/400 or xR > self.width -  Window.size[0]*80/400 or yL >  Window.size[1]*200/700 \
-					or xR < self.x +  Window.size[0]*60/400 or xL > self.width -  Window.size[0] * 80 / 400:
+			while xL < self.x + Window.size[0]*60/400 or xR > self.width - Window.size[0]*80/400 or yL > Window.size[1]*200/700\
+					or xR < self.x + Window.size[0]*60/400 or xL > self.width - Window.size[0] * 80 / 400:
 
 				x0 = x0 + 1
 				x1 = x1 - 1
@@ -136,7 +136,7 @@ class VelocityTriangles(Screen):
 				yR = y0 + U * float(fe)
 
 		######################  Hub Camber line drawing ##################################
-			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb, yLm_rotor, yRm_rotor = mid_camb_stator(U,fe,rne,pe,y0)
+			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb, yLm_rotor, yRm_rotor = mid_cambers(U,fe,rne,pe,y0)
 
 			self.manager.get_screen('res_sc').yLm_cambText = str(round(yLm_camb, 3))
 			self.manager.get_screen('res_sc').xLm_cambText = str(round(xLm_camb, 3))
@@ -283,7 +283,6 @@ class VelocityTriangles(Screen):
 				############### Passing the compressor or turbine text and possition on the Second Screen  ##################
 				self.manager.get_screen('simple').tc_namemText = tc_namem
 
-
 ################ Debugging Section #################
 			if self.k == 4:
 				if float(b1e) - float(a1e) < 2 or float(a2e) - float(b2e) < 2:
@@ -368,7 +367,6 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('res_sc').Wth1Text = str(round(Wth1, 3))
 			self.manager.get_screen('res_sc').Wth2Text = str(round(Wth2, 3))
 
-
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				self.check = 1
@@ -383,7 +381,6 @@ class VelocityTriangles(Screen):
 #######################     Radial Balance  Computation   #######################
 	def h2t_triangles(self):
 
-
 		if self.ch3_value == 'normal' and self.ch3_value == 'normal' and self.ch3_value == 'normal':
 			n = 0
 		if self.ch3_value == 'down' :
@@ -393,52 +390,26 @@ class VelocityTriangles(Screen):
 		if self.ch5_value == 'down' :
 			n = 2
 
-		a = Um * (1 - float(rne))
-		b = Vth2 - a
+#######################################     Hub     ####################################################################
 
-		#########    HUB    ##########
-		Vth1h = a * ((rh / rm))** n - b * (rm / rh)
-		Vth2h = a * (rh / rm) ** n + b * (rm / rh)
-		Vx1h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) - b * ((rm / rh) - 1))))
-		Vx2h = sqrt(abs(Vx ** 2 - 2 * a * (log(rh / rm) + b * ((rm / rh) - 1))))
-		# Vx1h = sqrt(Vx**2 - 2*(a**2)*(rh**2 - rm**2)-4*a*b*log(rh/rm))
-		# Vx2h = sqrt(Vx ** 2 - 2 * (a ** 2) * (rh ** 2 - rm ** 2) + 4 * a * b * log(rh / rm))
-		dVthh = Vth2h - Vth1h
-		# rneh = 1 + (((a / Um) * (2 * ((rh / rm) ** (n - 1)) - n - 1)) / (n - 1))
-		rneh = 1 - (a/Um)*(rh/rm)**(n-1)
-		feh1 = Vx1h / Uh
-		feh2 = Vx2h / Uh
-		peh = dVthh/Uh
+		########################  Calculating Hub variables #####################################
 
-		Wth1h = Vth1h - Uh
-		Wth2h = Vth2h - Uh
+		Vth1h, Vth2h, Vx1h, Vx2h, dVthh, rneh, feh1, feh2, peh, Wth1h, Wth2h,\
+		a1eh, a2eh, b1eh, b2eh, V1h, V2h, W1h, W2h = calculating_variables(n, Um, rne, Vth2, rh, rm, Vx, Uh)
 
-		a1eh = -degrees(atan(Vth1h/Vx1h))
-		a2eh = degrees(atan(Vth2h / Vx2h))
-		b1eh = -degrees(atan(Wth1h/Vx1h))
-		b2eh = degrees(atan(Wth2h / Vx2h))
+		##########################     Drawing Hub Triangles       ###############################
 
-		V1h = Vx1h / cos(radians(float(a1eh)))
-		V2h = Vx2h / cos(radians(float(a2eh)))
-		W1h = Vx1h / cos(radians(float(b1eh)))
-		W2h = Vx2h / cos(radians(float(b2eh)))
+		Uhp, x0h, x1h, xLh, yLh, xRh, yRh = drawing_triangles(Uh, Um, U, x0, y0, x1, Vth1h, Vth2h, feh1, feh2)
 
-		#############     Drawing Hub Triangles       ############
+		##########################     Drawing Comparison Hub Triangles       ###############################
 
-		Uhp = (Uh/Um)*U
-		difH = U - Uhp
-		x0h = x0 + difH/2
-		x1h = x1 - difH / 2
+		Uhp_c, x0h_c, x1h_c, xLh_c, yLh_c, xRh_c, yRh_c = drawing_triangles(Uh, Um, U, x0, y0, x1, Vth1h, Vth2h, feh1, feh2)
 
-		# xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
-		xLh = x0h + (Vth1h/Uh)*Uhp
-		yLh = y0 + Uhp * float(feh1)
-		# xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
-		xRh = x0h + (Vth2h/Uh)*Uhp
-		yRh = y0 + Uhp * float(feh2)
+		#####################  Hub Camber line drawing ##################################
 
-
-
+		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yLh_rotor, yRh_rotor = cambers(y0, Uhp_c, Uh, feh2,
+																								 feh1, Vth1h, Vth2h,
+																								 Wth1h, Wth2h)
 
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
 				or yLh > Window.size[1] * 200 / 700 or yRh > Window.size[1] * 200 / 700 \
@@ -452,64 +423,31 @@ class VelocityTriangles(Screen):
 			xRh = x1h - Uhp * float(rneh) + Uhp * float(peh) / 2
 			yRh = y0 + Uhp * float(feh2)
 
-#####################  Hub Camber line drawing ##################################
-		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yLh_rotor, yRh_rotor = camber_stator(y0,Uhp,Uh,feh2,feh1,Vth1h,Vth2h,Wth1h,Wth2h)
-
-		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
-		self.manager.get_screen('res_sc').xLh_cambText = str(round(xLh_camb, 3))
-		self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
-		self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
-		self.manager.get_screen('res_sc').yRh_cambText = str(round(yRh_camb, 3))
-		self.manager.get_screen('res_sc').xRh_cambText = str(round(xRh_camb, 3))
-		self.manager.get_screen('res_sc').yRh_rotorText = str(round(yRh_rotor, 3))
-		self.manager.get_screen('res_sc').yLh_rotorText = str(round(yLh_rotor, 3))
-############################################################################################
+		##########################     Drawing Hub Triangles Arrows      ###############################
+		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh,\
+		xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
 
 
-		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh, xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
 
-		#########    TIP    ##########
-		Vth1t = a * (rt / rm) ** n - b * (rm / rt)
-		Vth2t = a * (rt / rm) ** n + b * (rm / rt)
-		Vx1t = sqrt(abs(Vx ** 2 - 2 * a * (log(rt / rm) - b * ((rm / rt) - 1))))
-		Vx2t = sqrt(abs(Vx ** 2 - 2 * a * (log(rt / rm) + b * ((rm / rt) - 1))))
-		# Vx1t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) - b * ((1 / rt) - (1 / rm))))
-		# Vx2t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) + b * ((1 / rt) - (1 / rm))))
-		dVtht = Vth2t - Vth1t
-		# rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
-		rnet = 1- (a/Um)*(rt/rm)**(n-1)
-		fet1 = Vx1t / Ut
-		fet2 = Vx2t / Ut
-		pet = dVtht / Ut
+#######################################     TIP     ####################################################################
 
-		Wth1t = Vth1t - Ut
-		Wth2t = Vth2t - Ut
+		########################  Calculating Tip variables #####################################
 
-		a1et = -degrees(atan(Vth1t / Vx1t))
-		a2et = degrees(atan(Vth2t / Vx2t))
-		b1et = -degrees(atan(Wth1t / Vx1t))
-		b2et = degrees(atan(Wth2t / Vx2t))
+		Vth1t, Vth2t, Vx1t, Vx2t, dVtht, rnet, fet1, fet2, pet, Wth1t, Wth2t, a1et, a2et, b1et, b2et, V1t,\
+		V2t, W1t, W2t = calculating_variables(n, Um, rne, Vth2, rt, rm, Vx, Ut)
 
+		############################    Drawing  Tip Triangles    ##############################################
 
-		V1t = Vx1t / cos(radians(float(a1et)))
-		V2t = Vx2t / cos(radians(float(a2et)))
-		W1t = Vx1t / cos(radians(float(b1et)))
-		W2t = Vx2t / cos(radians(float(b2et)))
+		Utp, x0t, x1t, xLt, yLt, xRt, yRt = drawing_triangles(Ut, Um, U, x0, y0, x1, Vth1t, Vth2t, fet1, fet2)
 
-		# Wth1t = -W1t * sin(radians(float(b1et)))
-		# Wth2t = W2t * sin(radians(float(b2et)))
+		############################    Drawing  Comparison Tip Triangles    ##############################################
+		Utp_c, x0t_c, x1t_c, xLt_c, yLt_c, xRt_c, yRt_c = drawing_triangles(Ut, Um, U, x0, y0, x1, Vth1t, Vth2t, fet1, fet2)
 
-		#############     Tip Triangles Drwaing       ############
+		#####################  Tip Camber drawings ############
 
-		Utp = (Ut / Um) * U
-		difT = U - Utp
-		x0t = x0 + difT / 2
-		x1t = x1 - difT / 2
-
-		xLt = x1t - Utp * float(rnet) - Utp * float(pet) / 2
-		yLt = y0 + Utp * float(fet1)
-		xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
-		yRt = y0 + Utp * float(fet2)
+		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yLt_rotor, yRt_rotor = cambers(y0, Utp_c, Ut, fet2,
+																								 fet1, Vth1t, Vth2t,
+																								 Wth1t, Wth2t)
 
 		while xRt > self.width - Window.size[0] * 80 / 400 or xLt < self.x + Window.size[0] * 80 / 400\
 			or yLt > Window.size[1]*200/700 or yRt > Window.size[1]*200/700\
@@ -523,18 +461,11 @@ class VelocityTriangles(Screen):
 			xRt = x1t - Utp * float(rnet) + Utp * float(pet) / 2
 			yRt = y0 + Utp * float(fet2)
 
-		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut, xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
+		##########################     Drawing Tip Triangles Arrows      ###############################
+		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut,\
+		xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
 
 
-#####################  Tip Camber drawings ############
-		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yLt_rotor, yRt_rotor = camber_stator(y0, Utp, Ut, fet2, fet1, Vth1t, Vth2t, Wth1t, Wth2t)
-
-		self.manager.get_screen('res_sc').yLt_cambText = str(round(yLt_camb, 3))
-		self.manager.get_screen('res_sc').xLt_cambText = str(round(xLt_camb, 3))
-		self.manager.get_screen('res_sc').yRt_cambText = str(round(yRt_camb, 3))
-		self.manager.get_screen('res_sc').xRt_cambText = str(round(xRt_camb, 3))
-		self.manager.get_screen('res_sc').yRt_rotorText = str(round(yRt_rotor, 3))
-		self.manager.get_screen('res_sc').yLt_rotorText = str(round(yLt_rotor, 3))
 #######################################################################################
 
 		############### Passing Hub Results #################
@@ -590,6 +521,24 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').xR2dhText = str(xR2dh)
 		self.manager.get_screen('res_sc').yR2dhText = str(yR2dh)
 
+		##################### Comparison window Hub triangles points ###############
+		self.manager.get_screen('res_sc').x0h_cText = str(round(x0h_c, 3))
+		self.manager.get_screen('res_sc').x1h_cText = str(round(x1h_c, 3))
+		self.manager.get_screen('res_sc').xLh_cText = str(round(xLh_c, 3))
+		self.manager.get_screen('res_sc').yLh_cText = str(round(yLh_c, 3))
+		self.manager.get_screen('res_sc').xRh_cText = str(round(xRh_c, 3))
+		self.manager.get_screen('res_sc').yRh_cText = str(round(yRh_c, 3))
+
+		##################### Comparison window Hub camber points ###############
+		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
+		self.manager.get_screen('res_sc').xLh_cambText = str(round(xLh_camb, 3))
+		self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
+		self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
+		self.manager.get_screen('res_sc').yRh_cambText = str(round(yRh_camb, 3))
+		self.manager.get_screen('res_sc').xRh_cambText = str(round(xRh_camb, 3))
+		self.manager.get_screen('res_sc').yRh_rotorText = str(round(yRh_rotor, 3))
+		self.manager.get_screen('res_sc').yLh_rotorText = str(round(yLh_rotor, 3))
+
 
 		############### Passing Tip Results #################
 		self.manager.get_screen('res_sc').ptText = str(round(pet, 3))
@@ -644,6 +593,22 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').xR2dtText = str(xR2dt)
 		self.manager.get_screen('res_sc').yR2dtText = str(yR2dt)
 
+		######################  Comparison window Tip triangle points #################
+		self.manager.get_screen('res_sc').x0t_cText = str(round(x0t_c, 3))
+		self.manager.get_screen('res_sc').x1t_cText = str(round(x1t_c, 3))
+		self.manager.get_screen('res_sc').xLt_cText = str(round(xLt_c, 3))
+		self.manager.get_screen('res_sc').yLt_cText = str(round(yLt_c, 3))
+		self.manager.get_screen('res_sc').xRt_cText = str(round(xRt_c, 3))
+		self.manager.get_screen('res_sc').yRt_cText = str(round(yRt_c, 3))
+		self.manager.get_screen('res_sc').Utp_cText = str(round(Utp_c, 3))
+
+		###################### Comparison window tip camber points ##############
+		self.manager.get_screen('res_sc').yLt_cambText = str(round(yLt_camb, 3))
+		self.manager.get_screen('res_sc').xLt_cambText = str(round(xLt_camb, 3))
+		self.manager.get_screen('res_sc').yRt_cambText = str(round(yRt_camb, 3))
+		self.manager.get_screen('res_sc').xRt_cambText = str(round(xRt_camb, 3))
+		self.manager.get_screen('res_sc').yRt_rotorText = str(round(yRt_rotor, 3))
+		self.manager.get_screen('res_sc').yLt_rotorText = str(round(yLt_rotor, 3))
 class SimWindow(Screen):
 
 	check = NumericProperty(0)
@@ -766,7 +731,6 @@ class Results(Screen):
 
 	tc_namehText = StringProperty('0')
 
-
 	######### MID ######
 	XText = StringProperty('0')
 	pText = StringProperty('0')
@@ -870,6 +834,26 @@ class Results(Screen):
 
 	tc_nametText = StringProperty('0')
 
+######### Comp window triangles points #################
+
+	############ Hub ##############
+	x0h_cText = StringProperty('0')
+	x1h_cText = StringProperty('0')
+	xLh_cText = StringProperty('0')
+	yLh_cText = StringProperty('0')
+	xRh_cText = StringProperty('0')
+	yRh_cText = StringProperty('0')
+
+	############ Tip ##############
+	x0t_cText = StringProperty('0')
+	x1t_cText = StringProperty('0')
+	xLt_cText = StringProperty('0')
+	yLt_cText = StringProperty('0')
+	xRt_cText = StringProperty('0')
+	yRt_cText = StringProperty('0')
+	Utp_cText = StringProperty('0')
+
+######## Camber Line points ##################
 	yLh_cambText = StringProperty('0')
 	xLh_cambText = StringProperty('0')
 	xs_centText = StringProperty('0')

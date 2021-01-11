@@ -2453,12 +2453,7 @@
                                     (-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
                                     self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(17))
 
-#                            MDLabel:
-#                                pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
-#                                font_style: 'Body1'
-#                                text:
-#                                    ('Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down in order to fit.')\
-#                                    if ((float(root.UtpText) < (float(root.UtText)/float(root.UmText))*float(root.UText))) else ''
+
 
                         GridLayout:
                             cols:2
@@ -2481,6 +2476,13 @@
 
                             BoxLayout:
                                 size_hint_x:0.7
+                                MDLabel:
+#                                pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
+                                    font_size: dp(13)
+                                    color: 1,0,0,1
+                                    text:
+                                        ('*Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down in order to fit.')\
+                                        if float(root.UtpText)<float(root.Utp_cText) else ''
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -2541,11 +2543,7 @@
                         FloatLayout:
                             size_hint_y: 0.45
                             canvas:
-                                Color:
-                                    rgba:0,0,0,1
-                                Line:
-                                    width: dp(1.)
-                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+
 
             ########################  TIP  #######################################################
                 ###################    Color of the Lines    ##################
@@ -2554,35 +2552,31 @@
                 ###################    Ut line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0tText),self.y + float(root.y0Text),float(root.x1tText),self.y + float(root.y1Text))
+                                    points: (float(root.x0t_cText),self.y + float(root.y0Text),float(root.x1t_cText),self.y + float(root.y1Text))
 
 
                 ###################    V1t Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0tText),self.y +float(root.y0Text),float(root.xRtText),self.y +float(root.yRtText))
+                                    points: (float(root.x0t_cText),self.y +float(root.y0Text),float(root.xRt_cText),self.y +float(root.yRt_cText))
 
                 ###################    W1t Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x1tText),self.y + float(root.y1Text),float(root.xRtText),self.y + float(root.yRtText))
+                                    points: (float(root.x1t_cText),self.y + float(root.y1Text),float(root.xRt_cText),self.y + float(root.yRt_cText))
 
                 ###################    W2t Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x1tText),self.y + float(root.y1Text),float(root.xLtText),self.y + float(root.yLtText))
+                                    points: (float(root.x1t_cText),self.y + float(root.y1Text),float(root.xLt_cText),self.y + float(root.yLt_cText))
 
                 ###################    V2t Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0tText),self.y + float(root.y0Text),float(root.xLtText),self.y + float(root.yLtText))
+                                    points: (float(root.x0t_cText),self.y + float(root.y0Text),float(root.xLt_cText),self.y + float(root.yLt_cText))
 
                                 Color:
                                     rgba:(0,0,0,0) if float(root.x1tText) - float(root.x0tText) < 30 else (1,0,0,1)
-                                Triangle:
-                                    points:
-                                        float(root.x0tText),self.y + float(root.y0Text),float(root.x0tText)+dp(25),\
-                                        self.y + float(root.y0Text)+dp(5),float(root.x0tText)+dp(25),self.y + float(root.y0Text)-dp(5)
 
             ########################     MIDDLE       #################################################
 
@@ -2616,10 +2610,6 @@
 
                                 Color:
                                     rgba: (0,0,0,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
-                                Triangle:
-                                    points:
-                                        float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),\
-                                        self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
 
             #########################     HUB     ##################################################
 
@@ -2629,34 +2619,30 @@
                 ###################    Uh line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0hText),self.y + float(root.y0Text),float(root.x1hText),self.y + float(root.y1Text))
+                                    points: (float(root.x0h_cText),self.y + float(root.y0Text),float(root.x1h_cText),self.y + float(root.y1Text))
 
                 ###################    V1h Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0hText),self.y +float(root.y0Text),float(root.xRhText),self.y +float(root.yRhText))
+                                    points: (float(root.x0h_cText),self.y +float(root.y0Text),float(root.xRh_cText),self.y +float(root.yRh_cText))
 
                 ###################    W1h Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x1hText),self.y + float(root.y1Text),float(root.xRhText),self.y + float(root.yRhText))
+                                    points: (float(root.x1h_cText),self.y + float(root.y1Text),float(root.xRh_cText),self.y + float(root.yRh_cText))
 
                 ###################    W2h Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x1hText),self.y + float(root.y1Text),float(root.xLhText),self.y + float(root.yLhText))
+                                    points: (float(root.x1h_cText),self.y + float(root.y1Text),float(root.xLh_cText),self.y + float(root.yLh_cText))
 
                 ###################    V2h Line    ##########################
                                 Line:
                                     width: dp(1.5)
-                                    points: (float(root.x0hText),self.y + float(root.y0Text),float(root.xLhText),self.y + float(root.yLhText))
+                                    points: (float(root.x0h_cText),self.y + float(root.y0Text),float(root.xLh_cText),self.y + float(root.yLh_cText))
 
                                 Color:
                                     rgba: (0,0,0,0) if float(root.x1hText) - float(root.x0hText) < 30 else (0,0,1,1)
-                                Triangle:
-                                    points:
-                                        float(root.x0hText),self.y + float(root.y0Text),float(root.x0hText)+dp(25),\
-                                        self.y + float(root.y0Text)+dp(5),float(root.x0hText)+dp(25),self.y + float(root.y0Text)-dp(5)
 
                                 #############  Top right corner box ############
 
@@ -2687,6 +2673,17 @@
                                     width: dp(1)
                                     points: (self.x + self.width - dp(80),self.y + dp(32.5),self.x + self.width - dp(40),self.y + dp(32.5))
 
+                                Color:
+                                    rgba:1,1,1,1
+                                Line:
+                                    width: dp(9.25)
+                                    rectangle: (self.x+9.25, self.y + 9.25, self.width-18.5, self.height-18.5)
+
+                                Color:
+                                    rgba:0,0,0,1
+                                Line:
+                                    width: dp(1.)
+                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
                             Label:
                                 font_size: dp(11)
                                 pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(58.5)
@@ -2701,6 +2698,8 @@
                                 font_size: dp(11)
                                 pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(33.5)
                                 text: 'Tip'
+
+
 
 #################################   Stator Camber Line drawings   ################################
                         MDBoxLayout:
