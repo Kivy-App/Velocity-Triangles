@@ -697,8 +697,6 @@ NavigationLayout:
         Results:
             nav_drawer: nav_drawer
         InfoScreen:
-            id: info
-            transition : NoTransition()
             nav_drawer: nav_drawer
 
     MDNavigationDrawer:
@@ -706,7 +704,6 @@ NavigationLayout:
         md_bg_color: [1,1,1,1]
         swipe_edge_width: dp(10)
         width: dp(300)
-        transition: NoTransition()
         MDCard:
             orientation: 'vertical'
             MDBoxLayout:
@@ -744,8 +741,6 @@ NavigationLayout:
                         win_manager.current = "info"
                         nav_drawer.set_state('close')
                         win_manager.transition.direction = 'up'
-
-
 
                 MDRectangleFlatIconButton:
                     ripple_scale : 0

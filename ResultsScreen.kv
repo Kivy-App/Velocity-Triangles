@@ -869,10 +869,14 @@
                                         root.manager.transition.direction = "right"
 
 
-
                             BoxLayout:
                                 size_hint_x:0.7
-
+                                MDLabel:
+                                    font_size: dp(13)
+                                    color: 1,0,0,1
+                                    text:
+                                        ('*Hub triangles were ' + (str(round(100*(1-float(root.UhpText)/float(root.Uhp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
+                                        if (float(root.UhpText)<float(root.Uhp_cText)) else ''
                         MDBoxLayout:
                             orientation: 'vertical'
                             padding: dp(10),dp(0)
@@ -2477,12 +2481,11 @@
                             BoxLayout:
                                 size_hint_x:0.7
                                 MDLabel:
-#                                pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
                                     font_size: dp(13)
                                     color: 1,0,0,1
                                     text:
-                                        ('*Tip triangles were ' + (str(round(100*(1-(float(root.UtpText)*float(root.UmText)/(float(root.UtText)*float(root.UText)))),1))) + ' %' + ' scaled down in order to fit.')\
-                                        if float(root.UtpText)<float(root.Utp_cText) else ''
+                                        ('*Tip triangles were ' + (str(round(100*(1-float(root.UtpText)/float(root.Utp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
+                                        if (float(root.UtpText)<float(root.Utp_cText)) else ''
 
                         MDBoxLayout:
                             orientation: 'vertical'

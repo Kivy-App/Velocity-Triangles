@@ -428,7 +428,6 @@ class VelocityTriangles(Screen):
 		xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
 
 
-
 #######################################     TIP     ####################################################################
 
 		########################  Calculating Tip variables #####################################
@@ -462,9 +461,9 @@ class VelocityTriangles(Screen):
 			yRt = y0 + Utp * float(fet2)
 
 		##########################     Drawing Tip Triangles Arrows      ###############################
+
 		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut,\
 		xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
-
 
 #######################################################################################
 
@@ -494,7 +493,7 @@ class VelocityTriangles(Screen):
 		####### Hub drawing variables #####
 		self.manager.get_screen('res_sc').x0hText = str(x0h)
 		self.manager.get_screen('res_sc').x1hText = str(x1h)
-		self.manager.get_screen('res_sc').UhpText = str(Uhp)
+		self.manager.get_screen('res_sc').UhpText = str(round(Uhp,3))
 		self.manager.get_screen('res_sc').xLhText = str(xLh)
 		self.manager.get_screen('res_sc').yLhText = str(yLh)
 		self.manager.get_screen('res_sc').xRhText = str(xRh)
@@ -528,6 +527,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').yLh_cText = str(round(yLh_c, 3))
 		self.manager.get_screen('res_sc').xRh_cText = str(round(xRh_c, 3))
 		self.manager.get_screen('res_sc').yRh_cText = str(round(yRh_c, 3))
+		self.manager.get_screen('res_sc').Uhp_cText = str(round(Uhp_c, 3))
 
 		##################### Comparison window Hub camber points ###############
 		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
@@ -550,7 +550,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').b1tText = str(round(b1et, 3))
 		self.manager.get_screen('res_sc').b2tText = str(round(b2et, 3))
 
-		self.manager.get_screen('res_sc').UtpText = str(Utp)
+		self.manager.get_screen('res_sc').UtpText = str(round(Utp,3))
 		self.manager.get_screen('res_sc').UtText = str(round(Ut, 3))
 		self.manager.get_screen('res_sc').Vx1tText = str(round(Vx1t, 3))
 		self.manager.get_screen('res_sc').Vx2tText = str(round(Vx2t, 3))
@@ -843,6 +843,7 @@ class Results(Screen):
 	yLh_cText = StringProperty('0')
 	xRh_cText = StringProperty('0')
 	yRh_cText = StringProperty('0')
+	Uhp_cText = StringProperty('0')
 
 	############ Tip ##############
 	x0t_cText = StringProperty('0')
@@ -852,6 +853,7 @@ class Results(Screen):
 	xRt_cText = StringProperty('0')
 	yRt_cText = StringProperty('0')
 	Utp_cText = StringProperty('0')
+
 
 ######## Camber Line points ##################
 	yLh_cambText = StringProperty('0')
