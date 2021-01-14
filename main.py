@@ -4,15 +4,15 @@ from kivy.properties import ObjectProperty
 from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
-from math import radians,degrees,log,atan,cos,sin,sqrt
+from math import radians, cos, sin
 from kivymd.app import MDApp
-from solver_if import system_if,system_X
+from solver_if import system_if, system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
 from kivymd.uix.tab import MDTabsBase
 from kivy.uix.boxlayout import BoxLayout
 from Camber import cambers, mid_cambers
-from Draw_functions import drawing_triangles,calculating_variables
+from Draw_functions import drawing_triangles, calculating_variables
 ###########################################################################################
 # from kivy.lang import Builder
 # import csv
@@ -72,6 +72,7 @@ class VelocityTriangles(Screen):
 			global rne
 			global i
 
+
 			pe = str(self.p.text)
 			fe = str(self.f.text)
 			rne = str(self.rn.text)
@@ -81,6 +82,8 @@ class VelocityTriangles(Screen):
 			b1e = str(self.b1.text)
 			b2e = str(self.b2.text)
 			b3e = str(self.b3.text)
+
+
 
 			global D1e
 			global D2e
@@ -609,6 +612,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').xRt_cambText = str(round(xRt_camb, 3))
 		self.manager.get_screen('res_sc').yRt_rotorText = str(round(yRt_rotor, 3))
 		self.manager.get_screen('res_sc').yLt_rotorText = str(round(yLt_rotor, 3))
+
 class SimWindow(Screen):
 
 	check = NumericProperty(0)

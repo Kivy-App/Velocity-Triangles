@@ -1,4 +1,10 @@
-#: import MDTabs kivymd.uix.tab.MDTabs
+<ToggleButton>
+    size_hint: 0.25,1
+    state: 'normal'
+    background_normal: 'images/deep_orange.png'
+    background_down: 'images/press_orange.png'
+    group: 'button'
+    allow_no_selection: False
 
 <Results>:
     name: 'res_sc'
@@ -38,29 +44,62 @@
                     size_hint:0.8,0.8
                     pos_hint: {'x':-0.08,'y':0.1}
 
-
             MDBoxLayout:
                 size_hint: 0.68,1
                 Label:
                     size_hint: 1,1
                     text: 'VTA-APP'
                     color: [1,1,1,1]
-                    font_name: 'BlackHanSans-Regular.ttf'
+                    font_name: 'fonts/BlackHanSans-Regular.ttf'
                     text_size: self.parent.size
                     halign: 'left'
                     valign: 'middle'
                     font_size: dp(28)
 
+
+        MDGridLayout:
+            cols:4
+            size_hint_y: 0.06
+            ToggleButton:
+                text: 'Hub'
+                id: hub_toggle
+                state: 'down' if (root.tc_namemText == 'Turbine Middle' or root.tc_namemText == 'Compressor Middle') else 'normal'
+                on_press:
+                    sv_results_x.scroll_x = 0
+                    sv_hub.scroll_y = 1
+
+            ToggleButton:
+                text: 'Mid'
+                on_press:
+                    sv_results_x.scroll_x = 0.3333333
+                    sv_mid.scroll_y = 1
+            ToggleButton:
+                text: 'Tip'
+                on_press:
+                    sv_results_x.scroll_x = 0.6666666
+                    sv_tip.scroll_y = 1
+
+            ToggleButton:
+                text: 'Comp'
+                on_press:
+                    sv_results_x.scroll_x = 1
+                    sv_comp.scroll_y = 1
+
         ##### Buttons ####
-        MDTabs:
-            size_hint_y:0.92
-            anim_duration: 0.4
-            background_color: [1,0.4,0,0.8]
-            Tab:
-                text: 'HUB'
+        ScrollView:
+            size_hint: 1,0.86
+            id: sv_results_x
+            do_scroll_x: True
+            do_scroll_y: False
+            MDGridLayout:
+                cols:4
+                size_hint:4,1
+    #            anim_duration: 0.4
+    #            background_color: [1,0.4,0,0.8]
+
                 ScrollView:
                     size: root.height, root.width
-                    size_hint: 1,1
+                    size_hint: 1,0.25
                     scroll_wheel_distance: '150dp'
                     effect_cls: 'ScrollEffect'
                     id: sv_hub
@@ -896,11 +935,9 @@
                                 halign: 'left'
                                 valign: 'middle'
 
-            Tab:
-                text: 'MID'
                 ScrollView:
                     size: root.height, root.width
-                    size_hint: 1,1
+                    size_hint: 1,0.25
                     scroll_wheel_distance: '150dp'
                     effect_cls: 'ScrollEffect'
                     id: sv_mid
@@ -1649,11 +1686,10 @@
                                 text_size: self.size
                                 halign: 'left'
                                 valign: 'middle'
-            Tab:
-                text: 'TIP'
+
                 ScrollView:
                     size: root.height, root.width
-                    size_hint: 1,1
+                    size_hint: 1,0.25
                     scroll_wheel_distance: '150dp'
                     effect_cls: 'ScrollEffect'
                     id: sv_tip
@@ -2506,11 +2542,9 @@
                                 halign: 'left'
                                 valign: 'middle'
 
-            Tab:
-                text: 'COMP'
                 ScrollView:
                     size: root.height, root.width
-                    size_hint: 1,1
+                    size_hint: 1,0.25
                     scroll_wheel_distance: '150dp'
                     effect_cls: 'ScrollEffect'
                     id: sv_comp
