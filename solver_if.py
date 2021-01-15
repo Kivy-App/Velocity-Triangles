@@ -68,7 +68,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		X.append(4)
 	else:
 		a1e = float(a1e)
-		a1 = radians(a1e)
+		a1 = -radians(a1e)
 
 	if a2e == '':
 		X.append(5)
@@ -80,7 +80,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		X.append(6)
 	else:
 		b1e = float(b1e)
-		b1 = radians(b1e)
+		b1 = -radians(b1e)
 
 	if b2e == '':
 		X.append(7)
@@ -741,6 +741,13 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 		k = 4
 ######################################################################################################################
+
+	if 4 not in X:
+		a1e = - a1e
+
+	if 6 not in X:
+		b1e = - b1e
+
 
 	# a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 	# a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))

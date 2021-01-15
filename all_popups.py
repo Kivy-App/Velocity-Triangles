@@ -53,11 +53,11 @@ def secondPopup():
     show = P2()
     # create content for the Popup
     bl = BoxLayout(orientation='vertical',padding = 30)
-    label = Label(text = ' This combination of \n'
-                         ' variables is not valid. \n'
-                         '\u03B21 has to be greater than \u03B11 \n'
-                         ' and \u03B12 has to be greater than \u03B22 \n'
-                         ' Please try again with new varieables',halign = 'center',valign = 'middle', color =[1,1,1,1],font_size = '18dp')
+    label = Label(text = '  This combination of variables\n'
+                         '  is   not  valid.   \u03B11   has  to   be \n'
+                         '  greater  than  \u03B21  and \u03B12  has \n'
+                         '  to be greater than \u03B22. Please\n'
+                         '  try  again with new  variables',halign = 'center',valign = 'middle', color =[1,1,1,1],font_size = '18dp')
 
     bl.add_widget(label)
     popupWindow = Popup(title="ERROR", title_color=[1, 0, 0, 1], title_size='25dp', separator_color=[1, 0.4, 0, 1],

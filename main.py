@@ -103,8 +103,8 @@ class VelocityTriangles(Screen):
 
 			##################   System_Solver  ################
 			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
-			self.manager.get_screen('res_sc').XText = str(X)
-			self.manager.get_screen('simple').XText = str(X)
+			self.manager.get_screen('res_sc').XText = X
+			self.manager.get_screen('simple').XText = X
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
 			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
@@ -194,10 +194,10 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('res_sc').pText = pe
 				self.manager.get_screen('res_sc').fText = fe
 				self.manager.get_screen('res_sc').rnText = rne
-				self.manager.get_screen('res_sc').a1Text = a1e
+				self.manager.get_screen('res_sc').a1Text = str(-float(a1e))
 				self.manager.get_screen('res_sc').a2Text = a2e
 				self.manager.get_screen('res_sc').a3Text = a3e
-				self.manager.get_screen('res_sc').b1Text = b1e
+				self.manager.get_screen('res_sc').b1Text = str(-float(b1e))
 				self.manager.get_screen('res_sc').b2Text = b2e
 				self.manager.get_screen('res_sc').b3Text = b3e
 				
@@ -244,10 +244,10 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('simple').pText = pe
 				self.manager.get_screen('simple').fText = fe
 				self.manager.get_screen('simple').rnText = rne
-				self.manager.get_screen('simple').a1Text = a1e
+				self.manager.get_screen('simple').a1Text = str(-float(a1e))
 				self.manager.get_screen('simple').a2Text = a2e
 				self.manager.get_screen('simple').a3Text = a3e
-				self.manager.get_screen('simple').b1Text = b1e
+				self.manager.get_screen('simple').b1Text = str(-float(b1e))
 				self.manager.get_screen('simple').b2Text = b2e
 				self.manager.get_screen('simple').b3Text = b3e
 
@@ -475,9 +475,9 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').fh1Text = str(round(feh1, 3))
 		self.manager.get_screen('res_sc').fh2Text = str(round(feh2, 3))
 		self.manager.get_screen('res_sc').rnhText = str(round(rneh, 3))
-		self.manager.get_screen('res_sc').a1hText = str(round(a1eh, 3))
+		self.manager.get_screen('res_sc').a1hText = str(round(-a1eh, 3))
 		self.manager.get_screen('res_sc').a2hText = str(round(a2eh, 3))
-		self.manager.get_screen('res_sc').b1hText = str(round(b1eh, 3))
+		self.manager.get_screen('res_sc').b1hText = str(round(-b1eh, 3))
 		self.manager.get_screen('res_sc').b2hText = str(round(b2eh, 3))
 
 		self.manager.get_screen('res_sc').UhText = str(round(Uh, 3))
@@ -548,9 +548,9 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').ft1Text = str(round(fet1, 3))
 		self.manager.get_screen('res_sc').ft2Text = str(round(fet2, 3))
 		self.manager.get_screen('res_sc').rntText = str(round(rnet, 3))
-		self.manager.get_screen('res_sc').a1tText = str(round(a1et, 3))
+		self.manager.get_screen('res_sc').a1tText = str(round(-a1et, 3))
 		self.manager.get_screen('res_sc').a2tText = str(round(a2et, 3))
-		self.manager.get_screen('res_sc').b1tText = str(round(b1et, 3))
+		self.manager.get_screen('res_sc').b1tText = str(round(-b1et, 3))
 		self.manager.get_screen('res_sc').b2tText = str(round(b2et, 3))
 
 		self.manager.get_screen('res_sc').UtpText = str(round(Utp,3))
@@ -671,7 +671,7 @@ class SimWindow(Screen):
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
 
-	XText = StringProperty('0')
+	XText = ObjectProperty(0)
 
 class Results(Screen):
 	######### HUB ######
@@ -736,7 +736,7 @@ class Results(Screen):
 	tc_namehText = StringProperty('0')
 
 	######### MID ######
-	XText = StringProperty('0')
+	XText = ObjectProperty(0)
 	pText = StringProperty('0')
 	fText = StringProperty('0')
 	rnText = StringProperty('0')
