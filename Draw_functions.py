@@ -18,14 +18,30 @@ def calculating_variables(n, Um, rne, Vth2, r_i, rm, Vx, U_i):
 
     # Vx1t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) - b * ((1 / rt) - (1 / rm))))
     # Vx2t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) + b * ((1 / rt) - (1 / rm))))
-    # rnet = 1 + (a / Um) * (2 * (rt / rm) ** (n - 1) - n - 1) / (n - 1)
-    
+
+
     Vth1_i = a * (r_i / rm) ** n - b * (rm / r_i)
     Vth2_i = a * (r_i / rm) ** n + b * (rm / r_i)
-    Vx1_i = sqrt(abs(Vx ** 2 - 2 * a * (log(r_i / rm) - b * ((rm / r_i) - 1))))
-    Vx2_i = sqrt(abs(Vx ** 2 - 2 * a * (log(r_i / rm) + b * ((rm / r_i) - 1))))
+
+    if n == 0 :
+        Vx1_i = sqrt(abs(Vx ** 2 - 2 * a * (a*log(r_i / rm) + b * ((1 / r_i) - (1/rm)))))
+        Vx2_i = sqrt(abs(Vx ** 2 - 2 * a * (a*log(r_i / rm) + b * ((1 / rm) - (1/r_i)))))
+
+    # if n == 1:
+    #     Vx1_i = sqrt(abs(Vx ** 2 + 2 * a * (a * (rm**2 - r_i**2) - 2 * b * (log(rm/r_i)))))
+    #     Vx2_i = sqrt(abs(Vx ** 2 + 2 * a * (a * (rm**2 - r_i**2) + 2 * b * (log(rm/r_i)))))
+
+    else:
+        Vx1_i = sqrt(abs(Vx ** 2 - 2 * a * (n + 1) * (
+                    (a / 2 * n) * (r_i ** (2 * n) - rm ** (2 * n)) - (b / (n - 1)) * (r_i ** (n - 1) - rm ** (n - 1)))))
+        Vx2_i = sqrt(abs(Vx ** 2 - 2 * a * (n + 1) * (
+                    (a / 2 * n) * (r_i ** (2 * n) - rm ** (2 * n)) + (b / (n - 1)) * (r_i ** (n - 1) - rm ** (n - 1)))))
+
     dVth_i = Vth2_i - Vth1_i
     rne_i = 1 - (a / Um) * (r_i / rm) ** (n - 1)
+    # print(rne2)
+    # rne_i = 1 + (a / Um) * (2 * ((r_i / rm) ** (n - 1)) - n - 1) / (n - 1)
+    # print(rne_i)
     fe_i1 = Vx1_i / U_i
     fe_i2 = Vx2_i / U_i
     pe_i = dVth_i / U_i

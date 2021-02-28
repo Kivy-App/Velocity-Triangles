@@ -479,7 +479,6 @@
                                             halign: 'center'
                                             valign: 'middle'
                                         Label:
-                                            #text: root.a1Text if slider0.value == 0 else '------'
                                             text: root.V2hText
                                             font_size:dp(11)
                                             text_size: self.size
@@ -882,12 +881,6 @@
                                     (-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
                                     self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(17))
 
-#                            MDLabel:
-#                                pos: self.parent.x + dp(23),self.parent.y + self.height/2 - dp(30)
-#                                font_style: 'Body1'
-#                                text:
-#                                    'Hub triangles were ' + (str(round(100*(1-(float(root.UhpText)*float(root.UmText)/(float(root.UhText)*float(root.UText)))),1))) + ' %' + ' scaled down.'\
-#                                    if (float(root.UhpText) < (float(root.UhText)/float(root.UmText))*float(root.UText)) else ''
                         GridLayout:
                             cols:2
                             size_hint_y: 0.1
@@ -1096,49 +1089,102 @@
                                                 text_size: self.size
                                                 halign: 'center'
                                                 valign: 'middle'
-                                        Label:
-                                            text: root.rnText
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
-                                        Label:
-                                            text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
-                                        Label:
-                                            text: root.a2Text
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
-                                        Label:
-                                            text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
-                                        Label:
-                                            text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if root.flagText == 0 else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+                                            Label:
+                                                text: root.rnText
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
+
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if (root.flagText == 2 and root.tc_namemText == 'Compressor Middle') else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+                                            Label:
+                                                text: root.a1Text if root.tc_namemText == 'Compressor Middle' else '------'
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
+
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if (root.flagText == 3) else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+
+                                            Label:
+                                                text: root.a2Text
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
+
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if (root.flagText == 2 and root.tc_namemText == 'Turbine Middle') else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+                                            Label:
+                                                text:'------' if root.tc_namemText == 'Compressor Middle' else root.a1Text
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if (root.flagText == 1 and root.tc_namemText == 'Compressor Middle') else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+                                            Label:
+                                                text: root.b1Text if root.tc_namemText == 'Compressor Middle' else '------'
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
                                         Label:
                                             text: root.b2Text
                                             font_size:dp(11)
                                             text_size: self.size
                                             halign: 'center'
                                             valign: 'middle'
-                                        Label:
-                                            #text: root.b3Text
-                                            text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
-                                            font_size:dp(11)
-                                            text_size: self.size
-                                            halign: 'center'
-                                            valign: 'middle'
+
+                                        BoxLayout:
+                                            size: self.size
+                                            canvas:
+                                                Color:
+                                                    rgba: (1,0,0,1) if (root.flagText == 1 and root.tc_namemText == 'Turbine Middle') else (0,0,0,0)
+                                                Line:
+                                                    width: dp(1.2)
+                                                    ellipse: (self.x,self.y + dp(10),self.width ,self.height - dp(20))
+                                            Label:
+                                                #text: root.b3Text
+                                                text:'------' if root.tc_namemText == 'Compressor Middle' else root.b1Text
+                                                font_size:dp(11)
+                                                text_size: self.size
+                                                halign: 'center'
+                                                valign: 'middle'
 
                                     GridLayout:
                                         rows:9

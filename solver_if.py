@@ -67,8 +67,8 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 	if a1e == '':
 		X.append(4)
 	else:
-		a1e = float(a1e)
-		a1 = -radians(a1e)
+		a1e = -float(a1e)
+		a1 = radians(a1e)
 
 	if a2e == '':
 		X.append(5)
@@ -79,8 +79,8 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 	if b1e == '':
 		X.append(6)
 	else:
-		b1e = float(b1e)
-		b1 = -radians(b1e)
+		b1e = -float(b1e)
+		b1 = radians(b1e)
 
 	if b2e == '':
 		X.append(7)
@@ -304,8 +304,10 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		a1e = -degrees(atan(-2 * rne * tan(a2) + tan(a2) + 2 * rne * tan(b2) - 2 * tan(b2)))
 		b1e = degrees(atan(2 * rne * tan(a2) - 2 * rne * tan(b2) + tan(b2)))
 
+	flag = 100
 ################################ r,b1,b2 #############################################################################
 	if X == [1, 2, 4, 5]:
+
 		if rne == 0 or b1e == b2e:
 			pass
 		else:
@@ -314,7 +316,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 
-	if X == [2,4,5]:
+	if X == [2, 4, 5]:
 		if rne == 0 and b1e == b2e:
 			fe = (pe / 2 + rne) / tan(b1)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
@@ -327,12 +329,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			k = 4
+			flag = 1
 		elif b1 == b2 and rne != 0:
 			rne = 0
 			fe = (pe / 2 + rne) / tan(b1)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 4, 5]:
 		if rne == 0 and b1e == b2e:
@@ -347,12 +351,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			k = 4
+			flag = 1
 		elif b1 == b2 and rne != 0:
 			rne = 0
 			pe = 2 * (fe * tan(b1) - rne)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 5]:
 		if rne == 0 and b1e == b2e:
@@ -367,12 +373,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			fe = 1 / (tan(b1) - tan(a1))
 			a2e = -degrees(atan(tan(a1) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 1
 		elif b1 == b2 and rne != 0:
 			rne = 0
 			pe = (tan(b1) + tan(b2)) / (tan(b1) - tan(a1))
 			fe = 1 / (tan(b1) - tan(a1))
 			a2e = -degrees(atan(tan(a1) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 4]:
 		if rne == 0 and b1e == b2e:
@@ -387,12 +395,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			fe = 1 / (tan(a2) - tan(b2))
 			a1e = -degrees(atan(tan(a2) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 1
 		elif b1 == b2 and rne != 0:
 			rne = 0
 			pe = (tan(b1) + tan(b2)) / (tan(a2) - tan(b2))
 			fe = 1 / (tan(a2) - tan(b2))
 			a1e = -degrees(atan(tan(a2) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 0
 ####################################################################################################################
 
 ################################ r,a1,a2 #############################################################################
@@ -407,23 +417,25 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	if X == [2, 6, 7]:
 		if rne == 1 and a1e == a2e:
-			fe = 2 * (rne - 1) / (tan(a1) - tan(a2))
+			fe = pe/(2*tan(a1))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
 		elif rne == 1 and a1e != a2e:
 			a1 = a2
 			a1e = a2e
-			fe = 2 * (rne - 1) / (tan(a1) - tan(a2))
+			fe = pe / (2 * tan(a1))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 2
 		elif a1 == a2 and rne != 1:
 			rne = 1
-			fe = 2 * (rne - 1) / (tan(a1) - tan(a2))
+			fe = pe / (2 * tan(a1))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 6, 7]:
 		if rne == 1 and a1e == a2e:
@@ -438,12 +450,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 2
 		elif a1 == a2 and rne != 1:
 			rne = 1
 			pe = fe * (tan(a1) + tan(a2))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 7]:
 		if rne == 1 and a1e == a2e:
@@ -458,12 +472,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			fe = 1 / (tan(b1) - tan(a1))
 			b2e = degrees(atan(tan(a1) + tan(a2) - tan(b1)))
 			k = 4
+			flag = 2
 		elif a1 == a2 and rne != 1:
 			rne = 1
 			pe = (tan(a1) + tan(a2)) / (tan(b1) - tan(a1))
 			fe = 1 / (tan(b1) - tan(a1))
 			b2e = degrees(atan(tan(a1) + tan(a2) - tan(b1)))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 6]:
 		if rne == 1 and a1e == a2e:
@@ -478,12 +494,14 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			fe = 1 / (tan(a2) - tan(b2))
 			b1e = degrees(atan(tan(a1) + tan(a2) - tan(b2)))
 			k = 4
+			flag = 2
 		elif a1 == a2 and rne != 1:
 			rne = 1
 			pe = (tan(a1) + tan(a2)) / (tan(a2) - tan(b2))
 			fe = 1 / (tan(a2) - tan(b2))
 			b1e = degrees(atan(tan(a1) + tan(a2) - tan(b2)))
 			k = 4
+			flag = 0
 ####################################################################################################################
 
 ################################ r,a2,b1 #############################################################################
@@ -498,23 +516,25 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	if X == [2, 4, 7]:
 		if rne == 0.5 and a2e == b1e:
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
+			fe = (0.5 + (pe/2))/tan(a2)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
 		elif rne == 0.5 and a2e != b1e:
 			a2 = b1
 			a2e = b1e
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
+			fe = (0.5 + (pe / 2)) / tan(a2)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 3
 		elif a2 == b1 and rne != 0.5:
 			rne = 0.5
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
+			fe = (0.5 + (pe / 2)) / tan(a2)
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 4, 7]:
 		if rne == 0.5 and a2e == b1e:
@@ -529,52 +549,58 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 3
 		elif a2 == b1 and rne != 0.5:
 			rne = 0.5
 			pe = fe * (tan(a2) + tan(b1)) - 1
 			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 			b2e = degrees(atan(((pe / 2) - rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 7]:
 		if rne == 0.5 and a2e == b1e:
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			b2e = degrees(atan(((pe / 2) - rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			b2e = degrees(atan(tan(a1) + tan(a2) - tan(b1)))
 			k = 4
 		elif rne == 0.5 and a2e != b1e:
 			a2 = b1
 			a2e = b1e
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			b2e = degrees(atan(((pe / 2) - rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			b2e = degrees(atan(tan(a1) + tan(a2) - tan(b1)))
 			k = 4
+			flag = 3
 		elif a2 == b1 and rne != 0.5:
 			rne = 0.5
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			b2e = degrees(atan(((pe / 2) - rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			b2e = degrees(atan(tan(a1) + tan(a2) - tan(b1)))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 4]:
 		if rne == 0.5 and a2e == b1e:
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			a1e = -degrees(atan(tan(a2) - tan(b1) - tan(b2)))
 			k = 4
 		elif rne == 0.5 and a2e != b1e:
 			a2 = b1
 			a2e = b1e
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			a1e = -degrees(atan(tan(a2) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 3
 		elif a2 == b1 and rne != 0.5:
 			rne = 0.5
-			fe = (1 - 2 * rne) / (tan(a2) - tan(b1))
-			pe = fe * (tan(a2) + tan(b1)) - 1
-			a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			a1e = -degrees(atan(tan(a2) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 0
 ####################################################################################################################
 
 ################################ r,b2,a1 #############################################################################
@@ -589,7 +615,7 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	if X == [2, 5, 6]:
 		if rne == 0.5 and a1e == b2e:
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
+			fe = (0.5+pe/2)/tan(b2)
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
@@ -600,72 +626,80 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
+			flag = 2
 		elif a1 == b2 and rne != 0.5:
 			rne = 0.5
 			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 5, 6]:
 		if rne == 0.5 and a1e == b2e:
-			pe = fe * (tan(a1) + tan(b1)) + 1
+			pe = fe * (tan(a1) + tan(b2)) + 1
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
 		elif rne == 0.5 and a1e != b2e:
 			a1 = b2
 			a1e = b2e
-			pe = fe * (tan(a1) + tan(b1)) + 1
+			pe = fe * (tan(a1) + tan(b2)) + 1
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
+			flag = 2
 		elif a1 == b2 and rne != 0.5:
 			rne = 0.5
-			pe = fe * (tan(a1) + tan(b1)) + 1
+			pe = fe * (tan(a1) + tan(b2)) + 1
 			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
 			b1e = degrees(atan(((pe / 2) + rne) / fe))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 6]:
 		if rne == 0.5 and a1e == b2e:
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			b1e = degrees(atan(((pe / 2) + rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			b1e = degrees(atan(tan(a1) + tan(a2) - tan(b2)))
 			k = 4
 		elif rne == 0.5 and a1e != b2e:
 			a1 = b2
 			a1e = b2e
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			b1e = degrees(atan(((pe / 2) + rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			b1e = degrees(atan(tan(a1) + tan(a2) - tan(b2)))
 			k = 4
+			flag = 2
 		elif a1 == b2 and rne != 0.5:
 			rne = 0.5
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			b1e = degrees(atan(((pe / 2) + rne) / fe))
+			pe = (tan(a1) + tan(a2)) / (tan(a2) - tan(b2))
+			fe = 1 / (tan(a2) - tan(b2))
+			b1e = degrees(atan(tan(a1) + tan(a2) - tan(b2)))
 			k = 4
+			flag = 0
 
 	if X == [1, 2, 5]:
 		if rne == 0.5 and a1e == b2e:
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			a2e = -degrees(atan(tan(a1) - tan(b1) - tan(b2)))
 			k = 4
 		elif rne == 0.5 and a1e != b2e:
 			a1 = b2
 			a1e = b2e
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			a2e = -degrees(atan(tan(a1) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 2
 		elif a1 == b2 and rne != 0.5:
 			rne = 0.5
-			fe = (2 * rne - 1) / (tan(a1) - tan(b2))
-			pe = fe * (tan(a1) + tan(b1)) + 1
-			a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
+			pe = (tan(b1) + tan(b2)) / (tan(b1) - tan(a1))
+			fe = 1 / (tan(b1) - tan(a1))
+			a2e = -degrees(atan(tan(a1) - tan(b1) - tan(b2)))
 			k = 4
+			flag = 0
 ####################################################################################################################
 
 ################################ f,a1,b1 #############################################################################
@@ -742,18 +776,6 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		k = 4
 ######################################################################################################################
 
-	if 4 not in X:
-		a1e = - a1e
-
-	if 6 not in X:
-		b1e = - b1e
-
-
-	# a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
-	# a2e = degrees(atan(((pe / 2) + 1 - rne) / fe))
-	# b1e = degrees(atan(((pe / 2) + rne) / fe))
-	# b2e = degrees(atan(((pe / 2) - rne) / fe))
-
 	pe = str(round(float(pe),3))
 	fe = str(round(float(fe),3))
 	rne = str(round(float(rne),3))
@@ -764,4 +786,4 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 	b2e = str(round(float(b2e),3))
 	#b3e = str(round(float(b3e),3))
 
-	return pe,fe,rne,a1e,a2e,b1e,b2e,k,t,X
+	return pe,fe,rne,a1e,a2e,b1e,b2e,k,t,X,flag

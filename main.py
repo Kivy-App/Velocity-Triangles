@@ -50,7 +50,7 @@ class VelocityTriangles(Screen):
 
 	n = ObjectProperty(None)
 	l = NumericProperty(0)
-	k =  NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
+	k = NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
 
 	j = NumericProperty(0)
@@ -84,7 +84,6 @@ class VelocityTriangles(Screen):
 			b3e = str(self.b3.text)
 
 
-
 			global D1e
 			global D2e
 			global D3e
@@ -102,9 +101,10 @@ class VelocityTriangles(Screen):
 			Ne = str(self.n.text)
 
 			##################   System_Solver  ################
-			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
+			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X, flag = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
 			self.manager.get_screen('res_sc').XText = X
 			self.manager.get_screen('simple').XText = X
+			self.manager.get_screen('res_sc').flagText = flag
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
 			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
@@ -385,12 +385,12 @@ class VelocityTriangles(Screen):
 	def h2t_triangles(self):
 
 		if self.ch3_value == 'normal' and self.ch3_value == 'normal' and self.ch3_value == 'normal':
-			n = 0
-		if self.ch3_value == 'down' :
-			n = 0
-		if self.ch4_value == 'down' :
 			n = -1
-		if self.ch5_value == 'down' :
+		if self.ch3_value == 'down':
+			n = 0
+		if self.ch4_value == 'down':
+			n = -1
+		if self.ch5_value == 'down':
 			n = 2
 
 #######################################     Hub     ####################################################################
@@ -414,12 +414,14 @@ class VelocityTriangles(Screen):
 																								 feh1, Vth1h, Vth2h,
 																								 Wth1h, Wth2h)
 
+		# y_new = y0
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
 				or yLh > Window.size[1] * 200 / 700 or yRh > Window.size[1] * 200 / 700 \
 				or xLh > self.width - Window.size[0] * 80 / 400 or xRh < self.x + Window.size[0] * 80 / 400:
 			x0h = x0h + 1
 			x1h = x1h - 1
 			Uhp = x1h - x0h
+			# y_new = y_new - 1
 
 			xLh = x1h - Uhp * float(rneh) - Uhp * float(peh) / 2
 			yLh = y0 + Uhp * float(feh1)
@@ -787,6 +789,7 @@ class Results(Screen):
 	xR2dText = StringProperty('0')
 	yR2dText = StringProperty('0')
 
+	flagText = ObjectProperty(None)
 	######### TIP ######
 	ptText = StringProperty('0')
 	ft1Text = StringProperty('0')
@@ -883,6 +886,7 @@ class Results(Screen):
 	yLt_rotorText = StringProperty('0')
 	yRm_rotorText = StringProperty('0')
 	yLm_rotorText = StringProperty('0')
+
 
 class InfoScreen(Screen):
 	pass

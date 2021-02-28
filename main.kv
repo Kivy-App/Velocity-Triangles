@@ -245,7 +245,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: p
-                                        text: '2' if slider1.value==0  else str(round(slider1.value,3))
+                                        text: ('0.3' if ch2.state == 'down' else '2') if slider1.value==0  else str(round(slider1.value,3))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -259,7 +259,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: f
-                                        text: '1' if slider2.value==0  else str(round(slider2.value,3))
+                                        text: ('0.8' if ch2.state == 'down' else '1') if slider2.value==0  else str(round(slider2.value,3))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -273,7 +273,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: rn
-                                        text: '0.5' if slider3.value==0  else str(round(slider3.value,3))
+                                        text: ('0.6' if ch2.state == 'down' else '0.4') if slider3.value==0  else str(round(slider3.value,3))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -440,17 +440,21 @@ NavigationLayout:
                             padding: dp(11)
                             md_bg_color:1,0.55,0,0.8
 
-                            Label:
+                            MDLabel:
+                                size: self.size
+                                halign: 'center'
                                 font_size: dp(15)
                                 bold: False if switch1.active else True
-                                text:"Parallel Annulus"
+                                text:"Constant Vx Profile (Stage 1-3)"
                                 size_hint_x: 0.45
                             MDSwitch:
                                 id: switch1
-                            Label:
+                            MDLabel:
                                 font_size: dp(15)
+                                size: self.size
+                                halign: 'center'
                                 bold: True if switch1.active else False
-                                text:"    Non Parallel Annulus"
+                                text:"Custom annulus geometry"
                                 size_hint_x: 0.45
 
                         MDBoxLayout:
