@@ -57,7 +57,7 @@
             id: sv_info
 
             MDGridLayout:
-                size_hint: 1,1.26
+                size_hint: 1,1.28
                 rows:7
                 md_bg_color:1,1,1,1
 
@@ -83,7 +83,7 @@
                         valign: 'top'
                         text:
                             'Welcome to VTA-APP. This application calculates and ' \
-                            'designs the velocity triangles in a stage of an axial turbomachine.' \
+                            'designs the velocity triangles in an axial turbomachinery stage.' \
                             'The results are given in four segments for the three radial points Hub-Mid-Tip ' \
                             'and their comparison. If you want to know how to use the app properly read more below.'
 
@@ -101,16 +101,16 @@
                         underline: True
 
                 MDBoxLayout:
-                    size_hint_y: .2
+                    size_hint_y: .22
                     Label:
                         padding: dp(30),dp(0)
                         text_size: self.size
                         halign: 'left'
                         valign: 'top'
                         text:
-                            'The app consists of two main sections, Non Dimensional and Dimensional. ' \
-                            'In the first section you should enter exactly three input variables and ' \
-                            'at the second you should fill in all available inputs. Note that the  ' \
+                            'The application consists of two main sections, Non Dimensional and Dimensional. ' \
+                            'In the first section you should enter exactly three dimensionless sizes or angles.' \
+                            'In the second section you should fill in all available dimensional inputs. Note that the  ' \
                             'first section can operate independently of the second. Optionally, you can  '\
                             'select the stage type, compressor or turbine and velocity profile.'
 
@@ -137,8 +137,8 @@
                         halign: 'left'
                         valign: 'middle'
                         text:
-                            'In order to measure the angles we use the horizontal level.'\
-                            'Angles are positive in the direction of U (Clockwise). '
+                            'The measurement of angles is based on the horizontal level. '\
+                            'Additionally, angles are positive in the direction of U (Clockwise). '
 
                     BoxLayout:
                         size_hint: 1,0.8

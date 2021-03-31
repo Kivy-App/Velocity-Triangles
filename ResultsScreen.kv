@@ -2804,7 +2804,7 @@
                                     rgba:0,0,0,1
                                 Line:
                                     width: dp(1.)
-                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+                                    rectangle: (self.x+ dp(20), self.y + dp(20), self.width - dp(40), self.height - (40))
                             ############# Hub Stator Camber Lines  #################
                                 Color:
                                     rgba: 0,0,1,1
@@ -2879,6 +2879,18 @@
                                 pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(55.5)
                                 text: 'Tip'
 
+                            Label:
+                                font_size: dp(20)
+                                pos: (self.parent.x - self.parent.width/2 + float(root.xLm_cambText) - dp(30), self.parent.y - self.parent.height/2 + float(root.yLm_cambText))
+                                text: 'LE' if root.tc_namemText == 'Turbine Middle' else 'TE'
+                                bold: True
+
+                            Label:
+                                font_size: dp(20)
+                                pos: (self.parent.x - self.parent.width/2 + float(root.xRm_cambText) + dp(30), self.parent.y - self.parent.height/2 + float(root.yRm_cambText))
+                                text: 'TE' if root.tc_namemText == 'Turbine Middle' else 'LE'
+                                bold: True
+
                         MDBoxLayout:
                             size_hint_y: 0.08
                             md_bg_color: 1,0.55,0,0.8
@@ -2900,7 +2912,7 @@
                                     rgba:0,0,0,1
                                 Line:
                                     width: dp(1.)
-                                    rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+                                    rectangle: (self.x + dp(20), self.y + dp(20), self.width - dp(40), self.height - dp(40))
                             ############# Hub Rotor Camber Lines  #################
                                 Color:
                                     rgba: 0,0,1,1
@@ -2975,6 +2987,18 @@
                                 font_size: dp(11)
                                 pos: self.parent.width/2 - dp(100), self.parent.y + self.parent.height/2 - dp(55.5)
                                 text: 'Tip'
+
+                            Label:
+                                font_size: dp(20)
+                                pos: (self.parent.x - self.parent.width/2 + float(root.xLm_cambText) - dp(30), self.parent.y - self.parent.height/2 + float(root.yLm_rotorText))
+                                text: 'TE' if root.tc_namemText == 'Turbine Middle' else 'LE'
+                                bold: True
+
+                            Label:
+                                font_size: dp(20)
+                                pos: (self.parent.x - self.parent.width/2 + float(root.xRm_cambText) + dp(30), self.parent.y - self.parent.height/2 + float(root.yRm_rotorText))
+                                text: 'LE' if root.tc_namemText == 'Turbine Middle' else 'TE'
+                                bold: True
             ####################    Button  ####################
                         GridLayout:
                             cols:2

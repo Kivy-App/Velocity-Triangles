@@ -138,22 +138,11 @@ class VelocityTriangles(Screen):
 				xR = x1 - U * float(rne) + U * float(pe) / 2
 				yR = y0 + U * float(fe)
 
-		######################  Hub Camber line drawing ##################################
-			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb, yLm_rotor, yRm_rotor = mid_cambers(U,fe,rne,pe,y0)
-
-			self.manager.get_screen('res_sc').yLm_cambText = str(round(yLm_camb, 3))
-			self.manager.get_screen('res_sc').xLm_cambText = str(round(xLm_camb, 3))
-			self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
-			self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
-			self.manager.get_screen('res_sc').yRm_cambText = str(round(yRm_camb, 3))
-			self.manager.get_screen('res_sc').xRm_cambText = str(round(xRm_camb, 3))
-			self.manager.get_screen('res_sc').yLm_rotorText = str(round(yLm_rotor, 3))
-			self.manager.get_screen('res_sc').yRm_rotorText = str(round(yRm_rotor, 3))
-		#############################################################################################
 
 			xL1u, yL1u, xL1d, yL1d, xL2u, yL2u, xL2d, yL2d, xR1u, yR1u, xR1d, yR1d, xR2u, yR2u, xR2d, yR2d = arrows(x0,y0,x1,y1,a1e,a2e,b1e,b2e)
 
 			######################### Choosing if it is Turbine or Compressor ###################
+			global tc
 			if self.ch1_value == 'down':
 				tc = 0  # turbine
 				tc_namem = 'Turbine Middle'
@@ -176,6 +165,19 @@ class VelocityTriangles(Screen):
 						tc = 0  # turbine
 						tc_namem = 'Turbine Middle'
 
+			######################  Hub Camber line drawing ##################################
+			xs_cent, ys_cent, xRm_camb, yRm_camb, yLm_camb, xLm_camb, yLm_rotor, yRm_rotor = mid_cambers(U, fe, rne, pe,
+																										 y0, tc)
+
+			#############################################################################################
+			self.manager.get_screen('res_sc').yLm_cambText = str(round(yLm_camb, 3))
+			self.manager.get_screen('res_sc').xLm_cambText = str(round(xLm_camb, 3))
+			self.manager.get_screen('res_sc').ys_centText = str(round(ys_cent, 3))
+			self.manager.get_screen('res_sc').xs_centText = str(round(xs_cent, 3))
+			self.manager.get_screen('res_sc').yRm_cambText = str(round(yRm_camb, 3))
+			self.manager.get_screen('res_sc').xRm_cambText = str(round(xRm_camb, 3))
+			self.manager.get_screen('res_sc').yLm_rotorText = str(round(yLm_rotor, 3))
+			self.manager.get_screen('res_sc').yRm_rotorText = str(round(yRm_rotor, 3))
 
 			# create_database_nd(pe, fe, rne, a1e, a2e, b1e, b2e, tc)
 
@@ -304,6 +306,7 @@ class VelocityTriangles(Screen):
 
 ################          Dimendional Analisys           ################################
 	def dml(self):
+
 		try:
 			global rh
 			global rt
@@ -412,7 +415,7 @@ class VelocityTriangles(Screen):
 
 		xs_cent, ys_cent, xRh_camb, yRh_camb, yLh_camb, xLh_camb, yLh_rotor, yRh_rotor = cambers(y0, Uhp_c, Uh, feh2,
 																								 feh1, Vth1h, Vth2h,
-																								 Wth1h, Wth2h)
+																								 Wth1h, Wth2h,tc)
 
 		# y_new = y0
 		while xRh > self.width - Window.size[0] * 80 / 400 or xLh < self.x + Window.size[0] * 80 / 400 \
@@ -451,7 +454,7 @@ class VelocityTriangles(Screen):
 
 		xs_cent, ys_cent, xRt_camb, yRt_camb, yLt_camb, xLt_camb, yLt_rotor, yRt_rotor = cambers(y0, Utp_c, Ut, fet2,
 																								 fet1, Vth1t, Vth2t,
-																								 Wth1t, Wth2t)
+																								 Wth1t, Wth2t,tc)
 
 		while xRt > self.width - Window.size[0] * 80 / 400 or xLt < self.x + Window.size[0] * 80 / 400\
 			or yLt > Window.size[1]*200/700 or yRt > Window.size[1]*200/700\
