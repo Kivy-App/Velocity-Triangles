@@ -57,7 +57,7 @@
             id: sv_info
 
             MDGridLayout:
-                size_hint: 1,1.28
+                size_hint: 1,1.08
                 rows:7
                 md_bg_color:1,1,1,1
 
@@ -140,12 +140,22 @@
                             'The measurement of angles is based on the horizontal level. '\
                             'Additionally, angles are positive in the direction of U (Clockwise). '
 
-                    BoxLayout:
-                        size_hint: 1,0.8
-                        Image:
-                            size_hint: 0.9,1
-                            pos_hint: {'x':0.05,'y':0}
-                            source: 'images/new_images/info-photo2.png'
+#                    BoxLayout:
+#                        size_hint: 1,0.8
+#                        Image:
+#                            size: self.parent.size
+##                            size_hint: 0.9,1
+#                            pos_hint: {'x':0.05,'y':0}
+#                            source: 'images/new_images/info-photo2.png'
+                    FloatLayout:
+                        size_hint_y: 0.6
+                        canvas:
+                            Color:
+                                rgba: 1,1,1,1
+                            Rectangle:
+                                source: 'images/new_images/info-photo2.png'
+                                size: self.width ,self.height - dp(20)
+                                pos: self.x ,self.y + dp(20)
 
                 MDBoxLayout:
                     orientation: 'vertical'
