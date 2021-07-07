@@ -468,7 +468,6 @@ NavigationLayout:
                                 rows:14
                                 spacing: dp(3)
                                 size_hint_x:0.6
-
                                 Label:
                                     font_size:dp(14)
                                     text:"Tip Diameter at Stage 1 [ m ] "
@@ -580,9 +579,58 @@ NavigationLayout:
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
-                            Label:
+                            MDBoxLayout:
+                                orientation: 'vertical'
                                 size_hint_x:0.4
-                                text: ''
+                                spacing: dp(10)
+                                MDRoundFlatButton:
+                                    size: dp(10),dp(35)
+                                    pos_hint: {'center_x': 0.5}
+                                    text: 'Clear All values'
+                                    md_bg_color: [1,0.4,0,0.8]
+                                    text_color: [0,0,0,1]
+                                    id: clear_all
+                                    on_press:
+                                        p.text = ''
+                                        f.text = ''
+                                        rn.text = ''
+                                        a1.text = ''
+                                        a2.text = ''
+                                        a3.text = ''
+                                        b1.text = ''
+                                        b2.text = ''
+                                        b3.text = ''
+                                        d1.text = ''
+                                        d2.text = ''
+                                        d3.text = ''
+                                        rh2t1.text = ''
+                                        rh2t2.text = ''
+                                        rh2t3.text = ''
+                                        n.text = ''
+
+                                MDRoundFlatButton:
+                                    size: dp(10),dp(35)
+                                    pos_hint: {'center_x': 0.5}
+                                    text: '  Reset values  '
+                                    md_bg_color: [1,0.4,0,0.8]
+                                    text_color: [0,0,0,1]
+                                    on_press:
+                                        p.text = ('2' if ch2.state == 'normal' else '0.3')
+                                        f.text = ('1' if ch2.state == 'normal' else '0.8')
+                                        rn.text = ('0.4' if ch2.state == 'normal' else '0.6')
+                                        a1.text = ''
+                                        a2.text = ''
+                                        a3.text = ''
+                                        b1.text = ''
+                                        b2.text = ''
+                                        b3.text = ''
+                                        d1.text = '2'
+                                        d2.text = ''
+                                        d3.text = ''
+                                        rh2t1.text = '0.8'
+                                        rh2t2.text = ''
+                                        rh2t3.text = ''
+                                        n.text = '4000'
 
                         MDBoxLayout:
                             size_hint_y: 0.01

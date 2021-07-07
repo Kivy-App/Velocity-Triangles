@@ -45,7 +45,7 @@
                     pos_hint: {'x':-0.08,'y':0.1}
 
             MDBoxLayout:
-                size_hint: 0.68,1
+                size_hint: 0.53,1
                 Label:
                     size_hint: 1,1
                     text: 'VTA-APP'
@@ -56,6 +56,18 @@
                     valign: 'middle'
                     font_size: dp(28)
 
+            MDBoxLayout:
+                size_hint: 0.15,1
+                MDIconButton:
+                    icon: 'arrow-left'
+                    pos:self.parent.pos
+                    size:self.parent.size
+                    user_font_size:dp(32)
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    on_press:
+                        root.manager.current = "Main"
+                        root.manager.transition.direction = "right"
 
         MDGridLayout:
             cols:4
@@ -881,33 +893,17 @@
                                     (-float(root.UhpText)/2-float(root.x0hText)+float(root.xRhText) + dp(15),\
                                     self.parent.y - self.parent.height/2 + float(root.yRhText) + dp(17))
 
-                        GridLayout:
-                            cols:2
-                            size_hint_y: 0.1
-                            BoxLayout:
-                                size_hint_x:0.3
-                                padding:dp(10)
-                                spacing:dp(10)
-                                MDRectangleFlatIconButton:
-                                    icon:'arrow-left-bold'
-                                    md_bg_color:[0.4,.4,.4,1]
-                                    text_color: [1,1,1,1]
-                                    size_hint:0.25,1
-                                    text:"Back"
-                                    on_press:
-#                                        sv_hub.scroll_y = 1
-                                        root.manager.current = "Main"
-                                        root.manager.transition.direction = "right"
-
-
-                            BoxLayout:
-                                size_hint_x:0.7
-                                MDLabel:
-                                    font_size: dp(13)
-                                    color: 1,0,0,1
-                                    text:
-                                        ('*Hub triangles were ' + (str(round(100*(1-float(root.UhpText)/float(root.Uhp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
-                                        if (float(root.UhpText)<float(root.Uhp_cText)) else ''
+                        BoxLayout:
+                            size_hint_y:0.1
+                            MDLabel:
+                                font_size: dp(15)
+                                color: 1,0,0,1
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'top'
+                                text:
+                                    ('*Hub triangles were ' + (str(round(100*(1-float(root.UhpText)/float(root.Uhp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
+                                    if (float(root.UhpText)<float(root.Uhp_cText)) else ''
                         MDBoxLayout:
                             orientation: 'vertical'
                             padding: dp(10),dp(0)
@@ -961,7 +957,7 @@
                                 halign:'left'
                                 valign: 'middle'
 
-                ######################GRid me ta grapta apotelesmata #############################
+                ###################### GRid me ta grapta apotelesmata #############################
                         GridLayout:
                             cols:2
                             size_hint_y: 0.67
@@ -1600,7 +1596,6 @@
                                         (float(root.xRText) + dp(15),self.y + float(root.yLText) + dp(17),dp(10))
 
 
-
                              ################################  Arrows   ##########################################
                 ################### Base Velocity Arrows   ##########################
                                 ################ U Arrow ##############
@@ -1657,7 +1652,6 @@
                                         (float(root.xRText)+ dp(20),self.y + float(root.y1Text),float(root.xRText)+ dp(20) + dp(3),\
                                         self.y + float(root.y1Text) + dp(20),float(root.xRText)+ dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
 
-
                             Label:
                                 text: 'U'
                                 pos: self.parent.x, self.parent.y - self.parent.height/2 + float(root.y0Text) - dp(35)
@@ -1691,27 +1685,9 @@
                                     self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
 
                         #####################    Button  ####################
-                        GridLayout:
-                            cols:2
-                            size_hint_y: 0.1
-                            BoxLayout:
-                                size_hint_x:0.3
-                                padding:dp(10)
-                                spacing:dp(10)
-                                MDRectangleFlatIconButton:
-                                    icon:'arrow-left-bold'
-                                    md_bg_color:[0.4,.4,.4,1]
-                                    text_color: [1,1,1,1]
-                                    size_hint:0.25,1
-                                    text:"Back"
-                                    on_press:
-#                                        sv_mid.scroll_y = 1
-                                        root.manager.current = "Main"
-                                        root.manager.transition.direction = "right"
 
-
-                            BoxLayout:
-                                size_hint_x:0.7
+                        BoxLayout:
+                            size_hint_y:0.1
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -1732,6 +1708,7 @@
                                 halign: 'left'
                                 valign: 'middle'
 
+                ################# Tip Window ##############
                 ScrollView:
                     size: root.height, root.width
                     size_hint: 1,0.25
@@ -2105,7 +2082,6 @@
                                             text_size: self.size
                                             halign: 'right'
                                             valign: 'middle'
-
 
                                     GridLayout:
                                         rows:12
@@ -2538,35 +2514,18 @@
                                     (-float(root.UtpText)/2-float(root.x0tText)+float(root.xRtText) + dp(15),\
                                     self.parent.y - self.parent.height/2 + float(root.yLtText) + dp(17))
 
-
-
-                        GridLayout:
-                            cols:2
-                            size_hint_y: 0.1
-
-                            BoxLayout:
-                                size_hint_x:0.3
-                                padding:dp(10)
-                                spacing:dp(10)
-                                MDRectangleFlatIconButton:
-                                    icon:'arrow-left-bold'
-                                    md_bg_color:[0.4,.4,.4,1]
-                                    text_color: [1,1,1,1]
-                                    size_hint:0.25,1
-                                    text:"Back"
-                                    on_press:
-                                        root.manager.current = "Main"
-                                        root.manager.transition.direction = "right"
-#                                        sv_tip.scroll_y = 1
-
-                            BoxLayout:
-                                size_hint_x:0.7
-                                MDLabel:
-                                    font_size: dp(13)
-                                    color: 1,0,0,1
-                                    text:
-                                        ('*Tip triangles were ' + (str(round(100*(1-float(root.UtpText)/float(root.Utp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
-                                        if (float(root.UtpText)<float(root.Utp_cText)) else ''
+                        ######## Scalar label ################
+                        BoxLayout:
+                            size_hint_y:0.1
+                            MDLabel:
+                                text_size: self.size
+                                halign: 'center'
+                                valign: 'top'
+                                font_size: dp(15)
+                                color: 1,0,0,1
+                                text:
+                                    ('*Tip triangles were ' + (str(round(100*(1-float(root.UtpText)/float(root.Utp_cText)),1))) + ' %' + ' scaled down in order to fit.')\
+                                    if (float(root.UtpText)<float(root.Utp_cText)) else ''
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -2836,7 +2795,6 @@
                                         float(root.xRt_cambText),self.y +float(root.yRt_cambText))
 
                                                #############  Top right corner box ############
-
                                 Color:
                                     rgba: 0,0,0,1
                                 Line:
@@ -2945,7 +2903,6 @@
                                         float(root.xRt_cambText),self.y +float(root.yRt_rotorText))
 
                                                #############  Top right corner box ############
-
                                 Color:
                                     rgba: 0,0,0,1
                                 Line:
@@ -2999,29 +2956,9 @@
                                 pos: (self.parent.x - self.parent.width/2 + float(root.xRm_cambText) + dp(30), self.parent.y - self.parent.height/2 + float(root.yRm_rotorText))
                                 text: 'LE' if root.tc_namemText == 'Turbine Middle' else 'TE'
                                 bold: True
-            ####################    Button  ####################
-                        GridLayout:
-                            cols:2
-                            size_hint_y: 0.1
 
-                            BoxLayout:
-                                size_hint_x:0.3
-                                padding:dp(10)
-                                spacing:dp(10)
-                                MDRectangleFlatIconButton:
-                                    icon:'arrow-left-bold'
-                                    md_bg_color:[0.4,.4,.4,1]
-                                    text_color: [1,1,1,1]
-                                    size_hint:0.25,1
-                                    text:"Back"
-                                    on_press:
-                                        root.manager.current = "Main"
-                                        root.manager.transition.direction = "right"
-#                                        sv_comp.scroll_y = 1
-
-
-                            BoxLayout:
-                                size_hint_x:0.7
+                        BoxLayout:
+                            size_hint_y:0.1
 
                         MDBoxLayout:
                             orientation: 'vertical'
