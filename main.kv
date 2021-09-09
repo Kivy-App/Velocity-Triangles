@@ -288,6 +288,7 @@ NavigationLayout:
                                     TextInput:
                                         id: a1
                                         text: '' if slider4.value==0  else str(round(slider4.value,3))
+                                        disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -316,7 +317,7 @@ NavigationLayout:
                                     TextInput:
                                         id: a3
                                         text: '' if slider6.value==0  else str(round(slider6.value,3))
-                                        disabled: not switch0.active
+                                        disabled: (not switch0.active) and (ch2.state == 'down')
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -331,6 +332,7 @@ NavigationLayout:
                                     TextInput:
                                         id: b1
                                         text: '' if slider7.value==0  else str(round(slider7.value,3))
+                                        disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -359,7 +361,7 @@ NavigationLayout:
                                     TextInput:
                                         id: b3
                                         text: '' if slider9.value==0  else str(round(slider9.value,3))
-                                        disabled: not switch0.active
+                                        disabled: (not switch0.active) and (ch2.state == 'down')
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -389,6 +391,8 @@ NavigationLayout:
                                     min: -75
                                     max: 75
                                     step: 1
+                                    disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
+
                                 MDSlider:
                                     id: slider5
                                     min: -75
@@ -399,12 +403,13 @@ NavigationLayout:
                                     min: -75
                                     max: 75
                                     step: 1
-                                    disabled: not switch0.active
+                                    disabled: (not switch0.active) and (ch2.state == 'down')
                                 MDSlider:
                                     id: slider7
                                     min: -75
                                     max: 75
                                     step: 1
+                                    disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
                                 MDSlider:
                                     id: slider8
                                     min: -75
@@ -415,7 +420,7 @@ NavigationLayout:
                                     min: -75
                                     max: 75
                                     step: 1
-                                    disabled: not switch0.active
+                                    disabled: (not switch0.active) and (ch2.state == 'down')
 
                         MDBoxLayout:
                             size_hint_y: 0.01
@@ -583,9 +588,9 @@ NavigationLayout:
                                 orientation: 'vertical'
                                 size_hint_x:0.4
                                 spacing: dp(10)
+                                padding: [0,20,0,340]
                                 MDRoundFlatButton:
-                                    size: dp(10),dp(35)
-                                    pos_hint: {'center_x': 0.5}
+                                    pos_hint: {'center_x':0.5}
                                     text: 'Clear All values'
                                     md_bg_color: [1,0.4,0,0.8]
                                     text_color: [0,0,0,1]
@@ -609,7 +614,6 @@ NavigationLayout:
                                         n.text = ''
 
                                 MDRoundFlatButton:
-                                    size: dp(10),dp(35)
                                     pos_hint: {'center_x': 0.5}
                                     text: '  Reset values  '
                                     md_bg_color: [1,0.4,0,0.8]

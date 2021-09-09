@@ -38,7 +38,7 @@
 
 
             MDBoxLayout:
-                size_hint: 0.68,1
+                size_hint: 0.53,1
                 Label:
                     size_hint: 1,1
                     text: 'VTA-APP'
@@ -48,7 +48,18 @@
                     halign: 'left'
                     valign: 'middle'
                     font_size: dp(28)
-
+            MDBoxLayout:
+                size_hint: 0.15,1
+                MDIconButton:
+                    icon: 'arrow-left'
+                    pos:self.parent.pos
+                    size:self.parent.size
+                    user_font_size:dp(32)
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    on_press:
+                        root.manager.current = "Main"
+                        root.manager.transition.direction = "right"
         ScrollView:
             size: root.height, root.width
             size_hint: 1,0.92
@@ -537,19 +548,6 @@
                 GridLayout:
                     cols:2
                     size_hint_y: 0.1
-                    BoxLayout:
-                        size_hint_x:0.3
-                        padding:dp(10)
-                        spacing:dp(10)
-                        MDRectangleFlatIconButton:
-                            icon:'arrow-left-bold'
-                            md_bg_color:[0.4,.4,.4,1]
-                            text_color: [1,1,1,1]
-                            size_hint:0.25,1
-                            text:"Back"
-                            on_release:
-                                root.manager.current = "Main"
-                                root.manager.transition.direction = "right"
 
                     BoxLayout:
                         size_hint_x:0.7

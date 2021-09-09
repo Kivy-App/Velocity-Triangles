@@ -83,6 +83,10 @@ class VelocityTriangles(Screen):
 			b2e = str(self.b2.text)
 			b3e = str(self.b3.text)
 
+			if a1e == '':
+				a1e = a3e
+			if b1e == '':
+				b1e = b3e
 
 			global D1e
 			global D2e
