@@ -13,6 +13,7 @@ from kivymd.uix.tab import MDTabsBase
 from kivy.uix.boxlayout import BoxLayout
 from Camber import cambers, mid_cambers
 from Draw_functions import drawing_triangles, calculating_variables
+from Non_Repeating import a3_calculation
 ###########################################################################################
 # from kivy.lang import Builder
 # import csv
@@ -106,9 +107,12 @@ class VelocityTriangles(Screen):
 
 			##################   System_Solver  ################
 			pe, fe, rne, a1e, a2e, b1e, b2e, self.k, t, X, flag = system_if(pe, fe, rne, a1e, a2e, b1e, b2e)
+
+
 			self.manager.get_screen('res_sc').XText = X
 			self.manager.get_screen('simple').XText = X
 			self.manager.get_screen('res_sc').flagText = flag
+
 			# with open('data.csv', 'w', newline='') as file:
 			# 	writer = csv.writer(file)
 			# 	writer.writerow(["ψ", "φ", "Rn", "α1", "α2", "β1", "β2"])
@@ -301,6 +305,7 @@ class VelocityTriangles(Screen):
 		except:
 		########## It goes in to except if only variables are less than 3. So if is unnecesery #########
 			X = system_X(pe,fe,rne,a1e,a2e,b1e,b2e)
+
 			if X == [1,2,4,5] or X == [1,2,6,7] or X == [1, 2, 4, 7] or X == [1, 2, 5, 6] or X == [1, 3, 5, 7] or X == [1, 3, 4, 6]:
 				error_Popup()
 				self.k = 0
@@ -363,6 +368,7 @@ class VelocityTriangles(Screen):
 			Wth1 = -W1 * sin(radians(float(b1e)))
 			Wth2 = W2 * sin(radians(float(b2e)))
 
+			a3_calculation(round(Um,3),round(Vx,3),round(float(a1e),3))
 
 			############### Passing the Results on the Second Screen  ##################
 			self.manager.get_screen('res_sc').UmText = str(round(Um, 3))

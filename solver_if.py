@@ -1,4 +1,5 @@
 from math import radians,degrees,atan,tan
+from all_popups import firstPopup
 
 def system_X(pe,fe,rne,a1e,a2e,b1e,b2e):
 	X = []
@@ -44,6 +45,7 @@ def system_X(pe,fe,rne,a1e,a2e,b1e,b2e):
 
 	k = len(X)
 	t = len(X)
+
 	return X
 
 def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
@@ -775,6 +777,8 @@ def system_if(pe,fe,rne,a1e,a2e,b1e,b2e):
 		a1e = degrees(atan(((pe / 2) - 1 + rne) / fe))
 		k = 4
 ######################################################################################################################
+	if X == []:
+		firstPopup()
 
 	pe = str(round(float(pe),3))
 	fe = str(round(float(fe),3))
