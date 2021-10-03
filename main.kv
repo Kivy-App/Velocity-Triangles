@@ -245,7 +245,9 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: p
-                                        text: ('0.3' if ch2.state == 'down' else '2') if slider1.value==0  else str(round(slider1.value,3))
+#                                        text: ('0.3' if ch2.state == 'down' else '2') if slider1.value==0  else str(round(slider1.value,3))
+                                        text: str(round(slider1.value,3))
+
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -287,7 +289,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: a1
-                                        text: '' if slider4.value==0  else str(round(slider4.value,3))
+                                        text: '' if (slider4.value == 0 or ch1.state == 'down')  else str(slider4.value)
                                         disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
@@ -302,7 +304,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: a2
-                                        text: '' if slider5.value==0  else str(round(slider5.value,3))
+                                        text: '' if slider5.value==0 else str(slider5.value)
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -316,7 +318,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: a3
-                                        text: '' if slider6.value==0  else str(round(slider6.value,3))
+                                        text: '' if (slider6.value==0 or ch2.state == 'down') else str(slider6.value)
                                         disabled: (not switch0.active) and (ch2.state == 'down')
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
@@ -331,7 +333,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: b1
-                                        text: '' if slider7.value==0  else str(round(slider7.value,3))
+                                        text: '' if (slider7.value==0 or ch1.state == 'down')  else str(slider7.value)
                                         disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
@@ -346,7 +348,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: b2
-                                        text: '' if slider8.value==0  else str(round(slider8.value,3))
+                                        text: '' if slider8.value==0  else str(slider8.value)
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -360,7 +362,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: b3
-                                        text: '' if slider9.value==0  else str(round(slider9.value,3))
+                                        text: '' if (slider9.value==0 or ch2.state == 'down') else str(slider9.value)
                                         disabled: (not switch0.active) and (ch2.state == 'down')
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
@@ -373,7 +375,7 @@ NavigationLayout:
                                     min: 0
                                     max: 2.5
                                     step: 0.1
-                                    value: 0
+                                    value: (0.3 if ch2.state == 'down' else 2)
                                 MDSlider:
                                     id: slider2
                                     min: 0

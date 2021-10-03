@@ -368,7 +368,7 @@ class VelocityTriangles(Screen):
 			Wth1 = -W1 * sin(radians(float(b1e)))
 			Wth2 = W2 * sin(radians(float(b2e)))
 
-			a3_calculation(round(Um,3),round(Vx,3),round(float(a1e),3))
+			#a3_calculation(round(Um,3),round(Vx,3),round(float(a1e),3))
 
 			############### Passing the Results on the Second Screen  ##################
 			self.manager.get_screen('res_sc').UmText = str(round(Um, 3))
@@ -546,6 +546,10 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').xRh_cText = str(round(xRh_c, 3))
 		self.manager.get_screen('res_sc').yRh_cText = str(round(yRh_c, 3))
 		self.manager.get_screen('res_sc').Uhp_cText = str(round(Uhp_c, 3))
+
+		self.manager.get_screen('res_sc').ch3_value = self.ch3_value
+		self.manager.get_screen('res_sc').ch4_value = self.ch4_value
+		self.manager.get_screen('res_sc').ch5_value = self.ch5_value
 
 		##################### Comparison window Hub camber points ###############
 		self.manager.get_screen('res_sc').yLh_cambText = str(round(yLh_camb, 3))
@@ -767,7 +771,7 @@ class Results(Screen):
 	xLText = StringProperty('0')
 	yLText = StringProperty('0')
 	xRText = StringProperty('0')
-	yRText = StringProperty('0')
+	yRText = StringProperty('0')   # idio me yLText (apalifi)
 
 	UtText = StringProperty('0')
 	VxText = StringProperty('0')
@@ -874,6 +878,9 @@ class Results(Screen):
 	yRt_cText = StringProperty('0')
 	Utp_cText = StringProperty('0')
 
+	ch3_value = StringProperty('normal')
+	ch4_value = StringProperty('normal')
+	ch5_value = StringProperty('normal')
 
 ######## Camber Line points ##################
 	yLh_cambText = StringProperty('0')

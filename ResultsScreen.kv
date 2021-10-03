@@ -1684,6 +1684,29 @@
                                     -float(root.UText)/2-float(root.x0Text)+float(root.xRText) + dp(15),\
                                     self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
 
+                            ####### V,W on top of vectors ######
+                            Label:
+                                font_size: dp(13)
+                                text:'V1'if root.tc_namemText == 'Compressor Middle' else 'V3'
+
+                                pos: ((float(root.x0Text) + float(root.xLText))/2 - self.parent.width/2 - dp(15), (float(root.y0Text)+float(root.yLText))/2 + dp(5))
+
+                            Label:
+                                font_size: dp(13)
+                                text:'W1' if root.tc_namemText == 'Compressor Middle' else 'W3'
+                                pos: ((float(root.x1Text) + float(root.xLText))/2 - self.parent.width/2 - dp(15), (float(root.y0Text)+float(root.yLText))/2 + dp(5))
+
+                            Label:
+                                font_size: dp(13)
+                                text:'V2'
+                                pos: ((float(root.x0Text) + float(root.xRText))/2 - self.parent.width/2 + dp(15), (float(root.y0Text)+float(root.yRText))/2 + dp(5))
+
+                            Label:
+                                font_size: dp(13)
+                                text:'W2'
+                                pos: ((float(root.x1Text) + float(root.xRText))/2 - self.parent.width/2 + dp(15), (float(root.y0Text)+float(root.yRText))/2 + dp(5))
+
+
                         #####################    Button  ####################
 
                         BoxLayout:
@@ -2739,6 +2762,13 @@
                                 font_size: dp(11)
                                 pos: self.parent.width/2 - dp(100), self.parent.y - self.parent.height/2 + dp(33.5)
                                 text: 'Tip'
+
+                            Label:
+                                font_size: dp(20)
+                                color: [1,0.4,0,0.8]
+                                bold: 'True'
+                                pos: self.parent.x - self.parent.width/2 + dp(85), self.parent.y + self.parent.height/2 - dp(35)
+                                text: '  Forced Vortex' if root.ch5_value == 'down' else ('    Constant angle' if root.ch3_value == 'down' else 'Free vortex' )
 
 
 
