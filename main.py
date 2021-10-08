@@ -56,7 +56,7 @@ class VelocityTriangles(Screen):
 
 	j = NumericProperty(0)
 	#### Values of checkboxes state ##########
-	ch1_value = ObjectProperty('normal')
+	ch1_value = ObjectProperty('down')
 	ch2_value = ObjectProperty('normal')
 	ch3_value = ObjectProperty('normal')
 	ch4_value = ObjectProperty('normal')

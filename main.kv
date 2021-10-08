@@ -205,6 +205,8 @@ NavigationLayout:
                                 state: vel_tr.ch1_value
                                 on_state: vel_tr.ch1_value = self.state
 
+
+
                             Label:
                                 size_hint_x: 0.45
                                 padding: dp(40),dp(0)
@@ -261,7 +263,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: f
-                                        text: ('0.8' if ch2.state == 'down' else '1') if slider2.value==0  else str(round(slider2.value,3))
+                                        text: str(round(slider2.value,3))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -275,7 +277,7 @@ NavigationLayout:
                                     orientation: 'vertical'
                                     TextInput:
                                         id: rn
-                                        text: ('0.6' if ch2.state == 'down' else '0.4') if slider3.value==0  else str(round(slider3.value,3))
+                                        text: str(round(slider3.value,3))
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -381,20 +383,19 @@ NavigationLayout:
                                     min: 0
                                     max: 2
                                     step: 0.1
-                                    value:0
+                                    value: (0.8 if ch2.state == 'down' else 1)
                                 MDSlider:
                                     id: slider3
                                     min: -0.5
                                     max: 1.5
                                     step: 0.1
-                                    value: 0
+                                    value: (0.6 if ch2.state == 'down' else 0.4)
                                 MDSlider:
                                     id: slider4
                                     min: -75
                                     max: 75
                                     step: 1
                                     disabled: (not switch0.active) and ((ch1.state == 'down') or (ch1.state == 'normal' and ch2.state == 'normal'))
-
                                 MDSlider:
                                     id: slider5
                                     min: -75
@@ -616,6 +617,7 @@ NavigationLayout:
                                         n.text = ''
 
                                 MDRoundFlatButton:
+                                    id:res_button
                                     pos_hint: {'center_x': 0.5}
                                     text: '  Reset values  '
                                     md_bg_color: [1,0.4,0,0.8]

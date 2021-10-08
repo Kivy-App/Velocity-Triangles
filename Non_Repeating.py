@@ -15,7 +15,7 @@ def a3_calculation(U,Vx,a1):
     l = 1/(cos(radians(a1))**2)
     a3 = degrees(acos(sqrt(1/(l+k))))
 
-    print(h_is,TR,T1,a3)
+    # print(h_is,TR,T1,a3)
 
 
 
