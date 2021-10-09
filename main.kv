@@ -249,7 +249,6 @@ NavigationLayout:
                                         id: p
 #                                        text: ('0.3' if ch2.state == 'down' else '2') if slider1.value==0  else str(round(slider1.value,3))
                                         text: str(round(slider1.value,3))
-
                                         size_hint_x: .7
                                         pos_hint: {'center_x':.5}
 
@@ -284,11 +283,18 @@ NavigationLayout:
                                 Label:
                                     font_size:dp(14)
                                     text:"Inlet absolute angle \u03B11  [ \u00B0 ] "
+                                    bold: True if (switch0.active and ch2.state == 'normal') else False
                                     halign: 'center'
                                     valign: 'middle'
                                     size_hint_x: 1.5
                                 BoxLayout:
                                     orientation: 'vertical'
+                                    canvas:
+                                        Color:
+                                            rgba: (0,0,0,1) if (switch0.active and ch2.state == 'normal') else (0,0,0,0)
+                                        Line
+                                            width: dp(2)
+                                            rectangle: (self.x + self.width*0.15,self.y,self.width*0.7,self.height)
                                     TextInput:
                                         id: a1
                                         text: '' if (slider4.value == 0 or ch1.state == 'down')  else str(slider4.value)
@@ -313,11 +319,19 @@ NavigationLayout:
                                 Label:
                                     font_size:dp(14)
                                     text:"Inlet absolute angle \u03B13  [ \u00B0 ] "
+                                    bold: True if (switch0.active and ch2.state == 'down') else False
                                     halign: 'center'
                                     valign: 'middle'
                                     size_hint_x: 1.5
                                 BoxLayout:
                                     orientation: 'vertical'
+                                    canvas:
+                                        Color:
+                                            rgba: (0,0,0,1) if (switch0.active and ch2.state == 'down') else (0,0,0,0)
+                                        Line
+                                            width: dp(2)
+                                            rectangle: (self.x + self.width*0.15,self.y,self.width*0.7,self.height)
+
                                     TextInput:
                                         id: a3
                                         text: '' if (slider6.value==0 or ch2.state == 'down') else str(slider6.value)
@@ -328,11 +342,18 @@ NavigationLayout:
                                 Label:
                                     font_size:dp(14)
                                     text:"Inlet relative angle \u03B21  [ \u00B0 ] "
+                                    bold: True if (switch0.active and ch2.state == 'normal') else False
                                     halign: 'center'
                                     valign: 'middle'
                                     size_hint_x: 1.5
                                 BoxLayout:
                                     orientation: 'vertical'
+                                    canvas:
+                                        Color:
+                                            rgba: (0,0,0,1) if (switch0.active and ch2.state == 'normal') else (0,0,0,0)
+                                        Line
+                                            width: dp(2)
+                                            rectangle: (self.x + self.width*0.15,self.y,self.width*0.7,self.height)
                                     TextInput:
                                         id: b1
                                         text: '' if (slider7.value==0 or ch1.state == 'down')  else str(slider7.value)
@@ -357,11 +378,18 @@ NavigationLayout:
                                 Label:
                                     font_size:dp(14)
                                     text:"Inlet relative angle \u03B23  [ \u00B0 ] "
+                                    bold: True if (switch0.active and ch2.state == 'down') else False
                                     halign: 'center'
                                     valign: 'middle'
                                     size_hint_x: 1.5
                                 BoxLayout:
                                     orientation: 'vertical'
+                                    canvas:
+                                        Color:
+                                            rgba: (0,0,0,1) if (switch0.active and ch2.state == 'down') else (0,0,0,0)
+                                        Line
+                                            width: dp(2)
+                                            rectangle: (self.x + self.width*0.15,self.y,self.width*0.7,self.height)
                                     TextInput:
                                         id: b3
                                         text: '' if (slider9.value==0 or ch2.state == 'down') else str(slider9.value)

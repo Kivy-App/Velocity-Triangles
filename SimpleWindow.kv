@@ -351,7 +351,7 @@
                             rgba:0,0,0,1
                         Line:
                             width: dp(1.)
-                            rectangle: (self.x+20, self.y + 20, self.width-40, self.height-40)
+                            rectangle: (self.x + dp(20), self.y + dp(20), self.width - dp(40), self.height - dp(40))
 
         ###################    Color of the Lines    ##################
                         Color:
@@ -359,44 +359,44 @@
         ###################    U line    ##########################
                         Line:
                             width: dp(1.5)
-                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y1Text))
+                            points: ((root.x0Text),self.y + (root.y0Text),(root.x1Text),self.y + (root.y1Text))
 
 
         ###################    V1 Line    ##########################
                         Line:
                             width: dp(1.5)
-                            points: (float(root.x0Text),self.y +float(root.y0Text),float(root.xRText),self.y +float(root.yRText))
+                            points: ((root.x0Text),self.y +(root.y0Text),(root.xRText),self.y +(root.yRText))
 
         ###################    W1 Line    ##########################
                         Line:
                             width: dp(1.5)
-                            points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xRText),self.y + float(root.yRText))
+                            points: ((root.x1Text),self.y + (root.y1Text),(root.xRText),self.y + (root.yRText))
 
         ###################    W2 Line    ##########################
                         Line:
                             width: dp(1.5)
-                            points: (float(root.x1Text),self.y + float(root.y1Text),float(root.xLText),self.y + float(root.yLText))
+                            points: ((root.x1Text),self.y + (root.y1Text),(root.xLText),self.y + (root.yLText))
 
         ###################    V2 Line    ##########################
                         Line:
                             width: dp(1.5)
-                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.xLText),self.y + float(root.yLText))
+                            points: ((root.x0Text),self.y + (root.y0Text),(root.xLText),self.y + (root.yLText))
 
         ########### Lines, Dash lines and Labels ###################
         ###################    U dashLine    ##########################
                         Line:
                             width: dp(1)
-                            points: (float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x1Text),self.y + float(root.y1Text)-dp(20))
+                            points: ((root.x0Text),self.y + (root.y0Text)-dp(20),(root.x1Text),self.y + (root.y1Text)-dp(20))
 
         ###################    U Dash lines    ##########################
                         Line:
                             width: dp(1)
-                            points: (float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text),self.y + float(root.y0Text)-dp(30))
+                            points: ((root.x0Text),self.y + (root.y0Text),(root.x0Text),self.y + (root.y0Text)-dp(30))
                             dash_length: dp(5)
                             dash_offset: dp(5)
                         Line:
                             width: dp(1)
-                            points: (float(root.x1Text),self.y + float(root.y0Text),float(root.x1Text),self.y + float(root.y0Text)-dp(30))
+                            points: ((root.x1Text),self.y + (root.y0Text),(root.x1Text),self.y + (root.y0Text)-dp(30))
                             dash_length: dp(5)
                             dash_offset: dp(5)
 
@@ -404,42 +404,42 @@
                         Line:
                             width: dp(1)
                             points:
-                                (float(root.x1Text) + dp(20),self.y + float(root.y0Text),float(root.x1Text) + dp(20),self.y + float(root.yRText))\
-                                if float(root.xRText) < float(root.x1Text) else\
-                                (float(root.xRText)+ dp(20),self.y + float(root.y0Text),float(root.xRText)+ dp(20),self.y + float(root.yRText))
+                                ((root.x1Text) + dp(20),self.y + (root.y0Text),(root.x1Text) + dp(20),self.y + (root.yRText))\
+                                if (root.xRText) < (root.x1Text) else\
+                                ((root.xRText)+ dp(20),self.y + (root.y0Text),(root.xRText)+ dp(20),self.y + (root.yRText))
 
         ###################    Vx Dash lines    ##########################
                         Line:
                             width: dp(1)
                             points:
-                                (float(root.x1Text),self.y + float(root.y1Text),float(root.x1Text) + dp(30),self.y + float(root.y0Text))\
-                                if float(root.xRText) < float(root.x1Text) else\
-                                (float(root.x1Text),self.y + float(root.y0Text),float(root.xRText) + dp(30) ,self.y + float(root.y1Text))
+                                ((root.x1Text),self.y + (root.y1Text),(root.x1Text) + dp(30),self.y + (root.y0Text))\
+                                if (root.xRText) < (root.x1Text) else\
+                                ((root.x1Text),self.y + (root.y0Text),(root.xRText) + dp(30) ,self.y + (root.y1Text))
                             dash_length: dp(5)
                             dash_offset: dp(5)
                         Line:
                             width: dp(1)
                             points:
-                                (float(root.xRText),self.y + float(root.yRText),float(root.x1Text) + dp(30),self.y + float(root.yRText))\
-                                if float(root.xRText) < float(root.x1Text)  else\
-                                (float(root.xRText),self.y + float(root.yRText),float(root.xRText)+dp(30),self.y + float(root.yRText))
+                                ((root.xRText),self.y + (root.yRText),(root.x1Text) + dp(30),self.y + (root.yRText))\
+                                if (root.xRText) < (root.x1Text)  else\
+                                ((root.xRText),self.y + (root.yRText),(root.xRText)+dp(30),self.y + (root.yRText))
                             dash_length: dp(5)
                             dash_offset: dp(5)
 
         ###################   ΔVθ   Line    ##########################
                         Line:
                             width: dp(1)
-                            points: (float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xRText),self.y + float(root.yRText) + dp(20))
+                            points: ((root.xLText),self.y + (root.yLText) + dp(20),(root.xRText),self.y + (root.yRText) + dp(20))
 
         ###################    ΔVθ  Dash lines    ##########################
                         Line:
                             width: dp(1)
-                            points: (float(root.xLText),self.y + float(root.yLText),float(root.xLText),self.y + float(root.yLText)+dp(30))
+                            points: ((root.xLText),self.y + (root.yLText),(root.xLText),self.y + (root.yLText)+dp(30))
                             dash_length: dp(5)
                             dash_offset: dp(5)
                         Line:
                             width: dp(1)
-                            points: (float(root.xRText),self.y + float(root.yRText),float(root.xRText),self.y + float(root.yRText)+dp(30))
+                            points: ((root.xRText),self.y + (root.yRText),(root.xRText),self.y + (root.yRText)+dp(30))
                             dash_length: dp(5)
                             dash_offset: dp(5)
 
@@ -447,103 +447,103 @@
                         Line:
                             width: dp(1.)
                             circle:
-                                (float(root.xLText) - dp(15),self.y + float(root.yLText) + dp(17),dp(10))
+                                ((root.xLText) - dp(15),self.y + (root.yLText) + dp(17),dp(10))
 
                         Line:
                             width: dp(1.)
                             circle:
-                                (float(root.xRText) + dp(15),self.y + float(root.yLText) + dp(17),dp(10))
+                                ((root.xRText) + dp(15),self.y + (root.yLText) + dp(17),dp(10))
 
                      ################################  Arrows   ##########################################
         ################### Base Velocity Arrows   ##########################
 
                         ################## U Arrow ########################
                         Color:
-                            rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 30 else (0,0,0,1)
+                            rgba: (1,1,1,0) if (root.x1Text) - (root.x0Text) < 30 else (0,0,0,1)
                         Triangle:
-                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.x0Text)+dp(25),self.y + float(root.y0Text)+dp(5),float(root.x0Text)+dp(25),self.y + float(root.y0Text)-dp(5)
+                            points:(root.x0Text),self.y + (root.y0Text),(root.x0Text)+dp(25),self.y + (root.y0Text)+dp(5),(root.x0Text)+dp(25),self.y + (root.y0Text)-dp(5)
 
                         ################## The other 4 Base Arrows ########################
                         Color:
                             rgba: (0,0,0,1)
                         Triangle:
-                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL1uText),self.y + float(root.yL1uText),float(root.xL1dText),self.y + float(root.yL1dText)
+                            points:(root.x0Text),self.y + (root.y0Text),(root.xL1uText),self.y + (root.yL1uText),(root.xL1dText),self.y + (root.yL1dText)
 
                         Triangle:
-                            points:float(root.x0Text),self.y + float(root.y0Text),float(root.xL2uText),self.y + float(root.yL2uText),float(root.xL2dText),self.y + float(root.yL2dText)
+                            points:(root.x0Text),self.y + (root.y0Text),(root.xL2uText),self.y + (root.yL2uText),(root.xL2dText),self.y + (root.yL2dText)
 
                         Triangle:
-                            points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR1uText),self.y + float(root.yR1uText),float(root.xR1dText),self.y + float(root.yR1dText)
+                            points:(root.x1Text),self.y + (root.y1Text),(root.xR1uText),self.y + (root.yR1uText),(root.xR1dText),self.y + (root.yR1dText)
 
                         Triangle:
-                            points:float(root.x1Text),self.y + float(root.y1Text),float(root.xR2uText),self.y + float(root.yR2uText),float(root.xR2dText),self.y + float(root.yR2dText)
+                            points:(root.x1Text),self.y + (root.y1Text),(root.xR2uText),self.y + (root.yR2uText),(root.xR2dText),self.y + (root.yR2dText)
 
         ##################  U Line Arrows  ####################
                         Color:
-                            rgba: (1,1,1,0) if float(root.x1Text) - float(root.x0Text) < 40 else (0,0,0,1)
+                            rgba: (1,1,1,0) if (root.x1Text) - (root.x0Text) < 40 else (0,0,0,1)
                         Triangle:
                             points:
-                                float(root.x0Text),self.y + float(root.y0Text)-dp(20),float(root.x0Text)+dp(20),\
-                                self.y + float(root.y0Text)-dp(20)+dp(3),float(root.x0Text)+dp(20),self.y + float(root.y0Text)-dp(20)-dp(3)
+                                (root.x0Text),self.y + (root.y0Text)-dp(20),(root.x0Text)+dp(20),\
+                                self.y + (root.y0Text)-dp(20)+dp(3),(root.x0Text)+dp(20),self.y + (root.y0Text)-dp(20)-dp(3)
                         Triangle:
                             points:
-                                float(root.x1Text),self.y + float(root.y1Text)-dp(20),float(root.x1Text)-dp(20),\
-                                self.y + float(root.y1Text)-dp(20)+dp(3),float(root.x1Text)-dp(20),self.y + float(root.y1Text)-dp(20)-dp(3)
+                                (root.x1Text),self.y + (root.y1Text)-dp(20),(root.x1Text)-dp(20),\
+                                self.y + (root.y1Text)-dp(20)+dp(3),(root.x1Text)-dp(20),self.y + (root.y1Text)-dp(20)-dp(3)
 
         ##################  ΔVθ Line Arrows  ####################
                         Color:
-                            rgba: (1,1,1,0) if float(root.xRText) - float(root.xLText) < 25 else (0,0,0,1)
+                            rgba: (1,1,1,0) if (root.xRText) - (root.xLText) < 25 else (0,0,0,1)
                         Triangle:
                             points:
-                                (float(root.xLText),self.y + float(root.yLText) + dp(20),float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) + dp(3),\
-                                float(root.xLText)+ dp(20),self.y + float(root.yLText) + dp(20) - dp(3))\
+                                ((root.xLText),self.y + (root.yLText) + dp(20),(root.xLText)+ dp(20),self.y + (root.yLText) + dp(20) + dp(3),\
+                                (root.xLText)+ dp(20),self.y + (root.yLText) + dp(20) - dp(3))\
                                 if root.tc_namemText == 'Compressor Middle' else\
-                                (float(root.xRText),self.y + float(root.yRText) + dp(20),float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) + dp(3),\
-                                float(root.xRText)- dp(20),self.y + float(root.yRText) + dp(20) - dp(3))
+                                ((root.xRText),self.y + (root.yRText) + dp(20),(root.xRText)- dp(20),self.y + (root.yRText) + dp(20) + dp(3),\
+                                (root.xRText)- dp(20),self.y + (root.yRText) + dp(20) - dp(3))
 
         #####################  Vx Line Arrows  ####################
                         Color:
-                            rgba: (1,1,1,0) if (float(root.yRText) - float(root.y1Text)) < 25 else (0,0,0,1)
+                            rgba: (1,1,1,0) if ((root.yRText) - (root.y1Text)) < 25 else (0,0,0,1)
                         Triangle:
                             points:
-                                (float(root.x1Text) + dp(20),self.y + float(root.y1Text),float(root.x1Text) + dp(20) + dp(3),\
-                                self.y + float(root.y1Text)+dp(20),float(root.x1Text) + dp(20) - dp(3),self.y + float(root.y1Text)+dp(20))\
-                                if float(root.xRText) < float(root.x1Text) else\
-                                (float(root.xRText)+ dp(20),self.y + float(root.y1Text),float(root.xRText)+ dp(20) + dp(3),\
-                                self.y + float(root.y1Text) + dp(20),float(root.xRText)+ dp(20) - dp(3),self.y + float(root.y1Text) + dp(20))
+                                ((root.x1Text) + dp(20),self.y + (root.y1Text),(root.x1Text) + dp(20) + dp(3),\
+                                self.y + (root.y1Text)+dp(20),(root.x1Text) + dp(20) - dp(3),self.y + (root.y1Text)+dp(20))\
+                                if (root.xRText) < (root.x1Text) else\
+                                ((root.xRText)+ dp(20),self.y + (root.y1Text),(root.xRText)+ dp(20) + dp(3),\
+                                self.y + (root.y1Text) + dp(20),(root.xRText)+ dp(20) - dp(3),self.y + (root.y1Text) + dp(20))
 
         ###################   Labels   ##########################
 
                     Label:
                         text: 'U'
-                        pos: self.parent.x, self.parent.y - self.parent.height/2 +dp(35)
+                        pos: self.parent.x, self.parent.y - self.parent.height/2 + dp(35)
 
                     Label:
                         text: 'Vx'
                         pos:
-                            (self.parent.x + float(root.UText)/2 + dp(35),\
-                            self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)\
-                            if float(root.x1Text) > float(root.xRText) else\
-                            (self.parent.x - self.parent.width/2 + float(root.xRText) + dp(40),\
-                            self.parent.y - self.parent.height/2  + float(root.y0Text) + float(root.UText)*float(root.fText)/2)
+                            (root.x1Text - self.width/2 + dp(35),\
+                            self.parent.y - self.parent.height/2  + (root.y0Text + root.yRText)/2)\
+                            if (root.x1Text) > (root.xRText) else\
+                            (self.parent.x - self.parent.width/2 + (root.xRText) + dp(40),\
+                            self.parent.y - self.parent.height/2  + (root.y0Text + root.yRText)/2)
 
                     Label:
                         text: '\u0394V\u03B8'
                         pos:
-                            -float(root.UText)/2-float(root.x0Text)+float(root.xLText)+float(root.UText)*float(root.pText)/2,\
-                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(35)
+                            (root.xLText + root.xRText - self.width)/2,\
+                            self.parent.y - self.parent.height/2 + root.yLText + dp(35)
 
                     Label:
                         text:'1' if root.tc_namemText == 'Compressor Middle' else '3'
                         pos:
-                            -float(root.UText)/2-float(root.x0Text)+float(root.xLText) - dp(15),\
-                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
+                            (root.xLText) - self.width/2 - dp(15),\
+                            self.parent.y - self.parent.height/2 + root.yLText + dp(17)
 
                     Label:
                         text:'2'
                         pos:
-                            -float(root.UText)/2-float(root.x0Text)+float(root.xRText) + dp(15),\
-                            self.parent.y - self.parent.height/2 + float(root.y0Text) + float(root.UText)*float(root.fText) + dp(17)
+                            -(root.UText)/2-(root.x0Text)+(root.xRText) + dp(15),\
+                            self.parent.y - self.parent.height/2 + (root.y0Text) + (root.UText)*float(root.fText) + dp(17)
 
                 GridLayout:
                     cols:2
@@ -562,7 +562,7 @@
                             rgba: 0.8,0.8,0.8,0.5
                         Line:
                             width: dp(7.5)
-                            points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                            points: (self.x,self.height - dp(7.5),self.width,self.height - dp(7.5))
                     Label:
                         text: 'Velocity Triangles Analysis App/Non dimensional results '
                         font_size: dp(14)

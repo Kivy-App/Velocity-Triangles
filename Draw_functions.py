@@ -16,20 +16,12 @@ def calculating_variables(n, Um, rne, Vth2, r_i, rm, Vx, U_i):
     a = Um * (1 - float(rne))
     b = Vth2 - a
 
-    # Vx1t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) - b * ((1 / rt) - (1 / rm))))
-    # Vx2t = sqrt(Vx ** 2 - 2 * a * (a * log(rt / rm) + b * ((1 / rt) - (1 / rm))))
-
-
     Vth1_i = a * (r_i / rm) ** n - b * (rm / r_i)
     Vth2_i = a * (r_i / rm) ** n + b * (rm / r_i)
 
-    if n == 0 :
+    if n == 0:
         Vx1_i = sqrt(abs(Vx ** 2 - 2 * a * (a*log(r_i / rm) + b * ((1 / r_i) - (1/rm)))))
         Vx2_i = sqrt(abs(Vx ** 2 - 2 * a * (a*log(r_i / rm) + b * ((1 / rm) - (1/r_i)))))
-
-    # if n == 1:
-    #     Vx1_i = sqrt(abs(Vx ** 2 + 2 * a * (a * (rm**2 - r_i**2) - 2 * b * (log(rm/r_i)))))
-    #     Vx2_i = sqrt(abs(Vx ** 2 + 2 * a * (a * (rm**2 - r_i**2) + 2 * b * (log(rm/r_i)))))
 
     else:
         Vx1_i = sqrt(abs(Vx ** 2 - 2 * a * (n + 1) * (
@@ -39,9 +31,6 @@ def calculating_variables(n, Um, rne, Vth2, r_i, rm, Vx, U_i):
 
     dVth_i = Vth2_i - Vth1_i
     rne_i = 1 - (a / Um) * (r_i / rm) ** (n - 1)
-    # print(rne2)
-    # rne_i = 1 + (a / Um) * (2 * ((r_i / rm) ** (n - 1)) - n - 1) / (n - 1)
-    # print(rne_i)
     fe_i1 = Vx1_i / U_i
     fe_i2 = Vx2_i / U_i
     pe_i = dVth_i / U_i
