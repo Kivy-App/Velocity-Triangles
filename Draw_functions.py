@@ -49,3 +49,4 @@ def calculating_variables(n, Um, rne, Vth2, r_i, rm, Vx, U_i):
     W2_i = Vx2_i / cos(radians(float(b2e_i)))
     
     return Vth1_i, Vth2_i, Vx1_i, Vx2_i, dVth_i, rne_i, fe_i1, fe_i2, pe_i, Wth1_i, Wth2_i, a1e_i, a2e_i, b1e_i, b2e_i, V1_i, V2_i, W1_i, W2_i
+

@@ -1,0 +1,126 @@
+#: import MeshLinePlot kivy_garden.graph.MeshLinePlot
+
+
+<ChartsWindow>:
+	name: "charts"
+
+	BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1,1
+        MDGridLayout:
+            cols:4
+            size_hint_y: 0.08
+            md_bg_color:0.18,0.18,0.18,1
+
+            MDBoxLayout:
+                size_hint:0.15,1
+                MDIconButton:
+                    id:info_button
+                    user_font_size:dp(30)
+                    icon:'menu'
+                    pos:self.parent.pos
+                    size:self.parent.size
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    on_release: root.nav_drawer.set_state('open')
+
+            MDFloatLayout:
+                size_hint: 0.17,1
+                orientation: 'horizontal'
+                canvas:
+                    Color:
+                        rgba: 1,1,1,1
+                    Line:
+                        width: dp(1)
+                        points: [self.x+self.width-dp(10),self.y+dp(10),self.x+self.width-dp(10),self.y+self.height-dp(10)]
+                Image:
+                    source: 'images/logos/icon_orange4.png'
+                    size_hint:0.8,0.8
+                    pos_hint: {'x':-0.08,'y':0.1}
+
+            MDBoxLayout:
+                size_hint: 0.53,1
+                Label:
+                    size_hint: 1,1
+                    text: 'VTA-APP'
+                    color: [1,1,1,1]
+                    font_name: 'fonts/BlackHanSans-Regular.ttf'
+                    text_size: self.parent.size
+                    halign: 'left'
+                    valign: 'middle'
+                    font_size: dp(28)
+
+            MDBoxLayout:
+                size_hint: 0.15,1
+                MDIconButton:
+                    icon: 'arrow-left'
+                    pos:self.parent.pos
+                    size:self.parent.size
+                    user_font_size:dp(32)
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    on_press:
+                        root.manager.current = "res_sc"
+                        root.manager.transition.direction = "right"
+
+
+        ScrollView:
+            size_hint: 1,0.92
+            MDGridLayout:
+                rows:2
+                size_hint_y:1
+
+                MDGridLayout:
+                    rows:2
+                    size_hint: 1,0.865
+                    BoxLayout:
+                        id: chart1
+                        Graph:
+                            id: graph_test
+                            plot: MeshLinePlot
+                            color:[1,1,0,1]
+                            xlabel:'r'
+                            ylabel:'Rn'
+                            x_ticks_minor:1
+                            background_color:0.5,0.5,0.5,1
+                            tick_color: 1,1,1,1
+                            border_color:1,1,1,1
+                            x_ticks_major:0.05
+                            y_ticks_major:0.05
+                            y_grid_label:True
+                            x_grid_label:True
+                            padding:5
+                            x_grid:True
+                            y_grid:True
+#                            xmin: vel_tr.rh
+#                            xmax: vel_tr.rt
+
+                            ymin:0.4
+                            ymax:0.6
+                            pos: 0, self.height / 6
+                            size: self.width , self.height
+
+                    BoxLayout:
+                        id: chart2
+                        Label:
+                            text: 'Chart2'
+
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10),dp(0)
+                    size_hint: 1,0.135
+                    md_bg_color:0.18,0.18,0.18,1
+                    canvas:
+                        Color:
+                            rgba: 0.8,0.8,0.8,0.5
+                        Line:
+                            width: dp(7.5)
+                            points: (self.x,self.height-dp(7.5),self.width,self.height-dp(7.5))
+                    Label:
+                        text: 'Velocity Triangles Analysis App/Dimensional Analysis/ Velocity Triangles Comparison '
+                        font_size: dp(14)
+                        color: 1,1,1,1
+                        text_size: self.size
+                        halign: 'left'
+                        valign: 'middle'

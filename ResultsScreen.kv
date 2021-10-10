@@ -106,8 +106,7 @@
             MDGridLayout:
                 cols:4
                 size_hint:4,1
-    #            anim_duration: 0.4
-    #            background_color: [1,0.4,0,0.8]
+
 
                 ScrollView:
                     size: root.height, root.width
@@ -2987,8 +2986,18 @@
                                 text: 'LE' if root.tc_namemText == 'Turbine Middle' else 'TE'
                                 bold: True
 
-                        BoxLayout:
+                        MDBoxLayout:
+                            orientation: 'vertical'
                             size_hint_y:0.1
+                            padding: [self.width*0.6,0,0,dp(15)]
+                            MDRectangleFlatIconButton:
+                                icon: 'chart-line'
+                                text: 'Velocity Charts'
+                                user_font_size:dp(30)
+                                size_hint:0.6,0.2
+                                on_press:
+                                    root.manager.current = "charts"
+                                    root.manager.transition.direction = "left"
 
                         MDBoxLayout:
                             orientation: 'vertical'

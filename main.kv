@@ -1,4 +1,5 @@
 #: include ResultsScreen.kv
+#: include Charts.kv
 #: include SimpleWindow.kv
 #: include InfoScreen.kv
 #: import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
@@ -785,6 +786,8 @@ NavigationLayout:
         Results:
             nav_drawer: nav_drawer
         InfoScreen:
+            nav_drawer: nav_drawer
+        ChartsWindow:
             nav_drawer: nav_drawer
 
     MDNavigationDrawer:

@@ -9,18 +9,18 @@ from kivymd.app import MDApp
 from solver_if import system_if, system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
-from kivymd.uix.tab import MDTabsBase
-from kivy.uix.boxlayout import BoxLayout
 from Camber import cambers, mid_cambers
 from Draw_functions import drawing_triangles, calculating_variables
-from Non_Repeating import a3_calculation
+import matplotlib.pyplot as plt
+from kivy_garden.graph import Graph, MeshLinePlot
+from numpy import linspace
+
+
+# from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 ###########################################################################################
 # from kivy.lang import Builder
-# import csv
-# from creating_database import create_database_nd
 
-class Tab(BoxLayout,MDTabsBase):
-	pass
+Charts_list = []
 
 class VelocityTriangles(Screen):
 
@@ -29,24 +29,6 @@ class VelocityTriangles(Screen):
 	Window.size = (400, 700)
 	Window.softinput_mode = "below_target"
 
-	######### Variable properties ########
-	# p  = StringProperty('')
-	# f  = ObjectProperty(None)
-	# rn = ObjectProperty(None)
-	# a1 = ObjectProperty(None)
-	# a2 = ObjectProperty(None)
-	# a3 = ObjectProperty(None)
-	# b1 = ObjectProperty(None)
-	# b2 = ObjectProperty(None)
-	# b3 = ObjectProperty(None)
-
-	# d1 = ObjectProperty(None)
-	# d2 = ObjectProperty(None)
-	# d3 = ObjectProperty(None)
-	# rh2t1 = ObjectProperty(None)
-	# rh2t2 = ObjectProperty(None)
-	# rh2t3 = ObjectProperty(None)
-
 	check = NumericProperty(0)
 
 	n = ObjectProperty(None)
@@ -54,7 +36,6 @@ class VelocityTriangles(Screen):
 	k = NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
 
-	j = NumericProperty(0)
 	#### Values of checkboxes state ##########
 	ch1_value = ObjectProperty('down')
 	ch2_value = ObjectProperty('normal')
@@ -72,7 +53,6 @@ class VelocityTriangles(Screen):
 			global fe
 			global rne
 			global i
-
 
 			pe = str(self.p.text)
 			fe = str(self.f.text)
@@ -380,6 +360,7 @@ class VelocityTriangles(Screen):
 			self.manager.get_screen('res_sc').Wth1Text = str(round(Wth1, 3))
 			self.manager.get_screen('res_sc').Wth2Text = str(round(Wth2, 3))
 
+
 		except:
 			if D1e == '' and D2e == '' and D3e == '' and Rh1e == '' and Rh2e == '' and Rh3e == '' and Ne == '':
 				self.check = 1
@@ -441,7 +422,6 @@ class VelocityTriangles(Screen):
 		xL1uh, yL1uh, xL1dh, yL1dh, xL2uh, yL2uh, xL2dh, yL2dh, xR1uh, yR1uh, xR1dh, yR1dh, xR2uh, yR2uh,\
 		xR2dh, yR2dh = arrows(x0h, y0, x1h, y1, a1eh, a2eh, b1eh, b2eh)
 
-
 #######################################     TIP     ####################################################################
 
 		########################  Calculating Tip variables #####################################
@@ -480,6 +460,9 @@ class VelocityTriangles(Screen):
 		xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
 
 #######################################################################################
+		# Vx_list = [Vx1h,Vx,Vx1t]
+		# r_list = [rh,rm,rt]
+		# Charts_list.append(Vx_list)
 
 		############### Passing Hub Results #################
 		self.manager.get_screen('res_sc').phText = str(round(peh, 3))
@@ -628,6 +611,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').yRt_rotorText = (round(yRt_rotor, 3))
 		self.manager.get_screen('res_sc').yLt_rotorText = (round(yLt_rotor, 3))
 
+
 class SimWindow(Screen):
 
 	check = NumericProperty(0)
@@ -677,6 +661,8 @@ class SimWindow(Screen):
 	XText = ObjectProperty(0)
 
 class Results(Screen):
+
+
 	######### HUB ######
 	check = NumericProperty(0)
 
@@ -893,6 +879,29 @@ class Results(Screen):
 
 
 class InfoScreen(Screen):
+	pass
+
+class ChartsWindow(Screen):
+	# print(Charts_list)
+	# def grafs(self):
+
+	# 	a = 30
+	# 	b = 60
+	# 	n = -1
+	# 	D1e = 2
+	# 	Rh1e = 0.2
+	# 	self.rt = float(D1e) / 2
+	# 	self.rh = float(Rh1e) * self.rt
+	# 	rm = (self.rt + self.rh) / 2
+	# 	Um = 60
+	#
+	# 	s = linspace(self.rh, self.rt, 100)
+	#
+	# 	self.plot = MeshLinePlot(color=[1, 1, 1, 1])
+	#
+	# 	self.plot.points = [(r, 1 - (a / Um) * (r / rm) ** (n - 1)) for r in s]
+	#
+	# 	self.ids["graph_test"].add_plot(self.plot)
 	pass
 
 class WindowManager(ScreenManager):
