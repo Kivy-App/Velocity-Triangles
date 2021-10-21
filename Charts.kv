@@ -1,8 +1,13 @@
 #: import MeshLinePlot kivy_garden.graph.MeshLinePlot
+#<MyBoxLayout@BoxLayout>
+#    graph_test: graph_test
+#    id: graph_test
 
 
 <ChartsWindow>:
 	name: "charts"
+	chart1:chart1
+	chart2:chart2
 
 	BoxLayout:
         orientation: 'vertical'
@@ -66,50 +71,35 @@
 
         ScrollView:
             size_hint: 1,0.92
+            scroll_wheel_distance:"150dp"
             MDGridLayout:
                 rows:2
-                size_hint_y:1
+                size_hint_y:1.53
 
                 MDGridLayout:
-                    rows:2
-                    size_hint: 1,0.865
-                    BoxLayout:
-                        id: chart1
-                        Graph:
-                            id: graph_test
-                            plot: MeshLinePlot
-                            color:[1,1,0,1]
-                            xlabel:'r'
-                            ylabel:'Rn'
-                            x_ticks_minor:1
-                            background_color:0.5,0.5,0.5,1
-                            tick_color: 1,1,1,1
-                            border_color:1,1,1,1
-                            x_ticks_major:0.05
-                            y_ticks_major:0.05
-                            y_grid_label:True
-                            x_grid_label:True
-                            padding:5
-                            x_grid:True
-                            y_grid:True
-#                            xmin: vel_tr.rh
-#                            xmax: vel_tr.rt
+                    rows:4
+                    size_hint: 1,1.2
+                    MyFigure:
+                        size_hint:1,0.4
+                        id:chart1
 
-                            ymin:0.4
-                            ymax:0.6
-                            pos: 0, self.height / 6
-                            size: self.width , self.height
+                    MyFigure:
+                        size:self.parent.width,self.height
+                        size_hint:1,0.4
+                        id:chart2
 
-                    BoxLayout:
-                        id: chart2
-                        Label:
-                            text: 'Chart2'
+
+                    Button:
+                        size_hint:1,0.2
+                        on_press:
+                            root.draw_charts_Vx()
+                            root.draw_charts_Vth()
 
 
                 MDBoxLayout:
                     orientation: 'vertical'
                     padding: dp(10),dp(0)
-                    size_hint: 1,0.135
+                    size_hint: 1,0.13
                     md_bg_color:0.18,0.18,0.18,1
                     canvas:
                         Color:

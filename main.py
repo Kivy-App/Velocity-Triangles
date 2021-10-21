@@ -5,13 +5,19 @@ from kivy.properties import NumericProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import StringProperty
 from math import radians, cos, sin
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.app import MDApp
 from solver_if import system_if, system_X
 from all_popups import firstPopup, secondPopup, thirdPopup, rpmPopup, h2tPopup, diamPopup, error_Popup
 from computing_arrows import arrows
 from Camber import cambers, mid_cambers
 from Draw_functions import drawing_triangles, calculating_variables
+from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
+from kivy.app import App
+import config as cf
+from kivy.uix.boxlayout import BoxLayout
 import matplotlib.pyplot as plt
+from kivy.clock import Clock
 from kivy_garden.graph import Graph, MeshLinePlot
 from numpy import linspace
 
@@ -21,6 +27,7 @@ from numpy import linspace
 # from kivy.lang import Builder
 
 Charts_list = []
+
 
 class VelocityTriangles(Screen):
 
@@ -35,6 +42,7 @@ class VelocityTriangles(Screen):
 	l = NumericProperty(0)
 	k = NumericProperty(0) #### Debugging tool for less than 3 variables and for not changing window ######
 	t = NumericProperty(0) ##### Debugging tool for more than 3 variables ####
+	graph_test = ObjectProperty(None)
 
 	#### Values of checkboxes state ##########
 	ch1_value = ObjectProperty('down')
@@ -44,6 +52,7 @@ class VelocityTriangles(Screen):
 	ch5_value = ObjectProperty('normal')
 
 	def systemsolver(self):
+		cf.graph_test = self.graph_test
 		try:
 			global a1e
 			global a2e
@@ -303,6 +312,7 @@ class VelocityTriangles(Screen):
 			global Vx
 			global Vth1
 			global Vth2
+			global dvth
 
 			if self.k != 0:
 				if float(D1e) <= 0:
@@ -344,6 +354,7 @@ class VelocityTriangles(Screen):
 			Vth2 = V2 * sin(radians(float(a2e)))
 			Wth1 = -W1 * sin(radians(float(b1e)))
 			Wth2 = W2 * sin(radians(float(b2e)))
+
 
 			#a3_calculation(round(Um,3),round(Vx,3),round(float(a1e),3))
 
@@ -459,10 +470,6 @@ class VelocityTriangles(Screen):
 		xL1ut, yL1ut, xL1dt, yL1dt, xL2ut, yL2ut, xL2dt, yL2dt, xR1ut, yR1ut, xR1dt, yR1dt, xR2ut, yR2ut,\
 		xR2dt, yR2dt = arrows(x0t,y0,x1t,y1,a1et,a2et,b1et,b2et)
 
-#######################################################################################
-		# Vx_list = [Vx1h,Vx,Vx1t]
-		# r_list = [rh,rm,rt]
-		# Charts_list.append(Vx_list)
 
 		############### Passing Hub Results #################
 		self.manager.get_screen('res_sc').phText = str(round(peh, 3))
@@ -611,6 +618,11 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').yRt_rotorText = (round(yRt_rotor, 3))
 		self.manager.get_screen('res_sc').yLt_rotorText = (round(yLt_rotor, 3))
 
+		self.chart_lists = [[rh, rm, rt], [Vx1h,Vx,Vx1t],[Vx2h,Vx,Vx2t],[Vth1h,Vth1,Vth1t],[Vth2h,Vth2,Vth2t],[dVthh,dvth,dVtht]]
+		cf.chart_lists = self.chart_lists
+
+
+
 
 class SimWindow(Screen):
 
@@ -661,7 +673,6 @@ class SimWindow(Screen):
 	XText = ObjectProperty(0)
 
 class Results(Screen):
-
 
 	######### HUB ######
 	check = NumericProperty(0)
@@ -877,37 +888,61 @@ class Results(Screen):
 	yRm_rotorText = NumericProperty(0)
 	yLm_rotorText = NumericProperty(0)
 
-
 class InfoScreen(Screen):
 	pass
 
-class ChartsWindow(Screen):
-	# print(Charts_list)
-	# def grafs(self):
+class MyFigure(FigureCanvasKivyAgg):
+	def __init__(self, **kwargs):
+		super().__init__(plt.gcf(), **kwargs)
 
-	# 	a = 30
-	# 	b = 60
-	# 	n = -1
-	# 	D1e = 2
-	# 	Rh1e = 0.2
-	# 	self.rt = float(D1e) / 2
-	# 	self.rh = float(Rh1e) * self.rt
-	# 	rm = (self.rt + self.rh) / 2
-	# 	Um = 60
-	#
-	# 	s = linspace(self.rh, self.rt, 100)
-	#
-	# 	self.plot = MeshLinePlot(color=[1, 1, 1, 1])
-	#
-	# 	self.plot.points = [(r, 1 - (a / Um) * (r / rm) ** (n - 1)) for r in s]
-	#
-	# 	self.ids["graph_test"].add_plot(self.plot)
-	pass
+class ChartsWindow(Screen):
+	chart1 =ObjectProperty(None)
+	chart2 = ObjectProperty(None)
+
+
+
+	def draw_charts_Vx(self):
+
+		plt.title("Axial Velocities Vx", fontsize=16)
+		plt.ylabel(" r [mm]", fontsize=9)
+		plt.xlabel(" Vx [mm]", fontsize=9)
+
+		plt.figure(1)
+		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
+		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
+		plt.legend(["Dataset 1", "Dataset 2"])
+
+
+		self.chart1.figure = plt.gcf()
+
+		self.chart1.draw()
+
+	def draw_charts_Vth(self):
+
+
+		plt.title("Tangential Velocities Vth", fontsize=16)
+		plt.ylabel(" r [mm]", fontsize=9)
+		plt.xlabel(" Vθ [mm]", fontsize=9)
+		plt.figure(2)
+		plt.plot(cf.chart_lists[3], cf.chart_lists[0])
+		plt.plot(cf.chart_lists[4], cf.chart_lists[0])
+		plt.legend(["Dataset 1", "Dataset 2"])
+
+		self.chart2.figure = plt.gcf()
+
+		self.chart2.draw()
+		plt.figure(3)
+
+
+
 
 class WindowManager(ScreenManager):
 	pass
 
 class MainApp(MDApp):
+	helper = ChartsWindow()
+
+
 	def __init__(self, **kwargs):
 		self.title = "VTA"
 		self.theme_cls.theme_style = "Light"

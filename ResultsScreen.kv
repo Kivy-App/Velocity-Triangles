@@ -8,6 +8,8 @@
 
 <Results>:
     name: 'res_sc'
+    id:results
+    results:results
 
     ############ Overall Title ######################
     BoxLayout:
@@ -77,24 +79,28 @@
                 id: hub_toggle
                 state: 'down'
                 on_press:
-                    sv_results_x.scroll_x = 0
+                    sv_results_x.scroll_to(sv_hub, padding=0, animate=True)
+
                     sv_hub.scroll_y = 1
 
             ToggleButton:
                 text: 'Mid'
                 on_press:
-                    sv_results_x.scroll_x = 0.3333333
+                    sv_results_x.scroll_to(sv_mid, padding=0, animate=True)
+
                     sv_mid.scroll_y = 1
             ToggleButton:
                 text: 'Tip'
                 on_press:
-                    sv_results_x.scroll_x = 0.6666666
+                    sv_results_x.scroll_to(sv_tip, padding=0, animate=True)
+
                     sv_tip.scroll_y = 1
 
             ToggleButton:
                 text: 'Comp'
                 on_press:
-                    sv_results_x.scroll_x = 1
+                    sv_results_x.scroll_to(sv_comp, padding=0, animate=True)
+
                     sv_comp.scroll_y = 1
 
         ##### Buttons ####
@@ -2986,8 +2992,9 @@
                                 text: 'LE' if root.tc_namemText == 'Turbine Middle' else 'TE'
                                 bold: True
 
-                        MDBoxLayout:
-                            orientation: 'vertical'
+                        MDGridLayout:
+#                            orientation: 'vertical'
+                            cols:1
                             size_hint_y:0.1
                             padding: [self.width*0.6,0,0,dp(15)]
                             MDRectangleFlatIconButton:
@@ -2998,6 +3005,10 @@
                                 on_press:
                                     root.manager.current = "charts"
                                     root.manager.transition.direction = "left"
+
+
+
+
 
                         MDBoxLayout:
                             orientation: 'vertical'
