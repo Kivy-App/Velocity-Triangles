@@ -1,9 +1,7 @@
 from kivy.config import Config
 from kivy.core.window import Window
-from kivy.properties import ObjectProperty
-from kivy.properties import NumericProperty
+from kivy.properties import ObjectProperty,NumericProperty,StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import StringProperty
 from math import radians, cos, sin
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.app import MDApp
@@ -20,9 +18,8 @@ import matplotlib.pyplot as plt
 from kivy.clock import Clock
 from kivy_garden.graph import Graph, MeshLinePlot
 from numpy import linspace
+from kivy.lang import Builder
 
-
-# from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 ###########################################################################################
 # from kivy.lang import Builder
 
@@ -888,60 +885,68 @@ class Results(Screen):
 	yRm_rotorText = NumericProperty(0)
 	yLm_rotorText = NumericProperty(0)
 
+	########### Charts Window ########
+
+	chart1 = ObjectProperty(None)
+	chart2 = ObjectProperty(None)
+	chart3 = ObjectProperty(None)
+
+	def draw_charts(self):
+
+		# self.chart_lists = [[rh, rm, rt], [Vx1h,Vx,Vx1t],[Vx2h,Vx,Vx2t],[Vth1h,Vth1,Vth1t],[Vth2h,Vth2,Vth2t],[dVthh,dvth,dVtht]]
+		# cf.chart_lists = self.chart_lists
+		###### Vx-r Chart ####
+		plt.figure(1)
+		plt.clf()
+		plt.title("Axial Velocities Vx", fontsize=13)
+		plt.ylabel(" r [mm]", fontsize=9)
+		plt.xlabel(" Vx [mm]", fontsize=9)
+		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
+		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
+		plt.legend(["Vx1", "Vx2"])
+
+		self.chart1.figure = plt.figure(1)
+		self.chart1.draw()
+
+		plt.figure(2)
+		plt.clf()
+		plt.title("Tangential Velocities Vth", fontsize=13)
+		plt.ylabel(" r [mm]", fontsize=9)
+		plt.xlabel(" Vθ [mm]", fontsize=9)
+		plt.plot(cf.chart_lists[3], cf.chart_lists[0])
+		plt.plot(cf.chart_lists[4], cf.chart_lists[0])
+		plt.legend(["VΘ1", "VΘ2"])
+		self.chart2.figure = plt.figure(2)
+		self.chart2.draw()
+
+		plt.figure(3)
+		plt.title("Relative tangestial velocities WΘ", fontsize=13)
+		plt.ylabel(" r [mm]", fontsize=9)
+		plt.xlabel(" Vx [mm]", fontsize=9)
+
+		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
+		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
+		plt.legend(["WΘ1", "WΘ2"])
+		self.chart3.figure = plt.figure(3)
+		self.chart3.draw()
+
 class InfoScreen(Screen):
 	pass
 
 class MyFigure(FigureCanvasKivyAgg):
+
 	def __init__(self, **kwargs):
 		super().__init__(plt.gcf(), **kwargs)
-
-class ChartsWindow(Screen):
-	chart1 =ObjectProperty(None)
-	chart2 = ObjectProperty(None)
-
-
-
-	def draw_charts_Vx(self):
-
-		plt.title("Axial Velocities Vx", fontsize=16)
-		plt.ylabel(" r [mm]", fontsize=9)
-		plt.xlabel(" Vx [mm]", fontsize=9)
-
-		plt.figure(1)
-		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
-		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
-		plt.legend(["Dataset 1", "Dataset 2"])
-
-
-		self.chart1.figure = plt.gcf()
-
-		self.chart1.draw()
-
-	def draw_charts_Vth(self):
-
-
-		plt.title("Tangential Velocities Vth", fontsize=16)
-		plt.ylabel(" r [mm]", fontsize=9)
-		plt.xlabel(" Vθ [mm]", fontsize=9)
-		plt.figure(2)
-		plt.plot(cf.chart_lists[3], cf.chart_lists[0])
-		plt.plot(cf.chart_lists[4], cf.chart_lists[0])
-		plt.legend(["Dataset 1", "Dataset 2"])
-
-		self.chart2.figure = plt.gcf()
-
-		self.chart2.draw()
-		plt.figure(3)
-
-
-
 
 class WindowManager(ScreenManager):
 	pass
 
-class MainApp(MDApp):
-	helper = ChartsWindow()
+# Screen_Manager = ScreenManager()
+# Screen_Manager.add_widget(Results(name = 'res_sc'))
 
+class MainApp(MDApp):
+
+	res = Results()
 
 	def __init__(self, **kwargs):
 		self.title = "VTA"
@@ -949,6 +954,9 @@ class MainApp(MDApp):
 		self.theme_cls.primary_palette = "DeepOrange"
 		self.theme_cls.secondary_palette = "Black"
 		super().__init__(**kwargs)
+
+	# def build(self):
+	# 	return Builder.load_string('ResultsScreen.kv')
 
 MainApp().run()
 

@@ -1,5 +1,4 @@
 #: include ResultsScreen.kv
-#: include Charts.kv
 #: include SimpleWindow.kv
 #: include InfoScreen.kv
 #: import MDSwitch kivymd.uix.selectioncontrol.MDSwitch
@@ -759,8 +758,7 @@ NavigationLayout:
                                     win_manager.current = "simple"
                                     win_manager.transition.direction = 'left'
 
-#                                    if vel_tr.k == 4 :\
-#                                    sv_main.scroll_y = 1
+#                                    app.res.draw_charts()
 
                         MDBoxLayout:
                             orientation: 'vertical'
@@ -781,16 +779,12 @@ NavigationLayout:
                                 halign: 'left'
                                 valign: 'middle'
 
-
         SimWindow:
             nav_drawer: nav_drawer
         Results:
             nav_drawer: nav_drawer
         InfoScreen:
             nav_drawer: nav_drawer
-        ChartsWindow:
-            nav_drawer: nav_drawer
-
 
     MDNavigationDrawer:
         id: nav_drawer
