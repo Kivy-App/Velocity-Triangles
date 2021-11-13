@@ -170,7 +170,7 @@ class VelocityTriangles(Screen):
 ############################################################################################
 
 ################ Case of  Both Compartments filled #########################################
-			if self.check == 0:	
+			if self.check == 0:
 				############### Passing the Results on the Second Screen  ####################
 
 				################ MID segment variables ##########################
@@ -195,23 +195,23 @@ class VelocityTriangles(Screen):
 				self.manager.get_screen('res_sc').yLText = (yL)
 				self.manager.get_screen('res_sc').xRText = (xR)
 				self.manager.get_screen('res_sc').yRText = (yR)
-	
+
 				############### Passing the Arrow Points on the Second Screen  ##################
 				self.manager.get_screen('res_sc').xL1uText = (xL1u)
 				self.manager.get_screen('res_sc').yL1uText = (yL1u)
 				self.manager.get_screen('res_sc').xL1dText = (xL1d)
 				self.manager.get_screen('res_sc').yL1dText = (yL1d)
-	
+
 				self.manager.get_screen('res_sc').xL2uText = (xL2u)
 				self.manager.get_screen('res_sc').yL2uText = (yL2u)
 				self.manager.get_screen('res_sc').xL2dText = (xL2d)
 				self.manager.get_screen('res_sc').yL2dText = (yL2d)
-	
+
 				self.manager.get_screen('res_sc').xR1uText = (xR1u)
 				self.manager.get_screen('res_sc').yR1uText = (yR1u)
 				self.manager.get_screen('res_sc').xR1dText = (xR1d)
 				self.manager.get_screen('res_sc').yR1dText = (yR1d)
-	
+
 				self.manager.get_screen('res_sc').xR2uText = (xR2u)
 				self.manager.get_screen('res_sc').yR2uText = (yR2u)
 				self.manager.get_screen('res_sc').xR2dText = (xR2d)
@@ -568,7 +568,7 @@ class VelocityTriangles(Screen):
 		self.manager.get_screen('res_sc').Vth2tText = str(round(Vth2t, 3))
 		self.manager.get_screen('res_sc').Wth1tText = str(round(Wth1t, 3))
 		self.manager.get_screen('res_sc').Wth2tText = str(round(Wth2t, 3))
-		
+
 		##########   Drawing variables   ##########
 		self.manager.get_screen('res_sc').x0tText = (x0t)
 		self.manager.get_screen('res_sc').x1tText = (x1t)
@@ -619,8 +619,6 @@ class VelocityTriangles(Screen):
 		cf.chart_lists = self.chart_lists
 
 
-
-
 class SimWindow(Screen):
 
 	check = NumericProperty(0)
@@ -636,7 +634,7 @@ class SimWindow(Screen):
 	b1Text = StringProperty('0')
 	b2Text = StringProperty('0')
 	b3Text = StringProperty('0')
-	
+
 	x0Text = NumericProperty(0)
 	y0Text = NumericProperty(0)
 	x1Text = NumericProperty(0)
@@ -895,68 +893,62 @@ class Results(Screen):
 
 		# self.chart_lists = [[rh, rm, rt], [Vx1h,Vx,Vx1t],[Vx2h,Vx,Vx2t],[Vth1h,Vth1,Vth1t],[Vth2h,Vth2,Vth2t],[dVthh,dvth,dVtht]]
 		# cf.chart_lists = self.chart_lists
-		###### Vx-r Chart ####
-		plt.figure(1)
+
 		plt.clf()
-		plt.title("Axial Velocities Vx", fontsize=13)
-		plt.ylabel(" r [mm]", fontsize=9)
-		plt.xlabel(" Vx [mm]", fontsize=9)
+
+		plt.title("Axial Velocities Vx", fontsize=12)
+		plt.ylabel(" r [m]", fontsize=10)
+		plt.xlabel(" V\u2093 [m/s]", fontsize=10)
+		plt.tight_layout(pad=0.7)
 		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
 		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
-		plt.legend(["Vx1", "Vx2"])
+		plt.legend(["V\u2093\u2081", "V\u2093\u2082"])
 
-		self.chart1.figure = plt.figure(1)
+		self.chart1.figure = plt.gcf()
 		self.chart1.draw()
 
-		plt.figure(2)
 		plt.clf()
-		plt.title("Tangential Velocities Vth", fontsize=13)
-		plt.ylabel(" r [mm]", fontsize=9)
-		plt.xlabel(" Vθ [mm]", fontsize=9)
+
+		plt.title("Tangential Velocities Vθ", fontsize=12)
+		plt.ylabel(" r [m]", fontsize=10)
+		plt.xlabel(" Vθ [m/s]", fontsize=10)
 		plt.plot(cf.chart_lists[3], cf.chart_lists[0])
 		plt.plot(cf.chart_lists[4], cf.chart_lists[0])
-		plt.legend(["VΘ1", "VΘ2"])
-		self.chart2.figure = plt.figure(2)
+		plt.legend(["Vθ\u2081", "Vθ\u2082"])
+		self.chart2.figure = plt.gcf()
 		self.chart2.draw()
 
-		plt.figure(3)
-		plt.title("Relative tangestial velocities WΘ", fontsize=13)
-		plt.ylabel(" r [mm]", fontsize=9)
-		plt.xlabel(" Vx [mm]", fontsize=9)
 
-		plt.plot(cf.chart_lists[1], cf.chart_lists[0])
-		plt.plot(cf.chart_lists[2], cf.chart_lists[0])
-		plt.legend(["WΘ1", "WΘ2"])
-		self.chart3.figure = plt.figure(3)
+		plt.clf()
+
+		plt.title("Diferrence in tangential velocities ΔVθ", fontsize=12)
+		plt.ylabel(" r [m]", fontsize=10)
+		plt.xlabel(" ΔVθ [m/s]", fontsize=10)
+
+		plt.plot(cf.chart_lists[5], cf.chart_lists[0])
+
+		plt.legend(["ΔVθ"])
+		self.chart3.figure = plt.gcf()
 		self.chart3.draw()
 
 class InfoScreen(Screen):
 	pass
 
 class MyFigure(FigureCanvasKivyAgg):
-
 	def __init__(self, **kwargs):
 		super().__init__(plt.gcf(), **kwargs)
 
 class WindowManager(ScreenManager):
 	pass
 
-# Screen_Manager = ScreenManager()
-# Screen_Manager.add_widget(Results(name = 'res_sc'))
-
 class MainApp(MDApp):
-
-	res = Results()
-
+	# res = Results()
 	def __init__(self, **kwargs):
 		self.title = "VTA"
 		self.theme_cls.theme_style = "Light"
 		self.theme_cls.primary_palette = "DeepOrange"
 		self.theme_cls.secondary_palette = "Black"
 		super().__init__(**kwargs)
-
-	# def build(self):
-	# 	return Builder.load_string('ResultsScreen.kv')
 
 MainApp().run()
 

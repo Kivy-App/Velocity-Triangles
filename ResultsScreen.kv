@@ -75,6 +75,10 @@
                     on_press:
                         root.manager.current = "Main"
                         root.manager.transition.direction = "right"
+                        sv_results_x.scroll_to(sv_hub, padding=0, animate=False)
+                        hub_toggle.state = "down"
+                        charts_toggle.state = "normal"
+
 
         MDGridLayout:
             cols:5
@@ -108,6 +112,7 @@
 
             ToggleButton:
                 text: 'Charts'
+                id:charts_toggle
                 on_press:
                     root.draw_charts()
                     sv_results_x.scroll_to(sv_charts, padding=0, animate=True)
@@ -3049,13 +3054,13 @@
                             rows:3
                             size_hint: 1,1.5
                             MyFigure:
-                                size_hint: 0.7,0.5
+                                size_hint_y:0.5
                                 id:chart1
                             MyFigure:
-                                size_hint_y: 0.7,0.5
+                                size_hint_y:0.5
                                 id:chart2
                             MyFigure:
-                                size_hint_y: 0.7,0.5
+                                size_hint_y:0.5
                                 id:chart3
 
                         MDBoxLayout:
